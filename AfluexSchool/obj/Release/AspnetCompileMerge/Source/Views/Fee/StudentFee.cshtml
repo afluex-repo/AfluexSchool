@@ -1,0 +1,383 @@
+﻿@model AfluexSchool.Models.Fee
+
+@{
+    ViewBag.Title = "StudentFee";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@using (Html.BeginForm("StudentFee", "Fee", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    <div>
+          <div class="login-row">
+            <div class="col-12 col-md-12 col-lg-12 col-xl-12 mx-auto align-self-center">
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-header">
+                        <div class="row ">
+
+                            <div class="col-auto">
+                                <h4 class="mt-0 mb-1">Admission Fee</h4>
+
+                            </div>
+                            <p style="color:red">
+                                @TempData["Fee"]
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mx-auto">
+                                <div class="row ">
+                                    <div class="col-lg-6 col-md-4">
+                                        <div class="form-group ">
+                                            <label>LoginId <span style="color: red">*</span></label>
+                                            @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Student LoginId" })
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-lg-6 col-md-4">
+                                        <div class="form-group ">
+                                            <br />
+                                            <input type="submit" class="btn btn-success" onclick="return validateform();" name="GetDeatils" id="btnSave" value="Get Details" />
+                                        </div>
+                                    </div>
+                                </div>
+                                @if (Model != null)
+                                {
+                                    if (Model.lstfeesdetails != null)
+                                    {
+                                        int i = 1;
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-3">
+
+                                                <div class="form-group">
+                                                    <label>Branch <span style="color:red">*</span></label>
+
+                                                    @Html.TextBoxFor(m => m.BranchName, new { @class = "form-control", @readonly = "gf" })
+
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-3">
+
+                                                <div class="form-group">
+                                                    <label>Registration No <span style="color:red">*</span></label>
+
+                                                    @Html.TextBoxFor(m => m.RegistrationNo, new { @class = "form-control", @readonly = "gf" })
+
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-3">
+
+                                                <div class="form-group">
+                                                    <label>Student Id <span style="color:red">*</span></label>
+
+                                                    @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @readonly = "gf" })
+
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-3">
+
+                                                <div class="form-group">
+                                                    <label>Student Name <span style="color:red">*</span></label>
+
+                                                    @Html.TextBoxFor(m => m.DisplayName, new { @class = "form-control", @readonly = "gf" })
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-3">
+
+                                                <div class="form-group">
+                                                    <label>Parent Id <span style="color:red">*</span></label>
+
+                                                    @Html.TextBoxFor(m => m.ParentLoginId, new { @class = "form-control", @readonly = "gf" })
+
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-3">
+
+                                                <div class="form-group">
+                                                    <label>Parent Name <span style="color:red">*</span></label>
+
+                                                    @Html.TextBoxFor(m => m.ParentName, new { @class = "form-control", @readonly = "gf" })
+
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-3">
+
+                                                <div class="form-group">
+                                                    <label>Parent Mobile <span style="color:red">*</span></label>
+
+                                                    @Html.TextBoxFor(m => m.ParentMobile, new { @class = "form-control", @readonly = "gf" })
+
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-3">
+
+                                                <div class="form-group">
+                                                    <label>Parent EmailId <span style="color:red">*</span></label>
+
+                                                    @Html.TextBoxFor(m => m.ParenteEmailId, new { @class = "form-control", @readonly = "gf" })
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-3">
+
+                                                <div class="form-group">
+                                                    <label>Class <span style="color:red">*</span></label>
+
+                                                    @Html.TextBoxFor(m => m.ClassName, new { @class = "form-control", @readonly = "gf" })
+
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-3">
+
+                                                <div class="form-group">
+                                                    <label>Section <span style="color:red">*</span></label>
+
+                                                    @Html.TextBoxFor(m => m.SectionName, new { @class = "form-control", @readonly = "gf" })
+
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-3">
+
+                                                <div class="form-group">
+                                                    <label>Medium <span style="color:red">*</span></label>
+
+                                                    @Html.TextBoxFor(m => m.Medium, new { @class = "form-control", @readonly = "gf" })
+
+                                                </div>
+                                            </div>
+                                          
+                                        </div>
+                                        <div class="dataTables_wrapper dt-bootstrap4 no-footer">
+                                            <div class="row">
+                                                <div class="col-sm-8">
+                                                    <table class="table datatable display responsive w-100 dataTable no-footer dtr-inline" style="width: 1002px;">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Sr No.</th>
+                                                                <th>FeeType Name</th>
+                                                                <th style="text-align:right">Amount</th>
+
+
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var Item in Model.lstfeesdetails)
+                                                            {
+                                                                <tr class="text-left">
+
+                                                                    <td>
+                                                                        @i
+
+
+
+                                                                    </td>
+                                                                    <td>@Item.FeeTypeName</td>
+                                                                    <td style="text-align:right">@Item.Amount</td>
+
+                                                                </tr>
+                                                                i++;
+                                                            }
+                                                        </tbody>
+                                                        <tfoot>
+                                                            <tr>
+                                                                <td></td>
+                                                                <td><b>Total</b></td>
+                                                                <td style="text-align:right"><b>@ViewBag.Total</b></td>
+                                                            </tr>
+                                                        </tfoot>
+                                                    </table>
+                                                </div>
+
+                                                <div class="col-sm-4">
+                                                    <div class="col-md-12 col-lg-12">
+                                                        <div class="form-group">
+                                                            <label>Payment Date <span style="color:red">*</span></label>
+                                                           @Html.TextBoxFor(m => m.PaymentDate, new { @class = "form-control", @readonly = "gf" })
+                                                        </div>
+                                                    </div>
+
+                                                  
+                                                    <div class="col-md-12 col-lg-12">
+                                                        <div class="form-group">
+                                                            <label>Payment Mode <span style="color:red">*</span></label>
+
+
+                                                            @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlpaymentmode, "Value", "Text"), new { @class = "form-control", @onchange = "getpaymentdetails();" })
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12 col-lg-12" id="divtransactiono" style="display: none">
+
+                                                        <div class="form-group">
+                                                            Cheque/Transaction Number <span style="color: red">*</span>
+                                                            @Html.TextBoxFor(m => m.TransactionNumber, new { @class = "form-control", @Placeholder = "Cheque/Transaction Number", @maxlength = "50" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12 col-lg-12" id="divPaymentMode" style="display: none">
+                                                        <div class="form-group">
+                                                            Cheque/Transaction Date <span style="color: red">*</span>
+                                                            @Html.TextBoxFor(m => m.TransactionDate, new { @class = "form-control", @Placeholder = "Cheque/Transaction Date", @Readonly = "readonly" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12 col-lg-12" id="divbankname" style="display: none">
+                                                        <div class="form-group">
+                                                            Bank Name <span style="color: red">*</span>
+                                                            @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @maxlength = "100", @Placeholder = "Bank Name" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12 col-lg-12" id="divbankbranch" style="display: none">
+                                                        <div class="form-group">
+                                                            Bank Branch <span style="color: red">*</span>
+                                                            @Html.TextBoxFor(m => m.BankBranch, new { @class = "form-control", @maxlength = "100", @Placeholder = "Bank Branch" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12 col-lg-12">
+                                                        <br />
+                                                        <input type="submit" class="btn btn-success" onclick="return validatesaveform();" name="btnSave" id="btnSave" value="Save" />
+                                                        <input type="submit" class="btn btn-success" onclick="return validatesaveform();" name="btnSaveandPrint" id="btnSaveandPrint" value="Save and Print" />
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
+                                    }
+                                }
+
+
+
+                                <div class="card-footer text-left">
+
+
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script src="../../scripts/jquery-1.10.2.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+<script>
+  
+    $('#PaymentDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true,
+       
+
+    });
+    $('#TransactionDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true,
+      
+
+    });
+    function validateform() {
+        $(".errortext").removeClass("errortext");
+        if ($('#LoginId').val() == '') {
+            $("#LoginId").addClass('errortext');
+            $('#LoginId').focus();
+            return false;
+        }
+       
+        $("#divload").css({ 'display': '' });
+        return true;
+    }
+    function getpaymentdetails() {
+        if ($('#PaymentMode').val() != '1') {
+            $("#divPaymentMode").show();
+            $("#divtransactiono").show();
+            $("#divbankname").show();
+            $("#divbankbranch").show();
+        }
+        else {
+            $("#divPaymentMode").hide();
+            $("#divtransactiono").hide();
+            $("#divbankname").hide();
+            $("#divbankbranch").hide();
+        }
+    }
+    function validatesaveform()
+    {
+      
+
+
+        $(".errortext").removeClass("errortext");
+        if ($('#LoginId').val() == '') {
+            $("#LoginId").addClass('errortext');
+            $('#LoginId').focus();
+            return false;
+        }
+        if ($('#PaymentDate').val() == '') {
+            $("#PaymentDate").addClass('errortext');
+            $('#PaymentDate').focus();
+            return false;
+        }
+        if ($('#PaymentMode').val() == '0') {
+            $("#PaymentMode").addClass('errortext');
+            $('#PaymentMode').focus();
+            return false;
+        }
+        if ($('#PaymentMode').val() != '1') {
+            if ($('#TransactionNumber').val() == '') {
+                $("#TransactionNumber").addClass('errortext');
+                $('#TransactionNumber').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+            if ($('#TransactionDate').val() == '') {
+                $("#TransactionDate").addClass('errortext');
+                $('#TransactionDate').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+            if ($('#BankName').val() == '') {
+                $("#BankName").addClass('errortext');
+                $('#BankName').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+            if ($('#BankBranch').val() == '') {
+                $("#BankBranch").addClass('errortext');
+                $('#BankBranch').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+        }
+        var a = confirm("Are you sure you want to submit admission fee ?")
+        if (a == false)
+        {
+            return false
+        }
+        else
+        {
+            return true
+        }
+        //alert(a);
+
+        $("#divload").css({ 'display': '' });
+    }
+
+</script>
+

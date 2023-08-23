@@ -1,0 +1,191 @@
+﻿@model AfluexSchool.Models.DashBoard
+
+@{
+    ViewBag.Title = "DashBoard";
+    Layout = "~/Views/Shared/_ParentLayout.cshtml";
+}
+
+<div class="row">
+    <div class="container">
+        <div class="row col-md-12">
+            <div class="col-12 col-md-4 col-lg-3">
+               
+                <h6 class="page-subtitle"><i class="material-icons mr-2">group</i> <span>Students</span></h6>
+                <div class="row small">
+                    @if (Model != null)
+                    {
+                        if (Model.lststudent != null)
+                        {
+                            foreach (var item in Model.lststudent)
+                            {
+                                <div class="col-6 col-sm-6 col-md-6 col-lg-6" onclick="return getstudentdetails('@item.DateOfBirth','@item.Gender','@item.Mobile','@item.AadhaarCard','@item.PermanentAddress','@item.CorrespondenceAddress','@item.FatherOcc','@item.MotherOcc','@item.RegistrationNo','@item.ClassName','@item.SectionName')">
+                                    <div class="card mb-4 border-0 shadow-sm">
+                                        <figure class="avatar small">
+                                            <img src="../..@item.ImagePath" alt="" style="height: 107px;">
+                                        </figure>
+                                        <div class="card-footer bg-none p-2">
+                                            <p class="mb-0">
+                                                @item.Name
+                                                <br>
+                                               
+                                                <span style="font-size: 16px;" class="mb-0 text-template-primary-light">Class-@item.ClassName <br/>Section- @item.SectionName</span>
+                                                <br/>
+                                                <a style="font-size: 14px;color:red !important" href="#" onclick="return getstudentdetails('@item.DateOfBirth','@item.Gender','@item.Mobile','@item.AadhaarCard','@item.PermanentAddress','@item.CorrespondenceAddress','@item.FatherOcc','@item.MotherOcc','@item.RegistrationNo','@item.ClassName','@item.SectionName')" class="mb-0 text-template-primary-light">View Details</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    }
+                    
+                 
+                </div>
+               
+            </div>
+            <div class="col">
+                <div class="card mb-4 shadow-sm border-0">
+                    <div class="card-body">
+                        <div class="page-subtitle">Personal Details</div>
+                        <div class="row">
+                            <div class="col-12 col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label>Birth Date</label>
+                                    <p id="DateOfBirth"></p>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label>Gender</label>
+                                    <p id="Gender"></p>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label>Mobile</label>
+                                    <p id="Mobile"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label>Aadhaar Card</label>
+                                    <p id="AadhaarCard"></p>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label>Father's Occupation</label>
+                                    <p id="FatherOcc"></p>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label>Mother's Occupation</label>
+                                    <p id="MotherOcc"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label>Registration No</label>
+                                    <p id="RegistrationNo"></p>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label>Class</label>
+                                    <p id="ClassName"></p>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label>Section</label>
+                                    <p id="SectionName"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-md-12 col-lg-12">
+                                <div class="form-group">
+                                    <label>Permanent Address</label>
+                                    <p id="PermanentAddress"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-md-12 col-lg-12">
+                                <div class="form-group">
+                                    <label>Correspondence Address</label>
+                                    <p id="CorrespondenceAddress"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+        <div class="card-body ">
+            <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
+                    <div class="col-sm-12">
+                        <table class="table table-bordered w-100 mb-0" id="example23">
+                            <thead>
+                                <tr>
+                                    <th>Sr.No.</th>
+                                    <th>Class Name</th>
+                                    <th>Section</th>
+                                    <th>Notice Name</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null)
+                                {
+                                    if (Model.lstteacher != null)
+                                    {
+                                        var i = 1;
+                                        foreach (var item in Model.lstteacher)
+                                        {
+                                            <tr>
+                                                <td>@i</td>
+                                                <td>@item.ClassName</td>
+                                                <td>@item.SectionName</td>
+                                                <td>@item.Notice</td>
+
+                                            </tr>
+                                            i++;
+                                        }
+                                    }
+                                }
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    function getstudentdetails(DateOfBirth, Gender, Mobile, AadhaarCard, PermanentAddress, CorrespondenceAddress, FatherOcc, MotherOcc, RegistrationNo, ClassName, SectionName)
+    {
+        $('#DateOfBirth').text(DateOfBirth);
+        $('#Gender').text(Gender);
+        $('#Mobile').text(Mobile);
+        $('#AadhaarCard').text(AadhaarCard);
+        $('#PermanentAddress').text(PermanentAddress);
+        $('#CorrespondenceAddress').text(CorrespondenceAddress);
+        $('#FatherOcc').text(FatherOcc);
+        $('#MotherOcc').text(MotherOcc);
+        $('#RegistrationNo').text(RegistrationNo);
+        $('#ClassName').text(ClassName);
+        $('#SectionName').text(SectionName);
+    }
+</script>

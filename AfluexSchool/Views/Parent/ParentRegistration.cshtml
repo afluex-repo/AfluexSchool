@@ -1,0 +1,374 @@
+﻿@model AfluexSchool.Models.Parent
+
+@{
+    ViewBag.Title = "ParentRegistration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+@using (Html.BeginForm("ParentRegistration", "Parent", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+
+    <div>
+        <div class="login-row">
+            <div class="col-12 col-md-12 col-lg-12 col-xl-12 mx-auto align-self-center">
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-header">
+                        <div class="row ">
+
+                            <div class="col-auto">
+                                <h4 class="mt-0 mb-1">Parent Details</h4>
+
+                            </div>
+                            <p style="color:red">
+                                @TempData["ParentReg"]
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mx-auto">
+                                <div class="row ">
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label>Parent Name <span style="color: red">*</span></label>
+                                            @Html.TextBoxFor(m => m.ParentName, new { @class = "form-control", @Placeholder = "Parent Name" })
+                                            @Html.HiddenFor(m => m.Pk_ParentID)
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> Father's Occuption <span style="color: red">*</span></label>
+                                            @Html.DropDownListFor(m => m.FatherOccupation, new SelectList(ViewBag.ddlOccupation, "Value", "Text"), new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> Mother Name <span style="color: red">*</span></label>
+                                            @Html.TextBoxFor(m => m.MotherName, new { @class = "form-control", })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> Mother's Occuption <span style="color: red">*</span></label>
+                                            @Html.DropDownListFor(m => m.MotherOccupation, new SelectList(ViewBag.ddlOccupationmother, "Value", "Text"), new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label>Mobile <span style="color: red">*</span></label>
+                                            @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", @Placeholder = "Mobile", @maxlength = "10", @onkeypress = "return isNumberKey(event);" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label>Email <span style="color: red">*</span></label>
+                                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @Placeholder = "Email" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label>PAN  </label>
+                                            @Html.TextBoxFor(m => m.PAN, new { @class = "form-control", @Placeholder = "PAN" })
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label>Aadhar Card No.</label>
+                                            @Html.TextBoxFor(m => m.AadharNo, new { @class = "form-control", @Placeholder = "Aadhar Card No" })
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label>Address <span style="color: red">*</span></label>
+                                            @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @Placeholder = "Address" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label>Pincode <span style="color: red">*</span></label>
+                                            @Html.TextBoxFor(m => m.PinCode, new { @class = "form-control", @Placeholder = "Pincode", @onchange = "return GetstateCity();", @onkeypress = "return isNumberKey(event);" })
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label>State</label>
+                                            @Html.TextBoxFor(m => m.State, new { @class = "form-control", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label>City</label>
+                                            @Html.TextBoxFor(m => m.City, new { @class = "form-control", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row ">
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> Correspondence Address </label>
+
+                                            @Html.TextAreaFor(m => m.correspondenceAddress, new { @class = "form-control", @cols = "30", row = "10" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> PinCode </label>
+                                            @Html.TextBoxFor(m => m.correspondencPinCode, new { @class = "form-control", @onchange = "return GetstateCity1();", @onkeypress = "return isNumberKey(event);", @maxlength = "6" })
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> State</label>
+                                            @Html.TextBoxFor(m => m.correspondencState, new { @class = "form-control", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> City</label>
+                                            <input type="checkbox" id="Permanent_ceckbox" onclick="GetpremanentAddress();"><label>Same Permanent Address</label>
+                                            @Html.TextBoxFor(m => m.correspondencCity, new { @class = "form-control", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card-footer text-left">
+
+                                    @if (Model == null)
+                                    {
+                                        <input class="btn btn-primary" type="submit" onclick="return validateform();" name="btnsave" value="Save" id="btnSave" />
+
+                                        <input class="btn btn-primary" type="submit" onclick="return validateform();" name="btnprint" value="Save and Print" id="btnprint" />
+                                    }
+                                    else
+                                    {
+                                        <input class="btn btn-primary" type="Submit" onclick="return updateform();" name="btnUpdate" value="Update" id="btnUpdate" />
+                                    }
+
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+<script src="../../scripts/jquery-1.10.2.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#divload").css({ 'display': 'none' });
+
+
+    });
+
+    function GetstateCity() {
+
+        var PinCode = $('#PinCode').val();
+
+        $.ajax({
+            url: '/Parent/GetStateCityByPincode', type: 'post', dataType: 'json',
+            data: { 'PinCode': PinCode }, success: function (data) {
+
+                if (data.Result == "Yes") {
+                    $('#State').val(data.State);
+                    $('#City').val(data.City);
+
+                }
+                else {
+                    alert("Invalid Pincode");
+                    $('#Pincode').val('');
+                    $('#State').val('');
+                    $('#City').val('');
+                }
+            }
+
+        });
+
+    }
+
+    function validateform() {
+        $(".errortext").removeClass("errortext");
+        if ($('#ParentName').val() == '') {
+            $("#ParentName").addClass('errortext');
+            $('#ParentName').focus();
+            return false;
+        }
+        if ($('#FatherOccupation').val() == '0') {
+            $("#FatherOccupation").addClass('errortext');
+            $('#FatherOccupation').focus();
+            return false;
+        }
+        if ($('#MotherName').val() == '') {
+            $("#MotherName").addClass('errortext');
+            $('#MotherName').focus();
+            return false;
+        }
+        if ($('#MotherOccupation').val() == '0') {
+            $("#MotherOccupation").addClass('errortext');
+            $('#MotherOccupation').focus();
+            return false;
+        }
+        if ($('#Mobile').val() == '') {
+            $("#Mobile").addClass('errortext');
+            $('#Mobile').focus();
+            return false;
+        }
+        if ($('#Email').val() == '') {
+            $("#Email").addClass('errortext');
+            $('#Email').focus();
+            return false;
+        }
+       
+        if ($('#Address').val() == '') {
+            $("#Address").addClass('errortext');
+            $('#Address').focus();
+            return false;
+        }
+        if ($('#PinCode').val() == '') {
+            $("#PinCode").addClass('errortext');
+            $('#PinCode').focus();
+            return false;
+        }
+        //if ($('#Amount').val() == '') {
+        //    $("#Amount").addClass('errortext');
+        //    $('#Amount').focus();
+        //    return false;
+        //}
+
+        return true;
+    }
+
+    function updateform() {
+        $(".errortext").removeClass("errortext");
+        if ($('#ParentName').val() == '') {
+            $("#ParentName").addClass('errortext');
+            $('#ParentName').focus();
+            return false;
+        }
+        if ($('#FatherOccupation').val() == '0') {
+            $("#FatherOccupation").addClass('errortext');
+            $('#FatherOccupation').focus();
+            return false;
+        }
+        if ($('#MotherName').val() == '') {
+            $("#MotherName").addClass('errortext');
+            $('#MotherName').focus();
+            return false;
+        }
+        if ($('#MotherOccupation').val() == '0') {
+            $("#MotherOccupation").addClass('errortext');
+            $('#MotherOccupation').focus();
+            return false;
+        }
+        if ($('#Mobile').val() == '') {
+            $("#Mobile").addClass('errortext');
+            $('#Mobile').focus();
+            return false;
+        }
+        if ($('#Email').val() == '') {
+            $("#Email").addClass('errortext');
+            $('#Email').focus();
+            return false;
+        }
+
+        if ($('#Address').val() == '') {
+            $("#Address").addClass('errortext');
+            $('#Address').focus();
+            return false;
+        }
+        if ($('#PinCode').val() == '') {
+            $("#PinCode").addClass('errortext');
+            $('#PinCode').focus();
+            return false;
+        }
+        //if ($('#Amount').val() == '') {
+        //    $("#Amount").addClass('errortext');
+        //    $('#Amount').focus();
+        //    return false;
+        //}
+        return true;
+    }
+
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+    function GetstateCity1() {
+
+        var value = $('#correspondencPinCode').val();
+
+        $.ajax({
+            url: '/Student/GetStateCityByPincodeCorres', type: 'post', dataType: 'json',
+            data: { 'correspondencPinCode': value }, success: function (data) {
+
+                if (data.Result == "Yes") {
+                    $('#correspondencState').val(data.correspondencState);
+                    $('#correspondencCity').val(data.correspondencCity);
+
+                }
+                else {
+                    alert("Invalid Pincode");
+                    $('#correspondencPinCode').val('');
+                    $('#correspondencState').val('');
+                    $('#correspondencCity').val('');
+                }
+            }
+
+        });
+
+    }
+    function GetpremanentAddress() {
+
+        if (document.getElementById('Permanent_ceckbox').checked) {
+
+            var str = document.getElementById('Address').value;
+            var str1 = document.getElementById('PinCode').value;
+            var str2 = document.getElementById('State').value;
+            var str3 = document.getElementById('City').value;
+
+            document.getElementById('correspondenceAddress').value = str;
+            document.getElementById('correspondencPinCode').value = str1;
+            document.getElementById('correspondencState').value = str2;
+            document.getElementById('correspondencCity').value = str3;
+
+            //     $("#correspondenceAddress").enabled=false;
+            $("#correspondenceAddress").attr("readonly", true);
+            $("#correspondencPinCode").attr("readonly", true);
+
+
+
+        }
+        else {
+            document.getElementById('correspondenceAddress').value = '';
+            document.getElementById('correspondencPinCode').value = '';
+            document.getElementById('correspondencState').value = '';
+            document.getElementById('correspondencCity').value = '';
+
+            $("#correspondenceAddress").attr("readonly", false);
+            $("#correspondencPinCode").attr("readonly", false);
+        }
+    }
+</script>
+

@@ -1,0 +1,117 @@
+﻿@model AfluexSchool.Models.Student
+
+@{
+    ViewBag.Title = "LeaveList";
+    Layout = "~/Views/Shared/_ParentLayout.cshtml";
+}
+
+@using (Html.BeginForm("LeaveList", "ParentPanel", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    <div>
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header border-0 bg-none">
+                <div class="row">
+                    <div class="col-12 col-md">
+                        <p class="fs15">Leave List</p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="card-body ">
+
+                <div class="row">
+
+                    <div class="col-md-3">
+                        From Date
+                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", placeholder = "From Date", @ReadOnly = "ReadOnly" })
+                    </div>
+                    <div class="col-md-3">
+                        To Date
+                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", placeholder = "To Date", @ReadOnly = "ReadOnly" })
+                    </div>
+                    <div class="col-md-3" style="margin-top:20px">
+
+                        <input type="submit" value="Search" name="btnSearch" id="btnSearch" class="btn btn-primary" />
+                    </div>
+                </div>
+
+                <div class="col-sm-12 table-responsive">
+                    <table class="table table-bordered w-100 mb-0" id="example23">
+                        <thead>
+                            <tr>
+                                <th>S.no</th>
+                                <th>Student</th>
+                                <th>From Date    </th>
+                                <th>To Date   </th>
+                                <th>Reason</th>
+                                <th>Status </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                if (Model.listStudent != null)
+                                {
+                                    int i = 1;
+                                    foreach (var item in Model.listStudent)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @i
+                                            </td>
+                                            <td>@item.studentName (@item.ClassName - @item.SectionName)</td>
+                                            <td>
+                                                @item.FromDate
+                                            </td>
+                                            <td>
+                                                @item.ToDate
+                                            </td>
+                                            <td>
+                                                @item.Reason
+                                            </td>
+                                            <td>
+                                                @item.Status
+                                            </td>
+
+                                        </tr>
+                                        i++;
+                                    }
+                                }
+                            }
+                        </tbody>
+                    </table>
+                    <div class="j-response"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+}
+
+<script src="../../scripts/jquery-1.10.2.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+        $("#divload").css({ 'display': 'none' });
+    });
+
+    $('#FromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true,
+    });
+
+    $('#ToDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true,
+    }
+);
+
+
+</script>

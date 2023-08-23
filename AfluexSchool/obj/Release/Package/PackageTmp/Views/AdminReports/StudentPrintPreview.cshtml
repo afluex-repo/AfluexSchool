@@ -1,0 +1,187 @@
+﻿@model AfluexSchool.Models.Student
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>StudentPrintPreview</title>
+
+    <script>
+        function printpage() {
+            //Get the print button and put it into a variable
+            var printButton = document.getElementById("printDiv");
+            //Set the print button visibility to 'hidden'
+            printButton.style.visibility = 'hidden';
+            //Print the page content
+            window.print()
+            //Set the print button to 'visible' again
+            //[Delete this line if you want it to stay hidden after printing]
+            printButton.style.visibility = 'visible';
+        }
+
+    </script>
+</head>
+<body style="background-color:#f1ecec" ;>
+    <div>
+        <table width="100%">
+            <tr style="margin-top:20px;">
+
+                <th style="font-size: 35px; padding-top:20px; padding-left:145px;" colspan="3">Student Profile</th>
+                <th> <div id="printDiv"> <input type="button" onclick="printpage();" value="Print" /></div></th>
+
+            </tr>
+        </table>
+        <hr style="margin-top:50px;" />
+        <table width="100%">
+            <tr>
+
+                <th>Name :</th>
+                <td>@ViewBag.studentName</td>
+                <th>Student Photo :</th>
+                <td>
+                    <img src="@ViewBag.StudentPhoto" alt="IMAGES" width="100px;" height="100px;" />
+                </td>
+            </tr>
+
+
+
+            <tr style="height: 30px;">
+
+                <th>Parent LoginId :</th>
+                <td>@ViewBag.ParentLogin_ID</td>
+                <th>Parent Name :</th>
+                <td>@ViewBag.ParentName</td>
+            </tr>
+
+            <tr style="height: 30px;">
+                <th>Branch :</th>
+                <td>@ViewBag.Branch</td>
+                <th>Session Name :</th>
+                <td>@ViewBag.SessionName</td>
+            </tr>
+            <tr style="height: 30px;">
+                <th>Class :</th>
+                <td>@ViewBag.ClassName</td>
+                <th>Section Name :</th>
+                <td>@ViewBag.SectionName</td>
+            </tr>
+            <tr style="height: 30px;">
+                <th>Father Name :</th>
+                <td>@ViewBag.FatherName</td>
+                <th>Father Occuption :</th>
+                <td>@ViewBag.FatherOccupation</td>
+
+
+            </tr>
+            <tr style="height: 30px;">
+
+
+                <th>Mother Name :</th>
+                <td>@ViewBag.MotherName</td>
+                <th>Mother Occuption :</th>
+                <td>@ViewBag.MotherOccupation</td>
+
+            </tr>
+            <tr style="height: 30px;">
+
+                <th>Date of Birth :</th>
+                <td>@ViewBag.Dateofbirth</td>
+                <th>Age :</th>
+                <td>@ViewBag.Age</td>
+
+
+            </tr>
+            <tr style="height: 30px;">
+
+                <th>Gender :</th>
+                <td>@ViewBag.Gender</td>
+                <th>Category :</th>
+                <td>@ViewBag.Category</td>
+            </tr>
+            <tr style="height: 30px;">
+
+                <th>Religion :</th>
+                <td>@ViewBag.Religion</td>
+                <th>Nationality :</th>
+                <td>@ViewBag.Nationality</td>
+
+
+            </tr>
+            <tr style="height: 30px;">
+
+                <th>Medium :</th>
+                <td>@ViewBag.Medium</td>
+                <th>Aadhaar Card :</th>
+                <td>@ViewBag.AadhaarCard</td>
+            </tr>
+            <tr style="height: 30px;">
+
+                <th>Permanent Address :</th>
+                <td>@ViewBag.PermanentAddress</td>
+                <th>Pincode :</th>
+                <td>@ViewBag.PinCode</td>
+
+
+            </tr>
+            <tr style="height: 30px;">
+
+                <th>State :</th>
+                <td>@ViewBag.State</td>
+                <th>City :</th>
+                <td>@ViewBag.City</td>
+            </tr>
+            <tr style="height: 30px;">
+
+                <th>Correspondence Address :</th>
+                <td>@ViewBag.correspondenceAddress</td>
+                <th>Pincode :</th>
+                <td>@ViewBag.correspondencPinCode</td>
+
+
+            </tr>
+            <tr style="height: 30px;">
+
+                <th>State :</th>
+                <td>@ViewBag.correspondencState</td>
+                <th>City :</th>
+                <td>@ViewBag.correspondencCity</td>
+            </tr>
+            <tr style="height: 30px;">
+
+                <th>Mobile :</th>
+                <td>@ViewBag.Mobile</td>
+                <th>Alternate Number :</th>
+                <td>@ViewBag.AlternateNumber</td>
+
+
+            </tr>
+            <tr style="height: 30px;">
+
+                <th>Email :</th>
+                <td>@ViewBag.Email</td>
+                <th>Previous school :</th>
+                <td>@ViewBag.PreviousSchool</td>
+            </tr>
+            <tr style="height: 30px;">
+
+                <th>Previous Class</th>
+                <td>@ViewBag.PreviousClass</td>
+                <th>Birth Cetificate</th>
+                <td>
+                    <img src="@ViewBag.BirthCetificate" alt="IMAGES" width="50px;" height="50px;" />
+                </td>
+
+
+            </tr>
+
+
+        </table>
+    </div>
+</body>
+
+</html>
+

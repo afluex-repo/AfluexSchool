@@ -1,0 +1,80 @@
+﻿@model AfluexSchool.Models.Master
+
+@{
+    ViewBag.Title = "Leave";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Leave", "Master", FormMethod.Post, new { @id = "Leave" }))
+{  <div>
+          <div class="login-row">
+            <div class="col-12 col-md-12 col-lg-12 col-xl-12 mx-auto align-self-center">
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-header">
+                        <div class="row ">
+                            <div class="col-auto">
+                                <h4 class="mt-0 mb-1">Leave</h4>
+                            </div>
+                            <p style="color:red">
+                                @TempData["Leave"]
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mx-auto">
+                                <div class="row ">
+
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group ">
+                                            <label> Leave Name <span style="color: red">*</span></label>
+                                            @Html.TextBoxFor(m => m.LeaveName, new { @class = "form-control", @placeholder = "Leave Name" })
+
+                                            @Html.HiddenFor(m => m.PK_LeaveID, new { @class = "form-control" })
+                                        </div>
+
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group ">
+                                            <label> Count <span style="color: red">*</span></label>
+                                            @Html.TextBoxFor(m => m.LeaveCount, new { @class = "form-control", @placeholder = "Leave Count" })
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-left">
+                        @if (Model.PK_LeaveID == null)
+                        {
+                            <input type="submit" class="btn btn-success" value="Save" name="SaveLeave" onclick="return fvalidate();" />
+
+                        }
+                        else
+                        {
+                            <input type="submit" class="btn btn-success" value="Update" name="UpdateLeave" onclick="return fvalidate();" />
+
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    function fvalidate() {
+        $(".errortext").removeClass('errortext');
+        if ($("#LeaveName").val() == "") {
+            $("#LeaveName").addClass('errortext');
+            $("#LeaveName").focus();
+            return false;
+        }
+        if ($("#LeaveCount").val() == "") {
+            $("#LeaveCount").addClass('errortext');
+            $("#LeaveCount").focus();
+            return false;
+        }
+    }
+</script>

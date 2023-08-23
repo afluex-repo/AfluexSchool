@@ -1,0 +1,133 @@
+﻿@model AfluexSchool.Models.SendSMS
+
+@{
+    ViewBag.Title = "UsedSMS";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("UsedSMS", "AdminReports", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    <div class="container main-container" id="main-container">
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header border-0 bg-none">
+                <div class="row">
+                    <div class="col-12 col-md">
+                        <p class="fs15">SMS Report</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body ">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>  From Date</label>
+                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control" })
+                </div>
+                <div class="col-md-3">
+                    <label>  To Date</label>
+                    @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control" })
+                </div>
+                <div class="col-md-3">
+                    <br />
+                    <input type="submit" class="btn btn-info" name="Search" id="btnsearch" value="Search" />
+                </div>
+            </div>
+            <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
+                    <div class="col-sm-12">
+                        <table class="table table-bordered w-100 mb-0" id="example23">
+                            <thead>
+                                <tr>
+                                    <th>S.no</th>
+                                    <th>Date</th>
+                                    <th>Name</th>
+                                    <th>MobileNo</th>
+                                    <th>Message</th>
+                                    <th>SMS Count</th>
+                                    <th>Status</th>
+
+                                </tr>
+
+                            </thead>
+                            <tbody>
+                                @if (Model != null)
+                                {
+                                    if (Model.lstsmsdata != null)
+                                    {
+                                        int i = 1;
+                                        foreach (var item in Model.lstsmsdata)
+                                        {
+
+                                            <tr>
+                                                <td>
+                                                    @i
+
+                                                </td>
+
+                                                <td>
+                                                    @item.AddedOn
+                                                </td>
+                                                <td>
+                                                    @item.Name
+
+                                                </td>
+                                                <td>
+                                                    @item.MobileNo
+                                                </td>
+                                                <td>
+                                                    @item.SMS
+                                                </td>
+                                                <td>
+                                                    @item.MessageCount
+                                                </td>
+                                                <td>
+                                                    @item.Status
+                                                </td>
+
+                                            </tr>
+                                            i++;
+                                        }
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                        <div class="j-response"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+}
+
+
+<script src="../../scripts/jquery-1.10.2.min.js"></script>
+<script src="../../Scripts/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+
+<script>
+     
+
+    $('#FromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true,
+        yearRange: '1950:2029'
+    });
+
+    $('#ToDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true,
+        yearRange: '1950:2029'
+    });
+
+     
+</script>
+
+

@@ -1,0 +1,72 @@
+﻿@model AfluexSchool.Models.Master
+
+@{
+    ViewBag.Title = "Class";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm("Class", "Master", FormMethod.Post, new { @id = "Class" }))
+{
+    <div>
+          <div class="login-row">
+            <div class="col-12 col-md-12 col-lg-12 col-xl-12 mx-auto align-self-center">
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-header">
+                        <div class="row ">
+                            <div class="col-auto">
+                                <h4 class="mt-0 mb-1">Class</h4>
+                            </div>
+                            <p style="color:red">
+                                @TempData["Class"]
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mx-auto">
+                                <div class="row ">
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group ">
+                                            <label> Class Name <span style="color: red">*</span></label>
+                                            @Html.TextBoxFor(m => m.ClassName, new { @class = "form-control", @placeholder = "Class Name" })
+
+                                            @Html.HiddenFor(m => m.Pk_ClassId, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-left">
+                        @if (Model.Pk_ClassId == null)
+                        {
+                            <input type="submit" class="btn btn-success" value="Save" name="SaveClass" onclick="return fvalidate();" />
+
+                        }
+                        else
+                        {
+                            <input type="submit" class="btn btn-success" value="Update" name="UpdateClass" onclick="return fvalidate();" />
+
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    function fvalidate() {
+        $('.errortext').removeClass('errortext');
+        if ($("#ClassName").val() == "") {
+            $("#ClassName").addClass('errortext');
+            $("#ClassName").focus();
+            return false;
+        }
+
+    }
+</script>
+
+

@@ -1,0 +1,287 @@
+﻿@model AfluexSchool.Models.Student
+
+@{
+    ViewBag.Title = "StudentReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    @@page {
+  size: auto;
+	}
+    @@media print {
+  table td:last-child {display:none}
+  table th:last-child {display:none}
+}
+</style>
+@using (Html.BeginForm("StudentReport", "AdminReports", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    <div>
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header border-0 bg-none">
+                <div class="row">
+                    <div class="col-12 col-md">
+                        <p class="fs15">Student List</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body ">
+                <div class="row">
+
+                    <div class="col-md-3">
+
+
+
+                        <label>Parent Name</label>
+
+                        @Html.TextBoxFor(m => m.ParentName, new { @class = "form-control" })
+
+                    </div>
+
+                    <div class="col-md-3">
+
+                        <label>Student LoginID</label>
+
+                        @Html.TextBoxFor(m => m.StudenLoginID, new { @class = "form-control" })
+
+                    </div>
+                    <div class="col-md-3">
+                        <label>Student Name</label>
+                        @Html.TextBoxFor(m => m.studentName, new { @class = "form-control" })
+
+                    </div>
+                    <div class="col-md-3">
+
+                        <label>Class</label>
+
+                        @Html.DropDownListFor(m => m.Fk_ClassID, new SelectList(ViewBag.ddlclass, "Value", "Text"), new { @class = "form-control", @onchange = "return OnchangeSection();" })
+
+                    </div>
+
+                </div>
+                <div class="row">
+
+                    <div class="col-md-3">
+
+                        <label>Section</label>
+
+                        @Html.DropDownListFor(m => m.Fk_SectionID, new SelectList(ViewBag.ddlsection, "Value", "Text"), new { @class = "form-control" })
+
+                    </div>
+                    <div class="col-md-3">
+
+                        <label>Session </label>
+
+                        @Html.DropDownListFor(m => m.SessionName, new SelectList(ViewBag.ddlSession, "Value", "Text"), new { @class = "form-control" })
+
+                    </div>
+                    <div class="col-md-3">
+
+                        <label>Registration From Date</label>
+
+                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control" })
+
+                    </div>
+
+                    <div class="col-md-3">
+
+                        <label>Registration To Date</label>
+
+                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control" })
+
+
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-md-3">
+                        <div class="form-group ">
+                            <label>Gender  </label>
+                            @Html.DropDownListFor(m => m.Gender, new SelectList(ViewBag.ddlGender, "Value", "Text"), new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3">
+                        <div class="form-group ">
+                            <label> Category  </label>
+                            @Html.DropDownListFor(m => m.Category, new SelectList(ViewBag.ddlCategory, "Value", "Text"), new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3">
+                        <div class="form-group ">
+                            <label> Religion  </label>
+                            @Html.DropDownListFor(m => m.Religion, new SelectList(ViewBag.ddlReligion, "Value", "Text"), new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+
+                        <label> From DOB</label>
+
+                        @Html.TextBoxFor(m => m.FromDateDOB, new { @class = "form-control" })
+
+                    </div>
+
+                   
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+
+                        <label> To DOB</label>
+
+                        @Html.TextBoxFor(m => m.ToDateDOB, new { @class = "form-control" })
+
+
+                    </div>
+                    <div class="col-md-2">
+                        <br/>
+                        <input type="submit" class="btn btn-info" name="btnsearch" id="btnsearch" value="Search" />
+                    </div>
+                </div>
+
+
+
+                <div class="col-md-12 table-responsive">
+                    <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                        <table class="table table-bordered w-100 mb-0" id="example23">
+
+                            <thead>
+                                <tr>
+                                    <th>S.no</th>
+                                    <th>Session</th>
+                                    <th>RegNo</th>
+                                    <th>Login ID</th>
+                                    <th>Name</th>
+                                    <th>Class</th>
+                                    <th>Section</th>
+                                    <th>Father</th>
+                                    <th>Mother</th>
+                                    <th>DOB</th>
+                                    <th>Category</th>
+                                    <th>Gender</th>
+                                    <th>Address</th>
+                                    <th>Mobile</th>
+                                    <th>Action</th>
+                                </tr>
+
+                            </thead>
+                            <tbody>
+                                @if (Model != null)
+                                                {
+                                                    if (Model.listStudent != null)
+                                                    {
+                                                        int i = 1;
+                                                        foreach (var item in Model.listStudent)
+                                                        {
+
+                                    <tr>
+                                        <td>
+                                            @i
+                                            @Html.HiddenFor(m => m.Pk_StudentID)
+                                        </td>
+                                        <td>@item.SessionName</td>
+                                        <td>@item.RegistrationDate</td>
+                                        <td>@item.LoginID</td>
+                                        <td>@item.studentName</td>
+                                        <td>@item.Fk_ClassID</td>
+                                        <td>@item.Fk_SectionID</td>
+                                        <td>@item.FatherName</td>
+                                        <td>@item.MotherName</td>
+                                        <td>@item.Dateofbirth</td>
+                                        <td>@item.Category</td>
+                                        <td>@item.Gender</td>
+                                        <td>@item.Address</td>
+                                        <td>@item.Mobile</td>
+                                        <td>
+                                            <a href="/AdminReports/StudentViewProfile?Pk_StudentID=@item.Pk_StudentID"
+                                               class="btn btn-success btn-sm">View Profile</a>
+
+                                            <a href="/AdminReports/StudentPrintPreview?Pk_StudentID=@item.Pk_StudentID" class="btn btn-primary btn-sm" target="_blank">Print</a>
+                                        </td>
+                                    </tr>
+                                                            i++;
+                                                        }
+                                                    }
+                                                }
+                            </tbody>
+                        </table>
+
+
+                        <div class="j-response"></div>
+
+                    </div>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+
+<script src="../../scripts/jquery-1.10.2.min.js"></script>
+<script src="../../Scripts/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+
+<script>
+     
+    $('#FromDateDOB').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true,
+        yearRange: '1950:2029'
+    });
+
+    $('#ToDateDOB').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true,
+        yearRange: '1950:2029'
+    });
+
+    $('#FromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true,
+        yearRange: '1950:2029'
+    });
+
+    $('#ToDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true,
+        yearRange: '1950:2029'
+    });
+
+
+    function OnchangeSection() {
+        //$("#divload").css({ 'display': '' });
+        var value = $('#Fk_ClassID').val();
+        //var values = $('#SectionName').val();
+        //alert(value);
+        $.ajax({
+            url: "/AdminReports/GetSectionByClass",
+            Type: "Get",
+            DataType: "JSON",
+            data: { Fk_ClassID: value },
+            success: function (data) {
+                //$("#divload").css({ 'display': 'none' });
+                $("#Fk_SectionID").html(""); // clear before appending new list
+                $("#Fk_SectionID").empty();
+                $("#Fk_SectionID").append(
+                      $('<option></option>').val(0).html('Select Section'));
+                $.each(data.ddlsection, function (index, Sectioncount) {
+                    $("#Fk_SectionID").append(
+                          $('<option></option>').val(Sectioncount.Value).html(Sectioncount.Text));
+
+                });
+
+            }
+        });
+
+    }
+
+
+</script>

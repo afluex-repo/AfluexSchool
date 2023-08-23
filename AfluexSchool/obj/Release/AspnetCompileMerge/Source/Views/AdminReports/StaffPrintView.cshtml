@@ -1,0 +1,121 @@
+﻿@model AfluexSchool.Models.Staff
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>StaffPrintPreview</title>
+
+    <script>
+        function printpage() {
+            //Get the print button and put it into a variable
+            var printButton = document.getElementById("printDiv");
+            //Set the print button visibility to 'hidden'
+            printButton.style.visibility = 'hidden';
+            //Print the page content
+            window.print()
+            //Set the print button to 'visible' again
+            //[Delete this line if you want it to stay hidden after printing]
+            printButton.style.visibility = 'visible';
+        }
+
+    </script>
+</head>
+<body style="background-color:#f1ecec" ;>
+    <div>
+        <table width="100%">
+            <tr style="margin-top:20px;">
+
+                <th style="font-size: 35px; padding-top:20px; padding-left:145px;" colspan="3">Staff Profile</th>
+                <th> <div id="printDiv"> <input type="button" onclick="printpage();" value="Print" /></div></th>
+
+            </tr>
+        </table>
+        <hr style="margin-top:50px;" />
+        <table width="100%">
+            <tr>
+
+                <th>Name :</th>
+                <td>@ViewBag.Name</td>
+                <th>Staff Photo :</th>
+                <td>
+                    <img src="@ViewBag.Image" alt="IMAGES" width="100px;" height="100px;" />
+                </td>
+            </tr>
+
+
+
+            <tr style="height: 30px;">
+
+                <th>Staff LoginId :</th>
+                <td>@ViewBag.LoginID</td>
+                <th>Father Name :</th>
+                <td>@ViewBag.FatherName</td>
+            </tr>
+
+            <tr style="height: 30px;">
+                <th>Branch :</th>
+                <td>@ViewBag.BranchName</td>
+                <th>Designation :</th>
+                <td>@ViewBag.Designation</td>
+            </tr>
+            <tr style="height: 30px;">
+                <th>Pincode :</th>
+                <td>@ViewBag.PinCode</td>
+                <th>State :</th>
+                <td>@ViewBag.State</td>
+            </tr>
+            <tr style="height: 30px;">
+                <th>Address :</th>
+                <td>@ViewBag.Address</td>
+                <th>DOB :</th>
+                <td>@ViewBag.DOB</td>
+
+
+            </tr>
+            <tr style="height: 30px;">
+
+
+                <th>Gender :</th>
+                <td>@ViewBag.Gender</td>
+                <th>Religion :</th>
+                <td>@ViewBag.Religion</td>
+
+            </tr>
+            <tr style="height: 30px;">
+
+                <th>Category :</th>
+                <td>@ViewBag.Category</td>
+                <th>DOJ :</th>
+                <td>@ViewBag.DOJ</td>
+
+
+            </tr>
+            <tr style="height: 30px;">
+
+                <th>EmailID :</th>
+                <td>@ViewBag.EmailID</td>
+                <th>Qualification :</th>
+                <td>@ViewBag.Qualification</td>
+            </tr>
+            <tr style="height: 30px;">
+
+                <th>Experience :</th>
+                <td>@ViewBag.Experience</td>
+                <th>MobileNo :</th>
+                <td>@ViewBag.MobileNo</td>
+
+
+            </tr>
+
+
+        </table>
+    </div>
+</body>
+
+</html>
+

@@ -1,0 +1,71 @@
+﻿@model AfluexSchool.Models.Student
+
+@{
+    ViewBag.Title = "Homework";
+    Layout = "~/Views/Shared/_ParentLayout.cshtml";
+}
+
+
+@using (Html.BeginForm("Homework", "ParentPanel", FormMethod.Post, new { @id = "ReligionList" }))
+{
+    <div>
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header border-0 bg-none">
+                <div class="row">
+                    <div class="col-12 col-md">
+                        <p class="fs15">Homework</p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="card-body ">
+                <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                    <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-bordered w-100 mb-0" id="example23">
+                                <thead>
+                                    <tr>
+                                        <th>Sr.No.</th>
+                                        <th>Subject   </th>
+                                        <th>ClassName </th>
+                                        <th>SectionName </th>
+                                        <th>Date </th>
+                                        <th>File </th>
+                                        <th>Text</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
+                                    {
+                                        if (Model.listStudent != null)
+                                        {
+                                            var i = 1;
+                                            foreach (var item in Model.listStudent)
+                                            {
+                                                <tr>
+                                                    <td>@i</td>
+                                                    <td>@item.studentName   </td>
+                                                    <td>@item.ClassName          </td>
+                                                    <td>@item.SectionName        </td>
+                                                    <td>@item.AttendanceDate     </td>
+                                                    <td><a href="@item.Status" target="_blank"><img src="@item.Status" style="height:50px;width:50px;" />  </a>    </td> 
+                                                    <td>@(new HtmlString(item.HomeWorkHTML))</td>
+                                                  </tr>
+                                                i++;
+                                            }
+                                        }
+                                    }
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+}
+
+

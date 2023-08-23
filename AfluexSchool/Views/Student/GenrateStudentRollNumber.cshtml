@@ -1,0 +1,223 @@
+﻿@model AfluexSchool.Models.Student
+
+@{
+    ViewBag.Title = "GenrateStudentRollNumber";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("GenrateStudentRollNumber", "Student", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    <div>
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header border-0 bg-none">
+                <div class="row">
+                    <div class="col-12 col-md">
+                        <p class="fs15">Genrate RollNumber</p>
+                    </div>
+                    <p style="color:red">
+                        @TempData["StudentGenrateRollNumber"]
+                    </p>
+                </div>
+            </div>
+            <div class="card-body ">
+                <div class="row">
+
+                    <div class="col-md-6">
+
+
+
+                        <label>Class <span style="color: red">*</span></label>
+
+                        @Html.DropDownListFor(m => m.Fk_ClassID, new SelectList(ViewBag.ddlclass, "Value", "Text"), new { @class = "form-control", @onchange = "return OnchangeSection();" })
+
+                    </div>
+
+                    <div class="col-md-6">
+
+
+
+
+                        <label>Section <span style="color: red">*</span></label>
+
+                        @Html.DropDownListFor(m => m.Fk_SectionID, new SelectList(ViewBag.ddlsection, "Value", "Text"), new { @class = "form-control", @onchange = "return onDDLchange()" })
+
+
+
+                    </div>
+
+
+                </div>
+
+                <div class="card-footer text-left">
+
+                    <div class="col-md-2">
+                        <input type="submit" name="btngetdetail" class="btn btn-info btn-sm" id="btngetdetail" onclick="return validateform();" value="Get Detail" />
+                    </div>
+                </div>
+                @if (Model != null)
+                {
+                    if (Model.listStudent != null)
+                    {
+                        int i = 1;
+                        <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                            <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table datatable display responsive w-100 dataTable no-footer dtr-inline" style="width: 1002px;">
+                                        <thead>
+                                            <tr>
+                                                <th>S No.</th>
+                                                <th>StudentName</th>
+                                                <th>LoginID</th>
+                                                <th>ClassName</th>
+                                                <th>SessionName</th>
+                                                <th>SectionName</th>
+                                                <th>Mobile</th>
+                                                <th>Medium</th>
+
+                                            </tr>
+
+                                        </thead>
+                                        <tbody>
+
+                                            @foreach (var item in Model.listStudent)
+                                            {
+
+                                                <tr>
+                                                    <td>
+                                                        @i
+                                                        @Html.HiddenFor(m => m.Pk_StudentID)
+                                                    </td>
+
+                                                    <td>
+                                                        @item.DisplayName
+                                                    </td>
+                                                    <td>
+                                                        @item.LoginID
+
+                                                    </td>
+
+                                                    <td>
+                                                        @item.ClassName
+
+                                                    </td>
+                                                    <td>
+                                                        @item.SessionName
+
+                                                    </td>
+                                                    <td>
+                                                        @item.SectionName
+
+                                                    </td>
+                                                    <td>
+                                                        @item.Mobile
+
+                                                    </td>
+                                                    <td>
+                                                        @item.Medium
+
+                                                    </td>
+
+
+                                                </tr>
+                                                i++;
+
+                                            }
+                                        </tbody>
+                                    </table>
+
+
+                                    <div class="j-response"></div>
+
+                                </div>
+
+
+
+                            </div>
+                        </div>
+
+                        <div class="card-footer text-left">
+
+                            <div class="col-md-2">
+                                <input class="btn btn-success btn-sm" type="submit" onclick="return validateform();" name="btnsave"
+                                       value="Genrate Rollnumber" id="btnSave" />
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+
+}
+
+
+
+<script>
+
+
+    function OnchangeSection() {
+        var value = $('#Fk_ClassID').val();
+        //var values = $('#SectionName').val();
+        //alert(value);
+        $.ajax({
+            url: "/Student/GetSectionByClass",
+            Type: "Get",
+            DataType: "JSON",
+            data: { Fk_ClassID: value },
+            success: function (data) {
+
+                $("#Fk_SectionID").html(""); // clear before appending new list
+                $("#Fk_SectionID").empty();
+                $("#Fk_SectionID").append(
+                      $('<option></option>').val(0).html('Select Section'));
+                $.each(data.ddlsection, function (index, Sectioncount) {
+                    $("#Fk_SectionID").append(
+                          $('<option></option>').val(Sectioncount.Value).html(Sectioncount.Text));
+
+                });
+
+
+            }
+        });
+
+    }
+
+    function validateform() {
+        $(".errortext").removeClass("errortext");
+        if ($('#Fk_ClassID').val() == '0') {
+            $("#Fk_ClassID").addClass('errortext');
+            $('#Fk_ClassID').focus();
+            return false;
+        }
+        if ($('#Fk_SectionID').val() == '0') {
+            $("#Fk_SectionID").addClass('errortext');
+            $('#Fk_SectionID').focus();
+            return false;
+        }
+
+        return true;
+    }
+
+    function onDDLchange() {
+        $("#StudenRoll").hide();
+        $("#btnSave").hide();
+    }
+
+    function tableDetail() {
+
+        var value = $('#Fk_SectionID').val();
+        if (value == 1) {
+            $("#StudenRoll").show();
+            $("#btnSave").show();
+
+        }
+        else {
+            $("#StudenRoll").hide();
+            $("#btnSave").hide();
+
+        }
+
+    }
+
+</script>
+

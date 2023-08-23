@@ -1,0 +1,90 @@
+﻿@model AfluexSchool.Models.Parent
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>ParentPrintView</title>
+</head>
+<body>
+    @using (Html.BeginForm("ParentPrintView", "AdminReports", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+    {
+        <div>
+            <table style="width:100%" border="0">
+                <tr style="font-size:30px">
+
+                    <th colspan="5" style="padding:20px">Parent Details</th>
+
+
+                </tr>
+            </table>
+            <div id="printDiv"> <input type="button" onclick="printreport();" value="Print" /></div>
+            <hr style="margin:30px" />
+            <table style="width:100%" border="0">
+                <tr style="height:30px">
+                    @Html.HiddenFor(r => r.Pk_ParentID)
+                    <th>Parent LoginID</th>
+                    <td>@ViewBag.ParentLogin_ID</td>
+                    <th>Parent Name</th>
+                    <td>@ViewBag.ParentName</td>
+
+                </tr>
+
+
+
+                <tr style="height:30px">
+                    <th>Email</th>
+                    <td>@ViewBag.Email</td>
+                    <th>Mobile</th>
+                    <td colspan="2">@ViewBag.Mobile</td>
+
+                </tr>
+
+                <tr style="height:30px">
+                    <th>Address </th>
+                    <td>@ViewBag.Address</td>
+                    <th>PinCode</th>
+                    <td colspan="2">@ViewBag.PinCode</td>
+
+                </tr>
+
+
+
+                <tr style="height:30px">
+                    <th>PinCode</th>
+                    <td>@ViewBag.PinCode</td>
+                    <th>State</th>
+                    <td colspan="2">@ViewBag.State</td>
+
+                </tr>
+
+                <tr style="height:30px">
+                    <th> City</th>
+                    <td>@ViewBag.City</td>
+
+                </tr>
+                <tr style="height:30px">
+                    <th> PAN</th>
+                    <td>@ViewBag.PAN</td>
+                    <th> Aadhar Card No</th>
+                    <td colspan="2">@ViewBag.AadharNo</td>
+                </tr>
+
+            </table>
+        </div>
+    }
+    <script>
+        function printreport() {
+            var printButton = document.getElementById("printDiv");
+            printButton.style.visibility = 'hidden';
+            window.print()
+            printButton.style.visibility = 'visible';
+        }
+    </script>
+
+</body>
+</html>

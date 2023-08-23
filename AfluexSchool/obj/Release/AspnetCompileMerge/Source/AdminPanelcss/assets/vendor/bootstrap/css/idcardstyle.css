@@ -1,0 +1,323 @@
+body {
+    padding: 0px;
+    margin: 0px;
+}
+
+.main-section {
+    margin: 0 auto;
+    width: 40%;
+    height: 240px;
+}
+
+.logo-section img {
+    max-width: 85%;
+}
+
+.logo-heading h1 {
+    color: #17484f;
+    font-size: 22px;
+    margin-bottom: 0px;
+}
+
+.name-section {
+    padding: 10px 0px;
+}
+
+.name-detali {
+    padding: 10px 0px;
+}
+
+.col-md-1.col-lg-1.colon {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.col-md-6.col-lg-6.colon1 {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.col-md-3 col-lg-3 colon2 {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.student-section img {
+    max-width: 60px;
+    margin-top: 7px;
+    border: 1px solid #000;
+}
+
+.signature {
+    float: right;
+    padding-top: 30px;
+}
+
+.logo-heading h5 {
+    font-size: 13px;
+}
+
+.name-section h6 {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+
+.name-detali h6 {
+    font-size: 8px;
+    font-weight: bold;
+}
+
+.logo-heading h5 {
+    margin-bottom: 1px;
+}
+
+.name-detali h6 {
+    margin-bottom: 2px;
+}
+
+.signature h6 {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 0px;
+    padding-right: 0px;
+}
+
+.col-md-3.col-lg-3.colon0 {
+    /* padding-left: 0px; */
+    padding-right: 0px;
+}
+
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+    .main-section img {
+        max-width: 100%;
+    }
+
+    .name-section h6 {
+        font-size: 11px;
+        font-weight: bold;
+        margin-bottom: 2px;
+    }
+
+    .name-detali h6 {
+        font-size: 11px;
+        font-weight: bold;
+    }
+
+    .signature h6 {
+        font-size: 11px;
+        font-weight: bold;
+        margin-bottom: 0px;
+        padding-right: 0px;
+    }
+}
+
+@media (min-width: 1281px) and (max-width: 1366px) {
+    .main-section img {
+        max-width: 100%;
+    }
+
+    .logo-heading h1 {
+        color: #17484f;
+        font-size: 38px;
+        margin-bottom: 0px;
+    }
+
+    .logo-heading h5 {
+        font-size: 17px;
+    }
+
+    .name-section h6 {
+        font-size: 13px;
+        font-weight: bold;
+        margin-bottom: 2px;
+    }
+
+    .name-detali h6 {
+        font-size: 13px;
+        font-weight: bold;
+    }
+
+    .col-md-6.col-lg-6.colon1 {
+        padding-left: 15px;
+        padding-right: 0px;
+    }
+
+    .signature h6 {
+        font-size: 13px;
+        font-weight: bold;
+        margin-bottom: 0px;
+        padding-right: 0px;
+    }
+}
+
+@media (min-width: 1367px) and (max-width: 1441px) {
+    .main-section img {
+        max-width: 100%;
+    }
+
+    .logo-heading h1 {
+        color: #17484f;
+        font-size: 37px;
+        margin-bottom: 0px;
+    }
+
+    .logo-heading h5 {
+        font-size: 16px;
+    }
+
+    .name-section h6 {
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 2px;
+    }
+
+    .name-detali h6 {
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .name-detali h6 {
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .student-section img {
+        max-width: 100px;
+        margin-top: 7px;
+        border: 1px solid #000;
+        margin-left: 24px;
+    }
+}
+
+@media (min-width: 1442px) and (max-width: 1680px) {
+    .main-section img {
+        max-width: 100%;
+    }
+
+    .logo-heading h1 {
+        color: #17484f;
+        font-size: 43px;
+        margin-bottom: 0px;
+    }
+
+    .logo-heading h5 {
+        font-size: 18px;
+    }
+
+    .name-section h6 {
+        font-size: 15px;
+        font-weight: bold;
+        margin-bottom: 2px;
+    }
+
+    .name-detali h6 {
+        font-size: 15px;
+        font-weight: bold;
+    }
+
+    .student-section img {
+        max-width: 100%;
+        margin-top: 7px;
+        border: 1px solid #000;
+    }
+
+    .signature h6 {
+        font-size: 15px;
+        font-weight: bold;
+        margin-bottom: 0px;
+        padding-right: 0px;
+    }
+}
+
+@media (min-width: 1681px) and (max-width: 1920px) {
+    .main-section img {
+        max-width: 100%;
+    }
+
+    .logo-heading h1 {
+        color: #17484f;
+        font-size: 45px;
+        margin-bottom: 0px;
+    }
+
+    .logo-heading h5 {
+        font-size: 20px;
+    }
+
+    .name-section h6 {
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 2px;
+    }
+
+    .name-detali h6 {
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .student-section img {
+        max-width: 80%;
+        margin-top: 7px;
+        border: 1px solid #000;
+        margin-left: -20px !important;
+    }
+
+    .signature h6 {
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 0px;
+        padding-right: 45px;
+    }
+}
+
+
+@media print {
+    /* All your print styles go here */
+    .logo-section img {
+        max-width: 60%;
+    }
+
+    .logo-heading h1 {
+        color: #17484f;
+        font-size: 40px;
+        margin-left: -90px;
+    }
+
+    .logo-heading h5 {
+        font-size: 20px;
+        margin-left: -500px;
+    }
+
+    .name-section h6 {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 2px;
+    }
+
+    .name-detali h6 {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .student-section img {
+        max-width: 50%;
+        margin-top: 7px;
+        border: 1px solid #000;
+        margin-left: -180px !important;
+    }
+
+    .col-md-6.col-lg-6.colon1 {
+        padding-left: 0px;
+        padding-right: 0px;
+        margin-left: -80px !important;
+    }
+
+    .signature h6 {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 0px;
+        margin-left: -550px !important;
+    }
+}

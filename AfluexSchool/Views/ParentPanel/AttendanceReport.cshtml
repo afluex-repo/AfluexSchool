@@ -1,0 +1,179 @@
+﻿@model AfluexSchool.Models.Student
+
+@{
+    ViewBag.Title = "AttendanceReport";
+    Layout = "~/Views/Shared/_ParentLayout.cshtml";
+}
+ 
+ 
+@using (Html.BeginForm("AttendanceReport", "ParentPanel", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    <div>
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header border-0 bg-none">
+                <div class="row">
+                    <div class="col-12 col-md">
+                        <p class="fs15">Attendance Report</p>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="card-body ">
+                <div class="row">
+                    <div class="col-md-3">
+
+                        <label>  Student Id</label>
+
+                        @Html.TextBoxFor(m => m.StudenLoginID, new { @class = "form-control" })
+
+
+                    </div>
+                    <div class="col-md-3">
+
+                        <label>Class</label>
+
+                        @Html.DropDownListFor(m => m.Fk_ClassID, new SelectList(ViewBag.ddlclass, "Value", "Text"), new { @class = "form-control", @onchange = "return OnchangeSection();" })
+
+                    </div>
+                    <div class="col-md-3">
+
+                        <label>Section</label>
+
+                        @Html.DropDownListFor(m => m.Fk_SectionID, new SelectList(ViewBag.ddlsection, "Value", "Text"), new { @class = "form-control" })
+
+                    </div>
+                    <div class="col-md-3">
+
+                        <label>  From Date</label>
+
+                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control" })
+
+                    </div>
+
+                   
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+
+                        <label>  To Date</label>
+
+                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control" })
+
+
+                    </div>
+                   
+                </div>
+                 
+                <div class="card-footer text-left">
+
+                    <div class="col-md-2">
+                        <input type="submit" class="btn btn-info" name="Search" id="btnsearch" value="Search" />
+                    </div>
+                </div>
+
+                <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                    <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-bordered w-100 mb-0" id="example23">
+                                <thead>
+                                    <tr>
+                                        <th>S.no</th>
+                                        <th>StudentName</th>
+                                        <th>ClassName</th>
+                                        <th>SectionName</th>
+                                        <th>AttendanceDate</th>
+                                        <th>Status</th> 
+                                    </tr>
+
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
+                                    {
+                                        if (Model.listStudent != null)
+                                        {
+                                            int i = 1;
+                                            foreach (var item in Model.listStudent)
+                                            { 
+                                                <tr> 
+                                                    <td> @i </td>
+                                                    <td> @item.studentName </td>
+                                                    <td> @item.ClassName </td>
+                                                    <td> @item.SectionName </td>
+                                                    <td> @item.AttendanceDate </td>
+                                                    <td> @item.Status </td>
+                                                </tr>
+                                                i++;
+                                            }
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+
+<script src="../../scripts/jquery-1.10.2.min.js"></script>
+<script src="../../Scripts/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+
+<script>
+
+
+
+
+    $('#FromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true,
+        yearRange: '1950:2029'
+    });
+
+    $('#ToDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true,
+        yearRange: '1950:2029'
+    });
+
+
+    function OnchangeSection() {
+        //$("#divload").css({ 'display': '' });
+        var value = $('#Fk_ClassID').val();
+        //var values = $('#SectionName').val();
+        //alert(value);
+        $.ajax({
+            url: "/ParentPanel/GetSectionByClass",
+            Type: "Get",
+            DataType: "JSON",
+            data: { Fk_ClassID: value },
+            success: function (data) {
+                //$("#divload").css({ 'display': 'none' });
+                $("#Fk_SectionID").html(""); // clear before appending new list
+                $("#Fk_SectionID").empty();
+                $("#Fk_SectionID").append(
+                      $('<option></option>').val(0).html('Select Section'));
+                $.each(data.ddlsection, function (index, Sectioncount) {
+                    $("#Fk_SectionID").append(
+                          $('<option></option>').val(Sectioncount.Value).html(Sectioncount.Text));
+
+                });
+
+            }
+        });
+
+    }
+
+
+</script>
+
+

@@ -1,0 +1,124 @@
+﻿@model AfluexSchool.Models.HRManagement
+
+@{
+    Layout = null;
+}
+<!doctype html>
+<html lang="en">
+<head>
+    <link href="http://nidhi.afluex.com/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+    <div class="top-main">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <h5 class="text-center"><b>@ViewBag.CompanyName</b></h5>
+                    <h5 class="text-center"><b>@ViewBag.CompanyAddress,@ViewBag.Pin1 </b></h5>
+                    <h5 class="text-center"><b>Email : @ViewBag.Website</b></h5>
+                    <br />
+                    <h3 class="text-center"><b>Salary Slip</b></h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">Name :</th>
+                                <td>@Model.EmployeeName</td>
+                                <th scope="col">Employee Code  :</th>
+                                <td>@Model.EmployeeCode</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">Father Name  </th>
+                                <td>@Model.FatherName</td>
+                                <th scope="row">PAN No</th>
+                                <td>@Model.PAN</td>
+                            </tr>
+                            <tr>
+                                <th>Pay Period :</th>
+                                <td>@Model.MonthName-@Model.Year</td>
+                                <th scope="row">Bank A/C No</th>
+                                <td>@Model.BankAccountNo</td>
+                            </tr>
+                             
+                        </tbody>
+                    </table>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th colspan="2">EARNINGS </th>
+                                <th colspan="2">DEDUCTION</th>
+                            </tr>
+                            <tr>
+                                <th scope="row">Basic Salary</th>
+                                <td>@Model.Basic</td>
+                                <th scope="row">EMP  Cont</th>
+                                <td>@Model.ContributionTosociety</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">HRA</th>
+                                <td>@Model.HRA</td>
+                                <th scope="row">TDS</th>
+                                <td>@Model.TDS</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">CA</th>
+                                <td>@Model.CA</td>
+                                <th scope="row">Insurance</th>
+                                <td>@Model.Insurance</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">MA</th>
+                                <td>@Model.MA</td>
+                                <th scope="row">Advance</th>
+                                <td>@Model.Advance</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">PA</th>
+                                <td>@Model.PA</td>
+                                <th scope="row">PF</th>
+                                <td>@Model.PF</td>
+                            </tr>
+
+
+                            <tr>
+                                <th scope="row">TOTAL</th>
+                                <td>@Model.TotalIncome</td>
+                                <th scope="row">TOTAL</th>
+                                <td>@Model.TotalDeduction</td>
+                            </tr>
+                            <tr>
+                                <th colspan="2"></th>
+                                <th scope="row">Net Pay</th>
+                                <td>@Model.NetSalary</td>
+                            </tr>
+
+
+                        </thead>
+                    </table>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4 style="margin-top: 100px;">Authorise  Signature</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <h4 style="margin-top: 100px;text-align: end;">Employee  Signature</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+   
+    <script src="../../AdminPanelcss/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

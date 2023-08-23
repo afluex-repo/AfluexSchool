@@ -1,0 +1,119 @@
+﻿@model AfluexSchool.Models.Master
+
+@{
+    ViewBag.Title = "Holiday";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Holiday", "Master", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    <div>
+        <div class="login-row">
+            <div class="col-12 col-md-12 col-lg-12 col-xl-12 mx-auto align-self-center">
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-header">
+                        <div class="row ">
+
+                            <div class="col-auto">
+                                <h4 class="mt-0 mb-1">Holiday</h4>
+
+                            </div>
+                            <p style="color:red">
+                                @TempData["Holiday"]
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mx-auto">
+                                <div class="row ">
+
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label>Holiday Name <span style="color: red">*</span></label>
+                                            @Html.TextBoxFor(b => b.HolidayName, new { @Class = "form-control", @Placeholder = "HolidayName" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label>Holiday Date <span style="color: red">*</span></label>
+                                            @Html.TextBoxFor(f => f.HolidayDate, new { @class = "form-control", @Placeholder = "Holiday Date", @ReadOnly = "ReadOnly"  })
+                                      @Html.HiddenFor(f => f.HolidayID)
+                                          </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <br/>
+                                        @if (Model.HolidayID != null)
+                                        {
+                                            <input type="submit" class="btn btn-success" onclick="return validateform();" name="Update" id="btnUpdate" value="Update" />
+
+                                        }
+                                        else
+                                        {
+                                            <input type="submit" class="btn btn-success" onclick="return validateform();" name="Save" id="btnSave" value="Save" />
+
+                                        }
+                                    </div>
+                                     </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+<script src="../../scripts/jquery-1.10.2.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+
+
+<script>
+
+    $('#HolidayDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true,
+        currentyear: true,
+
+    }
+     );
+
+    function validateform() {
+        $(".errortext").removeClass("errortext");
+
+        if ($('#HolidayName').val() == '') {
+            $("#HolidayName").addClass('errortext');
+            $('#HolidayName').focus();
+            return false;
+        }
+         
+        if ($('#HolidayDate').val() == '') {
+            $("#HolidayDate").addClass('errortext');
+            $('#HolidayDate').focus();
+            return false;
+        }
+         
+        return true;
+    }
+
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+
+
+</script>
+
+

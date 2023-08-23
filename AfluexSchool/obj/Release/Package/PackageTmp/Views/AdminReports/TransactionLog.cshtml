@@ -1,0 +1,142 @@
+﻿@model AfluexSchool.Models.Reports
+
+@{
+    ViewBag.Title = "TransactionLog";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("TransactionLog", "AdminReports", FormMethod.Post, new { @id = " " }))
+{
+    <div class="container main-container" id="main-container">
+        <div class="login-row">
+            <div class="col-12 col-md-12 col-lg-12 col-xl-12 mx-auto align-self-center">
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-header">
+                        <div class="row ">
+                            <div class="col-auto">
+                                <h4 class="mt-0 mb-1">Transaction Log</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mx-auto">
+                                <div class="row ">
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> Search by Action Name</label>
+                                            @Html.DropDownListFor(m => m.ActionName, new SelectList(ViewBag.ddlAction, "Value", "Text"), new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label>  From Date</label>
+                                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @readonly = "read" })
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <label>  To Date</label>
+                                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @readonly = "read" })
+                                    </div>
+                                    <div class="col-md-3">
+                                        <br />
+                                        <input type="submit" class="btn btn-primary" value="GetDetails" name="GetDetails" />
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row ">
+                                    <div class="col-md-3">
+                                        <a href="/Export/ExportToExcel?id=pdf&&PageName=TransactionLog"><img src="../../AdminPanelcss/assets/img/pdf.png" style="width:40px;height:40px" title="Export To PDF" /></a>
+                                        <a href="/Export/ExportToExcel?id=excel&&PageName=TransactionLog"><img src="../../AdminPanelcss/assets/img/excel.jpg" style="width:40px;height:40px" title="Export To Excel" /></a>
+                                        <a href="/Export/ExportToExcel?id=word&&PageName=TransactionLog"><img src="../../AdminPanelcss/assets/img/Word.png" style="width:40px;height:40px" title="Export To Word" /></a>
+                                        <a href="#" onclick="return printData();"><img src="../../AdminPanelcss/assets/img/print.jpg" style="width:40px;height:40px" title="Print" /></a>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                        <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
+                            <div class="col-sm-12">
+                                <table class="table table-bordered w-100 mb-0" id="example24">
+                                    <thead>
+                                        <tr>
+
+                                            <th>S.no</th>
+                                            <th>ActionName       </th>
+                                            <th>Remark           </th>
+                                            <th>TransactionDate    </th>
+                                            <th>TransactionBy    </th>
+
+                                        </tr>
+
+                                    </thead>
+                                    <tbody>
+                                        @if (Model != null)
+                                        {
+                                            if (Model.lstfeedata != null)
+                                            {
+                                                int i = 1;
+                                                foreach (var item in Model.lstfeedata)
+                                                {
+
+                                                    <tr>
+                                                        <td>
+                                                            @i
+                                                        </td>
+                                                        <td>@item.ActionName      </td>
+                                                        <td>@item.Remark          </td>
+                                                        <td>@item.TransactionDate </td>
+                                                        <td>@item.TransactionBy   </td>
+                                                    </tr>
+                                                    i++;
+                                                }
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                                <div class="j-response"></div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script src="../../scripts/jquery-1.10.2.min.js"></script>
+<script src="../../Scripts/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+
+
+<script>
+    function printData() {
+     
+        var divToPrint = document.getElementById("example24");
+        newWin = window.open("");
+        newWin.document.write(divToPrint.outerHTML);
+        newWin.print();
+        newWin.close();
+    }
+    $('#FromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true,
+        yearRange: '1950:2029'
+    });
+
+    $('#ToDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true,
+        yearRange: '1950:2029'
+    });
+
+</script>
+

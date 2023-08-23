@@ -1,0 +1,79 @@
+﻿@model AfluexSchool.Models.Master
+
+@{
+    ViewBag.Title = "SessionMaster";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm("SessionMaster", "Master", FormMethod.Post, new { @id = "SessionMaster" }))
+{
+    <div>
+          <div class="login-row">
+            <div class="col-12 col-md-12 col-lg-12 col-xl-12 mx-auto align-self-center">
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-header">
+                        <div class="row ">
+                           
+                            <div class="col-auto">
+                                <h4 class="mt-0 mb-1">Session Master</h4>
+                              
+                            </div>
+                            <p style="color:red">
+                                @TempData["SavingSessionMaster"]
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mx-auto">
+                                <div class="row ">
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group ">
+                                            <label> Session Name<span style="color: red"> *</span></label>
+                                           @Html.TextBoxFor(m => m.SessionName, new { @class = "form-control",@placeholder="Session Name" })
+
+                                        @Html.HiddenFor(m => m.Pk_SessionId, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                   
+                                </div>
+                                
+                                
+                                
+                               
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-left">
+                        @if (Model.Pk_SessionId == null)
+                        {
+                            <input type="submit" class="btn btn-primary" value="Save" name="SaveSession" onclick="return fvalidate();" />
+
+                        }
+                        else
+                        {
+                            <input type="submit" class="btn btn-primary" value="Update" name="UpdateSession" onclick="return fvalidate();" />
+
+                        }
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+<script>
+   
+    function fvalidate() {
+        $(".errortext").removeClass('errortext');
+        if ($("#SessionName").val() == "") {
+            $("#SessionName").addClass('errortext');
+            $("#SessionName").focus();
+            return false;
+        }
+
+    }
+</script>

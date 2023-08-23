@@ -1,0 +1,310 @@
+﻿@model AfluexSchool.Models.Student
+
+@{
+    ViewBag.Title = "StudentRegistrationList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    @@page {
+        size: auto;
+    }
+
+    @@media print {
+        table td:last-child {
+            display: none;
+        }
+
+        table th:last-child {
+            display: none;
+        }
+    }
+</style>
+@using (Html.BeginForm("StudentRegistrationList", "Student", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    <div>
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header border-0 bg-none">
+                <div class="row">
+                    <div class="col-12 col-md">
+                        <p class="fs15">Student List</p>
+                    </div>
+                    <p style="color:red">
+                        @TempData["Student"]
+                    </p>
+                </div>
+            </div>
+            <div class="card-body ">
+                <div class="row">
+
+                    <div class="col-md-3">
+
+
+
+                        <label>Parent Name</label>
+
+                        @Html.TextBoxFor(m => m.ParentName, new { @class = "form-control" })
+
+
+
+                    </div>
+
+                    <div class="col-md-3">
+
+
+
+
+                        <label>Student LoginID</label>
+
+                        @Html.TextBoxFor(m => m.StudenLoginID, new { @class = "form-control" })
+
+
+
+                    </div>
+                    <div class="col-md-3">
+
+                        <label>Student Name</label>
+
+                        @Html.TextBoxFor(m => m.studentName, new { @class = "form-control" })
+
+
+                    </div>
+                    <div class="col-md-3">
+
+                        <label>Class</label>
+
+                        @Html.DropDownListFor(m => m.Fk_ClassID, new SelectList(ViewBag.ddlclass, "Value", "Text"), new { @class = "form-control", @onchange = "return OnchangeSection();" })
+
+                    </div>
+
+                </div>
+                <div class="row">
+
+
+
+                    <div class="col-md-3">
+
+                        <label>Section</label>
+
+                        @Html.DropDownListFor(m => m.Fk_SectionID, new SelectList(ViewBag.ddlsection, "Value", "Text"), new { @class = "form-control" })
+
+                    </div>
+
+                    <div class="col-md-3">
+
+                        <label>Registration From Date</label>
+
+                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control" })
+
+                    </div>
+
+                    <div class="col-md-3">
+
+                        <label>Registration To Date</label>
+
+                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control" })
+
+
+                    </div>
+
+
+                </div>
+                <br/>
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <input type="submit" class="btn btn-info" name="btnsearch" id="btnsearch" value="Search" />
+                        <a href="/Export/ExportToExcel?id=pdf&&PageName=StudentList"><img src="../../AdminPanelcss/assets/img/pdf.png" style="width:40px;height:40px" title="Export To PDF" /></a>
+                        <a href="/Export/ExportToExcel?id=excel&&PageName=StudentList"><img src="../../AdminPanelcss/assets/img/excel.jpg" style="width:40px;height:40px" title="Export To Excel" /></a>
+                        <a href="/Export/ExportToExcel?id=word&&PageName=StudentList"><img src="../../AdminPanelcss/assets/img/Word.png" style="width:40px;height:40px" title="Export To Word" /></a>
+                        <a href="#" onclick="return printData();"><img src="../../AdminPanelcss/assets/img/print.jpg" style="width:40px;height:40px" title="Print" /></a>
+
+                        
+                    </div>
+                    
+                </div>
+
+                <div class="row">
+                    <div class="table-responsive">
+                        <table class="table table-bordered w-100 mb-0" id="example24">
+                            <thead>
+                                <tr>
+                                    <th>S.no</th>
+                                    <th>Login ID</th>
+                                    <th>Session</th>
+                                    <th>Class</th>
+                                    <th>Section</th>
+                                    <th>Name</th>
+                                    <th>Parent Name</th>
+                                    <th>LoginId</th>
+                                    <th>Password</th>
+                                    <th>Medium</th>
+                                    <th>Mobile</th>
+                                    <th>Registration Date</th>
+                                    <th class="station-12" style="display:@ViewBag.IsEdit;">Edit</th>
+                                    <th class="station-12" style="display:@ViewBag.IsDelete;">Delete</th>
+                                    <th>Print IDCard</th>
+                                </tr>
+
+                            </thead>
+                            <tbody>
+                                @if (Model != null)
+                                {
+                                    if (Model.listStudent != null)
+                                    {
+                                        int i = 1;
+                                        foreach (var item in Model.listStudent)
+                                        {
+
+                                            <tr>
+                                                <td>
+                                                    @i
+                                                    @Html.HiddenFor(m => m.Pk_StudentID)
+                                                </td>
+
+                                                <td>
+                                                    @item.LoginID
+                                                </td>
+                                                <td>
+                                                    @item.SessionName
+
+                                                </td>
+
+                                                <td>
+                                                    @item.Fk_ClassID
+
+                                                </td>
+                                                <td>
+                                                    @item.Fk_SectionID
+
+                                                </td>
+                                                <td>
+                                                    @item.studentName
+
+                                                </td>
+                                                <td>
+                                                    @item.ParentName
+
+                                                </td>
+                                                <td>
+                                                    @item.ParentLogin_ID
+
+                                                </td>
+                                                <td>
+                                                    @item.ParentPass
+
+                                                </td>
+                                                <td>
+                                                    @item.Medium
+
+                                                </td>
+
+                                                <td>
+                                                    @item.Mobile
+
+                                                </td>
+                                                <td>
+                                                    @item.AddedOn
+
+                                                </td>
+
+                                                <td style="display:@ViewBag.IsEdit;" class="station-12">
+                                                    <a href="/Student/StudentRegistration?Pk_StudentID=@item.Pk_StudentID"
+                                                       class="btn btn-success btn-sm">Edit</a>
+                                                </td>
+                                                <td style="display:@ViewBag.IsDelete;" class="station-12">
+                                                    <a href="/Student/DeleteStudent?Pk_StudentID=@item.Pk_StudentID" class="btn btn-danger btn-sm"
+                                                       onclick="return confirm('Are you sure want to delete ?')">Delete</a>
+                                                </td>
+                                                <td  >
+                                                    <a href="/Student/PrintIDCard?Pk_StudentID=@item.Pk_StudentID" class="btn btn-primary btn-sm" target="_blank">Print ID</a>
+                                                </td>
+                                            </tr>
+                                            i++;
+                                        }
+                                    }
+                                }
+                            </tbody>
+                        </table>
+
+
+                        <div class="j-response"></div>
+
+                    </div>
+
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+}
+
+
+<script src="../../scripts/jquery-1.10.2.min.js"></script>
+<script src="../../Scripts/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+
+<script>
+
+    function printData()
+    {
+        
+        var divToPrint = document.getElementById("example24");
+        newWin = window.open("");
+        newWin.document.write(divToPrint.outerHTML);
+        newWin.print();
+        newWin.close();
+    }
+
+
+    $('#FromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true,
+        yearRange: '1950:2029'
+    });
+
+    $('#ToDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true,
+        yearRange: '1950:2029'
+    });
+
+
+    function OnchangeSection() {
+        //$("#divload").css({ 'display': '' });
+        var value = $('#Fk_ClassID').val();
+        //var values = $('#SectionName').val();
+        //alert(value);
+        $.ajax({
+            url: "/Student/GetSectionByClass",
+            Type: "Get",
+            DataType: "JSON",
+            data: { Fk_ClassID: value },
+            success: function (data) {
+                //$("#divload").css({ 'display': 'none' });
+                $("#Fk_SectionID").html(""); // clear before appending new list
+                $("#Fk_SectionID").empty();
+                $("#Fk_SectionID").append(
+                      $('<option></option>').val(0).html('Select Section'));
+                $.each(data.ddlsection, function (index, Sectioncount) {
+                    $("#Fk_SectionID").append(
+                          $('<option></option>').val(Sectioncount.Value).html(Sectioncount.Text));
+
+                });
+
+            }
+        });
+
+    }
+
+
+</script>
+

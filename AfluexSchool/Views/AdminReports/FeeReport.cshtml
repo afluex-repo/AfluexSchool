@@ -1,0 +1,197 @@
+﻿@model AfluexSchool.Models.Reports
+
+@{
+    ViewBag.Title = "FeeReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    @@page {
+        size: auto;
+    }
+
+    @@media print {
+        table td:last-child {
+            display: none;
+        }
+
+        table th:last-child {
+            display: none;
+        }
+    }
+</style>
+
+@using (Html.BeginForm("FeeReport", "AdminReports", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+
+    <div>
+        <div class="login-row">
+            <div class="col-12 col-md-12 col-lg-12 col-xl-12 mx-auto align-self-center">
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-header">
+                        <div class="row ">
+
+                            <div class="col-auto">
+                                <h4 class="mt-0 mb-1">Fee Report</h4>
+
+                            </div>
+                            <p style="color:red">
+                                @TempData["DeleteFee"]
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mx-auto">
+                                <div class="row ">
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> Session<span style="color: red">*</span></label>
+                                            @Html.DropDownListFor(m => m.Session, new SelectList(ViewBag.ddlSession, "Value", "Text"), new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> Login Id </label>
+                                            @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", placeholder = "Login ID" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> Class</label>
+                                            @Html.DropDownListFor(m => m.Fk_ClassID, new SelectList(ViewBag.ddlclass, "Value", "Text"), new { @class = "form-control", @onchange = "return OnchangeSection();" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> Section</label>
+                                            @Html.DropDownListFor(m => m.Fk_SectionID, new SelectList(ViewBag.ddlsection, "Value", "Text"), new { @class = "form-control", @onchange = "return GetstudentBySection();" })
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="card-footer text-left">
+                            <input type="submit" value="Search" name="GetDeatils" id="GetDeatils" class="btn btn-primary" onclick="return favlidate();" />
+
+                        </div>
+                        <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                            <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-bordered w-100 mb-0" id="example23">
+                                        <thead>
+                                            <tr>
+                                                <th>S.no</th>
+                                                <th>Student</th>
+                                                <th>Class</th>
+                                                <th>Section</th>
+                                                <th>Receipt No</th>
+                                                <th>Payment Date</th>
+
+                                                <th>BankDetails</th>
+
+                                                <th>Action</th>
+                                                <th style="display:@ViewBag.IsDelete;">Delete</th>
+                                            </tr>
+
+
+                                        </thead>
+                                        <tbody>
+                                            @if (Model != null)
+                                            {
+                                                if (Model.lstfeedata != null)
+                                                {
+                                                    int i = 1;
+                                                    foreach (var item in Model.lstfeedata)
+                                                    {
+
+                                                        <tr>
+                                                            <td>
+                                                                @i
+
+                                                            </td>
+                                                            <td>@item.StudentName</td>
+                                                            <td>@item.ClassName</td>
+                                                            <td>@item.SectionName</td>
+                                                            <td>
+                                                                @item.ReceiptNo
+                                                            </td>
+                                                            <td>
+                                                                @item.PaymentDate
+                                                            </td>
+
+                                                            <td>
+                                                                @item.BankDetails
+                                                            </td>
+                                                            <td>
+                                                                <a target="_blank" href="/AdminReports/PrintFeereciptForReport?id=@item.ReceiptNo" class="btn btn-info">Print</a>
+
+                                                            </td>
+                                                            <td style="display:@ViewBag.IsDelete;"><a href="/AdminReports/DeleteFee?id=@item.ReceiptNo" class="btn btn-info" onclick="return confirm('Are you sure want to delete?')">Delete</a></td>
+                                                        </tr>
+                                                        i++;
+                                                    }
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                    <div class="j-response"></div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+<script src="../../scripts/jquery-1.10.2.min.js"></script>
+
+<script>
+    function OnchangeSection() {
+        var value = $('#Fk_ClassID').val();
+        //var values = $('#SectionName').val();
+        //alert(value);
+        $.ajax({
+            url: "/AdminReports/GetSectionByClass",
+            Type: "Get",
+            DataType: "JSON",
+            data: { Fk_ClassID: value },
+            success: function (data) {
+
+                $("#Fk_SectionID").html(""); // clear before appending new list
+                $("#Fk_SectionID").empty();
+                $("#Fk_SectionID").append(
+                      $('<option></option>').val(0).html('Select Section'));
+                $.each(data.ddlsection, function (index, Sectioncount) {
+                    $("#Fk_SectionID").append(
+                          $('<option></option>').val(Sectioncount.Value).html(Sectioncount.Text));
+
+                });
+
+
+            }
+        });
+
+    }
+    function favlidate() {
+        $(".errortext").removeClass("errortext");
+        if ($('#Session').val() == '0') {
+            $("#Session").addClass('errortext');
+            $('#Session').focus();
+            return false;
+        }
+        $("#divload").css({ 'display': '' });
+    }
+
+</script>
+
+

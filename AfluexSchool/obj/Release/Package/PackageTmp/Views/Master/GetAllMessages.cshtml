@@ -1,0 +1,139 @@
+﻿@model AfluexSchool.Models.Parent
+
+@{
+    ViewBag.Title = "GetAllMessages";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div>
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-header border-0 bg-none">
+            <div class="row">
+                <div class="col-12 col-md">
+                    <p class="fs15">Messages</p>
+                </div>
+            </div>
+        </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-12 table-responsive">
+                    <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                        <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
+                            <div class="col-sm-12">
+                                <table class="table table-bordered w-100 mb-0" id="example23">
+                                    <thead>
+                                        <tr>
+                                            <th>Sr No.</th>
+
+                                            <th>Message By</th>
+                                            <th>Message</th>
+
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model != null)
+                                        {
+                                            if (Model.listparent != null)
+                                            {
+                                                int i = 1;
+                                                foreach (var Item in Model.listparent)
+                                                {
+                                                    <tr class="text-left">
+                                                        <td>@i</td>
+
+                                                        <td>@Item.MemberName</td>
+                                                        <td>@Item.Message</td>
+
+                                                        <td><a style="cursor:pointer" onclick="reply('@Item.Pk_MessageId','@Item.MemberName','@Item.Fk_UserId');">Reply</a></td>
+
+                                                    </tr>
+                                                    i++;
+                                                }
+
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="col-md-12" id="reply" style="display:none">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        Reply
+                                    </div>
+                                    <!-- /.panel-heading -->
+                                    <div class="panel-body">
+                                        <div class="col-md-12 form-group">
+                                            Message To
+                                            @Html.TextBoxFor(m => m.MessageBy, new { @class = "form-control", @ReadOnly = "true" })
+                                            @Html.HiddenFor(m => m.Pk_MessageId)
+                                        </div>
+                                        <div class="col-md-12 form-group">
+                                            Message
+                                            @Html.TextAreaFor(m => m.Message, new { @class = "form-control" })
+
+                                            <input type="hidden" id="fk_userid" value="" />
+
+                                        </div>
+                                        <div class="col-md-12 form-group">
+                                            <input type="button" value="Send" class="btn btn-success" onclick="savemessage();" />
+
+                                        </div>
+
+                                    </div>
+                                    <!-- /.panel-body -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script src="../../scripts/jquery-1.10.2.min.js"></script>
+
+<script>
+
+    function reply(MessageId, message, fk_userid) {
+        $('#reply').show();
+        $('#MessageBy').val(message);
+        $('#fk_userid').val(fk_userid);
+        $('#Pk_MessageId').val(MessageId);
+    }
+    function savemessage() {
+        $(".errortext").removeClass("errortext");
+        if ($('#Message').val() == '') {
+            $("#Message").addClass('errortext');
+            $('#Message').focus();
+            return false;
+        }
+        $.ajax({
+            url: "/Master/SaveMessages",
+            Type: "Get",
+            DataType: "JSON",
+            data: { Message: $("#Message").val(), MessageBy: "Admin", Fk_UserId: $('#fk_userid').val(), Pk_MessageId: $('#Pk_MessageId').val() },
+            success: function (data) {
+                if (data.Result == "1") {
+                    alert('Message Send Successfully');
+                    window.location.href = '@Url.Action("GetAllMessages", "Master")';
+                }
+                else {
+                    alert(data.Result);
+
+                }
+
+
+            }
+
+        });
+    }
+</script>
+
+

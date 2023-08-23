@@ -1,0 +1,92 @@
+﻿@model AfluexSchool.Models.Master
+
+@{
+    ViewBag.Title = "AreaMaster";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("AreaMaster", "Master", FormMethod.Post, new { @id = "AreaMaster" }))
+{   <div>
+          <div class="login-row">
+            <div class="col-12 col-md-12 col-lg-12 col-xl-12 mx-auto align-self-center">
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-header">
+                        <div class="row ">
+                            <div class="col-auto">
+                                <h4 class="mt-0 mb-1">Area Master</h4>
+                            </div>
+                            <p style="color:red">
+                                @TempData["AreaMaster"]
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mx-auto">
+                                <div class="row ">
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group ">
+                                            <label> Area Name <span style="color: red">*</span></label>
+                                            @Html.TextBoxFor(m => m.AreaName, new { @class = "form-control", @placeholder = "Area Name" })
+                                            @Html.HiddenFor(m => m.PK_AreaMasterID, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group ">
+                                            <label> Amount <span style="color: red">*</span></label>
+                                            @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @placeholder = "Amount", @onkeypress = "return validNumber(event)" })
+                                           </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-left">
+                        @if (Model.PK_AreaMasterID == null)
+                        {
+                            <input type="submit" class="btn btn-success" value="Save" name="SaveAreaMaster" onclick="return fvalidate();" />
+
+                        }
+                        else
+                        {
+                            <input type="submit" class="btn btn-success" value="Update" name="UpdateAreaMaster" onclick="return fvalidate();" />
+
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+
+    function fvalidate() {
+        $(".errortext").removeClass('errortext');
+        if ($("#AreaName").val() == "") {
+            $("#AreaName").addClass('errortext');
+            $("#AreaName").focus();
+            return false;
+        }
+         if ($("#Amount").val() == "") {
+            $("#Amount").addClass('errortext');
+            $("#Amount").focus();
+            return false;
+        }
+    }
+
+
+    function validNumber(event) {
+        var charCode = (event.which) ? event.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+
+</script>
+
+
+

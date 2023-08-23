@@ -1,0 +1,165 @@
+﻿@model AfluexSchool.Models.Reports
+
+@{
+    ViewBag.Title = "DueReportClassWise";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    @@page {
+        size: auto;
+    }
+</style>
+@using (Html.BeginForm("DueReportClassWise", "AdminReports", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    <div>
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header border-0 bg-none">
+                <div class="row">
+                    <div class="col-12 col-md">
+                        <p class="fs15">Due Report Class Wise</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body ">
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>  Date  <span style="color:red;">*</span></label>
+                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-2">
+                        <br />
+                        <input type="submit" class="btn btn-info" name="btnsearch" id="btnsearch" value="Search" onclick="return validateform();" />
+                    </div>
+                </div>
+
+                <div class="col-md-12 table-responsive">
+                    <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                        <table class="table table-bordered w-100 mb-0" id="example23">
+
+                            <thead>
+                                <tr>
+                                    <th>S.no</th>
+                                    <th>ClassName             </th>
+                                    <th>
+                                        TotalStudent
+                                    </th>
+                                    <th>
+                                        PaidStudent
+                                    </th>
+                                    <th>UnpaidStudent</th>
+                                    <th>RegistrationAmt       </th>
+                                    <th>AdmissionFee          </th>
+                                    <th>TuitionFee            </th>
+                                    <th>ExaminationFee        </th>
+                                    <th>Computerfee           </th>
+                                    <th>Otherfee              </th>
+                                    <th>Totalfee              </th>
+                                    <th>TotalPaid             </th>
+                                    <th>DueAmt                </th>
+
+                                </tr>
+
+                            </thead>
+                            <tbody>
+                                @if (Model != null)
+                                {
+                                    if (Model.lstfeedata != null)
+                                    {
+                                        int i = 1;
+                                        foreach (var item in Model.lstfeedata)
+                                        {
+
+                                            <tr>
+                                                <td>
+                                                    @i
+                                                </td>
+                                                <td>@item.ClassName             </td>
+                                                <td>@item.TotalStudent</td>
+                                                <td>@item.PaidStudent</td>
+                                                <td>@item.UnpaidStudent</td>
+                                                <td>@item.RegistrationAmt       </td>
+                                                <td>@item.AdmissionFee          </td>
+                                                <td>@item.TuitionFee            </td>
+                                                <td>@item.ExaminationFee        </td>
+                                                <td>@item.Computerfee           </td>
+                                                <td>@item.Otherfee              </td>
+                                                <td>@item.Totalfee              </td>
+                                                <td>@item.TotalPaid             </td>
+                                                <td>@item.DueAmt                </td>
+
+                                            </tr>
+                                            i++;
+                                        }
+                                        
+                                    }
+                                }
+                                
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td></td>
+                                    <td>Total</td>
+                                    <td>
+                                        @ViewBag.TotalStudent
+                                    </td>
+                                    <td>
+                                        @ViewBag.TotalPaidStudent
+                                    </td>
+                                    <td>@ViewBag.TotalUnpaidStudent</td>
+                                    <td>@ViewBag.TotalRegistrationAmt       </td>
+                                    <td>@ViewBag.TotalAdmissionFee          </td>
+                                    <td>@ViewBag.TotalTuitionFee            </td>
+                                    <td>@ViewBag.TotalExaminationFee        </td>
+                                    <td>@ViewBag.TotalComputerfee           </td>
+                                    <td>@ViewBag.TotalOtherfee              </td>
+                                    <td>@ViewBag.TotalTotalfee              </td>
+                                    <td>@ViewBag.TotalTotalPaid             </td>
+                                    <td>@ViewBag.TotalDueAmt                </td>
+
+                                </tr>
+                            </tfoot>
+                        </table>
+
+
+                        <div class="j-response"></div>
+
+                    </div>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+<script src="../../scripts/jquery-1.10.2.min.js"></script>
+<script src="../../Scripts/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+<script>
+
+    $('#FromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true,
+        yearRange: '1950:2029'
+    });
+
+    function validateform() {
+        $(".errortext").removeClass("errortext");
+        if ($('#FromDate').val() == '') {
+            $("#FromDate").addClass('errortext');
+            $('#FromDate').focus();
+            return false;
+        }
+
+        return true;
+    }
+</script>
+
+

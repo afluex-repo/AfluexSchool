@@ -1,0 +1,269 @@
+﻿@model AfluexSchool.Models.Home
+
+@{
+    ViewBag.Title = "Enquiry";
+    Layout = "~/Views/Shared/WebsiteLayout.cshtml";
+}
+@using (Html.BeginForm("Enquiry", "Home", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+
+    <div class="contact-details padding-120">
+        <div class="container">
+            <div class="row">
+                <p style="color:red">
+                    @TempData["Enquiry"]
+                </p>
+                <div class="col-lg-12 col-md-12 col-xs-12">
+
+                    <div id="new">
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-6 col-md-6">
+                                <div class="form-group enqr">
+                                    <label>Parent Name <span style="color: red">*</span></label>
+                                    @Html.TextBoxFor(m => m.ParentName, new { @class = "form-control", @Placeholder = "Parent Name" })
+                                    @Html.HiddenFor(m => m.Pk_ParentID)
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-lg-6 col-md-6">
+                                <div class="form-group enqr">
+                                    <label>Mobile <span style="color: red">*</span></label>
+                                    @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", @Placeholder = "Mobile", @maxlength = "10", @onkeypress = "return isNumberKey(event);" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4">
+                                <div class="form-group enqr">
+                                    <label>Student Name  </label>
+                                    @Html.TextBoxFor(m => m.StudentName, new { @class = "form-control", @Placeholder = "Student Name" })
+
+                                </div>
+                            </div>
+                            
+
+                            <div class="col-lg-4 col-md-4">
+                                <div class="form-group enqr">
+                                    <label> Class </label>
+                                    @Html.DropDownListFor(m => m.Fk_ClassID, new SelectList(ViewBag.ddlclass, "Value", "Text"), new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                <div class="form-group enqr">
+                                    <label> Previous School </label>
+                                    @Html.TextBoxFor(m => m.PreviousSchool, new { @class = "form-control", @Placeholder = "Previous School" })
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group enqr">
+                                    <label>Mail Id </label>
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @Placeholder = "Mail Id " })
+
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group enqr">
+                                    <label> Photo upload </label>
+                                    <input type="file" id="img" name="photo" class="form form-control" />
+
+                                </div>
+                            </div>
+                           
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12">
+                                <div class="form-group enqr">
+                                    <label>Address  </label>
+                                    @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @Placeholder = "Address" })
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="card-footer text-left">
+
+                            <input class="btn btn-primary" type="submit" onclick="return validateformnew();" name="btnSave" value="Save" id="btnSave" />
+
+                        </div>
+                    </div>
+
+                    @*<div id="existing" style="display:none">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group ">
+                                        <label>Parent Name <span style="color: red">*</span></label>
+                                        @Html.TextBoxFor(m => m.IDLoginId, new { @class = "form-control", @placeholder = "Parent Name", onchange = "return getdetails()" })
+                                        @Html.HiddenFor(m => m.LoginID)
+                                        @Html.HiddenFor(m => m.Pk_ParentID)
+                                        @Html.HiddenFor(m => m.ExistingParentName)
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group ">
+                                        <label>Mobile <span style="color: red">*</span></label>
+                                        @Html.TextBoxFor(m => m.ExistingMobile, new { @class = "form-control", @Readonly = "r", @Placeholder = "Mobile", @maxlength = "10", @onkeypress = "return isNumberKey(event);" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12">
+                                    <div class="form-group ">
+                                        <label>Address  </label>
+                                        @Html.TextAreaFor(m => m.ExistingAddress, new { @class = "form-control", @Readonly = "r", @Placeholder = "Address" })
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4">
+                                    <div class="form-group ">
+                                        <label>Student Name  <span style="color: red">*</span></label>
+                                        @Html.TextBoxFor(m => m.ExistingStudentName, new { @class = "form-control", @Placeholder = "Student Name" })
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4">
+                                    <div class="form-group ">
+                                        <label> Class <span style="color: red">*</span></label>
+                                        @Html.DropDownListFor(m => m.ExistingFk_ClassID, new SelectList(ViewBag.ddlclass, "Value", "Text"), new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4">
+                                    <div class="form-group ">
+                                        <label>Form No<span style="color: red">*</span></label>
+                                        @Html.TextBoxFor(m => m.ExistingFormNo, new { @class = "form-control", @Placeholder = "Form No" })
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="card-footer text-left">
+
+                                <input class="btn btn-primary" type="submit" onclick="return validateform();" name="btnprintExisting" value="Save and Print" id="btnprintExisting" />
+
+                            </div>
+                        </div>*@
+
+                </div>
+            </div>
+            <!-- row -->
+        </div>
+        <!-- container -->
+    </div>
+
+}
+<script src="../../scripts/jquery-1.10.2.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+<script>
+    $(document).ready(function () {
+
+        var cityuse = [];
+        $("#loader").css({ 'display': '' });
+
+    });
+    function validateformnew()
+    {
+        $(".errortext").removeClass("errortext");
+        if ($('#ParentName').val() == '') {
+            $("#ParentName").addClass('errortext');
+            $('#ParentName').focus();
+            return false;
+        }
+
+        if ($('#Mobile').val() == '') {
+            $("#Mobile").addClass('errortext');
+            $('#Mobile').focus();
+            return false;
+        }
+
+
+
+        return true;
+    }
+    function showdiv(value) {
+        if(value=="1")
+        {
+            $('#new').show();
+            $('#existing').hide();
+
+        }
+        else {
+            $('#new').hide();
+            $('#existing').show();
+        }
+    }
+    function getdetails()
+    {
+        $.ajax({
+            url: '/Home/ParentData', type: 'post', dataType: 'json',
+            data: { 'MobileNo': $('#LoginID').val() },
+            success: function (data) {
+                if (data != null) {
+                    if(data.Result=="1")
+                    {
+                        $('#ExistingMobile').val(data.ExistingMobile);
+                        $('#ExistingAddress').val(data.ExistingAddress);
+
+                        $('#Pk_ParentID').val(data.Pk_ParentID);
+                        $('#ExistingParentName').val(data.ExistingParentName);
+                    }
+
+                }
+                else {
+                    //alert("Respose is null");
+                }
+            }, error: function () {
+                alert('Some Thing wrong!');
+                $("#loader").css({ 'display': 'none' });
+            }
+        });
+
+    }
+    function validateform()
+    {
+        $(".errortext").removeClass("errortext");
+        if ($('#LoginID').val() == '') {
+            $("#LoginID").addClass('errortext');
+            $('#LoginID').focus();
+            return false;
+        }
+
+        if ($('#ExistingMobile').val() == '') {
+            $("#ExistingMobile").addClass('errortext');
+            $('#ExistingMobile').focus();
+            return false;
+        }
+        if ($('#ExistingStudentName').val() == '') {
+            $("#ExistingStudentName").addClass('errortext');
+            $('#ExistingStudentName').focus();
+            return false;
+        }
+
+        if ($('#ExistingFk_ClassID').val() == '0') {
+            $("#ExistingFk_ClassID").addClass('errortext');
+            $('#ExistingFk_ClassID').focus();
+            return false;
+        }
+        if ($('#ExistingFormNo').val() == '') {
+            $("#ExistingFormNo").addClass('errortext');
+            $('#ExistingFormNo').focus();
+            return false;
+        }
+
+
+
+        return true;
+    }
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+</script>

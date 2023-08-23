@@ -1,0 +1,165 @@
+﻿@model AfluexSchool.Models.Reports
+
+@{
+    ViewBag.Title = "MultipleStudentReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("MultipleStudentReport", "AdminReports", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    <div>
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header border-0 bg-none">
+                <div class="row">
+                    <div class="col-12 col-md">
+                        <p class="fs15">Multiple Student For Same Parent Report</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body ">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Parent Name</label>
+                        @Html.TextBoxFor(m => m.ParentName, new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-3">
+                        <label> LoginID</label>
+                        @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-6">
+                        <br />
+                        <input type="submit" class="btn btn-info" name="GetDeatils" id="GetDeatils" value="Search" />
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="table-responsive">
+                        <table class="table table-bordered w-100 mb-0" id="example24">
+                            <thead>
+                                <tr>
+                                    <th>S.no</th>
+                                    <th>Login ID</th>
+                                    <th>Name</th>
+                                    <th>No. Of Students</th>
+                                    <th>Mobile</th>
+                                    <th>View</th>
+                                </tr>
+
+                            </thead>
+                            <tbody>
+                                @if (Model != null)
+                                {
+                                    if (Model.lstfeedata != null)
+                                    {
+                                        int i = 1;
+                                        foreach (var item in Model.lstfeedata)
+                                        {
+
+                                            <tr>
+                                                <td>
+                                                    @i
+                                                </td>
+                                                <td>
+                                                    @item.LoginId
+                                                </td>
+                                                <td>
+                                                    @item.ParentName
+                                                </td>
+                                                <td>
+                                                    @item.ReceiptNo
+                                                </td>
+                                                <td>
+                                                    @item.Mobile
+                                                </td>
+                                                <td>
+                                                  
+                                                    <a href="/AdminReports/GetMultipleStudentByParent?pkid=@item.pkid" class="btn btn-info btn-sm">View</a>
+                                                </td>
+                                            </tr>
+                                            i++;
+                                        }
+                                    }
+                                }
+                            </tbody>
+                        </table>
+
+
+                        <div class="j-response"></div>
+
+                    </div>
+
+                </div>
+                 
+            </div>
+        </div>
+    </div>
+
+
+     
+
+}
+
+
+<script src="../../scripts/jquery-1.10.2.min.js"></script>
+<script src="../../Scripts/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+
+<script>
+
+    function printData() {
+        $('.station-12').hide().next('.separator').hide();
+        var divToPrint = document.getElementById("example24");
+        newWin = window.open("");
+        newWin.document.write(divToPrint.outerHTML);
+        newWin.print();
+        newWin.close();
+    }
+
+
+    $('#FromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true,
+        yearRange: '1950:2029'
+    });
+
+    $('#ToDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true,
+        yearRange: '1950:2029'
+    });
+
+
+    function OnchangeSection() {
+        //$("#divload").css({ 'display': '' });
+        var value = $('#Fk_ClassID').val();
+        //var values = $('#SectionName').val();
+        //alert(value);
+        $.ajax({
+            url: "/Student/GetSectionByClass",
+            Type: "Get",
+            DataType: "JSON",
+            data: { Fk_ClassID: value },
+            success: function (data) {
+                //$("#divload").css({ 'display': 'none' });
+                $("#Fk_SectionID").html(""); // clear before appending new list
+                $("#Fk_SectionID").empty();
+                $("#Fk_SectionID").append(
+                      $('<option></option>').val(0).html('Select Section'));
+                $.each(data.ddlsection, function (index, Sectioncount) {
+                    $("#Fk_SectionID").append(
+                          $('<option></option>').val(Sectioncount.Value).html(Sectioncount.Text));
+
+                });
+
+            }
+        });
+
+    }
+
+
+</script>
+

@@ -1,0 +1,192 @@
+﻿@model AfluexSchool.Models.Parent
+
+@{
+    ViewBag.Title = "ParentList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    @@page {
+        size: auto;
+    }
+
+    @@media print {
+        /*table td:last-child {
+            display: none;
+        }
+
+        table th:last-child {
+            display: none;
+        }*/
+        table td:nth-last-child(-n+3) {
+            display: none;
+        }
+
+        table th:nth-last-child(-n+3) {
+            display: none;
+        }
+    }
+</style>
+@using (Html.BeginForm("ParentList", "Parent", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+
+
+    <div>
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header border-0 bg-none">
+                <div class="row">
+                    <div class="col-12 col-md">
+                        <p class="fs15">Parent List</p>
+                    </div>
+                    <p style="color:red">
+                        @TempData["ParentUpdate"]
+                    </p>
+                </div>
+            </div>
+            <div class="card-body ">
+
+                <div class="row">
+                    <div class="col-md-3">
+                        Login ID
+                        @Html.TextBoxFor(m => m.LoginID, new { @class = "form-control", placeholder = "Login ID" })
+                    </div>
+                    <div class="col-md-3">
+                        Parent Name
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Parent Name" })
+                    </div>
+                    <div class="col-md-3">
+                        Date Of Inquiry
+                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", placeholder = "From Date", @ReadOnly = "ReadOnly" })
+                    </div>
+                    <div class="col-md-3">
+                        Date Of Inquiry
+                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", placeholder = "To Date", @ReadOnly = "ReadOnly" })
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        Is Active
+                        @Html.DropDownList("IsActive", new List<SelectListItem>
+
+                 {
+                        new SelectListItem{ Text="All", Value = null  },
+                    new SelectListItem{ Text="Active", Value = "1" },
+                    new SelectListItem{ Text="Not-Active", Value = "0" }
+
+                 }, new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-3" style="margin-top:20px">
+                        <input type="submit" value="Search" name="btnSearch" id="btnSearch" class="btn btn-primary" />
+                    </div>
+                </div>
+
+
+                <div class="col-sm-12 table-responsive">
+                    <table class="table table-bordered w-100 mb-0" id="example23">
+
+                        <thead>
+                            <tr>
+                                <th>S.no</th>
+                                <th> Login ID</th>
+                                <th>Password</th>
+                                <th>Parent Name</th>
+                                <th>Email</th>
+                                <th>Mobile</th>
+                                <th>Address</th>
+                                <th>Joining Date</th>
+
+                                <th>IsActive</th>
+                                <th style="display:@ViewBag.IsEdit;">Edit</th>
+                                <th style="display:@ViewBag.IsDelete;">Delete</th>
+                                <th>Print</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                if (Model.listparent != null)
+                                {
+                                    int i = 1;
+                                    foreach (var item in Model.listparent)
+                                    {
+
+                                        <tr>
+                                            <td>
+                                                @i
+                                            </td>
+                                            <td>@item.ParentLogin_ID</td>
+                                            <td>@item.Password</td>
+                                            <td>
+                                                @item.ParentName
+                                            </td>
+                                            <td>
+                                                @item.Email
+                                            </td>
+                                            <td>
+                                                @item.Mobile
+                                            </td>
+                                            <td>
+                                                @item.Address (@item.PinCode,@item.State,@item.City)
+                                            </td>
+                                            <td>
+                                                @item.AddedOn
+                                            </td>
+
+                                            <td>
+                                                @item.IsActive
+                                            </td>
+                                            <td style="display:@ViewBag.IsEdit;">
+                                                <a href="/Parent/ParentRegistration?Pk_ParentID=@item.Pk_ParentID" class="btn btn-success btn-sm">Edit</a>
+                                            </td>
+                                            <td style="display:@ViewBag.IsDelete;">
+                                                <a href="/Parent/DeleteParentList?Pk_ParentID=@item.Pk_ParentID" class="btn btn-danger btn-sm"
+                                                   onclick="return confirm('Are you sure want to delete?')">Delete</a>
+                                            </td>
+                                            <td><a href="/AdminReports/ParentPrintView?Pk_ParentID=@item.Pk_ParentID" class="btn btn-info btn-sm">Print</a></td>
+                                        </tr>
+                                        i++;
+                                    }
+                                }
+                            }
+                        </tbody>
+                    </table>
+                    <div class="j-response"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+}
+
+<script src="../../scripts/jquery-1.10.2.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+        $("#divload").css({ 'display': 'none' });
+
+
+    });
+
+    $('#FromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true,
+    });
+
+    $('#ToDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true,
+    }
+);
+
+
+</script>

@@ -1,0 +1,273 @@
+﻿@model AfluexSchool.Models.Student
+
+@{
+    ViewBag.Title = "TransferStudent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("TransferStudent", "Student", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    <div>
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header border-0 bg-none">
+                <div class="row">
+                    <div class="col-12 col-md">
+                        <p class="fs15">Upgrade Student</p>
+                    </div>
+                    <p style="color:red">
+                        @TempData["TransferStudent"]
+                    </p>
+                </div>
+            </div>
+            <div class="card-body ">
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <label>Class <span style="color: red">*</span></label>
+                        @Html.DropDownListFor(m => m.Fk_ClassID, new SelectList(ViewBag.ddlclass, "Value", "Text"), new { @class = "form-control", @onchange = "return OnchangeSection();" })
+
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Section <span style="color: red">*</span></label>
+                        @Html.DropDownListFor(m => m.Fk_SectionID, new SelectList(ViewBag.ddlsection, "Value", "Text"), new { @class = "form-control" })
+
+                    </div>
+
+                </div>
+                <div class="card-footer text-left">
+
+                    <input type="submit" class="btn btn-info" name="btnsearch" id="btnsearch" value="Search" onclick="return validateform();" />
+                </div>
+                @if (Model != null)
+                {
+                    if (Model.listStudent != null)
+                    {
+                        int i = 1;
+                        <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                            <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
+                                <div class="col-sm-12">
+
+                                    <table class="table datatable display responsive w-100 dataTable no-footer dtr-inline" style="width: 1002px;">
+                                        <thead>
+                                            <tr>
+                                                <th>S.no</th>
+                                                <th>Name</th>
+                                                <th>Select All&nbsp;&nbsp; <input type="checkbox" name="checkedAll" id="checkedAll" style="margin-top:3px;" /></th>
+                                            </tr>
+
+                                        </thead>
+                                        <tbody>
+
+                                            @foreach (var item in Model.listStudent)
+                                            {
+
+                                                <tr>
+                                                    <td>
+                                                        @i
+                                                    </td>
+                                                    <td>
+                                                        @item.studentName
+                                                    </td>
+                                                    <td>
+                                                        <input type="hidden" name="hdStudentID_ @i" id="hdStudentID_ @i" value="@item.Pk_StudentID" />
+
+                                                        <input type="checkbox" id="checkBoxId_ @i" name="checkBoxId_ @i" class="chkclass" />
+                                                    </td>
+                                                </tr>
+                                                i++;
+                                            }
+                                            <input type="hidden" id="hdRows" name="hdRows" value="@i" />
+
+                                        </tbody>
+                                    </table>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label>Status</label>
+                                            @Html.DropDownListFor(m => m.Status, new SelectList(ViewBag.StatusType, "Value", "Text"), new { @class = "form-control", @onchange = "return showhideclass();" })
+                                        </div>
+                                        <div class="col-md-3" id="divclass">
+                                            <label>Class</label>
+                                            @Html.DropDownListFor(m => m.Class, new SelectList(ViewBag.classddl, "Value", "Text"), new { @class = "form-control", @onchange = "return OnchangeSection1();" })
+
+                                        </div>
+                                        <div class="col-md-3" id="divsection">
+                                            <label>Section</label>
+                                            @Html.DropDownListFor(m => m.Section, new SelectList(ViewBag.dropdnSection, "Value", "Text"), new { @class = "form-control" })
+
+                                        </div>
+                                        <div class="col-md-3" id="divsession">
+                                            <label>Session</label>
+                                            @Html.DropDownListFor(m => m.SessionName, new SelectList(ViewBag.ddlSession, "Value", "Text"), new { @class = "form-control" })
+
+                                        </div>
+                                       
+                                    </div>
+                                    <div class="j-response"></div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="card-footer text-left">
+
+                            <input type="submit" class="btn btn-info" name="btnSave" id="btnSave" value="Transfer" onclick="return checkvalidateform();" />
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+
+}
+
+
+<script src="../../scripts/jquery-1.10.2.min.js"></script>
+<script src="../../Scripts/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+
+<script>
+    function validateform() {
+        $(".errortext").removeClass("errortext");
+        if ($('#Fk_ClassID').val() == '0') {
+            $("#Fk_ClassID").addClass('errortext');
+            $('#Fk_ClassID').focus();
+            return false;
+        }
+        if ($('#Fk_SectionID').val() == '0') {
+            $("#Fk_SectionID").addClass('errortext');
+            $('#Fk_SectionID').focus();
+            return false;
+        }
+        return true;
+    }
+
+
+    $('#checkedAll').click(function () {
+        if ($(this).prop("checked")) {
+            //$('input:checkbox[name=checkBoxId_]').attr('checked', true);
+            $('.chkclass').prop("checked", true);
+        } else {
+            //$('input:checkbox[name=checkBoxId_]').attr('checked', false);
+            $('.chkclass').prop("checked", false);
+        }
+    });
+
+    $('#FromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true,
+        yearRange: '1950:2029'
+    });
+
+    $('#ToDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true,
+        yearRange: '1950:2029'
+    });
+
+    function OnchangeSection() {
+        //$("#divload").css({ 'display': '' });
+        var value = $('#Fk_ClassID').val();
+        //var values = $('#SectionName').val();
+        //alert(value);
+        $.ajax({
+            url: "/Student/GetSectionByClass",
+            Type: "Get",
+            DataType: "JSON",
+            data: { Fk_ClassID: value },
+            success: function (data) {
+                //$("#divload").css({ 'display': 'none' });
+                $("#Fk_SectionID").html(""); // clear before appending new list
+                $("#Fk_SectionID").empty();
+                $("#Fk_SectionID").append(
+                      $('<option></option>').val(0).html('Select Section'));
+                $.each(data.ddlsection, function (index, Sectioncount) {
+                    $("#Fk_SectionID").append(
+                          $('<option></option>').val(Sectioncount.Value).html(Sectioncount.Text));
+
+                });
+
+            }
+        });
+
+    }
+
+    function OnchangeSection1() {
+        //$("#divload").css({ 'display': '' });
+        var value = $('#Class').val();
+        //var values = $('#SectionName').val();
+        //alert(value);
+        $.ajax({
+            url: "/Student/GetSectionByClass",
+            Type: "Get",
+            DataType: "JSON",
+            data: { Fk_ClassID: $('#Class').val() },
+            success: function (data) {
+                //$("#divload").css({ 'display': 'none' });
+                $("#Section").html(""); // clear before appending new list
+                $("#Section").empty();
+                $("#Section").append(
+                      $('<option></option>').val(0).html('Select Section'));
+                $.each(data.ddlsection, function (index, Sectioncount) {
+                    $("#Section").append(
+                          $('<option></option>').val(Sectioncount.Value).html(Sectioncount.Text));
+
+                });
+
+            }
+        });
+
+    }
+    function showhideclass() {
+        if ($('#Status').val() == "Migrate") {
+            $('#divclass').show();
+            $('#divsection').show();
+            $('#divsession').show();
+        }
+        else if ($('#Status').val() == "Close") {
+            $('#divclass').hide();
+            $('#divsection').hide();
+            $('#divsession').hide();
+        }
+        else {
+
+            $('#divsession').show();
+
+        }
+    }
+    function checkvalidateform()
+    {
+        $(".errortext").removeClass("errortext");
+        if ($('#Status').val() == "Migrate") {
+            if ($('#Class').val() == '0') {
+                $("#Class").addClass('errortext');
+                $('#Class').focus();
+                return false;
+            }
+            if ($('#Section').val() == '0') {
+                $("#Section").addClass('errortext');
+                $('#Section').focus();
+                return false;
+            }
+            if ($('#SessionName').val() == '0') {
+                $("#SessionName").addClass('errortext');
+                $('#SessionName').focus();
+                return false;
+            }
+        }
+        else if ($('#Status').val() == "Fail") {
+            if ($('#SessionName').val() == '0') {
+                $("#SessionName").addClass('errortext');
+                $('#SessionName').focus();
+                return false;
+            }
+        }
+       
+        return true;
+    }
+</script>
+

@@ -1,0 +1,71 @@
+﻿@model AfluexSchool.Models.Master
+
+@{
+    ViewBag.Title = "LeaveList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("LeaveList", "Master", FormMethod.Post, new { @id = "LeaveList" }))
+{ <div>
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header border-0 bg-none">
+                <div class="row">
+                    <div class="col-12 col-md">
+                        <p class="fs15">Leave List</p>
+                    </div>
+                    <p style="color:red">
+                        @TempData["LeaveList"]
+                    </p>
+                </div>
+            </div>
+            <div class="card-body ">
+                <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                    <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-bordered w-100 mb-0" id="example23">
+                                <thead>
+                                    <tr>
+                                        <th>Sr.No.</th>
+                                        <th>Leave Name</th>
+                                        <th>Leave Count</th>
+                                        <th style="display:@ViewBag.IsEdit;">Edit</th>
+                                        <th style="display:@ViewBag.IsDelete;">Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
+                                    {
+                                        if (Model.LeaveList != null)
+                                        {
+                                            int i = 1;
+                                            foreach (var item in Model.LeaveList)
+                                            {
+                                    <tr>
+                                        <td>
+                                            @i
+                                        </td>
+                                        <td>@item.LeaveName</td>
+                                        <td>@item.LeaveCount</td>
+                                        <td style="display:@ViewBag.IsEdit;">
+                                            <a href="/Master/Leave?PK_LeaveID=@item.PK_LeaveID" class="btn btn-success btn-sm">Edit</a>
+                                            
+
+                                        </td>
+                                        <td 	style="display:@ViewBag.IsDelete;"><a href="/Master/DeleteLeave?PK_LeaveID=@item.PK_LeaveID" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete?')">Delete</a></td>
+                                    </tr>
+                                                i++;
+                                            }
+                                        }
+                                    }
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+}

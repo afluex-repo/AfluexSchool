@@ -1,0 +1,85 @@
+﻿@model AfluexSchool.Models.Master
+
+@{
+    ViewBag.Title = "Section";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Section", "Master", FormMethod.Post, new { @id = "Class" }))
+{
+    <div>
+          <div class="login-row">
+            <div class="col-12 col-md-12 col-lg-12 col-xl-12 mx-auto align-self-center">
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-header">
+                        <div class="row ">
+                            <div class="col-auto">
+                                <h4 class="mt-0 mb-1">Section</h4>
+                            </div>
+                            <p style="color:red">
+                                @TempData["Section"]
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mx-auto">
+                                <div class="row ">
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group ">
+                                            <label> Class Name <span style="color: red">*</span></label>
+                                            @Html.DropDownListFor(m => m.Pk_ClassId, new SelectList(ViewBag.ddlClassName, "Value", "Text"), new { @class = "form-control" })
+
+                                            @Html.HiddenFor(m => m.PK_SectionId, new { @class = "form-control" })
+                                        </div>
+
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group ">
+                                            <label> Section Name <span style="color: red">*</span></label>
+                                            @Html.TextBoxFor(m => m.SectionName, new { @class = "form-control", @placeholder = "Section Name" })
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-left">
+                        @if (Model.PK_SectionId == null)
+                        {
+                            <input type="submit" class="btn btn-success" value="Save" name="SaveSection" onclick="return fvalidate();" />
+
+                        }
+                        else
+                        {
+                            <input type="submit" class="btn btn-success" value="Update" name="UpdateSection" onclick="return fvalidate();" />
+
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+
+    function fvalidate() {
+
+        $('.errortext').removeClass('errortext');
+        if ($("#Pk_ClassId").val() == 0) {
+            $("#Pk_ClassId").addClass('errortext');
+            $("#Pk_ClassId").focus();
+            return false;
+        }
+        if ($("#SectionName").val() == "") {
+            $("#SectionName").addClass('errortext');
+            $("#SectionName").focus();
+            return false;
+        }
+
+    }
+</script>
+
+

@@ -1,0 +1,210 @@
+﻿@model AfluexSchool.Models.Teacher
+
+@{
+    ViewBag.Title = "TeacherList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm("TeacherList", "Teacher", FormMethod.Post, new { @id = "form3", enctype = "multipart/form-data" }))
+{
+
+    <div>
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header border-0 bg-none">
+                <div class="row">
+                    <div class="col-12 col-md">
+                        <p class="fs15">Teacher List</p>
+                    </div>
+                    <p style="color:red">
+                        @TempData["TeacherList"]
+                    </p>
+                </div>
+            </div>
+            <div class="card-body ">
+
+
+                <div class="row">
+                    <div class="col-md-3">
+                        Login ID
+                        @Html.TextBoxFor(m => m.LoginID, new { @class = "form-control", placeholder = "Login ID" })
+                    </div>
+                    <div class="col-md-3">
+                        Teacher Name
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Teacher Name" })
+                    </div>
+                    <div class="col-md-3">
+                        Date Of Joining
+                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", placeholder = "From Date", @ReadOnly = "ReadOnly" })
+                    </div>
+                    <div class="col-md-3">
+                        Date Of Joining
+                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", placeholder = "To Date", @ReadOnly = "ReadOnly" })
+                    </div>
+
+                </div>
+                <br />
+                <div class="row">
+                   
+                    <div class="col-md-6">
+                        <input type="submit" value="Search" name="Search" id="Search" class="btn btn-primary" />
+                        <a href="/Export/ExportToExcel?id=pdf&&PageName=TeacherList"><img src="../../AdminPanelcss/assets/img/pdf.png" style="width:40px;height:40px" title="Export To PDF" /></a>
+                        <a href="/Export/ExportToExcel?id=excel&&PageName=TeacherList"><img src="../../AdminPanelcss/assets/img/excel.jpg" style="width:40px;height:40px" title="Export To Excel" /></a>
+                        <a href="/Export/ExportToExcel?id=word&&PageName=TeacherList"><img src="../../AdminPanelcss/assets/img/Word.png" style="width:40px;height:40px" title="Export To Word" /></a>
+                        <a href="#" onclick="return printData();"><img src="../../AdminPanelcss/assets/img/print.jpg" style="width:40px;height:40px" title="Print" /></a>
+
+                    </div>
+                </div>
+                <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                    <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-bordered w-100 mb-0" id="example24">
+                                <thead>
+                                    <tr>
+
+                                        <th>Sr No.</th>
+                                        <th>LoginID</th>
+                                        <th>Teacher Name</th>
+                                        <th>Password</th>
+                                        <th>Date Of Birth</th>
+                                        <th>Gender</th>
+                                        <th>Category</th>
+                                        <th>Address</th>
+                                        <th>Date Of Joining</th>
+                                        <th>MobileNo</th>
+                                        <th class="station-12" style="display:@ViewBag.IsEdit;">Edit</th>
+                                        <th class="station-12" style="display:@ViewBag.IsDelete;">Delete</th>
+
+                                    </tr>
+
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
+                                    {
+                                        if (Model.lstTeacherList != null)
+                                        {
+                                            int i = 1;
+                                            foreach (var Item in Model.lstTeacherList)
+                                            {
+                                                <tr class="text-left">
+
+                                                    <td>
+                                                        @i
+                                                        @Html.HiddenFor(m => m.PK_TeacherID)
+                                                    </td>
+                                                    <td>@Item.LoginID</td>
+                                                    <td>@Item.Name</td>
+                                                    <td>@Item.Password</td>
+                                                    <td>@Item.DOB</td>
+                                                    <td>@Item.Gender</td>
+                                                    <td>@Item.Category</td>
+                                                    <td>@Item.Address</td>
+                                                    <td>@Item.DOJ</td>
+                                                    <td>@Item.MobileNo</td>
+                                                    <td class="station-12" style="display:@ViewBag.IsEdit;">
+                                                        <a href="/Teacher/Teacher?PK_TeacherID=@Item.PK_TeacherID&actionview=edit" class="btn btn-sm btn-success">Edit</a>
+                                                        
+                                                    </td>
+                                                    <td class="station-12" style="display:@ViewBag.IsDelete;"><a href="/Teacher/DeleteTeacherList?PK_TeacherID=@Item.PK_TeacherID" class="btn btn-sm btn-danger" onclick="return confirm('Are you want to delete?;')">Delete</a></td>
+                                                </tr>
+                                                i++;
+                                            }
+
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                            <div class="j-response"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+}
+
+
+<script src="../../scripts/jquery-1.10.2.min.js"></script>
+
+
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+<script>
+    function printData() {
+        
+        var divToPrint = document.getElementById("example24");
+        newWin = window.open("");
+        newWin.document.write(divToPrint.outerHTML);
+        newWin.print();
+        newWin.close();
+    }
+    $('#FromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true,
+
+        maxDate: '0',
+    });
+
+    $('#ToDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true,
+
+        maxDate: '0',
+    }
+);
+    function validateform() {
+        $(".errortext").removeClass("errortext");
+        if ($('#FeeTypeName').val() == '') {
+            $("#FeeTypeName").addClass('errortext');
+            $('#FeeTypeName').focus();
+            return false;
+        }
+
+        return true;
+    }
+     
+    function ViewInformation() {
+        $("#BranchName").attr("disabled", "disabled");
+        $("#DesignationName").attr("disabled", "disabled");
+        $("#Name").attr("disabled", "disabled");
+        $("#FatherName").attr("disabled", "disabled");
+        $("#DOB").attr("disabled", "disabled");
+        $("#Gender").attr("disabled", "disabled");
+        $("#Category").attr("disabled", "disabled");
+        $("#Religion").attr("disabled", "disabled");
+        $("#Qualification").attr("disabled", "disabled");
+        $("#Experience").attr("disabled", "disabled");
+        $("#Address").attr("disabled", "disabled");
+        $("#Pincode").attr("disabled", "disabled");
+        $("#MobileNo").attr("disabled", "disabled");
+        $("#DOJ").attr("disabled", "disabled");
+        $("#Image").attr("disabled", "disabled");
+
+    }
+
+    function doConfirm(msg, yesFn, noFn) {
+        var confirmBox = $("#confirmBox");
+        confirmBox.find(".message").text(msg);
+        confirmBox.find(".yes,.no").unbind().click(function () {
+            confirmBox.hide();
+        });
+        confirmBox.find(".yes").click(yesFn);
+        confirmBox.find(".no").click(noFn);
+        confirmBox.show();
+    }
+
+    doConfirm("Are you sure?", function yes() {
+        form.delete();
+    }, function no() {
+        // do nothing
+    });
+
+
+</script>

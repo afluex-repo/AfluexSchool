@@ -1,0 +1,129 @@
+﻿@model AfluexSchool.Models.Home
+
+
+@{
+    ViewBag.Title = "Contact Us";
+    Layout = "~/Views/Shared/WebsiteLayout.cshtml";
+}
+
+<div class="welcome-message module" style="margin:70px 0px;">
+    <div class="row">
+        <div class="medium-6 small-12 columns inquiry">
+            <!-- <img src="../../Websitecss/images/contact.jpg" alt="Education Background" class="img" /> -->
+
+            <div class="well well-sm">
+                <h2 class="text-center">Inquiry Form</span></h2>
+
+                @Html.BeginForm("sendemail", "Home")
+                {
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="name">
+                                Name
+                            </label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-user"></span>
+                                </span>
+                                @Html.TextBoxFor(m => m.DisplayName, new { @class = "form-control", @placeholder = "Enter Name", required = "required" })
+                                @*<input type="text" class="form-control" id="name" placeholder="Enter Name" required="required" />*@
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">
+                                Email Address
+                            </label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-envelope"></span>
+                                </span>
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Enter Email", required = "required" })
+                                @*<input type="email" class="form-control" id="email" placeholder="Enter email" required="required" />*@
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">
+                                Subject
+                            </label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-random"></span>
+                                </span>
+                                @Html.TextBoxFor(m => m.Subject, new { @class = "form-control", @placeholder = "Subject", required = "required" })
+                                @*<input type="text" class="form-control" id="subject" placeholder="Enter Subject" required="required" />*@
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">
+                                Mobile No
+                            </label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-phone-alt"></span>
+                                </span>
+                                @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control", @placeholder = "Enter Mobile No.", required = "required" })
+                                @*<input type="text" class="form-control" id="subject" placeholder="Enter Subject" required="required" />*@
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="name">
+                                Message
+                            </label>
+                            @Html.TextAreaFor(m => m.Message, new { @class = "form-control", @placeholder = "Message", required = "required" })
+                            @*<textarea name="message" id="message" class="form-control" rows="9" cols="25" required="required"
+                                placeholder="Message"></textarea>*@
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <input type="submit" class="btn btn-info hvr-sweep-to-bottom" id="btnContactUs" />
+
+                    </div>
+                </div>
+                }
+
+
+            </div>
+        </div>
+
+
+
+
+        <div class="medium-6 small-12 columns">
+            <h2 class="text-center">Contact Us</span></h2>
+            <h3 class="text-center">Feel Free to contact us</h3>
+            <div class="textwidget">
+                <ul class="address" style="list-style-type:none;">
+                    <li class="list-style-item">
+                        <span><i class="fa fa-home" style="color:#000;"></i></span>
+
+                        <p style="font-size:16px;">D-54 Vibhuti Khand Lucknow LUCKNOW <p style="visibility:hidden;">D-54 Vibhuti Khand Lucknow Gondaayatripuram East LUCKNOW</p></p>
+                    </li>
+                    <li class="list-style-item">
+                        <span><i class="fa fa-mobile" style="color:#000;"></i></span>
+                        <p style="font-size:16px;">(+91) 7310000413</p><p style="visibility:hidden;">(+91) 7310000413</p>
+
+                    </li>
+                    <li class="list-style-item">
+                        <span><i class="fa fa-envelope" style="color:#000;"></i></span>
+
+                        <p style="font-size:16px;">info@afluex.com</p>
+                    </li>
+                </ul>
+
+
+            </div><!-- text widget /-->
+
+
+        </div><!-- Right Column /-->
+    </div><!-- Row /-->
+
+    <div class="row" style="margin-top:30px;">
+        <div class="col-md-12">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3559.283535792204!2d80.99475741501853!3d26.862731368706914!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399be3ad67cf86c1%3A0xe090e6813b2b28b9!2sAfluex%20Multiservices%20LLP!5e0!3m2!1sen!2sin!4v1637842606614!5m2!1sen!2sin" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+           
+        </div>
+    </div>
+</div>

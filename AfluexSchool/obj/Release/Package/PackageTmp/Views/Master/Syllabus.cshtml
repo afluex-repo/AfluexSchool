@@ -1,0 +1,115 @@
+﻿@model AfluexSchool.Models.Master
+
+@{
+    ViewBag.Title = "Syllabus";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Syllabus", "Master", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    <div>
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header border-0 bg-none">
+                <div class="row">
+                    <div class="col-12 col-md">
+                        <p class="fs15">Syllabus</p>
+                    </div>
+                    <p style="color:red">
+                        @TempData["Syllabus"]
+                    </p>
+                </div>
+            </div>
+            <div class="card-body ">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Class <span style="color: red">*</span></label>
+                        @Html.DropDownListFor(m => m.Fk_ClassID, new SelectList(ViewBag.ddlclass, "Value", "Text"), new { @class = "form-control", @onchange = "return OnchangeSection();" })
+
+                    </div>
+                    <div class="col-md-4">
+                        <label>Section <span style="color: red">*</span></label>
+                        @Html.DropDownListFor(m => m.Fk_SectionID, new SelectList(ViewBag.ddlsection, "Value", "Text"), new { @class = "form-control", @onchange = "return onDDLchange()" })
+
+                    </div>
+                    <div class="col-md-4">
+                        <label>Upload Syllabus <span style="color: red">*</span></label>
+                        <input type="file" name="Syllabus" class="bg-default form-control" id="Syllabus" />
+                    </div>
+                </div>
+                <div class="card-footer text-left">
+                    <div class="col-md-2">
+                        <input class="btn btn-primary btn-sm" type="submit" name="btnSave" onclick="return validateform()" value="Save" id="btndetail" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+    <script src="../../scripts/jquery-1.10.2.min.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+    <script>
+        $(document).ready(function () {
+            $("#divload").css({ 'display': 'none' });
+
+        });
+
+        function OnchangeSection() {
+            var value = $('#Fk_ClassID').val();
+            $.ajax({
+                url: "/Master/GetSectionByClass",
+                Type: "Get",
+                DataType: "JSON",
+                data: { Pk_ClassId: value },
+                success: function (data) {
+
+                    $("#Fk_SectionID").html("");
+                    $("#Fk_SectionID").empty();
+                    $("#Fk_SectionID").append(
+                          $('<option></option>').val(0).html('--Select Section--'));
+                    $.each(data.ddlSectionName, function (index, Sectioncount) {
+                        $("#Fk_SectionID").append(
+                              $('<option></option>').val(Sectioncount.Value).html(Sectioncount.Text));
+
+                    });
+
+
+                }
+            });
+
+        }
+        function validateform() {
+            $(".errortext").removeClass("errortext");
+
+            if ($('#Fk_ClassID').val() == '0') {
+                $("#Fk_ClassID").addClass('errortext');
+                $('#Fk_ClassID').focus();
+                return false;
+            }
+
+            if ($('#Fk_SectionID').val() == '0') {
+                $("#Fk_SectionID").addClass('errortext');
+                $('#Fk_SectionID').focus();
+                return false;
+            }
+
+            if ($('#Syllabus').val() == '') {
+                $("#Syllabus").addClass('errortext');
+                $('#Syllabus').focus();
+                return false;
+            }
+
+            return true;
+        }
+
+    </script>
+
+    <style>
+        .errortext {
+            border: 1px solid red !important;
+            background-color: #fff0f0 !important;
+        }
+    </style>
+

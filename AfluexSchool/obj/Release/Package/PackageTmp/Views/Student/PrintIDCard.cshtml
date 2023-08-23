@@ -1,0 +1,93 @@
+﻿@model AfluexSchool.Models.Student
+
+@{
+    Layout = null;
+}
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="../../AdminPanelcss/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../AdminPanelcss/assets/vendor/bootstrap/css/idcardstyle.css">
+    
+
+    <title>AFLUEX Id Card</title>
+</head>
+<!DOCTYPE html>
+<div id="printDiv">  &nbsp;&nbsp;<input type="button" onclick="printreport();" value="PRINT" /></div>
+<div class="main-section">
+    <img src="../../Websitecss/css/img/top-d.jpg" class="img-responsive" alt="logo" />
+    <div class="main-section1">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-lg-3">
+                    <div class="logo-section">
+                        <img src="../../Websitecss/images/logo.png" class="img-responsive" alt="logo" />
+                    </div>
+                </div>
+                <div class="col-md-9 col-lg-9">
+                    <div class="logo-heading">
+                        <h1>AFLUEX SCHOOL</h1>
+                        <h5 class="text-center">@ViewBag.CompanyAddress -@ViewBag.Pin1</h5>
+                        <h5 class="text-center">Mobile:- @ViewBag.ContactNo</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-lg-3 colon0">
+                    <div class="name-section">
+                        <h6>Name</h6>
+                        <h6>Father's Name</h6>
+                        <h6>Mother's Name</h6>
+                        <h6>Class</h6>
+                        <h6>Mobile</h6>
+                        <h6>Address</h6>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-6 colon1">
+                    <div class="name-detali">
+                        <h6>: &nbsp;@Model.studentName</h6>
+                        <h6>: &nbsp;@Model.FatherName</h6>
+                        <h6>: &nbsp;@Model.MotherName</h6>
+                        <h6>: &nbsp;@Model.ClassName &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reg:@Model.RegistrationDate</h6>
+                        <h6>: &nbsp;@Model.Mobile &nbsp;&nbsp; D.O.B. : @Model.Dateofbirth</h6>
+                        <h6>: &nbsp;@Model.PermanentAddress</h6>
+                    </div>
+                </div>
+                <div class="col-md-3 col-lg-3 colon2">
+                    <div class="student-section">
+                        <img src="@Model.StudentPhoto" class="img-responsive" alt="logo"/>
+                         
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-lg-12">
+                    <div class="signature">
+                        <h6>Principal Signature</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <img src="../../Websitecss/css/img/top-d.jpg" class="img-responsive" alt="logo" />
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="../../AdminPanelcss/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+<script>
+        function printreport() {
+
+            var printButton = document.getElementById("printDiv");
+            printButton.style.visibility = 'hidden';
+            window.print()
+            printButton.style.visibility = 'visible';
+
+        }
+
+</script>

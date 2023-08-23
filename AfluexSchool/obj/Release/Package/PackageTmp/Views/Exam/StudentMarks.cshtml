@@ -1,0 +1,260 @@
+﻿@model AfluexSchool.Models.Exam
+
+@{
+    ViewBag.Title = "StudentMarks";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("StudentMarks", "Exam", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    <div>
+          <div class="login-row">
+            <div class="col-12 col-md-12 col-lg-12 col-xl-12 mx-auto align-self-center">
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-header">
+                        <div class="row ">
+
+                            <div class="col-auto">
+                                <h4 class="mt-0 mb-1">Student Marks </h4>
+
+                            </div>
+                            <p style="color:red">
+                                @TempData["StudentMarks"]
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mx-auto">
+                                <div class="row ">
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group ">
+                                            <label> Class <span style="color:red">*</span></label>
+                                            @Html.DropDownListFor(m => m.Fk_ClassID, new SelectList(ViewBag.ddlClass, "Value", "Text"), new { @class = "form-control", @onchange = "return GetSectionByClass();" })
+                                            @Html.HiddenFor(m => m.Pk_StudentMarksId)
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group ">
+                                            <label> Section <span style="color:red">*</span></label>
+                                            @Html.DropDownListFor(m => m.Fk_SectionId, new SelectList(ViewBag.ddlsection, "Value", "Text"), new { @class = "form-control", @onchange = "return GetSubjectNameBySection ();" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row ">
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group ">
+                                            <label> Subject <span style="color:red">*</span></label>
+                                            @Html.DropDownListFor(m => m.SubjectID, new SelectList(ViewBag.ddlSubjectName, "Value", "Text"), new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group ">
+                                            <label> Exam Type <span style="color:red">*</span></label>
+                                            @Html.DropDownListFor(m => m.ExamTypeName, new SelectList(ViewBag.ddlExamType, "Value", "Text"), new { @class = "form-control" })
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                        <div class="card-footer text-left">
+                            <input class="btn btn-primary" type="submit" name="btndetail" onclick="return validateform()" value="Get Detail" id="btndetail" />
+                        </div>
+                        <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                            <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table datatable display responsive w-100 dataTable no-footer dtr-inline"  style="width: 1002px;">
+                                        <thead>
+                                            <tr>
+
+                                                <th>S No.</th>
+                                                <th>StudentName</th>
+                                                <th>Marks</th>
+                                                <th>Obtain Marks</th>
+
+                                            </tr>
+
+                                        </thead>
+                                        <tbody>
+                                            @if (Model != null)
+                                            {
+                                                if (Model.lststudent != null)
+                                                {
+                                                    int i = 1;
+                                                    foreach (var item in Model.lststudent)
+                                                    {
+
+                                                        <tr>
+                                                            <td>
+                                                                @i
+                                                                @Html.HiddenFor(m => m.Pk_StudentID)
+                                                                @Html.HiddenFor(m => m.Fk_ClassID)
+                                                                @Html.HiddenFor(m => m.Fk_SectionId)
+                                                                @Html.HiddenFor(m => m.SubjectID)
+                                                                @Html.HiddenFor(m => m.ExamTypeName)
+                                                            </td>
+                                                            <td>
+                                                                @item.StudentName
+                                                            </td>
+                                                            <td>
+
+                                                                <input type="text" value="@item.MaxMarks" name="MaxMarks @i" id="MaxMarks @i" />
+                                                            </td>
+                                                            <td>
+                                                                @*@Html.TextBoxFor(m => m.ObtainMarks, new { @class="form-control",@placeholder="Enter Marks"})*@
+                                                                <input type="text" required="required" name="obtainMarks_ @i" id="obtainMarks_ @i" onchange="return validateMarks(this);" onkeypress="return isNumberKey(event);" maxlength="3" />
+
+                                                                <input type="hidden" name="hdClassID_ @i" id="hdClassID_ @i" value="@item.Fk_ClassID" />
+                                                                <input type="hidden" name="hdSectionID_ @i" id="hdSectionID_ @i" value="@item.Fk_SectionId" />
+                                                                <input type="hidden" name="hdSubjectID_ @i" id="hdSubjectID_ @i" value="@item.SubjectID" />
+                                                                <input type="hidden" name="hdStudentID_ @i" id="hdStudentID_ @i" value="@item.Pk_StudentID" />
+                                                                <input type="hidden" name="hdExamTypeID_ @i" id="hdExamTypeID_ @i" value="@item.ExamTypeName" />
+                                                            </td>
+
+                                                        </tr>
+                                                        i++;
+                                                    }
+                                                    <input type="hidden" id="hdRows" name="hdRows" value="@i" />
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                    <div class="j-response"></div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="card-footer text-left">
+                            <input type="submit" class="btn btn-success" onclick="return validateform();" name="btnSave" id="btnSave" value="Save" />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+}
+
+<script src="../../scripts/jquery-1.10.2.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+
+
+<script>
+    function validateform() {
+        $(".errortext").removeClass("errortext");
+        if ($('#ClassName').val() == '0') {
+            $("#ClassName").addClass('errortext');
+            $('#ClassName').focus();
+            return false;
+        }
+        if ($('#SectionName').val() == '0') {
+            $("#SectionName").addClass('errortext');
+            $('#SectionName').focus();
+            return false;
+        }
+        if ($('#SubjectName').val() == '0') {
+            $("#SubjectName").addClass('errortext');
+            $('#SubjectName').focus();
+            return false;
+        }
+        if ($('#ExamTypeName').val() == '0') {
+            $("#ExamTypeName").addClass('errortext');
+            $('#ExamTypeName').focus();
+            return false;
+        }
+        if ($('#obtainMarks').val() == '') {
+            $("#obtainMarks").addClass('errortext');
+            $('#obtainMarks_').focus();
+            return false;
+        }
+        return true;
+    }
+
+    function GetSectionByClass() {
+        var value = $('#Fk_ClassID').val();
+        //var values = $('#SectionName').val();
+        //alert(value);
+        $.ajax({
+            url: "/Exam/GetSectionByClass",
+            Type: "Get",
+            DataType: "JSON",
+            data: { Fk_ClassID: value },
+            success: function (data) {
+
+                $("#Fk_SectionId").html(""); // clear before appending new list
+                $("#Fk_SectionId").empty();
+                $("#Fk_SectionId").append(
+                      $('<option></option>').val(0).html('--Select Section--'));
+                $.each(data.ddlsection, function (index, Sectioncount) {
+                    $("#Fk_SectionId").append(
+                          $('<option></option>').val(Sectioncount.Value).html(Sectioncount.Text));
+
+                });
+
+
+            }
+        });
+
+    }
+
+    function GetSubjectNameBySection() {
+        var value = $('#Fk_SectionId').val();
+        var values = $('#Fk_ClassID').val();
+        //alert(value);
+        $.ajax({
+            url: "/Exam/GetSubjectNameBySection",
+            Type: "Get",
+            DataType: "JSON",
+            data: { Fk_SectionId: value, Fk_ClassID: values },
+            success: function (data) {
+
+                $("#SubjectID").html(""); // clear before appending new list
+                $("#SubjectID").empty();
+                $("#SubjectID").append(
+                      $('<option></option>').val(0).html('--Select Subject Name--'));
+                $.each(data.ddlSubjectName, function (index, Sectioncount) {
+                    $("#SubjectID").append(
+                          $('<option></option>').val(Sectioncount.Value).html(Sectioncount.Text));
+
+                });
+
+            }
+        });
+
+    }
+
+    function validateMarks(marks) {
+        var test1 = marks.id;
+        var test = $('#' + test1 + '').val();
+        var maxMarks = $('#MaxMarks').val();
+        var obtMarks = marks.value;
+
+        if ((Number)(obtMarks) > (Number)(maxMarks)) {
+
+
+            alert('Please Enter Right Marks');
+            return false;
+
+        }
+    }
+
+    function isNumberKey(evt) {
+
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+</script>

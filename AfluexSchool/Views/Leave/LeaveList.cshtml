@@ -1,0 +1,181 @@
+﻿@model AfluexSchool.Models.Leave
+
+@{
+    ViewBag.Title = "LeaveList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("LeaveList", "Leave", FormMethod.Post, new { @id = "form1" }))
+{
+    <div class="container main-container" id="main-container">
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header border-0 bg-none">
+                <div class="row">
+                    <div class="col-12 col-md">
+                        <p class="fs15">Leave List</p>
+                    </div>
+                    <p style="color:red">
+                        @TempData["LeaveList"]
+                    </p>
+                </div>
+            </div>
+            <div class="card-body ">
+                <div class="row">
+
+                    <div class="col-md-3">
+                        Student
+                        @Html.TextBoxFor(m => m.StudentName, new { @class = "form-control", placeholder = "StudentName" })
+                    </div>
+                    <div class="col-md-3">
+                        Class
+                        @Html.DropDownListFor(m => m.PK_ClassID, new SelectList(ViewBag.ddlClass, "Value", "Text"), new { @class = "form-control", @onchange= "return getSection()" })
+                    </div>
+                    <div class="col-md-3">
+                        Section
+                        @Html.DropDownListFor(m => m.Fk_SectionID, new SelectList(ViewBag.ddlSection, "Value", "Text"), new { @class = "form-control",})
+                    </div>
+                    <div class="col-md-3">
+                        Status
+                        @Html.DropDownListFor(m => m.Status, new SelectList(ViewBag.ddlStatus, "Value", "Text"), new { @class = "form-control", placeholder = "To Date", @ReadOnly = "ReadOnly" })
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-3">
+                        From Date
+                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", placeholder = "From Date" })
+                    </div>
+                    <div class="col-md-3">
+                        To Date
+                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", placeholder = "To Date" })
+                    </div>
+                  
+                    <div class="col-md-3" style="margin-top:20px">
+
+                        <input type="submit" value="Search" name="btnSearch" id="btnSearch" class="btn btn-primary" />
+                    </div>
+                </div>
+
+                <div class="col-sm-12 table-responsive">
+                    <table class="table datatable display responsive w-100 dataTable no-footer dtr-inline">
+                        <thead>
+                            <tr>
+                                <th>S.no</th>
+                                <th>Student</th>
+                                <th>From Date    </th>
+                                <th>To Date   </th>
+                                <th>Reason</th>
+                                <th>Description</th>
+                                <th>Status </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                if (Model.listStudent != null)
+                                {
+                                    int i = 1;
+                                    foreach (var item in Model.listStudent)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @i
+                                            </td>
+                                            <td>@item.StudentName (@item.ClassName - @item.SectionName)</td>
+                                            <td>
+                                                @item.FromDate
+                                            </td>
+                                            <td>
+                                                @item.ToDate
+                                            </td>
+                                            <td>
+                                                @item.Reason
+                                            </td>
+                                            <td>
+                                                @item.Description
+                                            </td>
+                                            <td>
+                                                @item.Status
+                                            </td>
+                                           
+                                        </tr>
+                                        i++;
+                                    }
+                                    <input type="hidden" id="hdRows" name="hdRows" value="@i" />
+                                }
+                            }
+                        </tbody>
+                    </table>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script src="../../scripts/jquery-1.10.2.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+        $("#divload").css({ 'display': 'none' });
+    });
+
+    $('#FromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true,
+    });
+
+    $('#ToDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true,
+    }
+);
+
+    function setdescription(evt) {
+        $('#Description_').val(evt.value);
+        $('#PK_StdntLeaveID_').val();
+    }
+
+    function approve(evt) {
+        var Description = $('#Description_').val();
+        var Pk_StudentID = $('#Pk_StudentID_').val();
+        var PK_StdntLeaveID = $('#PK_StdntLeaveID_').val();
+        var Approve = $('#Approve').val();
+
+    }
+    function decline(evt) {
+        var Description = $('#Description_').val();
+        var Pk_StudentID = $('#Pk_StudentID_').val();
+        var PK_StdntLeaveID = $('#PK_StdntLeaveID_').val();
+        var Decline = $('#Decline').val();
+    }
+
+    function getSection() {
+        var value = $('#PK_ClassID').val();
+        $.ajax({
+            url: "/Leave/GetSectionByClass",
+            Type: "Get",
+            DataType: "JSON",
+            data: { Fk_ClassID: value },
+            success: function (data) {
+                $("#Fk_SectionID").html(""); 
+                $("#Fk_SectionID").empty();
+                $("#Fk_SectionID").append(
+                      $('<option></option>').val(0).html('Select Section'));
+                $.each(data.ddlSection, function (index, Sectioncount) {
+                    $("#Fk_SectionID").append(
+                          $('<option></option>').val(Sectioncount.Value).html(Sectioncount.Text));
+
+                });
+
+            }
+        });
+
+    }
+</script>

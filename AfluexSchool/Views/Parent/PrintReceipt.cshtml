@@ -1,0 +1,250 @@
+﻿@model AfluexSchool.Models.Parent
+
+@{
+    ViewBag.Title = "PrintReceipt";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Print Student Fee</title>
+    <style>
+        table, th, td {
+            font-size: medium;
+            /*border: 1px solid black;*/
+            border-collapse: collapse;
+        }
+
+        th, td {
+            font-size: medium;
+            padding: 5px;
+        }
+    </style>
+    <link href="../../AdminPanelcss/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="../../AdminPanelcss/assets/vendor/bootstrap/css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <br />
+    <div id="printDiv">  &nbsp;&nbsp;<input type="button" onclick="printreport();" value="PRINT" /></div>
+    <br/>
+    <div class="main-recipt-file">
+        <div class="container">
+            <div class="row">
+                <table class="table table-borderless">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="recipt-logo">
+                                    <img src="../../Websitecss/images/logo.png" class="img-responsive" />
+                                </div>
+                            </td>
+                            <td>
+                                <div class="recipt-logo-heading">
+                                    <h1>Afluex Educational Demo</h1>
+                                    <h4>D-54 Vibhuti Khand Lucknow LUCKNOW (U.P)-271001</h4>
+                                    <h5>Affiliation No. 17102-06/2018 <span><i class="fa fa-phone" aria-hidden="true"></i> (+91) 7310000413</span> <span><i class="fa fa-envelope" aria-hidden="true"></i> info@afluex.com</span></h5>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="registration-slip text-center">
+                        <h1>Registration Slip</h1>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-lg-12">
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr class="table-secondary">
+                                <th>Name</th>
+                                <td>@Model.ParentName</td>
+                                <th>Code</th>
+                                <td>@Model.ParentLogin_ID</td>
+                            </tr>
+                            <tr class="table-secondary">
+                                <th>Mobile</th>
+                                <td>@Model.Mobile</td>
+                                <th>Amount</th>
+                                <td>@Model.Amount</td>
+                            </tr>
+                            <tr class="table-secondary">
+                                <th>Student Name</th>
+                                <td>@Model.StudentName</td>
+                                <th>Class</th>
+                                <td>@Model.Fk_ClassID</td>
+                            </tr>
+                            <tr class="table-secondary">
+                                <th>Form No.</th>
+                                <td>@Model.FormNo</td>
+                                 <th></th>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <table class="table table-borderless">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="registration-footer-detail">
+                                    <h6><strong>Receipt By :</strong> @Model.DisplayName</h6>
+                                    <h6><strong>Date :</strong> @Model.AddedOn </h6>
+                                </div>
+                            </td>
+                            <td>
+                                <br/>
+                                <br />
+                                <br />
+                                <br />
+                                <div class="registration-footer-detail pull-right">
+                                    <h6><strong>Authorise Signature</strong></h6>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+
+    @*<div class="main-recipt">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 col-lg-12">
+                    <div class="main-recipt-logo">
+                        <div class="recipt-logo1">
+                            <div class="row">
+                                <div class="col-md-3 col-lg-3">
+                                    <div class="current-recipt-logo">
+
+                                        <img src="../../Websitecss/images/logo.png" class="img-responsive" />
+                                    </div>
+                                </div>
+                                <div class="col-md-9 col-lg-9">
+                                    <div class="current-recipt-logo">
+                                        <h4>Afluex Educational Demo</h4>
+                                        <h6>@ViewBag.CompanyAddress (@ViewBag.State)-@ViewBag.Pin1</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="recipt-logo-contact">
+                            <div class="row">
+                                <div class="col-md-3 col-lg-3"> 
+                                </div>
+                                <div class="col-md-7 col-lg-7">
+                                    <div class="section-recipt1">
+                                        <h6>Affiliation No. @ViewBag.AffliateNo <i class="fa fa-phone-square" aria-hidden="true"></i> @ViewBag.ContactNo <i class="fa fa-envelope-square" aria-hidden="true"></i> @ViewBag.EmailID</h6>
+                                        <br />
+                                        <h3 class="text-center" style="text-align:center;margin-left: -152px;"><b>Registration Slip</b></h3>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Name </th>
+                                            <td>@Model.ParentName</td>
+                                            <th scope="col">Code  </th>
+                                            <td>@Model.ParentLogin_ID</td>
+                                            <th scope="col">Form No. </th>
+                                            <td>@Model.FormNo</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="col" colspan="1">Mobile  </th>
+                                            <td colspan="2">@Model.Mobile</td>
+                                            <th scope="col" colspan="2">Amount</th>
+                                            <td colspan="2">@Model.Amount</td>
+                                        </tr>
+
+
+                                    </tbody>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row"  colspan="1">Student Name  </th>
+                                            <td colspan="2">@Model.StudentName</td>
+                                            <th scope="row" colspan="2">Class </th>
+                                            <td colspan="2">@Model.Fk_ClassID</td>
+                                        </tr>
+
+
+                                    </tbody>
+                                </table>
+                                <br/>
+                                <br />
+                                <br />
+                                <br />
+                                <div class="row" >
+                                    
+                                        <div class="col-md-9">
+                                            <b>&nbsp;&nbsp;&nbsp;Receipt By:</b> @Model.DisplayName
+                                            <br />
+                                            <b>&nbsp;&nbsp;&nbsp;Date:</b>
+                                            @Model.AddedOn
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h4>Authorise  Signature</h4>
+                                        </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>*@
+
+
+
+    <script src="../../scripts/jquery-1.10.2.min.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+
+    <script src="../../AdminPanelcss/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+        function printreport() {
+
+            var printButton = document.getElementById("printDiv");
+            printButton.style.visibility = 'hidden';
+            window.print()
+            printButton.style.visibility = 'visible';
+
+        }
+
+    </script>
+</body>
+</html>

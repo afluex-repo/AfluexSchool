@@ -1,0 +1,164 @@
+﻿@model AfluexSchool.Models.Staff
+
+@{
+    ViewBag.Title = "StaffViewProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("StaffViewProfile", "AdminReports", FormMethod.Post, new { @id = "StaffViewProfile", enctype = "multipart/form-data" }))
+{
+    <div>
+          <div class="login-row">
+            <div class="col-12 col-md-12 col-lg-12 col-xl-12 mx-auto align-self-center">
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-header">
+                        <div class="row ">
+
+                            <div class="col-auto">
+                                <h4 class="mt-0 mb-1">Add Staff</h4>
+
+                            </div>
+                            <p style="color:red">
+                                @TempData["StaffViewProfile"]
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mx-auto">
+                                <div class="row ">
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label>Branch  <span style="color: red">*</span></label>
+                                            @Html.TextBoxFor(q => q.BranchName,  new { @class = "form-control", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label>Designation <span style="color: red">*</span></label>
+                                            @Html.TextBoxFor(q => q.Designation,  new { @class = "form-control", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> Name <span style="color: red">*</span></label>
+                                            @Html.TextBoxFor(a => a.Name, new { @class = "form-control", @Placeholder = "Name", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label>Father Name <span style="color: red">*</span></label>
+                                            @Html.TextBoxFor(b => b.FatherName, new { @Class = "form-control", @Placeholder = "FatherName" , @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row ">
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label>DOB  <span style="color: red">*</span></label>
+                                            @Html.TextBoxFor(f => f.DOB, new { @class = "form-control", @Placeholder = "Date Of Birth", @ReadOnly = "ReadOnly", @onchange = "return ageCount();"})
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label>Gender <span style="color: red">*</span></label>
+                                            @Html.DropDownListFor(m => m.Gender, new SelectList(ViewBag.ddlGender, "Value", "Text"), new { @class = "form-control" , @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label>Category <span style="color: red">*</span></label>
+                                            @Html.DropDownListFor(m => m.Category, new SelectList(ViewBag.ddlCategory, "Value", "Text"), new { @class = "form-control", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label>Religion <span style="color: red">*</span></label>
+                                            @Html.TextBoxFor(q => q.Religion,  new { @class = "form-control", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row ">
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label>Qualification  <span style="color: red">*</span></label>
+                                            @Html.TextBoxFor(m => m.Qualification, new { @class = "form-control", @Placeholder = "Qualification", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label>Experience <span style="color: red">*</span></label>
+                                            @Html.TextBoxFor(o => o.Experience, new { @class = "form-control", @Placeholder = "Experience", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label>Address <span style="color: red">*</span></label>
+                                            @Html.TextAreaFor(c => c.Address, new { @class = "form-control", @Placeholder = "Address", @cols = "30", row = "10", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label>Pincode <span style="color: red">*</span></label>
+                                            @Html.TextBoxFor(d => d.PinCode, new { @class = "form-control", @Placeholder = "Pincode", @OnChange = "return GetstatecityBypincode();", @onkeypress = "return isNumberKey(event);", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row ">
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label>State  <span style="color: red">*</span></label>
+                                            @Html.TextBoxFor(d => d.State, new { @class = "form-control", @Placeholder = "State", @ReadOnly = "ReadOnly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label>City <span style="color: red">*</span></label>
+                                            @Html.TextBoxFor(d => d.City, new { @class = "form-control", @Placeholder = "City", @ReadOnly = "ReadOnly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label>MobileNo <span style="color: red">*</span></label>
+                                            @Html.TextBoxFor(e => e.MobileNo, new { @class = "form-control", @Placeholder = "MobileNo.", @maxlength = "10", @onkeypress = "return isNumberKey(event);", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label>Date of Joining </label>
+                                            @Html.TextBoxFor(l => l.DOJ, new { @class = "form-control", @Placeholder = "Date Of Joining", @ReadOnly = "ReadOnly" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row ">
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label>Email Id  <span style="color: red">*</span></label>
+                                            @Html.TextBoxFor(l => l.EmailID, new { @class = "form-control", @Placeholder = "EmailID", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> Photo  </label>
+                                            <img class="bg-default form-control" src="@Model.Image" style="height:200px;width:200px;" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+

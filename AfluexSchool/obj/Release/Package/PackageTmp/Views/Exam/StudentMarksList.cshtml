@@ -1,0 +1,204 @@
+﻿@model AfluexSchool.Models.Exam
+
+@{
+    ViewBag.Title = "StudentMarksList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+ @using (Html.BeginForm("StudentMarksList", "Exam", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+ {
+    <div>
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header border-0 bg-none">
+                <div class="row">
+                    <div class="col-12 col-md">
+                        <p class="fs15">Student Marks List</p>
+                    </div>
+                    <p style="color:red">
+                       
+                    </p>
+                </div>
+            </div>
+            <div class="card-body ">
+                <div class="row ">
+                    <div class="col-lg-3 col-md-3">
+                        <div class="form-group ">
+                            <label> Class </label>
+                            @Html.DropDownListFor(m => m.Fk_ClassID, new SelectList(ViewBag.ddlClass, "Value", "Text"), new { @class = "form-control", @onchange = "return GetSectionByClass();" })
+                            @Html.HiddenFor(m => m.Pk_StudentMarksId)
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3">
+                        <div class="form-group ">
+                            <label> Section </label>
+                            @Html.DropDownListFor(m => m.Fk_SectionId, new SelectList(ViewBag.ddlsection, "Value", "Text"), new { @class = "form-control", @onchange = "return GetSubjectNameBySection ();" })
+
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3">
+                        <div class="form-group ">
+                            <label> Subject </label>
+                            @Html.DropDownListFor(m => m.SubjectID, new SelectList(ViewBag.ddlSubjectName, "Value", "Text"), new { @class = "form-control" })
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3">
+                        <div class="form-group ">
+                            <label> Exam type </label>
+                            @Html.DropDownListFor(m => m.ExamTypeName, new SelectList(ViewBag.ddlExamType, "Value", "Text"), new { @class = "form-control" })
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-left">
+                    <input class="btn btn-primary" type="submit" name="Search" value="Get Detail" id="btndetail" />
+                </div>
+                <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                    <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-bordered w-100 mb-0" id="example23">
+                                <thead>
+                                    <tr>
+
+                                        <th>S No.</th>
+                                        <th>StudentName</th>
+                                        <th>Class</th>
+                                        <th>Section</th>
+                                        <th>Subject</th>
+                                        <th>Exam Type</th>
+                                        <th>Maximum Marks</th>
+                                        <th>Obtain Marks</th> 
+
+                                    </tr>
+
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
+                                    {
+                                        if (Model.lststudent != null)
+                                        {
+                                            int i = 1;
+                                            foreach (var item in Model.lststudent)
+                                            {
+                                                <tr>
+                                                    <td>@i</td>
+                                                    <td> @item.StudentName  </td>
+                                                    <td> @item.ClassName  </td>
+                                                    <td> @item.SectionName  </td>
+                                                    <td> @item.SubjectName  </td>
+                                                    <td> @item.ExamTypeName  </td>
+                                                    <td> @item.MaxMarks  </td>
+                                                    <td> <b>@item.ObtainedMarks</b>  </td>
+                                                </tr>
+                                                i++;
+                                            }
+
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                            <div class="j-response"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+ }
+
+<script src="../../scripts/jquery-1.10.2.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+
+
+<script>
+    
+
+    function GetSectionByClass() {
+        var value = $('#Fk_ClassID').val();
+        //var values = $('#SectionName').val();
+        //alert(value);
+        $.ajax({
+            url: "/Exam/GetSectionByClass",
+            Type: "Get",
+            DataType: "JSON",
+            data: { Fk_ClassID: value },
+            success: function (data) {
+
+                $("#Fk_SectionId").html(""); // clear before appending new list
+                $("#Fk_SectionId").empty();
+                $("#Fk_SectionId").append(
+                      $('<option></option>').val(0).html('--Select Section--'));
+                $.each(data.ddlsection, function (index, Sectioncount) {
+                    $("#Fk_SectionId").append(
+                          $('<option></option>').val(Sectioncount.Value).html(Sectioncount.Text));
+
+                });
+
+
+            }
+        });
+
+    }
+
+    function GetSubjectNameBySection() {
+        var value = $('#Fk_SectionId').val();
+        var values = $('#Fk_ClassID').val();
+        //alert(value);
+        $.ajax({
+            url: "/Exam/GetSubjectNameBySection",
+            Type: "Get",
+            DataType: "JSON",
+            data: { Fk_SectionId: value, Fk_ClassID: values },
+            success: function (data) {
+
+                $("#SubjectID").html(""); // clear before appending new list
+                $("#SubjectID").empty();
+                $("#SubjectID").append(
+                      $('<option></option>').val(0).html('--Select Subject Name--'));
+                $.each(data.ddlSubjectName, function (index, Sectioncount) {
+                    $("#SubjectID").append(
+                          $('<option></option>').val(Sectioncount.Value).html(Sectioncount.Text));
+
+                });
+
+            }
+        });
+
+    }
+
+    function validateMarks(marks) {
+        var test1 = marks.id;
+        var test = $('#' + test1 + '').val();
+        var maxMarks = $('#MaxMarks').val();
+        var obtMarks = marks.value;
+
+        if ((Number)(obtMarks) > (Number)(maxMarks)) {
+
+
+            alert('Please Enter Right Marks');
+            return false;
+
+        }
+    }
+
+    function isNumberKey(evt) {
+
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+</script>
+
+

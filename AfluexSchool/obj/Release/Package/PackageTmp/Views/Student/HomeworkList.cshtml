@@ -1,0 +1,156 @@
+﻿@model AfluexSchool.Models.Student
+
+@{
+    ViewBag.Title = "HomeworkList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("HomeworkList", "Student", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+
+
+    <div>
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header border-0 bg-none">
+                <div class="row">
+                    <div class="col-12 col-md">
+                        <p class="fs15">Homework List</p>
+                    </div>
+                    <p style="color:red">
+                        @TempData["HomeworkList"]
+                    </p>
+                </div>
+            </div>
+            <div class="card-body ">
+
+                <div class="row">
+
+                    <div class="col-md-3">
+                        From Date
+                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", placeholder = "From Date", @ReadOnly = "ReadOnly" })
+                    </div>
+                    <div class="col-md-3">
+                        To Date
+                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", placeholder = "To Date", @ReadOnly = "ReadOnly" })
+                    </div>
+
+                    <div class="col-md-6">
+                         <br/>
+                        <input type="submit" value="Search" name="btnSearch" id="btnSearch" class="btn btn-primary" />
+                        <a href="/Export/ExportToExcel?id=pdf&&PageName=HomeworkList"><img src="../../AdminPanelcss/assets/img/pdf.png" style="width:40px;height:40px" title="Export To PDF" /></a>
+                        <a href="/Export/ExportToExcel?id=excel&&PageName=HomeworkList"><img src="../../AdminPanelcss/assets/img/excel.jpg" style="width:40px;height:40px" title="Export To Excel" /></a>
+                        <a href="/Export/ExportToExcel?id=word&&PageName=HomeworkList"><img src="../../AdminPanelcss/assets/img/Word.png" style="width:40px;height:40px" title="Export To Word" /></a>
+                        <a href="#" onclick="return printData();"><img src="../../AdminPanelcss/assets/img/print.jpg" style="width:40px;height:40px" title="Print" /></a>
+
+                    </div>
+                </div>
+
+
+
+                <div class="col-sm-12 table-responsive">
+                    <table class="table table-bordered w-100 mb-0" id="example24">
+
+                        <thead>
+                            <tr>
+
+                                <th>S.no</th>
+                                <th>Homework Date    </th>
+                                <th>Class   </th>
+                                <th>Section</th>
+                                <th>Subject          </th>
+                                <th>Homework By</th>
+                                <th>Text          </th>
+                                <th>Photo   </th>
+                              
+                                <th style="display:@ViewBag.IsDelete;">Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                if (Model.listStudent != null)
+                                {
+                                    int i = 1;
+                                    foreach (var item in Model.listStudent)
+                                    {
+
+                                        <tr>
+                                            <td>
+                                                @i
+                                            </td>
+                                            <td>@item.HomeworkDate</td>
+                                            <td>
+                                                @item.ClassName
+                                            </td>
+                                            <td>
+                                                @item.SectionName
+                                            </td>
+                                            <td>
+                                                @item.SubjectID
+                                            </td>
+                                            <td>
+                                                @item.HomeworkBy
+                                            </td>
+                                            <td>@(new HtmlString(item.HomeWorkHTML))</td>
+                                            <td><a href="@item.StudentPhoto" target="_blank"><img src="@item.StudentPhoto" style="height:50px;width:50px;" />  </a>    </td> 
+                                            <td style="display:@ViewBag.IsDelete;">
+
+                                                <a href="/Student/DeleteHomework?HomeWorkID=@item.HomeWorkID" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete?')">Delete</a>
+                                                @*  <a href="/Parent/PrintReceipt?Pk_ParentID=@item.Pk_ParentID" class="btn btn-primary btn-sm" target="_blank"> Receipt</a>*@
+                                            </td>
+                                        </tr>
+                                        i++;
+                                    }
+                                }
+                            }
+                        </tbody>
+                    </table>
+                    <div class="j-response"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+}
+
+<script src="../../scripts/jquery-1.10.2.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
+
+
+<script>
+    function printData() {
+
+        var divToPrint = document.getElementById("example24");
+        newWin = window.open("");
+        newWin.document.write(divToPrint.outerHTML);
+        newWin.print();
+        newWin.close();
+    }
+    $(document).ready(function () {
+        $("#divload").css({ 'display': 'none' });
+
+
+    });
+
+    $('#FromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true,
+    });
+
+    $('#ToDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true,
+    }
+);
+
+
+</script>
+

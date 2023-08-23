@@ -1,0 +1,384 @@
+﻿@model AfluexSchool.Models.Reports
+
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Print Student Fee</title>
+    <style>
+        table, th, td {
+            font-size: medium;
+            /*border: 1px solid black;*/
+            border-collapse: collapse;
+        }
+
+        th, td {
+            font-size: medium;
+            padding: 5px;
+        }
+    </style>
+
+</head>
+<body>
+    <div style="border:3px solid #a20e0e;padding-left:10px;padding-right:10px;">
+        <table style="border: 0px none black;">
+            <tr style="border: 0px none black;">
+                <td style="border: 0px none black;">
+                   <img src="../../Websitecss/images/logo.png" style="height:100px;"/>
+                </td>
+                <td style="border: 0px none black;"></td>
+
+                <td style="border: 0px none black;">
+                    <h1 style="color:#a20e0e"></h1>
+
+                </td>
+            </tr>
+
+        </table>
+        <br />
+
+        <table style="width:100%;background:#a20e0e;color:white;">
+            <tr>
+                <td style="text-align:center">
+                    Office Copy
+                </td>
+            </tr>
+        </table>
+        <br />
+
+        <table style="width: 100%;" class="table table-striped">
+            <tr>
+                <td style="border: 1px solid black;"><b></td>
+                <td colspan="2" style="border: 1px solid black;"><b>Date :    </b>@DateTime.Now.ToString("dd/MM/yyyy")</td>
+                <td style="border: 1px solid black;"><b>Receipt No.    </b>@ViewBag.ReceiptNo</td>
+            </tr>
+        </table>
+        <br />
+        <table style="width: 100%;" class="table table-striped">
+
+            <tr>
+                <td style="border: 1px solid black;" colspan="2"><b>StudentId Id:    </b>@ViewBag.StudentId</td>
+                <td style="border: 1px solid black;"><b>Mobile No.</b>@ViewBag.ParentMobile</td>
+            </tr>
+            <tr><td style="border: 1px solid black;" colspan="3"><b>Student Name:    </b>@ViewBag.StudentName</td></tr>
+            <tr>
+                <td colspan="3" style="border: 1px solid black;"><b>Address:    </b>@ViewBag.Address</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid black;"><b>State:    </b>@ViewBag.State</td>
+                <td style="border: 1px solid black;"><b>City:    </b>@ViewBag.City</td>
+                <td style="border: 1px solid black;"><b>Pin Code:    </b>@ViewBag.Pin</td>
+            </tr>
+        </table>
+        <br />
+        <table style="width: 100%;" class="table table-striped">
+
+           
+            <tr>
+                <td style="border: 1px solid black;"><b>Installment No</b></td>
+                <td style="border: 1px solid black;"><b>FeeType</b></td>
+              
+                <td style="border: 1px solid black;"><b>PaymentMode</b></td>
+                <td style="border: 1px solid black;"><b>BankDetails</b></td>
+                <td style="border: 1px solid black;text-align:right"><b>PaidAmount</b></td>
+                
+
+            </tr>
+           
+                @if (Model != null)
+                {
+                    if (Model.lstfeedata != null)
+                    {
+                        foreach (var item in Model.lstfeedata)
+                        {
+                            <tr>
+                                <td style="border: 1px solid black;">@item.InstallemntNo</td>
+                                <td style="border: 1px solid black;">@item.FeeTypeName</td>
+                                
+                                <td style="border: 1px solid black;">@item.PaymentMode</td>
+                                <td style="border: 1px solid black;">@item.BankDetails</td>
+                                <td style="border: 1px solid black;text-align:right">@item.PaidAmount</td>
+                            </tr>
+                        }
+                    }
+                }
+            <tr>
+                <td style="border: 1px solid black;" colspan="3"><b>In Words:     </b>@ViewBag.TotalFeeInWords</td>
+                <td style="border: 1px solid black;text-align:right" colspan="1"><b>Total Fee:     </b></td>
+                <td style="border: 1px solid black;text-align:right" colspan="1"><b>@ViewBag.TotalFee </b></td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid black;" colspan="3"><b>In Words:     </b>@ViewBag.AmountInWords</td>
+                <td style="border: 1px solid black;text-align:right" colspan="1"><b>Paid Amount:</b> </td>
+                <td style="border: 1px solid black;text-align:right" colspan="1"><b>@ViewBag.PaidAmount </b></td>
+            </tr>
+            <tr>
+                @if (ViewBag.PaymentMode == "Cash")
+                {
+                    <td style="border: 1px solid black;" colspan="5"><b> Via:    </b>@ViewBag.PaymentMode</td>
+                }
+                else
+                {
+                    if (ViewBag.PaymentMode == "Cheque")
+                    {
+                        <td style="border: 1px solid black;"><b> Via:    </b>@ViewBag.PaymentMode</td>
+                        <td style="border: 1px solid black;"><b> ChequeNo:    </b>@ViewBag.TransactionNo</td>
+                        <td style="border: 1px solid black;"><b> ChequeDate:    </b>@ViewBag.TransactionDate</td>
+                        <td style="border: 1px solid black;"><b> BankName:    </b>@ViewBag.BankName</td>
+                        <td style="border: 1px solid black;"><b> BankBranch:    </b>@ViewBag.BankBranch</td>
+                    }
+                    else if (ViewBag.PaymentMode == "NEFT")
+                    {
+                        <td style="border: 1px solid black;"><b> Via:    </b>@ViewBag.PaymentMode</td>
+                        <td style="border: 1px solid black;"><b> NEFTNo:    </b>@ViewBag.TransactionNo</td>
+                        <td style="border: 1px solid black;"><b> NEFTDate:    </b>@ViewBag.TransactionDate</td>
+                        <td style="border: 1px solid black;"><b> BankName:    </b>@ViewBag.BankName</td>
+                        <td style="border: 1px solid black;"><b> BankBranch:    </b>@ViewBag.BankBranch</td>
+                    }
+                    else if (ViewBag.PaymentMode == "DD")
+                    {
+                        <td style="border: 1px solid black;"><b> Via:    </b>@ViewBag.PaymentMode</td>
+                        <td style="border: 1px solid black;"><b> DD No:    </b>@ViewBag.TransactionNo</td>
+                        <td style="border: 1px solid black;"><b> DD Date:    </b>@ViewBag.TransactionDate</td>
+                        <td style="border: 1px solid black;"><b> BankName:    </b>@ViewBag.BankName</td>
+                        <td style="border: 1px solid black;"><b> BankBranch:    </b>@ViewBag.BankBranch</td>
+                    }
+                    else
+                    {
+                        <td style="border: 1px solid black;"><b> Via:    </b>@ViewBag.PaymentMode</td>
+                        <td style="border: 1px solid black;"><b> Transdaction No:    </b>@ViewBag.TransactionNo</td>
+                        <td style="border: 1px solid black;"><b> Transdaction Date:    </b>@ViewBag.TransactionDate</td>
+                        <td style="border: 1px solid black;"><b> BankName:    </b>@ViewBag.BankName</td>
+                        <td style="border: 1px solid black;"><b> BankBranch:    </b>@ViewBag.BankBranch</td>
+                    }
+                }
+
+
+            </tr>
+
+
+
+
+        </table>
+
+        <br />
+
+
+
+
+        <table style="width: 100%;text-align:center">
+            <tr>
+                <td>
+
+                    <b>LandLine no-</b>@ViewBag.LandLine
+
+                </td>
+                <td><b>Contact no-</b>@ViewBag.ContactNo</td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Website:</b>   @ViewBag.Website
+
+                </td>
+                <td><b>Email : </b>@ViewBag.EmailID</td>
+            </tr>
+        </table>
+        <br />
+        <table style="width:100%;background:#a20e0e;color:white;">
+            <tr>
+                <td style="text-align:center">
+                    @ViewBag.CompanyAddress
+                </td>
+            </tr>
+        </table>
+        <br />
+        <br />
+
+    </div>
+
+
+    <p style="page-break-after: always;">&nbsp;</p>
+
+    <div style="border:3px solid #a20e0e;padding-left:10px;padding-right:10px;">
+        <table style="border: 0px none black;">
+            <tr style="border: 0px none black;">
+                <td style="border: 0px none black;">
+                   <img src="../../Websitecss/images/logo.png" />
+                </td>
+                <td style="border: 0px none black;"></td>
+
+                <td style="border: 0px none black;">
+                    <h1 style="color:#a20e0e"></h1>
+
+                </td>
+            </tr>
+
+        </table>
+        <br />
+
+        <table style="width:100%;background:#a20e0e;color:white;">
+            <tr>
+                <td style="text-align:center">
+                    Parent Copy
+                </td>
+            </tr>
+        </table>
+        <br />
+
+        <table style="width: 100%;" class="table table-striped">
+            <tr>
+                <td style="border: 1px solid black;"><b></td>
+                <td colspan="2" style="border: 1px solid black;"><b>Date :    </b>@DateTime.Now.ToString("dd/MM/yyyy")</td>
+                <td style="border: 1px solid black;"><b>Receipt No.    </b>@ViewBag.ReceiptNo</td>
+            </tr>
+        </table>
+        <br />
+        <table style="width: 100%;" class="table table-striped">
+
+            <tr>
+                <td style="border: 1px solid black;" colspan="2"><b>StudentId Id:    </b>@ViewBag.StudentId</td>
+                <td style="border: 1px solid black;"><b>Mobile No.</b>@ViewBag.ParentMobile</td>
+            </tr>
+            <tr><td style="border: 1px solid black;" colspan="3"><b>Student Name:    </b>@ViewBag.StudentName</td></tr>
+            <tr>
+                <td colspan="3" style="border: 1px solid black;"><b>Address:    </b>@ViewBag.Address</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid black;"><b>State:    </b>@ViewBag.State</td>
+                <td style="border: 1px solid black;"><b>City:    </b>@ViewBag.City</td>
+                <td style="border: 1px solid black;"><b>Pin Code:    </b>@ViewBag.Pin</td>
+            </tr>
+        </table>
+        <br />
+        <table style="width: 100%;" class="table table-striped">
+
+
+            <tr>
+                <td style="border: 1px solid black;"><b>Installment No</b></td>
+                <td style="border: 1px solid black;"><b>FeeType</b></td>
+
+                <td style="border: 1px solid black;"><b>PaymentMode</b></td>
+                <td style="border: 1px solid black;"><b>BankDetails</b></td>
+                <td style="border: 1px solid black;text-align:right"><b>PaidAmount</b></td>
+
+
+            </tr>
+
+            @if (Model != null)
+            {
+                if (Model.lstfeedata != null)
+                {
+                    foreach (var item in Model.lstfeedata)
+                    {
+                        <tr>
+                            <td style="border: 1px solid black;">@item.InstallemntNo</td>
+                            <td style="border: 1px solid black;">@item.FeeTypeName</td>
+
+                            <td style="border: 1px solid black;">@item.PaymentMode</td>
+                            <td style="border: 1px solid black;">@item.BankDetails</td>
+                            <td style="border: 1px solid black;text-align:right">@item.PaidAmount</td>
+                        </tr>
+                    }
+                }
+            }
+            <tr>
+                <td style="border: 1px solid black;" colspan="3"><b>In Words:     </b>@ViewBag.TotalFeeInWords</td>
+                <td style="border: 1px solid black;text-align:right" colspan="1"><b>Total Fee:     </b></td>
+                <td style="border: 1px solid black;text-align:right" colspan="1"><b>@ViewBag.TotalFee </b></td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid black;" colspan="3"><b>In Words:     </b>@ViewBag.AmountInWords</td>
+                <td style="border: 1px solid black;text-align:right" colspan="1"><b>Paid Amount:</b> </td>
+                <td style="border: 1px solid black;text-align:right" colspan="1"><b>@ViewBag.PaidAmount </b></td>
+            </tr>
+            <tr>
+                @if (ViewBag.PaymentMode == "Cash")
+                {
+                    <td style="border: 1px solid black;" colspan="5"><b> Via:    </b>@ViewBag.PaymentMode</td>
+                }
+                else
+                {
+                    if (ViewBag.PaymentMode == "Cheque")
+                    {
+                        <td style="border: 1px solid black;"><b> Via:    </b>@ViewBag.PaymentMode</td>
+                        <td style="border: 1px solid black;"><b> ChequeNo:    </b>@ViewBag.TransactionNo</td>
+                        <td style="border: 1px solid black;"><b> ChequeDate:    </b>@ViewBag.TransactionDate</td>
+                        <td style="border: 1px solid black;"><b> BankName:    </b>@ViewBag.BankName</td>
+                        <td style="border: 1px solid black;"><b> BankBranch:    </b>@ViewBag.BankBranch</td>
+                    }
+                    else if (ViewBag.PaymentMode == "NEFT")
+                    {
+                        <td style="border: 1px solid black;"><b> Via:    </b>@ViewBag.PaymentMode</td>
+                        <td style="border: 1px solid black;"><b> NEFTNo:    </b>@ViewBag.TransactionNo</td>
+                        <td style="border: 1px solid black;"><b> NEFTDate:    </b>@ViewBag.TransactionDate</td>
+                        <td style="border: 1px solid black;"><b> BankName:    </b>@ViewBag.BankName</td>
+                        <td style="border: 1px solid black;"><b> BankBranch:    </b>@ViewBag.BankBranch</td>
+                    }
+                    else if (ViewBag.PaymentMode == "DD")
+                    {
+                        <td style="border: 1px solid black;"><b> Via:    </b>@ViewBag.PaymentMode</td>
+                        <td style="border: 1px solid black;"><b> DD No:    </b>@ViewBag.TransactionNo</td>
+                        <td style="border: 1px solid black;"><b> DD Date:    </b>@ViewBag.TransactionDate</td>
+                        <td style="border: 1px solid black;"><b> BankName:    </b>@ViewBag.BankName</td>
+                        <td style="border: 1px solid black;"><b> BankBranch:    </b>@ViewBag.BankBranch</td>
+                    }
+                    else
+                    {
+                        <td style="border: 1px solid black;"><b> Via:    </b>@ViewBag.PaymentMode</td>
+                        <td style="border: 1px solid black;"><b> Transdaction No:    </b>@ViewBag.TransactionNo</td>
+                        <td style="border: 1px solid black;"><b> Transdaction Date:    </b>@ViewBag.TransactionDate</td>
+                        <td style="border: 1px solid black;"><b> BankName:    </b>@ViewBag.BankName</td>
+                        <td style="border: 1px solid black;"><b> BankBranch:    </b>@ViewBag.BankBranch</td>
+                    }
+                }
+
+
+            </tr>
+
+
+
+
+        </table>
+
+        <br />
+
+
+
+
+        <table style="width: 100%;text-align:center">
+            <tr>
+                <td>
+
+                    <b>LandLine no-</b>@ViewBag.LandLine
+
+                </td>
+                <td><b>Contact no-</b>@ViewBag.ContactNo</td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Website:</b>   @ViewBag.Website
+
+                </td>
+                <td><b>Email : </b>@ViewBag.EmailID</td>
+            </tr>
+        </table>
+        <br />
+        <table style="width:100%;background:#a20e0e;color:white;">
+            <tr>
+                <td style="text-align:center">
+                    @ViewBag.CompanyAddress
+                </td>
+            </tr>
+        </table>
+        <br />
+        <br />
+
+    </div>
+
+</body>
+</html>

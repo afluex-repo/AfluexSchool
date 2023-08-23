@@ -1,0 +1,77 @@
+﻿@model AfluexSchool.Models.Home
+@{
+    Layout = "~/Views/Shared/WebsiteLayout.cshtml";
+}
+
+<br/>
+        <div class="row">
+            <div class="col-md-4 col-lg-4">
+                </div>
+                <div class="col-md-4 col-lg-4">
+                    @using (Html.BeginForm("LoginAction", "Home", FormMethod.Post, new { @id = "loginForm" }))
+                    {
+                        <div class="input-group form-group">
+                            
+                            @Html.DropDownListFor(m => m.UserType, new SelectList(ViewBag.ddlUserType, "Value", "Text"), new { @class = "form-control" })
+
+                        </div>
+                        <div class="input-group form-group">
+                            
+                            @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "LoginID" })
+                        </div>
+                        <div class="input-group form-group">
+                           
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", @Placeholder = "Password" })
+                        </div>
+                        <div class="form-group">
+                            <p style="color: red">
+                                @TempData["LoginError"]
+                            </p>
+                            <br />
+                            <input type="submit" id="Login" class="btn btn-primary login1" name="Login" value="Sign In" onclick="return validateform();" />
+                            <a class="btn btn-primary login1" href="/Home/ForgotPassword/">ForgotPassword</a>
+                        </div>
+                    }
+                </div>
+            </div>
+   
+
+
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        $("#divload").css({ 'display': 'none' });
+    });
+    function validateform() {
+
+        $(".errortext").removeClass("errortext");
+
+
+
+        if ($('#UserType').val() == '0') {
+            $("#UserType").addClass('errortext');
+            $('#UserType').focus();
+            return false;
+        }
+
+        if ($('#LoginId').val() == '') {
+            $("#LoginId").addClass('errortext');
+            $('#LoginId').focus();
+            return false;
+        }
+
+        if ($('#Password').val() == '') {
+            $("#Password").addClass('errortext');
+            $('#Password').focus();
+            return false;
+        }
+        $("#divload").css({ 'display': '' });
+
+
+    }
+</script>

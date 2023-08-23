@@ -1,0 +1,92 @@
+﻿@model AfluexSchool.Models.Master
+
+@{
+    ViewBag.Title = "RouteViewDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+ 
+@using (Html.BeginForm("RouteViewDetails", "Master", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    <div>
+        <div class="login-row">
+            <div class="col-12 col-md-12 col-lg-12 col-xl-12 mx-auto align-self-center">
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-header">
+                        <div class="row ">
+
+                            <div class="col-auto">
+                                <h4 class="mt-0 mb-1">Route Details</h4>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mx-auto">
+                                <div class="card-footer text-left">
+                                    <a href="/Master/RouteList"><input type="button" class="btn btn-primary" name="Back" id="Back" value="Back To List" /></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                            <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table datatable display responsive w-100 dataTable no-footer dtr-inline" id="example23" style="width: 1002px;">
+                                        <thead>
+                                            <tr>
+                                                <th>Sr.No.           </th>
+                                                <th>RouteNo         </th>
+                                                <th>VehicleType   </th>
+                                                <th>AreaName             </th>
+                                                <th>Amount     </th>
+                                                <th>PickupTime      </th>
+                                                <th> DropTime   </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (Model != null)
+                                            {
+                                                if (Model.Arealist != null)
+                                                {
+                                                    var i = 1;
+                                                    foreach (var item in Model.Arealist)
+                                                    {
+                                                        <tr>
+                                                            <td>@i</td>
+                                                            <td>@item.RouteNo         </td>
+                                                            <td>@item.VehicleType    </td>
+                                                            <td>@item.AreaName             </td>
+                                                            <td>@item.Amount     </td>
+                                                            <td>@item.PickupTime </td>
+                                                            <td>@item.DropTime </td>
+                                                        </tr>
+                                                        i++;
+                                                    }
+                                                }
+                                            }
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+<script>
+
+
+
+
+
+</script>
+
+

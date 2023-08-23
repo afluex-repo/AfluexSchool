@@ -1,0 +1,145 @@
+﻿@model AfluexSchool.Models.Master
+
+@{
+    ViewBag.Title = "AssignClassTeacherList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm("AssignClassTeacherList", "Master", FormMethod.Post, new { @id = "AssignClassTeacherList" }))
+{
+     <div>
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header border-0 bg-none">
+
+                <div class="row">
+                    <div class="col-12 col-md">
+                        <p class="fs15">Assign Class Teacher List</p>
+                        <p style="color:red">
+                            @TempData["AssignClassTeacherList"]
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="card-body ">
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-3">
+                        <div class="form-group ">
+                            <label>Teacher</label>
+                            @Html.DropDownListFor(m => m.PK_TeacherID, new SelectList(ViewBag.ddlTeacherName, "Value", "Text"), new { @class = "form-control" })
+
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3">
+                        <div class="form-group ">
+                            <label>Class</label>
+                            @Html.DropDownListFor(m => m.Pk_ClassId, new SelectList(ViewBag.ddlClassName, "Value", "Text"), new { @class = "form-control", @onchange = "return GetSection()" })
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3">
+                        <div class="form-group ">
+                            <label>Section</label>
+                            @Html.DropDownListFor(m => m.PK_SectionId, new SelectList(ViewBag.ddlSectionName, "Value", "Text"), new { @class = "form-control" })
+                        </div>
+
+                    </div>
+                    <div class="col-md-2">
+                        <br/>
+                        <input type="submit" class="btn btn-info" name="btnsearch" id="btnsearch" value="Search" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <br />
+                        <a href="/Export/ExportToExcel?id=pdf&&PageName=ClassTeacherList"><img src="../../AdminPanelcss/assets/img/pdf.png" style="width:40px;height:40px" title="Export To PDF" /></a>
+                        <a href="/Export/ExportToExcel?id=excel&&PageName=ClassTeacherList"><img src="../../AdminPanelcss/assets/img/excel.jpg" style="width:40px;height:40px" title="Export To Excel" /></a>
+                        <a href="/Export/ExportToExcel?id=word&&PageName=ClassTeacherList"><img src="../../AdminPanelcss/assets/img/Word.png" style="width:40px;height:40px" title="Export To Word" /></a>
+                        <a href="#" onclick="return printData();"><img src="../../AdminPanelcss/assets/img/print.jpg" style="width:40px;height:40px" title="Print" /></a>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body ">
+                <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                    <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-bordered w-100 mb-0" id="example24">
+                                <thead>
+                                    <tr>
+                                        <th>Sr.No.</th>
+                                        <th>Teacher Name</th>
+                                        <th>Class Name</th>
+                                        <th>Section Name</th>
+                                        <th style="display:@ViewBag.IsDelete;">Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
+                                    {
+                                        if (Model.assignClassTeacherList != null)
+                                        {
+                                            var i = 1;
+                                            foreach (var item in Model.assignClassTeacherList)
+                                            {
+                                                <tr>
+                                                    <td>@i</td>
+                                                    <td>@item.Name</td>
+                                                    <td>@item.ClassName</td>
+                                                    <td>@item.SectionName</td>
+                                                    <td style="display:@ViewBag.IsDelete;">
+                                                        <a href="/Master/DeleteAssignClassTeacher?Pk_AssignClassTeacherId=@item.Pk_AssignClassTeacherId" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete?')">Delete</a>
+                                                    </td>
+                                                </tr>
+                                                i++;
+                                            }
+                                        }
+                                    }
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+}
+
+<script>
+    function printData() {
+
+        var divToPrint = document.getElementById("example24");
+        newWin = window.open("");
+        newWin.document.write(divToPrint.outerHTML);
+        newWin.print();
+        newWin.close();
+    }
+    function GetSection() {
+        var Pk_ClassId = document.getElementById('Pk_ClassId').value;
+        $.ajax({
+            url: '/Master/GetSectionByClass',
+            data: {
+                'Pk_ClassId': $('#Pk_ClassId').val()
+            },
+            type: 'GET',
+            dataType: 'JSON',
+            success: function (data) {
+                $("#PK_SectionId").html("");
+                $("#PK_SectionId").empty();
+                $("#PK_SectionId").append(
+                      $('<option></option>').val(0).html('--Select Section--'));
+                $.each(data.ddlSectionName, function (index, Sectioncount) {
+                    $("#PK_SectionId").append(
+                          $('<option></option>').val(Sectioncount.Value).html(Sectioncount.Text));
+                });
+            }
+        });
+    }
+</script>

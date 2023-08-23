@@ -1,0 +1,202 @@
+﻿@model AfluexSchool.Models.Reports
+
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Print Student Fee</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <style>
+        .main-iner {
+            margin: 30px;
+            border: 4px solid #7bbece;
+            background-color: #7bbece47;
+        }
+
+        .logo1 img {
+            max-width: 160px;
+        }
+
+        .header1 {
+            background-color: #7bbece;
+            padding: 3px 0px 2px 0px;
+        }
+
+        .logo1 h1 {
+            font-family: Diploma;
+        }
+
+        .header1 h3 {
+            font-family: Diploma;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="main-iner">
+            <div class="container-fluid">
+                <div style="display: flex;flex-wrap: wrap;">
+                    <div style="flex: 0 0 25%;max-width: 25%;">
+                        <div class="logo1">
+                            <img  src="https://www.afluex.com/MainPagecss/images/logo-black.png" />
+                        </div>
+                    </div>
+                    <div style="flex: 0 0 75%;max-width: 75%;">
+                        <div class="logo1">
+                            <h1>@ViewBag.CompanyName</h1>
+                            <h3>@ViewBag.CompanyAddress</h3>
+                            <h3>Session - @ViewBag.SessionName</h3>
+                        </div>
+                    </div>
+                </div>
+                <div style="display: flex;flex-wrap: wrap;">
+                    <div style="flex: 0 0 100%;max-width: 100%;">
+                        <div class="header1">
+                            <h3 class="text-center"><strong>MarkSheet</strong></h3>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+
+                <div class="heade22">
+                    <div style="display: flex;flex-wrap: wrap;">
+                        <div style="flex: 0 0 33.33333%;max-width: 33.33333%;">
+                            <div class="sec1">
+                                <h6>Student Name : @ViewBag.StudentName</h6>
+
+                            </div>
+                        </div>
+                        <div style="flex: 0 0 33.33333%;max-width: 33.33333%;">
+                            <div class="sec1">
+                                <h6>Class/Section : @ViewBag.ClassName/@ViewBag.SectionName</h6>
+
+                            </div>
+                        </div>
+                        <div style="flex: 0 0 33.33333%;max-width: 33.33333%;">
+                            <div class="sec1">
+                                <h6>Session : @ViewBag.SessionName</h6>
+                            </div>
+                        </div>
+
+                    </div>
+                    <br />
+                    <div style="display: flex;flex-wrap: wrap;">
+                        <div style="flex: 0 0 33.33333%;max-width: 33.33333%;">
+                            <div class="sec1">
+                                <h6>Parent Name : @ViewBag.ParentName</h6>
+
+                            </div>
+                        </div>
+                        <div style="flex: 0 0 33.33333%;max-width: 33.33333%;">
+                            <div class="sec1">
+                                <h6>Exam Type : @ViewBag.ExamTypeName</h6>
+
+                            </div>
+                        </div>
+                        <div style="flex: 0 0 33.33333%;max-width: 33.33333%;">
+                            <div class="sec1">
+                                <h6>Registration No : @ViewBag.RegistrationNo</h6>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <br />
+                <div class="heade22">
+                    <div style="display: flex;flex-wrap: wrap;">
+                        <div style="flex: 0 0 100%;max-width: 100%;">
+                            <table style="width: 100%;" class="table table-striped">
+
+
+                                <tr>
+                                    <td style="border: 4px solid #7bbece;text-align:center"><b>Sr No.</b></td>
+                                    <td style="border: 4px solid #7bbece;text-align:center"><b>Subject Code</b></td>
+                                    <td style="border: 4px solid #7bbece;text-align:center"><b>Subject</b></td>
+                                    <td style="border: 4px solid #7bbece;text-align:center"><b>Marks</b></td>
+                                    <td style="border: 4px solid #7bbece;text-align:center"><b>Obtained Marks</b></td>
+                                    <td style="border: 4px solid #7bbece;text-align:center"><b>F/P</b></td>
+
+                                </tr>
+
+                                @if (Model != null)
+                                {
+                                    if (Model.lstfeedata != null)
+                                    {
+                                        int i = 1;
+                                        foreach (var item in Model.lstfeedata)
+                                        {
+                                <tr>
+                                    <td style="border: 4px solid #7bbece;text-align:center">@i</td>
+                                    <td style="border: 4px solid #7bbece;text-align:center">@item.SubjectCode</td>
+                                    <td style="border: 4px solid #7bbece;text-align:center">@item.SubjectName</td>
+                                    <td style="border: 4px solid #7bbece;text-align:center">@item.MaximumMarks</td>
+                                    <td style="border: 4px solid #7bbece;text-align:center">@item.ObtainMarks</td>
+                                    <td style="border: 4px solid #7bbece;text-align:center">@item.Status</td>
+
+                                </tr>
+                                            i++;
+                                        }
+                                    }
+                                }
+
+
+                            </table>
+                            <br />
+                            <table style="width: 100%;" class="table table-striped">
+                                <tr>
+                                    <td style="border: 4px solid #7bbece;text-align:center">
+                                        <b>Exam Type</b>
+                                    </td>
+                                    <td style="border: 4px solid #7bbece;text-align:center">
+                                        <b>Total Marks</b>
+                                    </td>
+                                    <td style="border: 4px solid #7bbece;text-align:center">
+                                        <b>Obtained Marks</b>
+                                    </td>
+                                    <td style="border: 4px solid #7bbece;text-align:center">
+                                        <b> Percentage</b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 4px solid #7bbece;text-align:center"><b>@ViewBag.ExamTypeName</b></td>
+                                    <td style="border: 4px solid #7bbece;text-align:center"><b>@ViewBag.MaximumMarks</b></td>
+
+                                    <td style="border: 4px solid #7bbece;text-align:center"><b>@ViewBag.ObtainMarks</b></td>
+                                    <td style="border: 4px solid #7bbece;text-align:center"><b>@ViewBag.Perc %</b></td>
+
+                                </tr>
+                            </table>
+                            <br />
+                            <p>
+                                @if (ViewBag.Result == "Fail")
+                                {
+                                <b style="color:red">Result : @ViewBag.Result </b>
+                                }
+                                else
+                                {
+                                <b style="color:green">Result : Pass </b>
+                                }
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+        <script src="../../AdminPanelcss/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+    </div>
+
+
+</body>
+</html>

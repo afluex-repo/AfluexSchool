@@ -1,0 +1,490 @@
+﻿@model AfluexSchool.Models.Reports
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Print Student Fee</title>
+    <style>
+        table, th, td {
+            font-size: medium;
+            /*border: 1px solid black;*/
+            border-collapse: collapse;
+        }
+
+        th, td {
+            font-size: medium;
+            padding: 5px;
+        }
+    </style>
+    <link href="../../AdminPanelcss/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="../../AdminPanelcss/assets/vendor/bootstrap/css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    @* <div><a hre f="/Fee/Fees" class="btn btn-primary">BACK</a></div>*@
+    <div id="printDiv">  &nbsp;&nbsp;<input type="button" onclick="printreport();" value="PRINT" /></div>
+
+    <div class="main-recipt">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6 col-lg-6">
+                    <div class="main-recipt-logo">
+                        <div class="recipt-logo1">
+                            <div class="row">
+                                <div class="col-md-2 col-lg-2">
+                                    <div class="current-recipt-logo">
+
+                                        <img src="../../Websitecss/images/favicon.png" class="img-responsive" />
+                                    </div>
+                                </div>
+                                <div class="col-md-10 col-lg-10">
+                                    <div class="current-recipt-logo">
+                                        <h4>Afluex Educational Demo</h4>
+                                        <h6>@ViewBag.CompanyAddress (@ViewBag.State)-@ViewBag.Pin1</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="recipt-logo-contact">
+                            <div class="row">
+                                <div class="col-md-12 col-lg-12">
+                                    <div class="section-recipt1">
+                                        <h6>Affiliation No. @ViewBag.AffliateNo <i class="fa fa-phone-square" aria-hidden="true"></i> @ViewBag.ContactNo <i class="fa fa-envelope-square" aria-hidden="true"></i> @ViewBag.EmailID</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="duplicate-fee-recipt">
+                            <div class="row">
+                                <div class="col-md-6 col-lg-6">
+                                    <h6> Fee Receipt</h6>
+                                </div>
+                                <div class="col-md-6 col-lg-6">
+                                    <h6>Session : @ViewBag.SessionName</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- duplicate-fee-recipt end -->
+                        <div class="recipt-no">
+                            <div class="row">
+                                <div class="col-md-6 col-lg-6">
+                                    <h6>Recipt No : @ViewBag.ReceiptNo</h6>
+                                </div>
+
+                                <div class="col-md-6 col-lg-6">
+                                    <h6>Date : @ViewBag.AddedOn</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- recipt-no end -->
+                        <div class="recipt-details">
+                            <div class="row">
+                                <div class="col-md-6 col-lg-6">
+                                    <h6>REG No:@ViewBag.RegistrationNo</h6>
+                                </div>
+
+                                <div class="col-md-6 col-lg-6">
+                                    <h6>Class:@ViewBag.ClassSection</h6>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 col-lg-6">
+                                    <h6>Name: @ViewBag.StudentName</h6>
+                                </div>
+                                <div class="col-md-6 col-lg-6">
+                                    <h6>DOB:@ViewBag.DateOfBirth</h6>
+                                </div>
+                                <div class="col-md-12 col-lg-12">
+                                    <h6>Father Name : @ViewBag.FatherName</h6>
+                                </div>
+                                <div class="col-md-12 col-lg-12">
+                                    <h6>Address : @ViewBag.Address</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- fee-month start -->
+                        <div class="fee-month">
+                            <div class="col-md-12 col-lg-12">
+                                <h6>Fee Month : @ViewBag.MonthName</h6>
+                            </div>
+                        </div>
+                        <!-- fee-month end -->
+                        <table style="width: 100%;" class="table table-striped">
+                            <tr>
+
+                                <td style="border: 1px solid black" colspan="2"><b>FeeType</b></td>
+                                <td style="border: 1px solid black;text-align:right" colspan="1"><b>Inst Amt</b></td>
+                                <td style="border: 1px solid black;text-align:right" colspan="1"><b>Concession</b></td>
+                                <td style="border: 1px solid black;text-align:right" colspan="1"><b>Final Amt</b></td>
+
+
+
+                            </tr>
+                            @if (Model != null)
+                            {
+                                if (Model.lstfeedata != null)
+                                {
+                                    foreach (var item in Model.lstfeedata)
+                                    {
+                                        <tr>
+
+                                            <td style="border: 1px solid black;" colspan="2">@item.FeeTypeName</td>
+
+                                            <td style="border: 1px solid black;text-align:right" colspan="1">@item.InstallmentAmt</td>
+                                            <td style="border: 1px solid black;text-align:right" colspan="1">@item.ConcessionFee</td>
+                                            <td style="border: 1px solid black;text-align:right" colspan="1">@item.FinalAmount</td>
+
+                                        </tr>
+                                    }
+                                }
+                            }
+                            <tr>
+
+                                <td style="border: 1px solid black;" colspan="2"><b></b></td>
+                                <td style="border: 1px solid black;text-align:right" colspan="1"><b></b></td>
+
+                                <td style="border: 1px solid black;text-align:right" colspan="1"><b>Total</b></td>
+                                <td style="border: 1px solid black;text-align:right" colspan="2"><b>@ViewBag.FinalAmtAfterCoon</b></td>
+
+
+                            </tr>
+                        </table>
+
+                        <div class="recipt-details00001">
+                            <div class="row">
+                                <div class="col-md-3 col-lg-3">
+                                    <div class="recipt1">
+                                        <h6>Total :@ViewBag.TotalFee</h6>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-lg-3">
+                                    <div class="recipt1">
+                                        <h6>Late Fee : @ViewBag.LateFee</h6>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-lg-3">
+                                    <div class="recipt1">
+                                        <h6>Conc. :@ViewBag.ConcessionFee</h6>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-lg-3">
+                                    <div class="recipt1">
+                                        <h6>Disc. :@ViewBag.Discount</h6>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="recipt-details11">
+                            <div class="row">
+                                <div class="col-md-3 col-lg-3">
+                                    <div class="recipt1">
+                                        <h6 class="bordera1">Arrear : @ViewBag.Arrear</h6>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-lg-3">
+                                    <div class="recipt1">
+                                        <h6>Final Amt: @ViewBag.TotalAMount</h6>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-lg-3">
+                                    <div class="recipt1">
+                                        <h6>Paid : @ViewBag.PaidAmount</h6>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-lg-3">
+                                    <div class="recipt1">
+                                        <h6>Balance : @ViewBag.Balance</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="recipt-details33">
+                            <div class="row">
+                                <div class="col-md-12 col-lg-12">
+                                    <div class="recipt1">
+                                        <h6>Amount in Word (@ViewBag.PaidAmountInWords)</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="recipt-details44">
+                            <div class="row">
+                                <div class="col-md-12 col-lg-12">
+                                    <div class="recipt1">
+                                        <h6>Payment Mode:<strong>@ViewBag.PaymentMode</strong>   @ViewBag.BankDetails</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="recipt-details55">
+                            <div class="row">
+                                <div class="col-md-12 col-lg-12">
+                                    <div class="recipt1">
+                                        <h6><strong>Afluex Educational Demo</strong></h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 col-lg-6">
+                                    <div class="recipt1">
+                                        <h6 class="text-red">Student Copy </h6>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-6">
+                                    <div class="recipt1">
+                                        <h6>Reciept By : @ViewBag.RecieptBy</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6">
+                    <div class="main-recipt-logo">
+                        <div class="recipt-logo1">
+                            <div class="row">
+                                <div class="col-md-2 col-lg-2">
+                                    <div class="current-recipt-logo">
+
+                                        <img src="../../Websitecss/images/favicon.png" class="img-responsive" />
+                                    </div>
+                                </div>
+                                <div class="col-md-10 col-lg-10">
+                                    <div class="current-recipt-logo">
+                                        <h4>Afluex Educational Demo</h4>
+                                        <h6>@ViewBag.CompanyAddress (@ViewBag.State)-@ViewBag.Pin1</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="recipt-logo-contact">
+                            <div class="row">
+                                <div class="col-md-12 col-lg-12">
+                                    <div class="section-recipt1">
+                                        <h6>Affiliation No. @ViewBag.AffliateNo <i class="fa fa-phone-square" aria-hidden="true"></i> @ViewBag.ContactNo <i class="fa fa-envelope-square" aria-hidden="true"></i> @ViewBag.EmailID</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="duplicate-fee-recipt">
+                            <div class="row">
+                                <div class="col-md-6 col-lg-6">
+                                    <h6> Fee Receipt</h6>
+                                </div>
+                                <div class="col-md-6 col-lg-6">
+                                    <h6>Session : @ViewBag.SessionName</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- duplicate-fee-recipt end -->
+                        <div class="recipt-no">
+                            <div class="row">
+                                <div class="col-md-6 col-lg-6">
+                                    <h6>Recipt No : @ViewBag.ReceiptNo</h6>
+                                </div>
+
+                                <div class="col-md-6 col-lg-6">
+                                    <h6>Date : @ViewBag.AddedOn</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- recipt-no end -->
+                        <div class="recipt-details">
+                            <div class="row">
+                                <div class="col-md-6 col-lg-6">
+                                    <h6>REG No:@ViewBag.RegistrationNo</h6>
+                                </div>
+
+                                <div class="col-md-6 col-lg-6">
+                                    <h6>Class:@ViewBag.ClassSection</h6>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 col-lg-6">
+                                    <h6>Name: @ViewBag.StudentName</h6>
+                                </div>
+                                <div class="col-md-6 col-lg-6">
+                                    <h6>DOB:@ViewBag.DateOfBirth</h6>
+                                </div>
+                                <div class="col-md-12 col-lg-12">
+                                    <h6>Father Name : @ViewBag.FatherName</h6>
+                                </div>
+                                <div class="col-md-12 col-lg-12">
+                                    <h6>Address : @ViewBag.Address</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- fee-month start -->
+                        <div class="fee-month">
+                            <div class="col-md-12 col-lg-12">
+                                <h6>Fee Month : @ViewBag.MonthName</h6>
+                            </div>
+                        </div>
+                        <!-- fee-month end -->
+                        <table style="width: 100%;" class="table table-striped">
+                            <tr>
+
+                                <td style="border: 1px solid black" colspan="2"><b>FeeType</b></td>
+                                <td style="border: 1px solid black;text-align:right" colspan="1"><b>Inst Amt</b></td>
+                                <td style="border: 1px solid black;text-align:right" colspan="1"><b>Concession</b></td>
+                                <td style="border: 1px solid black;text-align:right" colspan="1"><b>Final Amt</b></td>
+
+
+
+                            </tr>
+                            @if (Model != null)
+                            {
+                                if (Model.lstfeedata != null)
+                                {
+                                    foreach (var item in Model.lstfeedata)
+                                    {
+                                        <tr>
+
+                                            <td style="border: 1px solid black;" colspan="2">@item.FeeTypeName</td>
+
+                                            <td style="border: 1px solid black;text-align:right" colspan="1">@item.InstallmentAmt</td>
+                                            <td style="border: 1px solid black;text-align:right" colspan="1">@item.ConcessionFee</td>
+                                            <td style="border: 1px solid black;text-align:right" colspan="1">@item.FinalAmount</td>
+
+                                        </tr>
+                                    }
+                                }
+                            }
+                            <tr>
+
+                                <td style="border: 1px solid black;" colspan="2"><b></b></td>
+                                <td style="border: 1px solid black;text-align:right" colspan="1"><b></b></td>
+
+                                <td style="border: 1px solid black;text-align:right" colspan="1"><b>Total</b></td>
+                                <td style="border: 1px solid black;text-align:right" colspan="2"><b>@ViewBag.FinalAmtAfterCoon</b></td>
+
+
+                            </tr>
+                        </table>
+
+                        <div class="recipt-details00001">
+                            <div class="row">
+                                <div class="col-md-3 col-lg-3">
+                                    <div class="recipt1">
+                                        <h6>Total :@ViewBag.TotalFee</h6>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-lg-3">
+                                    <div class="recipt1">
+                                        <h6>Late Fee : @ViewBag.LateFee</h6>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-lg-3">
+                                    <div class="recipt1">
+                                        <h6>Conc. :@ViewBag.ConcessionFee</h6>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-lg-3">
+                                    <div class="recipt1">
+                                        <h6>Disc. :@ViewBag.Discount</h6>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="recipt-details11">
+                            <div class="row">
+                                <div class="col-md-3 col-lg-3">
+                                    <div class="recipt1">
+                                        <h6 class="bordera1">Arrear : @ViewBag.Arrear</h6>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-lg-3">
+                                    <div class="recipt1">
+                                        <h6>Final Amt: @ViewBag.TotalAMount</h6>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-lg-3">
+                                    <div class="recipt1">
+                                        <h6>Paid : @ViewBag.PaidAmount</h6>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-lg-3">
+                                    <div class="recipt1">
+                                        <h6>Balance : @ViewBag.Balance</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="recipt-details33">
+                            <div class="row">
+                                <div class="col-md-12 col-lg-12">
+                                    <div class="recipt1">
+                                        <h6>Amount in Word (@ViewBag.PaidAmountInWords)</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="recipt-details44">
+                            <div class="row">
+                                <div class="col-md-12 col-lg-12">
+                                    <div class="recipt1">
+                                        <h6>Payment Mode:<strong>@ViewBag.PaymentMode</strong>   @ViewBag.BankDetails</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="recipt-details55">
+                            <div class="row">
+                                <div class="col-md-12 col-lg-12">
+                                    <div class="recipt1">
+                                        <h6><strong>Afluex Educational Demo</strong></h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 col-lg-6">
+                                    <div class="recipt1">
+                                        <h6 class="text-red">Office Copy </h6>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-6">
+                                    <div class="recipt1">
+                                        <h6>Reciept By : @ViewBag.RecieptBy</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="../../scripts/jquery-1.10.2.min.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+
+    <script src="../../AdminPanelcss/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script>
+        function printreport() {
+
+            var printButton = document.getElementById("printDiv");
+            printButton.style.visibility = 'hidden';
+            window.print()
+            printButton.style.visibility = 'visible';
+
+        }
+
+    </script>
+</body>
+</html>

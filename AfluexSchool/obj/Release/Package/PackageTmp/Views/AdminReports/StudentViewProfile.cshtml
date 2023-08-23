@@ -1,0 +1,373 @@
+﻿@model AfluexSchool.Models.Student
+
+@{
+    ViewBag.Title = "StudentViewProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+ @using (Html.BeginForm("StudentViewProfile", "AdminReports", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+ {
+    <div>
+          <div class="login-row">
+            <div class="col-12 col-md-12 col-lg-12 col-xl-12 mx-auto align-self-center">
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-header">
+                        <div class="row ">
+
+                            <div class="col-auto">
+                                <h4 class="mt-0 mb-1">Student Details </h4>
+                                <a href="/AdminReports/StudentReport" class="btn btn-danger btn-sm">Back To List</a>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mx-auto">
+                                <div class="row ">
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group ">
+                                            <label> Parent LoginId  </label>
+                                            @Html.TextBoxFor(m => m.ParentLogin_ID, new { @class = "form-control", @onchange = "return GetParentdetailByLoginID();" })
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group ">
+                                            <label> Parent Name</label>
+                                            @Html.TextBoxFor(m => m.ParentName, new { @class = "form-control", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                </div>
+                                 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-header">
+                        <div class="row ">
+
+                            <div class="col-auto">
+                                <h4 class="mt-0 mb-1">Student Personal Details</h4>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mx-auto">
+                                <div class="row ">
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> Branch  </label>
+                                            @Html.TextBoxFor(m => m.Branch, new { @class = "form-control", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> Class  </label>
+                                            @Html.TextBoxFor(m => m.ClassName, new { @class = "form-control", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> Section  </label>
+                                            @Html.TextBoxFor(m => m.SectionName, new { @class = "form-control", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> Name  </label>
+                                            @Html.TextBoxFor(m => m.studentName, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                                 
+                                <div class="row ">
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> Father Name  </label>
+                                            @Html.TextBoxFor(m => m.FatherName, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> Father's Occuption  </label>
+                                            @Html.TextBoxFor(m => m.FatherOccupation, new { @class = "form-control", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> Mother Name  </label>
+                                            @Html.TextBoxFor(m => m.MotherName, new { @class = "form-control", })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> Mother's Occuption  </label>
+                                            @Html.TextBoxFor(m => m.MotherOccupation, new { @class = "form-control", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row ">
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> DOB  </label>
+                                            @Html.TextBoxFor(m => m.Dateofbirth, new { @class = "form-control", @onchange = "return ageCount()" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> Age  </label>
+                                            @Html.TextBoxFor(m => m.Age, new { @class = "form-control", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label>Gender  </label>
+                                            @Html.TextBoxFor(m => m.Gender, new { @class = "form-control", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> Category  </label>
+                                            @Html.TextBoxFor(m => m.Category, new { @class = "form-control", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row ">
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> Religion  </label>
+                                            @Html.TextBoxFor(m => m.Religion, new { @class = "form-control", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> Nationality  </label>
+                                            @Html.TextBoxFor(m => m.Nationality, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label>Medium  </label>
+                                            @Html.TextBoxFor(m => m.Medium, new { @class = "form-control", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> Aadhar No </label>
+                                            @Html.TextBoxFor(m => m.AadhaarCard, new { @class = "form-control", @onkeypress = "return isNumberKey(event);", @maxlength = "12" })
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row ">
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> Photo  </label>
+                                            <img   class="bg-default form-control"src="@Model.StudentPhoto" style="height:200px;width:200px;" />
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> Birth Certificate  </label>
+                                            <img class="bg-default form-control" src="@Model.BirthCetificate" style="height:200px;width:200px;"/>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-header">
+                        <div class="row ">
+
+                            <div class="col-auto">
+                                <h4 class="mt-0 mb-1">Student Address Details</h4>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mx-auto">
+                                <div class="row ">
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> Permanent Address  </label>
+                                            @Html.TextAreaFor(m => m.PermanentAddress, new { @class = "form-control", @cols = "30", row = "10" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> PinCode  </label>
+                                            @Html.TextBoxFor(m => m.PinCode, new { @class = "form-control", @onchange = "return GetstateCity();", @onkeypress = "return isNumberKey(event);" })
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> State</label>
+                                            @Html.TextBoxFor(m => m.State, new { @class = "form-control", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> City</label>
+
+                                            @Html.TextBoxFor(m => m.City, new { @class = "form-control", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row ">
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> Correspondence Address </label>
+
+                                            @Html.TextAreaFor(m => m.correspondenceAddress, new { @class = "form-control", @cols = "30", row = "10" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> PinCode </label>
+                                            @Html.TextBoxFor(m => m.correspondencPinCode, new { @class = "form-control", @onchange = "return GetstateCity();", @onkeypress = "return isNumberKey(event);" })
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> State</label>
+                                            @Html.TextBoxFor(m => m.correspondencState, new { @class = "form-control", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> City</label>
+                                           
+                                            @Html.TextBoxFor(m => m.correspondencCity, new { @class = "form-control", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                </div>
+                                 
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-header">
+                        <div class="row ">
+
+                            <div class="col-auto">
+                                <h4 class="mt-0 mb-1">Student Communication Details</h4>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mx-auto">
+                                <div class="row ">
+                                    <div class="col-lg-4 col-md-4">
+                                        <div class="form-group ">
+                                            <label> Mobile No  </label>
+                                            @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", @maxlength = "10", @onkeypress = "return isNumberKey(event);" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4">
+                                        <div class="form-group ">
+                                            <label> Alternate No.</label>
+                                            @Html.TextBoxFor(m => m.AlternateNumber, new { @class = "form-control", @maxlength = "10", @onkeypress = "return isNumberKey(event);" })
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-4">
+                                        <div class="form-group ">
+                                            <label> Email Id</label>
+                                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+
+                                </div>
+                                 
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-header">
+                        <div class="row ">
+
+                            <div class="col-auto">
+                                <h4 class="mt-0 mb-1">Student Previous Academic Details</h4>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mx-auto">
+                                <div class="row ">
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group ">
+                                            <label> Previous School </label>
+                                            @Html.TextBoxFor(m => m.PreviousSchool, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group ">
+                                            <label> Previous Class</label>
+                                            @Html.TextBoxFor(m => m.PreviousClass, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                     
+                                </div>
+                                 
+                            </div>
+                        </div>
+                    </div>
+                     
+                </div>
+            </div>
+        </div>
+    </div>
+ }
+
+<script src="../../AdminPanelcss/assets/js/jquery-3.3.1.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#divload").css({ 'display': 'none' });
+
+
+    });
+     
+     
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+     
+</script>

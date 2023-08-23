@@ -1,0 +1,1121 @@
+﻿@model AfluexSchool.Models.Student
+
+@{
+    ViewBag.Title = "StudentRegistration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm("StudentRegistration", "Student", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    <div>
+        <div class="login-row">
+            <div class="col-12 col-md-12 col-lg-12 col-xl-12 mx-auto align-self-center">
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-header">
+                        <div class="row ">
+
+                            <div class="col-auto">
+                                <h4 class="mt-0 mb-1">Student Registration </h4>
+
+                            </div>
+                            <p style="color:red">
+                                @TempData["SaveStudent"]
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mx-auto">
+                                @*@if (Model.Pk_StudentID == null && Model.Fk_ParentId != null)
+                                {
+                                    <div class="row ">
+                                        <div class="col-lg-3 col-md-3">
+                                            <div class="form-group ">
+                                                <label> Session <span style="color: red">*</span></label>
+                                                @Html.DropDownListFor(m => m.SessionName, new SelectList(ViewBag.ddlsession, "Value", "Text"), new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                else if (Model.Pk_StudentID == null)
+                                {
+                                    <div class="row ">
+                                        <div class="col-lg-3 col-md-3">
+                                            <div class="form-group ">
+                                                <label> Session <span style="color: red">*</span></label>
+                                                @Html.DropDownListFor(m => m.SessionName, new SelectList(ViewBag.ddlsession, "Value", "Text"), new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                }*@
+                                <div class="row ">
+                                    @if (Model.Pk_StudentID == null && Model.Fk_ParentId != null)
+                                    {
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group ">
+                                                <label> Parent LoginId <span style="color: red">*</span></label>
+                                                @Html.TextBoxFor(m => m.ParentLogin_ID, new { @class = "form-control", @onchange = "return GetParentdetailByLoginID();", @readonly = "read" })
+
+                                            </div>
+                                        </div>
+                                    }
+                                    else if (Model.Pk_StudentID == null)
+                                    {
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group ">
+                                                <label> Parent LoginId <span style="color: red">*</span></label>
+                                                @Html.TextBoxFor(m => m.ParentLogin_ID, new { @class = "form-control", @onchange = "return GetParentdetailByLoginID();" })
+
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-group ">
+                                                <label> Parent LoginId <span style="color: red">*</span></label>
+                                                @Html.TextBoxFor(m => m.ParentLogin_ID, new { @class = "form-control", @onchange = "return GetParentdetailByLoginID();", @readonly = "read" })
+
+                                            </div>
+                                        </div>
+                                    }
+
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group ">
+                                            <label> Parent Name</label>
+                                            @Html.TextBoxFor(m => m.ParentName, new { @class = "form-control", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-header">
+                        <div class="row ">
+
+                            <div class="col-auto">
+                                <h4 class="mt-0 mb-1">Student Personal Details</h4>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mx-auto">
+                                <div class="row ">
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> Branch <span style="color: red">*</span></label>
+                                            @Html.DropDownListFor(m => m.Branch, new SelectList(ViewBag.ddlBranch, "Value", "Text"), new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> Class <span style="color: red">*</span></label>
+                                            @Html.DropDownListFor(m => m.Fk_ClassID, new SelectList(ViewBag.ddlclass, "Value", "Text"), new { @class = "form-control", @onchange = "return OnchangeSection();" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> Section <span style="color: red">*</span></label>
+                                            @Html.DropDownListFor(m => m.Fk_SectionID, new SelectList(ViewBag.ddlsection, "Value", "Text"), new { @class = "form-control", @onchange = "return GetstudentBySection();" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> Name <span style="color: red">*</span></label>
+                                            @Html.TextBoxFor(m => m.studentName, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row ">
+                                    @if (Model.Fk_ParentId != null)
+                                    {
+                                        <div class="col-lg-3 col-md-3">
+                                            <div class="form-group ">
+                                                <label> Father Name <span style="color: red">*</span></label>
+                                                @Html.TextBoxFor(m => m.FatherName, new { @class = "form-control", @readonly = "read" })
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="col-lg-3 col-md-3">
+                                            <div class="form-group ">
+                                                <label> Father Name <span style="color: red">*</span></label>
+                                                @Html.TextBoxFor(m => m.FatherName, new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    }
+
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> Father's Occuption <span style="color: red">*</span></label>
+                                            @Html.DropDownListFor(m => m.FatherOccupation, new SelectList(ViewBag.ddlOccupation, "Value", "Text"), new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    @if (Model.Fk_ParentId != null && Model.MotherName!="")
+                                    {
+                                        <div class="col-lg-3 col-md-3">
+                                            <div class="form-group ">
+                                                <label> Mother Name <span style="color: red">*</span></label>
+                                                @Html.TextBoxFor(m => m.MotherName, new { @class = "form-control", @readonly = "read" })
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="col-lg-3 col-md-3">
+                                            <div class="form-group ">
+                                                <label> Mother Name <span style="color: red">*</span></label>
+                                                @Html.TextBoxFor(m => m.MotherName, new { @class = "form-control", })
+                                            </div>
+                                        </div>
+                                    }
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> Mother's Occuption <span style="color: red">*</span></label>
+                                            @Html.DropDownListFor(m => m.MotherOccupation, new SelectList(ViewBag.ddlOccupationmother, "Value", "Text"), new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row ">
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> DOB <span style="color: red">*</span></label>
+                                            @Html.TextBoxFor(m => m.Dateofbirth, new { @class = "form-control", @onchange = "return ageCount()" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> Age <span style="color: red">*</span></label>
+                                            @Html.TextBoxFor(m => m.Age, new { @class = "form-control", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label>Gender <span style="color: red">*</span></label>
+                                            @Html.DropDownListFor(m => m.Gender, new SelectList(ViewBag.ddlGender, "Value", "Text"), new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> Category <span style="color: red">*</span></label>
+                                            @Html.DropDownListFor(m => m.Category, new SelectList(ViewBag.ddlCategory, "Value", "Text"), new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row ">
+                                    @if (Model.Fk_ParentId != null)
+                                    {
+                                        <div class="col-lg-3 col-md-3">
+                                            <div class="form-group ">
+                                                <label> Religion <span style="color: red">*</span></label>
+                                                @Html.DropDownListFor(m => m.Religion, new SelectList(ViewBag.ddlReligion, "Value", "Text"), new { @class = "form-control", @readonly = "read" })
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="col-lg-3 col-md-3">
+                                            <div class="form-group ">
+                                                <label> Religion <span style="color: red">*</span></label>
+                                                @Html.DropDownListFor(m => m.Religion, new SelectList(ViewBag.ddlReligion, "Value", "Text"), new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    }
+                                    @if (Model.Fk_ParentId != null)
+                                    {
+                                        <div class="col-lg-3 col-md-3">
+                                            <div class="form-group ">
+                                                <label> Nationality <span style="color: red">*</span></label>
+                                                @Html.TextBoxFor(m => m.Nationality, new { @class = "form-control", @readonly = "read" })
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="col-lg-3 col-md-3">
+                                            <div class="form-group ">
+                                                <label> Nationality <span style="color: red">*</span></label>
+                                                @Html.TextBoxFor(m => m.Nationality, new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    }
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label>Medium <span style="color: red">*</span></label>
+                                            @Html.DropDownListFor(m => m.Medium, new SelectList(ViewBag.ddlMedium, "Value", "Text"), new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> Aadhar No </label>
+                                            @Html.TextBoxFor(m => m.AadhaarCard, new { @class = "form-control", @onkeypress = "return isNumberKey(event);", @maxlength = "12" })
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row ">
+                                    <div class="row ">
+                                        <div class="col-lg-3 col-md-3">
+                                            <div class="form-group ">
+                                                <label> Photo</label>
+                                                <input type="file" name="StudentFiles" class="bg-default form-control" id="StudentPhoto" />
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-3">
+                                            <div class="form-group ">
+                                                <label> Birth Certificate</label>
+                                                <input type="file" name="StudentFiles" class="bg-default form-control" id="BirthCetificate" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-3 col-md-3">
+                                            <div class="form-group ">
+                                                <label>Transport Required </label>
+                                                <input type="checkbox" name="chk" id="chk" onchange="return trans();" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row" id="transport">
+
+                                    <div class="col-lg-4 col-md-4">
+                                        <div class="form-group " id="PK_Route">
+                                            <label> Route <span style="color: red">*</span></label>
+                                            @Html.DropDownListFor(m => m.PK_RouteId, new SelectList(ViewBag.ddlRoute, "Value", "Text"), new { @class = "form-control", @onchange = "return GetArea()" })
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-4">
+                                        <div class="form-group " id="PK_AreaMaster">
+                                            <label> Area <span style="color: red">*</span></label>
+                                            @Html.DropDownListFor(m => m.PK_AreaMasterID, new SelectList(ViewBag.ddlArea, "Value", "Text"), new { @class = "form-control", @onchange = "return GetVehicleDetails()" })
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4">
+                                        <div class="form-group " id="Vehicle">
+                                            <label>Vehicle No  <span style="color: red">*</span></label>
+                                            @Html.TextBoxFor(m => m.VehicleNo, new { @class = "form-control", @placeholder = "Vehicle No", @readonly = "readonly" })
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-4">
+                                        <div class="form-group " id="Driver">
+                                            <label>Driver Name  </label>
+                                            @Html.TextBoxFor(m => m.DriverName, new { @class = "form-control", @placeholder = "Driver Name", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4">
+                                        <div class="form-group " id="DriverConta">
+                                            <label>Driver Contact No  </label>
+                                            @Html.TextBoxFor(m => m.DriverContactNo, new { @class = "form-control", @Placeholder = "Contact No", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-4">
+                                        <div class="form-group " id="Amou">
+                                            <label> Amount <span style="color: red">*</span></label>
+                                            @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @placeholder = "Amount", @onkeypress = "return validNumber(event)" })
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-header">
+                        <div class="row ">
+
+                            <div class="col-auto">
+                                <h4 class="mt-0 mb-1">Student Address Details</h4>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mx-auto">
+                                <div class="row ">
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> Permanent Address <span style="color: red">*</span></label>
+                                            @Html.TextAreaFor(m => m.PermanentAddress, new { @class = "form-control", @cols = "30", row = "10" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> PinCode <span style="color: red">*</span></label>
+                                            @Html.TextBoxFor(m => m.PinCode, new { @class = "form-control", @onchange = "return GetstateCity();", @onkeypress = "return isNumberKey(event);", @maxlength = "6" })
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> State</label>
+                                            @Html.TextBoxFor(m => m.State, new { @class = "form-control", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> City</label>
+
+                                            @Html.TextBoxFor(m => m.City, new { @class = "form-control", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row ">
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> Correspondence Address </label>
+
+                                            @Html.TextAreaFor(m => m.correspondenceAddress, new { @class = "form-control", @cols = "30", row = "10" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> PinCode </label>
+                                            @Html.TextBoxFor(m => m.correspondencPinCode, new { @class = "form-control", @onchange = "return GetstateCity1();", @onkeypress = "return isNumberKey(event);", @maxlength = "6" })
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> State</label>
+                                            @Html.TextBoxFor(m => m.correspondencState, new { @class = "form-control", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="form-group ">
+                                            <label> City</label>
+                                            <input type="checkbox" id="Permanent_ceckbox" onclick="GetpremanentAddress();"><label>Same Permanent Address</label>
+                                            @Html.TextBoxFor(m => m.correspondencCity, new { @class = "form-control", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-header">
+                        <div class="row ">
+
+                            <div class="col-auto">
+                                <h4 class="mt-0 mb-1">Student Communication Details</h4>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mx-auto">
+                                <div class="row ">
+                                    <div class="col-lg-4 col-md-4">
+                                        <div class="form-group ">
+                                            <label> Mobile No <span style="color: red">*</span></label>
+                                            @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", @maxlength = "10", @onkeypress = "return isNumberKey(event);" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4">
+                                        <div class="form-group ">
+                                            <label> Alternate No.</label>
+                                            @Html.TextBoxFor(m => m.AlternateNumber, new { @class = "form-control", @maxlength = "10", @onkeypress = "return isNumberKey(event);" })
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-4">
+                                        <div class="form-group ">
+                                            <label> Email Id</label>
+                                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-header">
+                        <div class="row ">
+
+                            <div class="col-auto">
+                                <h4 class="mt-0 mb-1">Student Previous Academic Details</h4>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mx-auto">
+                                <div class="row ">
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group ">
+                                            <label> Previous School </label>
+                                            @Html.TextBoxFor(m => m.PreviousSchool, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group ">
+                                            <label> Previous Class</label>
+                                            @Html.DropDownListFor(m => m.PreviousClass, new SelectList(ViewBag.ddlclass, "Value", "Text"), new { @class = "form-control" })
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-left"> 
+                        @Html.HiddenFor(m => m.Pk_StudentID)
+                        @if (Model.Pk_StudentID == null)
+                        {
+                            <input class="btn btn-success" type="submit" onclick="return validateform();" name="btnsave" value="Save" id="btnSave" />
+                        }
+                        else
+                        {
+                            <input class="btn btn-success" type="Submit" onclick="return updateform();" name="btnUpdate" value="Update" id="btnUpdate" />
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script src="../../AdminPanelcss/assets/js/jquery-3.3.1.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#divload").css({ 'display': 'none' });
+        $("#transport").hide();
+        if ($("#PK_RouteId").val() != "0") {
+            $("#transport").show();
+            $("#chk").prop("checked", true);
+        }
+    });
+
+    function trans() {
+
+        if ($(chk).prop("checked")) {
+            $("#transport").show();
+        } else {
+            $("#transport").hide();
+        }
+    }
+
+    function GetstateCity() {
+
+        var value = $('#PinCode').val();
+
+        $.ajax({
+            url: '/Student/GetStateCityByPincode', type: 'post', dataType: 'json',
+            data: { 'PinCode': value }, success: function (data) {
+
+                if (data.Result == "Yes") {
+                    $('#State').val(data.State);
+                    $('#City').val(data.City);
+
+                }
+                else {
+                    alert("Invalid Pincode");
+                    $('#PinCode').val('');
+                    $('#State').val('');
+                    $('#City').val('');
+                }
+            }
+
+        });
+
+    }
+
+    function GetParentdetailByLoginID() {
+
+        var value = $('#ParentLogin_ID').val();
+
+        $.ajax({
+            url: '/Student/GetParentListByLoginID', type: 'post', dataType: 'json',
+            data: { 'ParentLogin_ID': value }, success: function (data) {
+
+                if (data.Result == "Yes") {
+                    $('#ParentName').val(data.ParentName);
+                    $('#FatherName').val(data.ParentName);
+                    $('#Email').val(data.Email);
+                    $('#Mobile').val(data.Mobile);
+                    $('#PermanentAddress').val(data.Address);
+                    $('#PinCode').val(data.PinCode);
+                    $('#State').val(data.State);
+                    $('#City').val(data.City);
+
+
+                }
+                else {
+                    alert("Invalid Parent LoginID");
+                    $('#ParentLogin_ID').val('');
+                    $('#ParentName').val('');
+                    $('#FatherName').val('');
+                    $('#Email').val('');
+                    $('#Mobile').val('');
+                    $('#PermanentAddress').val('');
+                    $('#PinCode').val('');
+                    $('#State').val('');
+                    $('#City').val('');
+
+                }
+            }
+
+        });
+
+    }
+
+    $('#Dateofbirth').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true,
+        yearRange: '1950:2029'
+    });
+
+    function validateform() {
+
+        $(".errortext").removeClass("errortext");
+        if ($('#ParentLogin_ID').val() == '') {
+            $("#ParentLogin_ID").addClass('errortext');
+            $('#ParentLogin_ID').focus();
+            return false;
+        }
+        if ($('#Branch').val() == '0') {
+            $("#Branch").addClass('errortext');
+            $('#Branch').focus();
+            return false;
+        }
+        if ($('#SessionName').val() == '0') {
+            $("#SessionName").addClass('errortext');
+            $('#SessionName').focus();
+            return false;
+        }
+        if ($('#Fk_ClassID').val() == '0') {
+            $("#Fk_ClassID").addClass('errortext');
+            $('#Fk_ClassID').focus();
+            return false;
+        }
+        if ($('#Fk_SectionID').val() == '0') {
+            $("#Fk_SectionID").addClass('errortext');
+            $('#Fk_SectionID').focus();
+            return false;
+        }
+        if ($('#studentName').val() == '') {
+            $("#studentName").addClass('errortext');
+            $('#studentName').focus();
+            return false;
+        }
+        $(".errortext").removeClass("errortext");
+        if ($('#FatherName').val() == '') {
+            $("#FatherName").addClass('errortext');
+            $('#FatherName').focus();
+            return false;
+        }
+        if ($('#FatherOccupation').val() == '0') {
+            $("#FatherOccupation").addClass('errortext');
+            $('#FatherOccupation').focus();
+            return false;
+        }
+        if ($('#MotherName').val() == '') {
+            $("#MotherName").addClass('errortext');
+            $('#MotherName').focus();
+            return false;
+        }
+        if ($('#MotherOccupation').val() == '0') {
+            $("#MotherOccupation").addClass('errortext');
+            $('#MotherOccupation').focus();
+            return false;
+        }
+        $(".errortext").removeClass("errortext");
+        if ($('#Dateofbirth').val() == '') {
+            $("#Dateofbirth").addClass('errortext');
+            $('#Dateofbirth').focus();
+            return false;
+        }
+        if ($('#Gender').val() == '0') {
+            $("#Gender").addClass('errortext');
+            $('#Gender').focus();
+            return false;
+
+        }
+
+        if ($('#Category').val() == '0') {
+            $("#Category").addClass('errortext');
+            $('#Category').focus();
+            return false;
+        }
+        if ($('#Religion').val() == '0') {
+            $("#Religion").addClass('errortext');
+            $('#Religion').focus();
+            return false;
+        }
+        if ($('#Nationality').val() == '') {
+            $("#Nationality").addClass('errortext');
+            $('#Nationality').focus();
+            return false;
+        }
+
+        if ($('#Medium').val() == '0') {
+            $("#Medium").addClass('errortext');
+            $('#Medium').focus();
+            return false;
+        }
+        if ($(chk).prop("checked")) {
+
+            if ($('#PK_RouteId').val() == '0') {
+                $("#PK_RouteId").addClass('errortext');
+                $('#PK_RouteId').focus();
+                return false;
+            }
+            if ($('#PK_AreaMasterID').val() == '0') {
+                $("#PK_AreaMasterID").addClass('errortext');
+                $('#PK_AreaMasterID').focus();
+                return false;
+            }
+            if ($('#Amount').val() == '') {
+                $("#Amount").addClass('errortext');
+                $('#Amount').focus();
+                return false;
+            }
+        }
+
+        if ($('#PermanentAddress').val() == '') {
+            $("#PermanentAddress").addClass('errortext');
+            $('#PermanentAddress').focus();
+            return false;
+        }
+
+        if ($('#PinCode').val() == '') {
+            $("#PinCode").addClass('errortext');
+            $('#PinCode').focus();
+            return false;
+        }
+        if ($('#Mobile').val() == '') {
+            $("#Mobile").addClass('errortext');
+            $('#Mobile').focus();
+            return false;
+        }
+
+        var a = confirm("Are you sure you want to save student ?")
+        if (a == false) {
+            return false
+        }
+        else {
+            $("#loader").css({ 'display': '' });
+            return true
+        }
+
+
+        $("#loader").css({ 'display': '' });
+        return true;
+
+    }
+
+    function updateform() {
+        $(".errortext").removeClass("errortext");
+        if ($('#ParentLogin_ID').val() == '') {
+            $("#ParentLogin_ID").addClass('errortext');
+            $('#ParentLogin_ID').focus();
+            return false;
+        }
+        if ($('#Branch').val() == '0') {
+            $("#Branch").addClass('errortext');
+            $('#Branch').focus();
+            return false;
+        }
+        if ($('#SessionName').val() == '0') {
+            $("#SessionName").addClass('errortext');
+            $('#SessionName').focus();
+            return false;
+        }
+        if ($('#Fk_ClassID').val() == '0') {
+            $("#Fk_ClassID").addClass('errortext');
+            $('#Fk_ClassID').focus();
+            return false;
+        }
+        if ($('#Fk_SectionID').val() == '0') {
+            $("#Fk_SectionID").addClass('errortext');
+            $('#Fk_SectionID').focus();
+            return false;
+        }
+        if ($('#studentName').val() == '') {
+            $("#studentName").addClass('errortext');
+            $('#studentName').focus();
+            return false;
+        }
+        $(".errortext").removeClass("errortext");
+        if ($('#FatherName').val() == '') {
+            $("#FatherName").addClass('errortext');
+            $('#FatherName').focus();
+            return false;
+        }
+        if ($('#FatherOccupation').val() == '0') {
+            $("#FatherOccupation").addClass('errortext');
+            $('#FatherOccupation').focus();
+            return false;
+        }
+        if ($('#MotherName').val() == '') {
+            $("#MotherName").addClass('errortext');
+            $('#MotherName').focus();
+            return false;
+        }
+        if ($('#MotherOccupation').val() == '0') {
+            $("#MotherOccupation").addClass('errortext');
+            $('#MotherOccupation').focus();
+            return false;
+        }
+        $(".errortext").removeClass("errortext");
+        if ($('#Dateofbirth').val() == '') {
+            $("#Dateofbirth").addClass('errortext');
+            $('#Dateofbirth').focus();
+            return false;
+        }
+        if ($('#Gender').val() == '0') {
+            $("#Gender").addClass('errortext');
+            $('#Gender').focus();
+            return false;
+
+        }
+
+        if ($('#Category').val() == '0') {
+            $("#Category").addClass('errortext');
+            $('#Category').focus();
+            return false;
+        }
+        if ($('#Religion').val() == '0') {
+            $("#Religion").addClass('errortext');
+            $('#Religion').focus();
+            return false;
+        }
+        if ($('#Nationality').val() == '') {
+            $("#Nationality").addClass('errortext');
+            $('#Nationality').focus();
+            return false;
+        }
+
+        if ($('#Medium').val() == '0') {
+            $("#Medium").addClass('errortext');
+            $('#Medium').focus();
+            return false;
+        }
+        if ($(chk).prop("checked")) {
+
+            if ($('#PK_RouteId').val() == '0') {
+                $("#PK_RouteId").addClass('errortext');
+                $('#PK_RouteId').focus();
+                return false;
+            }
+            if ($('#PK_AreaMasterID').val() == '0') {
+                $("#PK_AreaMasterID").addClass('errortext');
+                $('#PK_AreaMasterID').focus();
+                return false;
+            }
+            if ($('#Amount').val() == '') {
+                $("#Amount").addClass('errortext');
+                $('#Amount').focus();
+                return false;
+            }
+        }
+
+        if ($('#PermanentAddress').val() == '') {
+            $("#PermanentAddress").addClass('errortext');
+            $('#PermanentAddress').focus();
+            return false;
+        }
+
+        if ($('#PinCode').val() == '') {
+            $("#PinCode").addClass('errortext');
+            $('#PinCode').focus();
+            return false;
+        }
+        if ($('#Mobile').val() == '') {
+            $("#Mobile").addClass('errortext');
+            $('#Mobile').focus();
+            return false;
+        }
+
+        $("#loader").css({ 'display': '' });
+        return true;
+
+    }
+
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+    function OnchangeSection() {
+        var value = $('#Fk_ClassID').val();
+        //var values = $('#SectionName').val();
+        //alert(value);
+        $.ajax({
+            url: "/Student/GetSectionByClass",
+            Type: "Get",
+            DataType: "JSON",
+            data: { Fk_ClassID: value },
+            success: function (data) {
+
+                $("#Fk_SectionID").html(""); // clear before appending new list
+                $("#Fk_SectionID").empty();
+                $("#Fk_SectionID").append(
+                      $('<option></option>').val(0).html('Select Section'));
+                $.each(data.ddlsection, function (index, Sectioncount) {
+                    $("#Fk_SectionID").append(
+                          $('<option></option>').val(Sectioncount.Value).html(Sectioncount.Text));
+
+                });
+
+
+            }
+        });
+
+    }
+
+    function ageCount() {
+        var date1 = new Date();
+        var dob = document.getElementById("Dateofbirth").value;
+        // alert(dob);
+        //var date2 = Date.parse(dob);
+        //alert(date2);
+        var date2 = new Date(dob);
+        var y1 = date1.getFullYear();
+        //var y2 = date2.getFullYear();
+        var y2 = dob.substring(6, 10);
+        //alert("Date 1 : "+date1+"\nDate 2 : "+date2);
+        //alert("Y1 : " + y1 + "\nY2 : " + y2);
+        if ((Number)(y1) > (Number)(y2)) {
+            var age = (Number)(y1) - (Number)(y2);
+            //alert(age);
+            if (age < 2) {
+                alert("age must be greater then 2 years ..!");
+                document.getElementById("Dateofbirth").value = "";
+                document.getElementById("Age").value = "";
+            }
+            else {
+                document.getElementById("Age").value = age;
+
+                return false;
+            }
+        }
+        else {
+            alert("Future Date cannot be selected");
+            document.getElementById("Dateofbirth").value = "";
+        }
+        //var pattern = /^(\d{1,2})(\/|-)(\d{1,2})(\/|-)(\d{4})$/;
+        //if (pattern.test(dob)) {
+        //    var y1 = date1.getFullYear();
+        //    var y2 = date2.getFullYear();
+        //    var age = (Number)(y1) - (Number)(y2);
+        //    //alert(age);
+        //    if (age < 2) {
+        //        alert("age must be greater then 2 years ..!");
+        //        document.getElementById("Dateofbirth").value = "";
+        //        document.getElementById("Age").value = "";
+        //    }
+        //    else {
+        //        document.getElementById("Age").value = age;
+        //        return false;
+        //    }
+
+        //}
+        //else {
+        //    alert("Invald date format.Please Input in(MM/DD/YYYY)format !");
+        //    document.getElementById("Dateofbirth").value = "";
+        //    return false;
+        //}
+
+    }
+
+    function GetpremanentAddress() {
+
+        if (document.getElementById('Permanent_ceckbox').checked) {
+
+            var str = document.getElementById('PermanentAddress').value;
+            var str1 = document.getElementById('PinCode').value;
+            var str2 = document.getElementById('State').value;
+            var str3 = document.getElementById('City').value;
+
+            document.getElementById('correspondenceAddress').value = str;
+            document.getElementById('correspondencPinCode').value = str1;
+            document.getElementById('correspondencState').value = str2;
+            document.getElementById('correspondencCity').value = str3;
+
+            //     $("#correspondenceAddress").enabled=false;
+            $("#correspondenceAddress").attr("readonly", true);
+            $("#correspondencPinCode").attr("readonly", true);
+
+
+
+        }
+        else {
+            document.getElementById('correspondenceAddress').value = '';
+            document.getElementById('correspondencPinCode').value = '';
+            document.getElementById('correspondencState').value = '';
+            document.getElementById('correspondencCity').value = '';
+
+            $("#correspondenceAddress").attr("readonly", false);
+            $("#correspondencPinCode").attr("readonly", false);
+        }
+    }
+
+    function GetArea() {
+        var PK_RouteId = document.getElementById('PK_RouteId').value;
+
+        $.ajax({
+            url: '/Student/GetArea',
+            data: {
+                'PK_RouteId': $('#PK_RouteId').val()
+            },
+            type: 'GET',
+            dataType: 'JSON',
+            success: function (data) {
+                $("#PK_AreaMasterID").html("");
+                $("#PK_AreaMasterID").empty();
+                $("#PK_AreaMasterID").append(
+                      $('<option></option>').val(0).html('--Select Area--'));
+                $.each(data.ddlArea, function (index, areacount) {
+                    $("#PK_AreaMasterID").append(
+                          $('<option></option>').val(areacount.Value).html(areacount.Text));
+                });
+
+                var strAmount = $('#Amount').val(data.Amount)
+            }
+        });
+    }
+
+
+    function GetVehicleDetails() {
+        var PK_AreaMasterID = document.getElementById('PK_AreaMasterID').value;
+        var PK_RouteId = document.getElementById('PK_RouteId').value;
+        var DriverName = document.getElementById('DriverName');
+        DriverName = "";
+        $('#DriverName').val(DriverName);
+        var DriverContactNo = document.getElementById('DriverContactNo');
+        DriverContactNo = "";
+        $('#DriverContactNo').val(DriverContactNo);
+
+
+        $.ajax({
+            url: '/Student/GetVehicleDetails',
+            data: {
+                'PK_AreaMasterID': $('#PK_AreaMasterID').val(), 'PK_RouteId': $('#PK_RouteId').val()
+            },
+            type: 'GET',
+            dataType: 'JSON',
+            success: function (data) {
+
+                $('#VehicleNo').val(data.VehicleNo);
+                $('#DriverName').val(data.DriverName);
+                $('#DriverContactNo').val(data.DriverContactNo)
+                $('#Amount').val(data.Amount)
+            }
+        });
+    }
+
+    function GetDriverNameandContact() {
+        var PK_VehicleMasterID = document.getElementById('PK_VehicleMasterID').value;
+        $.ajax({
+            url: '/Student/GetDriverNameandContact',
+            data: {
+                'PK_VehicleMasterID': $('#PK_VehicleMasterID').val()
+            },
+            type: 'GET',
+            dataType: 'JSON',
+            success: function (data) {
+                data.DriverName
+                data.DriverContactNo
+                var strDriverName = $('#DriverName').val(data.DriverName);
+                var strDriverContactNo = $('#DriverContactNo').val(data.DriverContactNo)
+            }
+        });
+    }
+
+    function GetstateCity1() {
+
+        var value = $('#correspondencPinCode').val();
+
+        $.ajax({
+            url: '/Student/GetStateCityByPincodeCorres', type: 'post', dataType: 'json',
+            data: { 'correspondencPinCode': value }, success: function (data) {
+
+                if (data.Result == "Yes") {
+                    $('#correspondencState').val(data.correspondencState);
+                    $('#correspondencCity').val(data.correspondencCity);
+
+                }
+                else {
+                    alert("Invalid Pincode");
+                    $('#correspondencPinCode').val('');
+                    $('#correspondencState').val('');
+                    $('#correspondencCity').val('');
+                }
+            }
+
+        });
+
+    }
+</script>
+
+<style>
+    .card .card-header {
+        padding: 10px 10px;
+    }
+
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+    }
+</style>
+
+
+

@@ -1,0 +1,86 @@
+﻿@model AfluexSchool.Models.Parent
+
+@{
+    ViewBag.Title = "Complains";
+    Layout = "~/Views/Shared/_ParentLayout.cshtml";
+}
+
+ 
+
+
+<div class="col-sm-6">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+
+                <div class="panel-body panel-scroll ps-container ps-theme-default ps-active-y" style="height:460px" data-ps-id="dd341fdb-4b50-773a-1735-745af50b49c0">
+                    <ol class="discussion">
+                        @if (Model != null)
+                        {
+                            if (Model.listparent != null)
+                            {
+                                int i = 1;
+                                foreach (var item in Model.listparent)
+                                {
+                                    <li class="@item.cssclass">
+                                        <div class="messages">
+                                            <p>
+                                                @item.Message
+                                            </p>
+                                            <span class="time"> @item.MemberName @item.AddedOn </span>
+                                        </div>
+                                    </li>
+                                }
+                            }
+                        }
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="chat-form">
+                <div class="input-group">
+                    <input id="txtmessage" type="text" class="form-control input-sm" placeholder="Type your message here...">
+                    <span class="input-group-btn">
+                        <input class="form-control" type="button" onclick="return savemessage();" value="Save" />
+                        <i class="fa fa-check"></i>
+
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../../scripts/jquery-1.10.2.min.js"></script>
+<script>
+
+    function savemessage() {
+        $(".errortext").removeClass("errortext");
+        if ($('#txtmessage').val() == '') {
+            $("#txtmessage").addClass('errortext');
+            $('#txtmessage').focus();
+            return false;
+        }
+        $.ajax({
+            url: "/ParentPanel/SaveMessages",
+            Type: "Get",
+            DataType: "JSON",
+            data: { Message: $("#txtmessage").val(), MessageBy: "Parent" },
+            success: function (data) {
+                if (data.Result == "1") {
+                    alert('Message Send Successfully');
+                    window.location.href = '@Url.Action("Complains", "ParentPanel")';
+                }
+                else {
+                    alert(data.Result);
+                    // window.location.href = '@Url.Action("Complains", "ParentPanel")';
+                }
+
+
+            }
+
+        });
+    }
+
+
+</script>

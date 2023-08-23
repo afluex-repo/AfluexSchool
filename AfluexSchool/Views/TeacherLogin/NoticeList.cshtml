@@ -1,0 +1,71 @@
+﻿@model AfluexSchool.Models.Master
+
+@{
+    ViewBag.Title = "NoticeList";
+    Layout = "~/Views/Shared/_TeacherLayout .cshtml";
+}
+
+@using (Html.BeginForm("NoticeList", "TeacherLogin", FormMethod.Post, new { @id = "NoticeList" }))
+{
+    <div>
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header border-0 bg-none">
+                <div class="row">
+                    <div class="col-12 col-md">
+                        <p class="fs15">Notice List</p>
+                    </div>
+                    <p style="color:red">
+                        @TempData["NoticeList"]
+                    </p>
+                </div>
+            </div>
+            <div class="card-body ">
+                <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                    <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-bordered w-100 mb-0" id="example23">
+                                <thead>
+                                    <tr>
+                                        <th>Sr.No.</th>
+                                        <th>Class Name</th>
+                                        <th>Section</th>
+                                        <th>Notice Name</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
+                                    {
+                                        if (Model.Noticelist != null)
+                                        {
+                                            var i = 1;
+                                            foreach (var item in Model.Noticelist)
+                                            {
+                                                <tr>
+                                                    <td>@i</td>
+                                                    <td>@item.ClassName</td>
+                                                    <td>@item.SectionName</td>
+                                                    <td>@item.NoticeName</td>
+                                                    <td>
+                                                        <a href="/TeacherLogin/NoticeMaster?PK_NoticeId=@item.PK_NoticeId" class="btn btn-success btn-sm">Edit</a>
+                                                        <a href="/TeacherLogin/DeleteNotice?PK_NoticeId=@item.PK_NoticeId" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete?')">Delete</a>
+                                                    </td>
+                                                </tr>
+                                                i++;
+                                            }
+                                        }
+                                    }
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+}
+
+

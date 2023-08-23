@@ -1,0 +1,152 @@
+﻿@model AfluexSchool.Models.Staff
+
+@{
+    ViewBag.Title = "StaffReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("StaffReport", "AdminReports", FormMethod.Post, new { @id = "StaffReport" }))
+{
+    <div>
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header border-0 bg-none">
+                <div class="row">
+                    <div class="col-12 col-md">
+                        <p class="fs15">Staff Report </p>
+                    </div>
+                    <p style="color:red">
+                        @TempData["StaffReport"]
+                    </p>
+                </div>
+            </div>
+            <div class="card-body ">
+
+
+                <div class="row">
+                    <div class="col-md-3">
+                        Login ID
+                        @Html.TextBoxFor(m => m.LoginID, new { @class = "form-control", placeholder = "Login ID" })
+                    </div>
+                    <div class="col-md-3">
+                        Staff Name
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Staff Name" })
+                    </div>
+                    <div class="col-md-3">
+                        Date Of Joining
+                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", placeholder = "From Date", @ReadOnly = "ReadOnly" })
+                    </div>
+                    <div class="col-md-3">
+                        Date Of Joining
+                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", placeholder = "To Date", @ReadOnly = "ReadOnly" })
+                    </div>
+
+                </div>
+                <div class="card-footer text-left">
+                    <div class="col-md-3">
+                        <input type="submit" value="Search" class="btn btn-primary" />
+                    </div>
+                </div>
+                <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                    <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-bordered w-100 mb-0" id="example23">
+                                <thead>
+                                    <tr>
+
+                                        <th>Sr No.</th>
+                                        <th>LoginID</th>
+                                        <th>Name</th>
+                                        <th>DOB</th>
+                                        <th>Gender</th>
+                                        <th>Category</th>
+                                        <th>Address</th>
+                                        <th>DOJ</th>
+
+                                        <th>MobileNo</th>
+
+
+
+                                        <th>Action</th>
+                                    </tr>
+
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
+                                    {
+                                        if (Model.lstSDesignationList != null)
+                                        {
+                                            int i = 1;
+                                            foreach (var Item in Model.lstSDesignationList)
+                                            {
+                                                <tr class="text-left">
+
+                                                    <td>
+                                                        @i
+                                                        @Html.HiddenFor(m => m.PK_StaffID)
+
+                                                    </td>
+                                                    <td>@Item.LoginID</td>
+                                                    <td>@Item.Name</td>
+
+                                                    <td>@Item.DOB</td>
+                                                    <td>@Item.Gender</td>
+                                                    <td>@Item.Category</td>
+
+                                                    <td>@Item.Address</td>
+
+                                                    <td>@Item.DOJ</td>
+                                                    <td>@Item.MobileNo</td>
+
+
+
+
+
+
+                                                    <td>
+                                                         <a href="/AdminReports/StaffViewProfile?PK_StaffID=@Item.PK_StaffID"
+                                                           class="btn btn-success btn-sm">View Profile</a>
+
+                                                        <a href="/AdminReports/StaffPrintView?PK_StaffID=@Item.PK_StaffID" class="btn btn-primary btn-sm" target="_blank">Print</a>
+
+                                                    </td>
+
+                                                </tr>
+                                                i++;
+                                            }
+
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                            <div class="j-response"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+}
+
+<script>
+
+    $('#FromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true,
+
+        maxDate: '0',
+    });
+
+    $('#ToDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true,
+
+        maxDate: '0',
+    }
+);
+
+</script>

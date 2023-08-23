@@ -1,0 +1,746 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D8F053B8-FE65-44C2-9560-3F4D56BF186D}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>APSSchool</RootNamespace>
+    <AssemblyName>APSSchool</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="itextsharp">
+      <HintPath>dll\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp.xmlworker">
+      <HintPath>dll\itextsharp.xmlworker.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.0.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.0.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.0.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.0.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.0.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationBlocks.Data">
+      <HintPath>..\..\..\spol\SPOL\SPOL\bin\Microsoft.ApplicationBlocks.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.0.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AdminPanelcss\assets\css\style-darkblue-dark.css" />
+    <Content Include="AdminPanelcss\assets\img\404.jpg" />
+    <Content Include="AdminPanelcss\assets\img\advertisement.png" />
+    <Content Include="AdminPanelcss\assets\img\background-part.png" />
+    <Content Include="AdminPanelcss\assets\img\carousel1.png" />
+    <Content Include="AdminPanelcss\assets\img\carousel2.png" />
+    <Content Include="AdminPanelcss\assets\img\carousel3.png" />
+    <Content Include="AdminPanelcss\assets\img\carousel4.png" />
+    <Content Include="AdminPanelcss\assets\img\carousel5.png" />
+    <Content Include="AdminPanelcss\assets\img\excel.jpg" />
+    <Content Include="AdminPanelcss\assets\img\facebook.png" />
+    <Content Include="AdminPanelcss\assets\img\happy-faces.jpg" />
+    <Content Include="AdminPanelcss\assets\img\happy-people.jpg" />
+    <Content Include="AdminPanelcss\assets\img\image-4.png" />
+    <Content Include="AdminPanelcss\assets\img\image-5.png" />
+    <Content Include="AdminPanelcss\assets\img\linkedin.png" />
+    <Content Include="AdminPanelcss\assets\img\logoicon.png" />
+    <Content Include="AdminPanelcss\assets\img\newzimage.png" />
+    <Content Include="AdminPanelcss\assets\img\pdf.png" />
+    <Content Include="AdminPanelcss\assets\img\pinterest.png" />
+    <Content Include="AdminPanelcss\assets\img\print.jpg" />
+    <Content Include="AdminPanelcss\assets\img\product-1.jpg" />
+    <Content Include="AdminPanelcss\assets\img\product-2.jpg" />
+    <Content Include="AdminPanelcss\assets\img\product-3.jpg" />
+    <Content Include="AdminPanelcss\assets\img\product-4.jpg" />
+    <Content Include="AdminPanelcss\assets\img\product-swipe-1.png" />
+    <Content Include="AdminPanelcss\assets\img\product-swipe-2.png" />
+    <Content Include="AdminPanelcss\assets\img\slide2.jpg" />
+    <Content Include="AdminPanelcss\assets\img\team.jpg" />
+    <Content Include="AdminPanelcss\assets\img\twitter.png" />
+    <Content Include="AdminPanelcss\assets\img\under-construction.png" />
+    <Content Include="AdminPanelcss\assets\img\user1.png" />
+    <Content Include="AdminPanelcss\assets\img\user2.png" />
+    <Content Include="AdminPanelcss\assets\img\user3.png" />
+    <Content Include="AdminPanelcss\assets\img\user4.png" />
+    <Content Include="AdminPanelcss\assets\img\user5.png" />
+    <Content Include="AdminPanelcss\assets\img\word.png" />
+    <Content Include="AdminPanelcss\assets\js\ecommerce-dashboard.js" />
+    <Content Include="AdminPanelcss\assets\js\file-manager.js" />
+    <Content Include="AdminPanelcss\assets\js\forum-dashboard.js" />
+    <Content Include="AdminPanelcss\assets\js\jquery-3.3.1.min.js" />
+    <Content Include="AdminPanelcss\assets\js\main.js" />
+    <Content Include="AdminPanelcss\assets\js\networking-dashboard.js" />
+    <Content Include="AdminPanelcss\assets\js\popper.min.js" />
+    <Content Include="AdminPanelcss\assets\js\production-dashboard.js" />
+    <Content Include="AdminPanelcss\assets\js\social-dashboard.js" />
+    <Content Include="AdminPanelcss\assets\js\style-picker.js" />
+    <Content Include="AdminPanelcss\assets\vendor\bootstrap-select\css\bootstrap-select.min.css" />
+    <Content Include="AdminPanelcss\assets\vendor\bootstrap-select\js\bootstrap-select.min.js" />
+    <Content Include="AdminPanelcss\assets\vendor\bootstrap-tour\css\bootstrap-tour-standalone.min.css" />
+    <Content Include="AdminPanelcss\assets\vendor\bootstrap-tour\js\bootstrap-tour-standalone.min.js" />
+    <Content Include="AdminPanelcss\assets\vendor\bootstrap\css\bootstrap.min.css" />
+    <Content Include="AdminPanelcss\assets\vendor\bootstrap\css\idcardstyle.css" />
+    <Content Include="AdminPanelcss\assets\vendor\bootstrap\css\style.css" />
+    <Content Include="AdminPanelcss\assets\vendor\bootstrap\js\bootstrap.min.js" />
+    <Content Include="AdminPanelcss\assets\vendor\chartjs\chart-js-data.js" />
+    <Content Include="AdminPanelcss\assets\vendor\chartjs\Chart.min.js" />
+    <Content Include="AdminPanelcss\assets\vendor\chartjs\utils.js" />
+    <Content Include="AdminPanelcss\assets\vendor\circle-progress\circle-progress.min.js" />
+    <Content Include="AdminPanelcss\assets\vendor\ckeditor\ckeditor.js" />
+    <Content Include="AdminPanelcss\assets\vendor\clipboard\clipboard.min.js" />
+    <Content Include="AdminPanelcss\assets\vendor\color-picker\default-picker.min.js" />
+    <Content Include="AdminPanelcss\assets\vendor\color-picker\light.min.css" />
+    <Content Include="AdminPanelcss\assets\vendor\context-menu\jquery.contextMenu.min.css" />
+    <Content Include="AdminPanelcss\assets\vendor\context-menu\jquery.contextMenu.min.js" />
+    <Content Include="AdminPanelcss\assets\vendor\cookie\jquery.cookie.js" />
+    <Content Include="AdminPanelcss\assets\vendor\custom-tooltip\bootstrap-tooltip-custom-class.js" />
+    <Content Include="AdminPanelcss\assets\vendor\DataTables-1.10.18\css\dataTables.bootstrap4.min.css" />
+    <Content Include="AdminPanelcss\assets\vendor\DataTables-1.10.18\css\fixedColumns.bootstrap4.min.css" />
+    <Content Include="AdminPanelcss\assets\vendor\DataTables-1.10.18\css\fixedHeader.dataTables.min.css" />
+    <Content Include="AdminPanelcss\assets\vendor\DataTables-1.10.18\css\responsive.dataTables.min.css" />
+    <Content Include="AdminPanelcss\assets\vendor\DataTables-1.10.18\js\dataTables.bootstrap4.min.js" />
+    <Content Include="AdminPanelcss\assets\vendor\DataTables-1.10.18\js\dataTables.fixedColumns.min.js" />
+    <Content Include="AdminPanelcss\assets\vendor\DataTables-1.10.18\js\dataTables.fixedHeader.min.js" />
+    <Content Include="AdminPanelcss\assets\vendor\DataTables-1.10.18\js\dataTables.responsive.min.js" />
+    <Content Include="AdminPanelcss\assets\vendor\DataTables-1.10.18\js\jquery.dataTables.min.js" />
+    <Content Include="AdminPanelcss\assets\vendor\daterangepicker-master\daterangepicker.css" />
+    <Content Include="AdminPanelcss\assets\vendor\daterangepicker-master\daterangepicker.js" />
+    <Content Include="AdminPanelcss\assets\vendor\daterangepicker-master\moment.min.js" />
+    <Content Include="AdminPanelcss\assets\vendor\dropzone-master\dist\dropzone.css" />
+    <Content Include="AdminPanelcss\assets\vendor\dropzone-master\dist\dropzone.js" />
+    <Content Include="AdminPanelcss\assets\vendor\dropzone-master\dropzone.js" />
+    <Content Include="AdminPanelcss\assets\vendor\EasyAutocomplete-1.3.5\easy-autocomplete.min.css" />
+    <Content Include="AdminPanelcss\assets\vendor\EasyAutocomplete-1.3.5\jquery.easy-autocomplete.min.js" />
+    <Content Include="AdminPanelcss\assets\vendor\flags\css\flag-icon.min.css" />
+    <Content Include="AdminPanelcss\assets\vendor\footable-bootstrap\css\footable.bootstrap.min.css" />
+    <Content Include="AdminPanelcss\assets\vendor\footable-bootstrap\js\footable.min.js" />
+    <Content Include="AdminPanelcss\assets\vendor\full-calendar\core\main.min.css" />
+    <Content Include="AdminPanelcss\assets\vendor\full-calendar\core\main.min.js" />
+    <Content Include="AdminPanelcss\assets\vendor\full-calendar\daygrid\main.min.css" />
+    <Content Include="AdminPanelcss\assets\vendor\full-calendar\daygrid\main.min.js" />
+    <Content Include="AdminPanelcss\assets\vendor\full-calendar\interaction\main.min.js" />
+    <Content Include="AdminPanelcss\assets\vendor\full-calendar\list\main.min.css" />
+    <Content Include="AdminPanelcss\assets\vendor\full-calendar\list\main.min.js" />
+    <Content Include="AdminPanelcss\assets\vendor\full-calendar\timegrid\main.min.css" />
+    <Content Include="AdminPanelcss\assets\vendor\full-calendar\timegrid\main.min.js" />
+    <Content Include="AdminPanelcss\assets\vendor\gauge-chart\gauge.min.js" />
+    <Content Include="AdminPanelcss\assets\vendor\jquery-jvectormap\jquery-jvectormap-2.0.3.css" />
+    <Content Include="AdminPanelcss\assets\vendor\jquery-jvectormap\jquery-jvectormap-africa-mill.js" />
+    <Content Include="AdminPanelcss\assets\vendor\jquery-jvectormap\jquery-jvectormap-asia-mill.js" />
+    <Content Include="AdminPanelcss\assets\vendor\jquery-jvectormap\jquery-jvectormap-in-mill.js" />
+    <Content Include="AdminPanelcss\assets\vendor\jquery-jvectormap\jquery-jvectormap-us-aea.js" />
+    <Content Include="AdminPanelcss\assets\vendor\jquery-jvectormap\jquery-jvectormap-world-mill-en.js" />
+    <Content Include="AdminPanelcss\assets\vendor\jquery-jvectormap\jquery-jvectormap.js" />
+    <Content Include="AdminPanelcss\assets\vendor\jquery-toast-plugin-master\dist\jquery.toast.min.css" />
+    <Content Include="AdminPanelcss\assets\vendor\jquery-toast-plugin-master\dist\jquery.toast.min.js" />
+    <Content Include="AdminPanelcss\assets\vendor\lightbox-simple\simple-lightbox.min.js" />
+    <Content Include="AdminPanelcss\assets\vendor\lightbox-simple\simplelightbox.min.css" />
+    <Content Include="AdminPanelcss\assets\vendor\material-icons\material-icons.css" />
+    <Content Include="AdminPanelcss\assets\vendor\smartwizard\css\smart_wizard.min.css" />
+    <Content Include="AdminPanelcss\assets\vendor\smartwizard\css\smart_wizard_theme_arrows.min.css" />
+    <Content Include="AdminPanelcss\assets\vendor\smartwizard\css\smart_wizard_theme_circles.min.css" />
+    <Content Include="AdminPanelcss\assets\vendor\smartwizard\css\smart_wizard_theme_dots.min.css" />
+    <Content Include="AdminPanelcss\assets\vendor\smartwizard\js\jquery.smartWizard.min.js" />
+    <Content Include="AdminPanelcss\assets\vendor\sparklines\jquery.sparkline.min.js" />
+    <Content Include="AdminPanelcss\assets\vendor\swiper\css\swiper.min.css" />
+    <Content Include="AdminPanelcss\assets\vendor\swiper\js\swiper.min.js" />
+    <Content Include="AdminPanelcss\assets\vendor\TreeView\jstree.min.js" />
+    <Content Include="AdminPanelcss\assets\vendor\TreeView\themes\default\32px.png" />
+    <Content Include="AdminPanelcss\assets\vendor\TreeView\themes\default\40px.png" />
+    <Content Include="AdminPanelcss\assets\vendor\TreeView\themes\default\style.min.css" />
+    <Content Include="AdminPanelcss\assets\vendor\TreeView\themes\default\throbber.gif" />
+    <Content Include="Autofill\jquery-2.1.3.js" />
+    <Content Include="Autofill\jquery-ui.css" />
+    <Content Include="Autofill\jquery-ui.js" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Datatablecss\css\amchart\export.css" />
+    <Content Include="Datatablecss\datatables\cdn.datatables.net\buttons\1.2.2\js\buttons.flash.min.js" />
+    <Content Include="Datatablecss\datatables\cdn.datatables.net\buttons\1.2.2\js\buttons.html5.min.js" />
+    <Content Include="Datatablecss\datatables\cdn.datatables.net\buttons\1.2.2\js\buttons.print.min.js" />
+    <Content Include="Datatablecss\datatables\cdn.datatables.net\buttons\1.2.2\js\dataTables.buttons.min.js" />
+    <Content Include="Datatablecss\datatables\cdnjs.cloudflare.com\ajax\libs\jszip\2.5.0\jszip.min.js" />
+    <Content Include="Datatablecss\datatables\datatables-init.js" />
+    <Content Include="Datatablecss\datatables\datatables.min.js" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="scripts\ai.0.22.9-build00167.js" />
+    <Content Include="scripts\ai.0.22.9-build00167.min.js" />
+    <Content Include="scripts\jquery-1.10.2.min.map" />
+    <Content Include="AdminPanelcss\assets\vendor\context-menu\font\context-menu-icons6a65.eot" />
+    <Content Include="AdminPanelcss\assets\vendor\context-menu\font\context-menu-icons6a65.ttf" />
+    <Content Include="AdminPanelcss\assets\vendor\context-menu\font\context-menu-icons6a65.woff" />
+    <Content Include="AdminPanelcss\assets\vendor\context-menu\font\context-menu-icons6a65.woff2" />
+    <Content Include="AdminPanelcss\assets\vendor\material-icons\MaterialIcons-Regular.eot" />
+    <Content Include="AdminPanelcss\assets\vendor\material-icons\MaterialIcons-Regular.ttf" />
+    <Content Include="AdminPanelcss\assets\vendor\material-icons\MaterialIcons-Regular.woff" />
+    <Content Include="AdminPanelcss\assets\vendor\material-icons\MaterialIcons-Regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="AdminPanelcss\assets\vendor\bootstrap\css\bootstrap.min.css.map" />
+    <None Include="Properties\PublishProfiles\AfluexSchoolDemo.pubxml" />
+    <None Include="scripts\jquery-1.7.1.intellisense.js" />
+    <Content Include="scripts\bootstrap.js" />
+    <Content Include="scripts\bootstrap.min.js" />
+    <None Include="scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="scripts\jquery-1.10.2.js" />
+    <Content Include="scripts\jquery-1.10.2.min.js" />
+    <Content Include="scripts\jquery-1.7.1.js" />
+    <Content Include="scripts\jquery-1.7.1.min.js" />
+    <Content Include="scripts\jquery-ui-1.8.20.js" />
+    <Content Include="scripts\jquery-ui-1.8.20.min.js" />
+    <Content Include="scripts\jquery.js" />
+    <Content Include="scripts\jquery.min.js" />
+    <Content Include="scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="scripts\jquery.unobtrusive-ajax.min.js" />
+    <None Include="scripts\jquery.validate-vsdoc.js" />
+    <Content Include="scripts\jquery.validate.js" />
+    <Content Include="scripts\jquery.validate.min.js" />
+    <Content Include="scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="scripts\MicrosoftAjax.debug.js" />
+    <Content Include="scripts\MicrosoftAjax.js" />
+    <Content Include="scripts\MicrosoftMvcAjax.debug.js" />
+    <Content Include="scripts\MicrosoftMvcAjax.js" />
+    <Content Include="scripts\MicrosoftMvcValidation.debug.js" />
+    <Content Include="scripts\MicrosoftMvcValidation.js" />
+    <Content Include="scripts\modernizr-2.5.3.js" />
+    <Content Include="scripts\modernizr-2.6.2.js" />
+    <Content Include="style.css" />
+    <Content Include="Views\Home\ThankYou.html" />
+    <Content Include="Web.config" />
+    <Content Include="WebForm1.aspx" />
+    <Content Include="Websitecss\css\animate.css" />
+    <Content Include="Websitecss\css\bootstrap.min.css" />
+    <Content Include="Websitecss\css\demo-page.css" />
+    <Content Include="Websitecss\css\envato\webful_education\fonts\fontawesome-webfont.svg" />
+    <Content Include="Websitecss\css\font-awesome.min.css" />
+    <Content Include="Websitecss\css\foundation.min.css" />
+    <Content Include="Websitecss\css\hover.css" />
+    <Content Include="Websitecss\css\img\close.png" />
+    <Content Include="Websitecss\css\img\loading.gif" />
+    <Content Include="Websitecss\css\img\next.png" />
+    <Content Include="Websitecss\css\img\prev.png" />
+    <Content Include="Websitecss\css\img\top-d.jpg" />
+    <Content Include="Websitecss\css\lightbox.min.css" />
+    <Content Include="Websitecss\css\owl.carousel.css" />
+    <Content Include="Websitecss\css\style.css" />
+    <Content Include="Websitecss\css\thankyoucss.css" />
+    <Content Include="Websitecss\images\comming.gif" />
+    <Content Include="Websitecss\images\comming1.png" />
+    <Content Include="Websitecss\images\contact.jpg" />
+    <Content Include="Websitecss\images\favicon.png" />
+    <Content Include="Websitecss\images\helpcourse.jpg" />
+    <Content Include="Websitecss\images\help\admissionform1.png" />
+    <Content Include="Websitecss\images\help\admissionform2.png" />
+    <Content Include="Websitecss\images\help\businesswoman.png" />
+    <Content Include="Websitecss\images\help\comming.png" />
+    <Content Include="Websitecss\images\help\course.png" />
+    <Content Include="Websitecss\images\help\education_bg.jpg" />
+    <Content Include="Websitecss\images\help\first_testimonial.jpg" />
+    <Content Include="Websitecss\images\help\first_testimonial2.jpg" />
+    <Content Include="Websitecss\images\help\gallery-lg1.jpg" />
+    <Content Include="Websitecss\images\help\gallery.jpg" />
+    <Content Include="Websitecss\images\help\gallery1.jpg" />
+    <Content Include="Websitecss\images\help\gallery2.jpg" />
+    <Content Include="Websitecss\images\help\gallery3.jpg" />
+    <Content Include="Websitecss\images\help\gallery4.jpg" />
+    <Content Include="Websitecss\images\help\gallery5.jpg" />
+    <Content Include="Websitecss\images\help\gallery6.png" />
+    <Content Include="Websitecss\images\help\gallery7.jpg" />
+    <Content Include="Websitecss\images\help\gallery8.jpg" />
+    <Content Include="Websitecss\images\help\gallery9.jpg" />
+    <Content Include="Websitecss\images\help\graphiccourse.jpg" />
+    <Content Include="Websitecss\images\help\logo.jpg" />
+    <Content Include="Websitecss\images\help\partner1.jpg" />
+    <Content Include="Websitecss\images\help\partner2.jpg" />
+    <Content Include="Websitecss\images\help\partner3.jpg" />
+    <Content Include="Websitecss\images\help\partner4.jpg" />
+    <Content Include="Websitecss\images\help\partner5.jpg" />
+    <Content Include="Websitecss\images\help\partner6.jpg" />
+    <Content Include="Websitecss\images\help\print.jpg" />
+    <Content Include="Websitecss\images\help\slide2.jpg" />
+    <Content Include="Websitecss\images\help\slide3.jpg" />
+    <Content Include="Websitecss\images\help\slide4.jpg" />
+    <Content Include="Websitecss\images\help\teacher1.jpg" />
+    <Content Include="Websitecss\images\help\teacher2.jpg" />
+    <Content Include="Websitecss\images\help\teacher3.jpg" />
+    <Content Include="Websitecss\images\help\teacher4.jpg" />
+    <Content Include="Websitecss\images\help\web.jpg" />
+    <Content Include="Websitecss\images\inquiry.png" />
+    <Content Include="Websitecss\images\logo.png" />
+    <Content Include="Websitecss\images\noimage.png" />
+    <Content Include="Websitecss\images\noimg.png" />
+    <Content Include="Websitecss\images\teachers\admin.jpg" />
+    <Content Include="Websitecss\images\teachers\alka-singh.jpg" />
+    <Content Include="Websitecss\images\teachers\antima-singh.jpg" />
+    <Content Include="Websitecss\images\teachers\ayushi-singh.jpg" />
+    <Content Include="Websitecss\images\teachers\azra-seemin.jpg" />
+    <Content Include="Websitecss\images\teachers\manager.jpg" />
+    <Content Include="Websitecss\images\teachers\meenu-tiwari.jpg" />
+    <Content Include="Websitecss\images\teachers\nishtha-singh.jpg" />
+    <Content Include="Websitecss\images\teachers\poonam-pathak.jpg" />
+    <Content Include="Websitecss\images\teachers\preeti-gautam.jpg.jpg" />
+    <Content Include="Websitecss\images\teachers\principal.jpg" />
+    <Content Include="Websitecss\images\teachers\rekha-pandey.jpg" />
+    <Content Include="Websitecss\images\teachers\saumya-singh.jpg" />
+    <Content Include="Websitecss\images\teachers\vertika-srivastava.jpg" />
+    <Content Include="Websitecss\images\user.png" />
+    <Content Include="Websitecss\img\admission.jpg" />
+    <Content Include="Websitecss\img\aps.jpg" />
+    <Content Include="Websitecss\img\bodybg.jpg" />
+    <Content Include="Websitecss\img\courses.jpg" />
+    <Content Include="Websitecss\img\eventsbgbk.jpg" />
+    <Content Include="Websitecss\img\faculty.jpg" />
+    <Content Include="Websitecss\img\gallery9.jpg" />
+    <Content Include="Websitecss\img\title-bg.jpg" />
+    <Content Include="Websitecss\js\foundation.min.js" />
+    <Content Include="Websitecss\js\jquery.js" />
+    <Content Include="Websitecss\js\lightbox.min.js" />
+    <Content Include="Websitecss\js\owl.carousel.min.js" />
+    <Content Include="Websitecss\js\webful.js" />
+    <Content Include="Websitecss\lib\index.html" />
+    <Content Include="Websitecss\lib\revolution\css\envato\webful_education\lib\revolution\fonts\revicons\revicons.svg" />
+    <Content Include="Websitecss\lib\revolution\css\img\coloredbg.png" />
+    <Content Include="Websitecss\lib\revolution\css\img\gridtile.png" />
+    <Content Include="Websitecss\lib\revolution\css\img\gridtile_3x3.png" />
+    <Content Include="Websitecss\lib\revolution\css\img\gridtile_3x3_white.png" />
+    <Content Include="Websitecss\lib\revolution\css\img\gridtile_white.png" />
+    <Content Include="Websitecss\lib\revolution\css\img\loader.gif" />
+    <Content Include="Websitecss\lib\revolution\css\layers.css" />
+    <Content Include="Websitecss\lib\revolution\css\navigation.css" />
+    <Content Include="Websitecss\lib\revolution\css\settings.css" />
+    <Content Include="Websitecss\lib\revolution\js\extensions\revolution.extension.actions.min.js" />
+    <Content Include="Websitecss\lib\revolution\js\extensions\revolution.extension.carousel.min.js" />
+    <Content Include="Websitecss\lib\revolution\js\extensions\revolution.extension.kenburn.min.js" />
+    <Content Include="Websitecss\lib\revolution\js\extensions\revolution.extension.layeranimation.min.js" />
+    <Content Include="Websitecss\lib\revolution\js\extensions\revolution.extension.migration.min.js" />
+    <Content Include="Websitecss\lib\revolution\js\extensions\revolution.extension.navigation.min.js" />
+    <Content Include="Websitecss\lib\revolution\js\extensions\revolution.extension.parallax.min.js" />
+    <Content Include="Websitecss\lib\revolution\js\extensions\revolution.extension.slideanims.min.js" />
+    <Content Include="Websitecss\lib\revolution\js\extensions\revolution.extension.video.min.js" />
+    <Content Include="Websitecss\lib\revolution\js\jquery.themepunch.revolution.min.js" />
+    <Content Include="Websitecss\lib\revolution\js\jquery.themepunch.tools.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AdminBaseController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AdminReportsController.cs" />
+    <Compile Include="Controllers\ExamController.cs" />
+    <Compile Include="Controllers\ExportController.cs" />
+    <Compile Include="Controllers\FeeController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HostelController.cs" />
+    <Compile Include="Controllers\HRManagementController.cs" />
+    <Compile Include="Controllers\LeaveController.cs" />
+    <Compile Include="Controllers\MasterController.cs" />
+    <Compile Include="Controllers\ParentBaseController.cs" />
+    <Compile Include="Controllers\ParentController.cs" />
+    <Compile Include="Controllers\ParentPanelController.cs" />
+    <Compile Include="Controllers\PermissionController.cs" />
+    <Compile Include="Controllers\SMSController.cs" />
+    <Compile Include="Controllers\StaffController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Controllers\TeacherBaseController.cs" />
+    <Compile Include="Controllers\TeacherController.cs" />
+    <Compile Include="Controllers\TeacherLoginController.cs" />
+    <Compile Include="Filters\SimpleAttribute.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BLSMS.cs" />
+    <Compile Include="Models\ChangePassword.cs" />
+    <Compile Include="Models\Common.cs" />
+    <Compile Include="Models\Connection.cs" />
+    <Compile Include="Models\Crypto.cs" />
+    <Compile Include="Models\DashBoard.cs" />
+    <Compile Include="Models\Exam.cs" />
+    <Compile Include="Models\Fee.cs" />
+    <Compile Include="Models\Home.cs" />
+    <Compile Include="Models\Hostel.cs" />
+    <Compile Include="Models\HRManagement.cs" />
+    <Compile Include="Models\Leave.cs" />
+    <Compile Include="Models\Master.cs" />
+    <Compile Include="Models\Parent.cs" />
+    <Compile Include="Models\Permissions.cs" />
+    <Compile Include="Models\Reports.cs" />
+    <Compile Include="Models\SendSMS.cs" />
+    <Compile Include="Models\Sessions.cs" />
+    <Compile Include="Models\Staff.cs" />
+    <Compile Include="Models\Student.cs" />
+    <Compile Include="Models\Teacher.cs" />
+    <Compile Include="Models\UserPermission.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\Home\Index.cshtml" />
+    <None Include="Properties\PublishProfiles\APSSchool.pubxml" />
+    <Content Include="Views\Home\aboutus.cshtml" />
+    <Content Include="Views\Home\addmission.cshtml" />
+    <Content Include="Views\Home\commingsoon.cshtml" />
+    <Content Include="Views\Home\Contactus.cshtml" />
+    <Content Include="Views\Home\gallery.cshtml" />
+    <Content Include="Views\Shared\WebsiteLayout.cshtml" />
+    <Content Include="Views\Home\staff.cshtml" />
+    <Content Include="Views\Home\ForgotPassword.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_Menu.cshtml" />
+    <Content Include="Views\Shared\_ParentLayout.cshtml" />
+    <Content Include="Views\Shared\_TeacherLayout .cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Admin\ChangePassword.cshtml" />
+    <Content Include="Views\Admin\Dashboard.cshtml" />
+    <Content Include="Views\Admin\EditProfile.cshtml" />
+    <Content Include="Views\AdminReports\AttendanceReport.cshtml" />
+    <Content Include="Views\AdminReports\DueInstallmentReport.cshtml" />
+    <Content Include="Views\AdminReports\FeeReport.cshtml" />
+    <Content Include="Views\AdminReports\ParentPrintView.cshtml" />
+    <Content Include="Views\AdminReports\ParentReport.cshtml" />
+    <Content Include="Views\AdminReports\ParentViewProfile.cshtml" />
+    <Content Include="Views\AdminReports\PrintFeerecipt.cshtml" />
+    <Content Include="Views\AdminReports\PrintMarksheet.cshtml" />
+    <Content Include="Views\AdminReports\StaffPrintView.cshtml" />
+    <Content Include="Views\AdminReports\StaffReport.cshtml" />
+    <Content Include="Views\AdminReports\StaffViewProfile.cshtml" />
+    <Content Include="Views\AdminReports\StudentMarksheet.cshtml" />
+    <Content Include="Views\AdminReports\StudentPrintPreview.cshtml" />
+    <Content Include="Views\AdminReports\StudentReport.cshtml" />
+    <Content Include="Views\AdminReports\StudentViewProfile.cshtml" />
+    <Content Include="Views\AdminReports\TeacherPrintView.cshtml" />
+    <Content Include="Views\AdminReports\TeacherReport.cshtml" />
+    <Content Include="Views\AdminReports\TeacherViewProfile.cshtml" />
+    <Content Include="Views\AdminReports\TransactionLog.cshtml" />
+    <Content Include="Views\AdminReports\UsedSMS.cshtml" />
+    <Content Include="Views\Exam\ExamType.cshtml" />
+    <Content Include="Views\Exam\ExamTypeList.cshtml" />
+    <Content Include="Views\Exam\MaxMarksList.cshtml" />
+    <Content Include="Views\Exam\MaxMarksMaster.cshtml" />
+    <Content Include="Views\Exam\StudentMarks.cshtml" />
+    <Content Include="Views\Exam\StudentMarksList.cshtml" />
+    <Content Include="Views\Fee\Fees.cshtml" />
+    <Content Include="Views\Fee\FeeStructure.cshtml" />
+    <Content Include="Views\Fee\FeeStructureList.cshtml" />
+    <Content Include="Views\Fee\FeeType.cshtml" />
+    <Content Include="Views\Fee\FeeTypeList.cshtml" />
+    <Content Include="Views\Fee\StudentFee.cshtml" />
+    <Content Include="Views\Hostel\BedCapacity.cshtml" />
+    <Content Include="Views\Hostel\BedCapacityList.cshtml" />
+    <Content Include="Views\Hostel\GetHostelFloorList.cshtml" />
+    <Content Include="Views\Hostel\GetHostelRoomList.cshtml" />
+    <Content Include="Views\Hostel\HostelAllotment.cshtml" />
+    <Content Include="Views\Hostel\HostelAllotmentList.cshtml" />
+    <Content Include="Views\Hostel\HostelEntry.cshtml" />
+    <Content Include="Views\Hostel\HostelFloor.cshtml" />
+    <Content Include="Views\Hostel\HostelList.cshtml" />
+    <Content Include="Views\Hostel\HostelRoom.cshtml" />
+    <Content Include="Views\HRManagement\AttendanceReport.cshtml" />
+    <Content Include="Views\HRManagement\EmployeeAttendance.cshtml" />
+    <Content Include="Views\HRManagement\EmployeeSalary.cshtml" />
+    <Content Include="Views\HRManagement\EmployeeSalarySlip.cshtml" />
+    <Content Include="Views\HRManagement\PrintSalarySlip.cshtml" />
+    <Content Include="Views\HRManagement\PublishSalary.cshtml" />
+    <Content Include="Views\HRManagement\SalaryPayment.cshtml" />
+    <Content Include="Views\Master\AlotVehicle.cshtml" />
+    <Content Include="Views\Master\AreaMaster.cshtml" />
+    <Content Include="Views\Master\AreaMasterList.cshtml" />
+    <Content Include="Views\Master\AssignClassTeacher.cshtml" />
+    <Content Include="Views\Master\AssignClassTeacherList.cshtml" />
+    <Content Include="Views\Master\AssignSubjecttoClass.cshtml" />
+    <Content Include="Views\Master\AssignSubjecttoTeacher.cshtml" />
+    <Content Include="Views\Master\Branch.cshtml" />
+    <Content Include="Views\Master\BranchList.cshtml" />
+    <Content Include="Views\Master\Class.cshtml" />
+    <Content Include="Views\Master\ClassList.cshtml" />
+    <Content Include="Views\Master\Department.cshtml" />
+    <Content Include="Views\Master\DepartmentList.cshtml" />
+    <Content Include="Views\Master\FineMaster.cshtml" />
+    <Content Include="Views\Master\FineMasterList.cshtml" />
+    <Content Include="Views\Master\Leave.cshtml" />
+    <Content Include="Views\Master\LeaveList.cshtml" />
+    <Content Include="Views\Master\NoticeList.cshtml" />
+    <Content Include="Views\Master\NoticeMaster.cshtml" />
+    <Content Include="Views\Master\Religion.cshtml" />
+    <Content Include="Views\Master\ReligionList.cshtml" />
+    <Content Include="Views\Master\Route.cshtml" />
+    <Content Include="Views\Master\Section.cshtml" />
+    <Content Include="Views\Master\SectionList.cshtml" />
+    <Content Include="Views\Master\SessionList.cshtml" />
+    <Content Include="Views\Master\SessionMaster.cshtml" />
+    <Content Include="Views\Master\SubjectMaster.cshtml" />
+    <Content Include="Views\Master\SubjectMasterList.cshtml" />
+    <Content Include="Views\Master\VehicleList.cshtml" />
+    <Content Include="Views\Master\VehicleMaster.cshtml" />
+    <Content Include="Views\Master\VehicleType.cshtml" />
+    <Content Include="Views\Master\VehicleTypeList.cshtml" />
+    <Content Include="Views\Parent\ParentList.cshtml" />
+    <Content Include="Views\Parent\ParentRegistration.cshtml" />
+    <Content Include="Views\Parent\PrintReceipt.cshtml" />
+    <Content Include="Views\ParentPanel\AttendanceReport.cshtml" />
+    <Content Include="Views\ParentPanel\ChangePassword.cshtml" />
+    <Content Include="Views\ParentPanel\DashBoard.cshtml" />
+    <Content Include="Views\ParentPanel\EditProfile.cshtml" />
+    <Content Include="Views\ParentPanel\FeeReport.cshtml" />
+    <Content Include="Views\ParentPanel\Homework.cshtml" />
+    <Content Include="Views\ParentPanel\PrintFeerecipt.cshtml" />
+    <Content Include="Views\ParentPanel\PrintMarksheet.cshtml" />
+    <Content Include="Views\ParentPanel\StudentMarksheet.cshtml" />
+    <Content Include="Views\Permission\SetPermission.cshtml" />
+    <Content Include="Views\Permission\UserList.cshtml" />
+    <Content Include="Views\Permission\UserRegistration.cshtml" />
+    <Content Include="Views\SMS\SendSMS.cshtml" />
+    <Content Include="Views\Staff\AddStaff.cshtml" />
+    <Content Include="Views\Staff\StaffDesignation.cshtml" />
+    <Content Include="Views\Staff\StaffDesignationList.cshtml" />
+    <Content Include="Views\Staff\StaffList.cshtml" />
+    <Content Include="Views\Student\GenrateStudentRollNumber.cshtml" />
+    <Content Include="Views\Student\Homework.cshtml" />
+    <Content Include="Views\Student\StudentAttendance.cshtml" />
+    <Content Include="Views\Student\StudentRegistration.cshtml" />
+    <Content Include="Views\Student\StudentRegistrationList.cshtml" />
+    <Content Include="Views\Student\TransferStudent.cshtml" />
+    <Content Include="Views\Teacher\Teacher.cshtml" />
+    <Content Include="Views\Teacher\TeacherList.cshtml" />
+    <Content Include="Views\TeacherLogin\ChangePassword.cshtml" />
+    <Content Include="Views\TeacherLogin\Dashboard.cshtml" />
+    <Content Include="Views\TeacherLogin\EditProfile.cshtml" />
+    <Content Include="Views\TeacherLogin\Homework.cshtml" />
+    <Content Include="Views\TeacherLogin\NoticeList.cshtml" />
+    <Content Include="Views\TeacherLogin\NoticeMaster.cshtml" />
+    <Content Include="Views\TeacherLogin\StudentAttendanceByTeacher.cshtml" />
+    <Content Include="Views\TeacherLogin\AttendanceReport.cshtml" />
+    <Content Include="Views\TeacherLogin\EmployeeSalarySlip.cshtml" />
+    <Content Include="Views\TeacherLogin\PrintSalarySlip.cshtml" />
+    <Content Include="Views\Master\AllotVehicleList.cshtml" />
+    <Content Include="Views\Master\RouteList.cshtml" />
+    <Content Include="Views\AdminReports\RouteWiseTransportReport.cshtml" />
+    <Content Include="Views\Parent\ParentEnquiry.cshtml" />
+    <Content Include="Views\Parent\GetEnquiryList.cshtml" />
+    <Content Include="Views\Student\HomeworkList.cshtml" />
+    <Content Include="Views\TeacherLogin\HomeworkList.cshtml" />
+    <Content Include="Views\SMS\SMSTemplate.cshtml" />
+    <Content Include="Views\SMS\SMSTemplateList.cshtml" />
+    <Content Include="Views\Master\Syllabus.cshtml" />
+    <Content Include="Views\Master\SyllabusList.cshtml" />
+    <Content Include="Views\Master\TimeTable.cshtml" />
+    <Content Include="Views\Master\TimeTableList.cshtml" />
+    <Content Include="Views\ParentPanel\SyllabusList.cshtml" />
+    <Content Include="Views\ParentPanel\TimeTableList.cshtml" />
+    <Content Include="Views\ParentPanel\ApplyLeave.cshtml" />
+    <Content Include="Views\ParentPanel\LeaveList.cshtml" />
+    <Content Include="Views\Leave\LeaveList.cshtml" />
+    <Content Include="Views\TeacherLogin\LeaveList.cshtml" />
+    <Content Include="Views\TeacherLogin\PendingLeave.cshtml" />
+    <Content Include="Views\Leave\PendingLeave.cshtml" />
+    <Content Include="Views\AdminReports\PrintFeereciptForReport.cshtml" />
+    <Content Include="Views\AdminReports\ConcessionReport.cshtml" />
+    <Content Include="Views\Master\RouteViewDetails.cshtml" />
+    <Content Include="Views\Master\Holiday.cshtml" />
+    <Content Include="Views\Master\HolidayList.cshtml" />
+    <Content Include="Views\Parent\ParentEnQuiryNew.cshtml" />
+    <Content Include="Views\Admin\ChangeTxnPassword.cshtml" />
+    <Content Include="Views\ParentPanel\Complains.cshtml" />
+    <Content Include="Views\Master\Complains.cshtml" />
+    <Content Include="Views\Master\GetAllMessages.cshtml" />
+    <Content Include="Views\Home\AdminLogin.cshtml" />
+    <Content Include="Views\Home\NoPermission.cshtml" />
+    <Content Include="Views\AdminReports\DueReportClassWise.cshtml" />
+    <Content Include="Views\AdminReports\DueReport.cshtml" />
+    <Content Include="Views\AdminReports\DeletedFeeReport.cshtml" />
+    <Content Include="Views\Student\PrintIDCard.cshtml" />
+    <Content Include="Views\AdminReports\MultipleStudentReport.cshtml" />
+    <Content Include="Views\AdminReports\GetMultipleStudentByParent.cshtml" />
+    <Content Include="Views\Home\Enquiry.cshtml" />
+    <Content Include="Views\Home\ThankYou.cshtml" />
+    <Content Include="Views\AdminReports\HomeworkReport.cshtml" />
+    <Content Include="Views\AdminReports\EnquiryReport.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <Content Include="Websitecss\css\envato\webful_education\fonts\fontawesome-webfont.eot" />
+    <Content Include="Websitecss\css\envato\webful_education\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Websitecss\css\envato\webful_education\fonts\fontawesome-webfont.woff" />
+    <Content Include="Websitecss\images\help\Desktop.lnk" />
+    <Content Include="Websitecss\lib\revolution\css\envato\webful_education\lib\revolution\fonts\revicons\revicons.eot" />
+    <Content Include="Websitecss\lib\revolution\css\envato\webful_education\lib\revolution\fonts\revicons\revicons.ttf" />
+    <Content Include="Websitecss\lib\revolution\css\envato\webful_education\lib\revolution\fonts\revicons\revicons.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="AadharImage\" />
+    <Folder Include="App_Data\" />
+    <Folder Include="BirthCetificate\" />
+    <Folder Include="Datatablecss\datatables\cdn.rawgit.com\bpampuch\pdfmake\0.1.18\build\" />
+    <Folder Include="Homework\" />
+    <Folder Include="PANImage\" />
+    <Folder Include="Staff\" />
+    <Folder Include="Students\" />
+    <Folder Include="Syllabus\" />
+    <Folder Include="Teacher\" />
+    <Folder Include="TimeTable\" />
+    <Folder Include="UserImage\" />
+    <Folder Include="Views\Export\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

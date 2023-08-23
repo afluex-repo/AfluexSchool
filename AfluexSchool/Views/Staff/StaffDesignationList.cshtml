@@ -1,0 +1,73 @@
+﻿@model AfluexSchool.Models.Staff
+
+@{
+    ViewBag.Title = "StaffDesignationList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("StaffDesignationList", "Staff", FormMethod.Post, new { @id = "form3", enctype = "multipart/form-data" }))
+{ <div>
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header border-0 bg-none">
+                <div class="row">
+                    <div class="col-12 col-md">
+                        <p class="fs15">Staff Designation List</p>
+                    </div>
+                    <p style="color:red">
+                        @TempData["StaffDesignationList"]
+                    </p>
+                </div>
+            </div>
+            <div class="card-body ">
+                <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                    <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-bordered w-100 mb-0" id="example23">
+                                <thead>
+                                    <tr>
+                                        <th>Sr No.</th>
+                                        <th>Designation Name</th>
+                                        <th>Action</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
+                                    {
+                                        if (Model.lstSDesignationList != null)
+                                        {
+                                            int i = 1;
+                                            foreach (var Item in Model.lstSDesignationList)
+                                            {
+                                    <tr>
+
+                                        <td>
+                                            @i
+                                            @Html.HiddenFor(m => m.PK_StaffDesignationID)
+
+                                        </td>
+                                        <td>@Item.Designation</td>
+                                        <td>
+                                            <a href="/Staff/StaffDesignation?PK_StaffDesignationID=@Item.PK_StaffDesignationID" class="btn btn-success btn-sm">Edit</a>
+                                            <a href="/Staff/DeleteStaffDesignation?PK_StaffDesignationID=@Item.PK_StaffDesignationID" class="btn btn-danger btn-sm" onclick="return confirm('Are you want to delete?;')">Delete</a>
+
+                                        </td>
+
+                                    </tr>
+                                                i++;
+                                            }
+
+                                        }
+                                    }
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+}

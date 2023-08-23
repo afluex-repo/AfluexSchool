@@ -1,0 +1,102 @@
+﻿@model AfluexSchool.Models.Exam
+
+@{
+    ViewBag.Title = "ExamType";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("ExamType", "Exam", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+
+    <div>
+          <div class="login-row">
+            <div class="col-12 col-md-12 col-lg-12 col-xl-12 mx-auto align-self-center">
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-header">
+                        <div class="row ">
+
+                            <div class="col-auto">
+                                <h4 class="mt-0 mb-1">Exam Type</h4>
+
+                            </div>
+                            <p style="color:red">
+                                @TempData["ExamType"]
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mx-auto">
+                                <div class="row ">
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group ">
+                                            <label> Exam Type <span style="color: red">*</span></label>
+                                            @Html.TextBoxFor(m => m.ExamTypeName, new { @class = "form-control", @placeholder = "Exam Type Name" })
+
+                                            @Html.HiddenFor(m => m.Pk_ExamTypeId, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-left">
+                        @if (Model == null)
+                        {
+                            <input type="submit" id="btnSave" class="btn btn-success" onclick="return validateform();" name="btnSave" value="Add" />
+                        }
+                        else
+                        {
+                            <input class="btn btn-success" type="submit" value="Update" onclick="return validateformUpdate();" name="btnUpdate" id="btnUpdate" />
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+<script src="../../scripts/jquery-1.10.2.min.js"></script>
+<script>
+
+    function validateform() {
+        $(".errortext").removeClass("errortext");
+        if ($('#ExamTypeName').val() == '') {
+            $("#ExamTypeName").addClass('errortext');
+            $('#ExamTypeName').focus();
+            return false;
+        }
+        return true;
+    }
+    function validateformUpdate() {
+        $(".errortext").removeClass("errortext");
+        if ($('#ExamTypeName').val() == '') {
+            $("#ExamTypeName").addClass('errortext');
+            $('#ExamTypeName').focus();
+            return false;
+        }
+
+        $.ajax({
+            url: '/ExamType/UpdateExamType',
+            type: 'GET',
+            dataType: 'JSON',
+            data: {
+                'Pk_ExamTypeId': $("#Pk_ExamTypeId").val(), 'ExamTypeName': $("#ExamTypeName").val(),
+            },
+            success: function (data) {
+                alert(data.Result);
+                window.location.href = '@Url.Action("ExamTypeList", "ExamType")';
+
+            }
+
+        });
+
+    }
+</script>

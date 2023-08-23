@@ -1,0 +1,121 @@
+﻿@model AfluexSchool.Models.UserPermission
+
+@{
+    ViewBag.Title = "SetPermission";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm("SetPermission", "Permission", FormMethod.Post, new { @class = "tr-form" }))
+{
+    <div>
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header border-0 bg-none">
+                <div class="row">
+                    <div class="col-12 col-md">
+                        <p class="fs15">Set Permission</p>
+                        <p style="color:red">@TempData["Permission"]</p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="card-body ">
+                <div class="row justify-content-center">
+                    <div class="col-md-12 mx-auto">
+                        <div class="row ">
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group ">
+                                    <label> Select User <span style="color: red">*</span></label>
+                                    @Html.DropDownListFor(m => m.Fk_UserId, new SelectList(ViewBag.ddluser, "Value", "Text"), new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group ">
+                                    <label> Select Form Type</label>
+                                    @Html.DropDownListFor(m => m.Fk_FormTypeId, new SelectList(ViewBag.ddlformtype, "Value", "Text"), new { @class = "form-control" })
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="card-footer text-left">
+
+                            <input type="submit" id="GetDetails" name="GetDetails" class="btn btn-primary" value="Get Details" />
+                        </div>
+
+
+                    </div>
+                </div>
+                @if (Model != null)
+                {
+                    if (Model.lstpermission != null)
+                    {
+                        int i = 1;
+                        <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                            <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table datatable display responsive w-100 dataTable no-footer dtr-inline" style="width: 1002px;">
+                                        <thead>
+                                            <tr>
+                                                <th>Sr No.</th>
+                                                <th>Form</th> 
+                                                <th>Form View</th>
+                                                <th>Edit</th>
+                                                <th>Delete</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            @foreach (var item in Model.lstpermission)
+                                            {
+
+                                                <tr>
+                                                    <td>@i</td>
+                                                    <td>
+                                                        @Html.DisplayFor(m => item.FormName)
+                                                    </td>
+                                                    <td>
+                                                        <input type="hidden" name="hdFormtypeId_ @i" id="hdFormtypeId_ @i" value="@item.Fk_FormTypeId" />
+                                                        <input type="hidden" name="hdFormId_ @i" id="hdFormId_ @i" value="@item.Fk_FormId" />
+                                                        <input type="hidden" name="hdLoginid_ @i" id="hdLoginid_ @i" value="@item.Fk_UserId" />
+                                                        <input type="checkbox" name="chkSelect_ @i" id="chkSelect_ @i" @item.SelectedValue /> 
+                                                    </td>
+                                                    <td><input type="checkbox" name="chkEdit_ @i" id="chkEdit_ @i" @item.FormUpdate /> </td>
+                                                    <td><input type="checkbox" name="chkDelete_ @i" id="chkDelete_ @i" @item.FormDelete /> </td>
+                                                </tr>
+                                                i++;
+                                            }
+                                            <input type="hidden" id="hdRows" name="hdRows" value="@i" />
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="card-footer text-left">
+
+                            <input type="submit" id="Save" name="Save" class="btn btn-success" value="Update" />
+                        </div>
+                    }
+                }
+
+            </div>
+        </div>
+
+    </div>
+}
+
+
+<script src="../../AdminPanelcss/assets/js/jquery-3.3.1.min.js"></script>
+<script>
+    function Validate() {
+        $(".errortext").removeClass("errortext");
+
+        if (($("input[name*='chkSelect_']:checked").length) <= 0) {
+            alert("You must check at least 1 box");
+            return false;
+        }
+        $("#divload").css({ 'display': '' });
+        return true;
+    }
+</script>

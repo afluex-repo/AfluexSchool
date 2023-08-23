@@ -1,0 +1,81 @@
+﻿@model AfluexSchool.Models.Fee
+
+@{
+    ViewBag.Title = "FeeStructureList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm("FeeStructureList", "Fee", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+
+    <div>
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header border-0 bg-none">
+                <div class="row">
+                    <div class="col-12 col-md">
+                        <p class="fs15">Structure List</p>
+                        
+                    </div>
+
+                </div>
+            </div>
+            <div class="card-body ">
+                <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                    <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-bordered w-100 mb-0" id="example23">
+                                <thead>
+                                    <tr>
+                                        <th>S No.</th>
+                                        <th>Session</th>
+                                        <th>ClassName</th>
+                                        <th>Fee Structure Type</th>
+                                        <th>Amount</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
+                                    {
+                                        if (Model.lstFeeTypeList != null)
+                                        {
+                                            int i = 1;
+                                            foreach (var item in Model.lstFeeTypeList)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @i
+                                                        @Html.HiddenFor(m => m.Pk_FeeStructureId)
+
+                                                    </td>
+                                                    <td>@item.SessionName</td>
+                                                    <td>@item.ClassName</td>
+                                                    <td>@item.FeeTypeName</td>
+                                                    <td>@item.Amount</td>
+                                                    <td>
+
+                                                        <a href="/Fee/FeeStructure?Pk_FeeStructureId=@item.Pk_FeeStructureId"><i class="btn btn-success">Edit</i></a>
+
+                                                        <a href="/Fee/DeleteFeeStructure?Pk_FeeStructureId=@item.Pk_FeeStructureId" onclick="return confirm('Are you sure want to delete?')"><i class="btn btn-danger">Delete</i></a>
+
+                                                    </td>
+                                                </tr>
+                                                i++;
+                                            }
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+}
+
+

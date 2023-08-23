@@ -1,0 +1,69 @@
+﻿@model AfluexSchool.Models.Master
+
+@{
+    ViewBag.Title = "Department";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm("Department", "Master", FormMethod.Post, new { @id = "Department" }))
+{ <div>
+          <div class="login-row">
+            <div class="col-12 col-md-12 col-lg-12 col-xl-12 mx-auto align-self-center">
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-header">
+                        <div class="row ">
+                            <div class="col-auto">
+                                <h4 class="mt-0 mb-1">Department</h4>
+                            </div>
+                            <p style="color:red">
+                                @TempData["Department"]
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12 mx-auto">
+                                <div class="row ">
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="col-md-7 form-group">
+                                            <label> Department Name <span style="color: red">*</span></label>
+                                            @Html.TextBoxFor(m => m.DepartmentName, new { @class = "form-control",@placeholder= "Department Name" })
+
+                                            @Html.HiddenFor(m => m.PK_DepartmentID, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-left">
+                        @if (Model.PK_DepartmentID == null)
+                        {
+                            <input type="submit" class="btn btn-success" value="Save" name="SaveDepartment" onclick="return validate();" />
+
+                        }
+                        else
+                        {
+                            <input type="submit" class="btn btn-success" value="Update" name="UpdateDepartment" onclick="return validate();" />
+
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script>
+   
+    function validate() {
+        $(".errortext").removeClass('errortext');
+        if ($("#DepartmentName").val() == "") {
+            $("#DepartmentName").addClass('errortext');
+            $("#DepartmentName").focus();
+            return false;
+        }
+    }
+</script>
+

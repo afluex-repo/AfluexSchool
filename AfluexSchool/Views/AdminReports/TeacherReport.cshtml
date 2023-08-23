@@ -1,0 +1,155 @@
+﻿@model AfluexSchool.Models.Teacher
+
+@{
+    ViewBag.Title = "TeacherReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    @@page {
+        size: auto;
+    }
+
+    @@media print {
+        table td:last-child {
+            display: none;
+        }
+
+        table th:last-child {
+            display: none;
+        }
+    }
+</style>
+ @using (Html.BeginForm("TeacherReport", "AdminReports", FormMethod.Post, new { @id = "form3", enctype = "multipart/form-data" }))
+ {
+
+    <div>
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header border-0 bg-none">
+                <div class="row">
+                    <div class="col-12 col-md">
+                        <p class="fs15">Teacher List</p>
+                    </div>
+                     
+                </div>
+            </div>
+            <div class="card-body ">
+                 
+                <div class="row">
+                    <div class="col-md-3">
+                        Login ID
+                        @Html.TextBoxFor(m => m.LoginID, new { @class = "form-control", placeholder = "Login ID" })
+                    </div>
+                    <div class="col-md-3">
+                        Parent Name
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Parent Name" })
+                    </div>
+                    <div class="col-md-3">
+                        Date Of Joining
+                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", placeholder = "From Date", @ReadOnly = "ReadOnly" })
+                    </div>
+                    <div class="col-md-3">
+                        Date Of Joining
+                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", placeholder = "To Date", @ReadOnly = "ReadOnly" })
+                    </div>
+
+                </div>
+                <div class="card-footer text-left">
+                    <div class="col-md-3" style="margin-top:20px">
+                        <input type="submit" value="Search" name="Search" id="Search" class="btn btn-primary" />
+                    </div>
+                </div>
+                <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                    <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-bordered w-100 mb-0" id="example23">
+                                <thead>
+                                    <tr>
+
+                                        <th>Sr No.</th>
+                                        <th>LoginID</th>
+                                        <th>Teacher Name</th>
+                                        <th>Date Of Birth</th>
+                                        <th>Gender</th>
+                                        <th>Category</th>
+                                        <th>Address</th>
+                                        <th>Date Of Joining</th>
+                                        <th>MobileNo</th>
+                                        <th>Action</th>
+
+                                    </tr>
+
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
+                                    {
+                                        if (Model.lstTeacherList != null)
+                                        {
+                                            int i = 1;
+                                            foreach (var Item in Model.lstTeacherList)
+                                            {
+                                                <tr class="text-left">
+
+                                                    <td>
+                                                        @i
+                                                        @Html.HiddenFor(m => m.PK_TeacherID)
+                                                    </td>
+                                                    <td>@Item.LoginID</td>
+                                                    <td>@Item.Name</td>
+                                                    <td>@Item.DOB</td>
+                                                    <td>@Item.Gender</td>
+                                                    <td>@Item.Category</td>
+                                                    <td>@Item.Address</td>
+                                                    <td>@Item.DOJ</td>
+                                                    <td>@Item.MobileNo</td>
+                                                    <td>
+                                                        <a href="/AdminReports/TeacherViewProfile?PK_TeacherID=@Item.PK_TeacherID&actionview=view" class="btn btn-sm btn-success" id="" onclick="return ViewInformation();">View</a>
+                                                        <a href="/AdminReports/TeacherPrintView?PK_TeacherID=@Item.PK_TeacherID" class="btn btn-sm btn-info" target="_blank">Print</a>
+                                                         
+                                                    </td>
+
+                                                </tr>
+                                                i++;
+                                            }
+
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                            <div class="j-response"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+ }
+
+
+<script src="../../scripts/jquery-1.10.2.min.js"></script>
+
+
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+ <script>
+     $('#FromDate').datepicker({
+         dateFormat: 'dd/mm/yy',
+         changeMonth: true,
+         changeYear: true,
+
+         maxDate: '0',
+     });
+
+     $('#ToDate').datepicker({
+         dateFormat: 'dd/mm/yy',
+         changeMonth: true,
+         changeYear: true,
+
+         maxDate: '0',
+     }
+ );
+ </script>
