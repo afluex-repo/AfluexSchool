@@ -2926,11 +2926,12 @@ Styles For Inner Pages Ends
     width: auto;
     position: absolute;
     top: 0px;*/
-        height: 60px;
+   height: 100%;
     width: auto;
     position: absolute;
     top: 0px;
-    width: 121px;
+    width: 150px;
+    padding-top: 37px;
 }
 
 nav#responsive-menu {
