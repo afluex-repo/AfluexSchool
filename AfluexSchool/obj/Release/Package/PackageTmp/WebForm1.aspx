@@ -62,7 +62,7 @@
             padding: 0px;
             background: #B4C6E7;'><span style='font-variant-ligatures: normal;font-variant-caps: normal;orphans: 2;
   widows: 2;-webkit-text-stroke-width: 0px;text-decoration-style: initial;
-  text-decoration-color: initial'>AFLUEX SCHOOL<br />
+  text-decoration-color: initial'>Afluex Educational Demo<br />
                             Registration / Affilation No. 17102-06/2018-19</span></td>
                         <td style='width: 192pt;
             color: black;

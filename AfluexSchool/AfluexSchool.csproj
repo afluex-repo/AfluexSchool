@@ -292,6 +292,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="AdminPanelcss\assets\vendor\bootstrap\css\bootstrap.min.css.map" />
+    <None Include="Properties\PublishProfiles\AfluexSchool.pubxml" />
     <None Include="Properties\PublishProfiles\AfluexSchoolDemo.pubxml" />
     <None Include="scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="scripts\bootstrap.js" />
@@ -450,6 +451,7 @@
     <Compile Include="Controllers\HRManagementController.cs" />
     <Compile Include="Controllers\LeaveController.cs" />
     <Compile Include="Controllers\MasterController.cs" />
+    <Compile Include="Controllers\MasterForApiController.cs" />
     <Compile Include="Controllers\ParentBaseController.cs" />
     <Compile Include="Controllers\ParentController.cs" />
     <Compile Include="Controllers\ParentPanelController.cs" />
@@ -476,6 +478,7 @@
     <Compile Include="Models\Hostel.cs" />
     <Compile Include="Models\HRManagement.cs" />
     <Compile Include="Models\Leave.cs" />
+    <Compile Include="Models\WebApi.cs" />
     <Compile Include="Models\Master.cs" />
     <Compile Include="Models\Parent.cs" />
     <Compile Include="Models\Permissions.cs" />
@@ -712,6 +715,7 @@
     <Folder Include="TimeTable\" />
     <Folder Include="UserImage\" />
     <Folder Include="Views\Export\" />
+    <Folder Include="Views\MasterForApi\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
