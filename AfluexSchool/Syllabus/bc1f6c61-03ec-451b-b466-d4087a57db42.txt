@@ -1,0 +1,17 @@
+AddedBy bigint,
+AddedOn datetime,
+UpdatedBy bigint,
+UpdatedOn datetime,
+DeletedBy bigint,
+DeletedOn datetime,
+IsDeleted bit default(0)
+
+
+
+CreatedBy int,
+CreatedDate datetime,
+UpdatedBy int,
+UpdatedDate datetime,
+DeletedBy int,
+DeletedDate datetime,
+IsDeleted bit default(0)
