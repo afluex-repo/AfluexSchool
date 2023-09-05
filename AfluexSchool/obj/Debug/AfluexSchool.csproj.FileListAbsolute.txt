@@ -157,3 +157,4 @@ F:\Sarfraz Ahmad\repository\AfluexSchool\AfluexSchool\bin\Newtonsoft.Json.xml
 F:\Sarfraz Ahmad\repository\AfluexSchool\AfluexSchool\bin\System.Net.Http.Formatting.xml
 F:\Sarfraz Ahmad\repository\AfluexSchool\AfluexSchool\bin\System.Web.Http.xml
 F:\Sarfraz Ahmad\repository\AfluexSchool\AfluexSchool\bin\System.Web.Http.WebHost.xml
+F:\Sarfraz Ahmad\repository\AfluexSchool\AfluexSchool\obj\Debug\AfluexSchool.csprojResolveAssemblyReference.cache
