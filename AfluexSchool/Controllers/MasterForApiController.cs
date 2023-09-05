@@ -3,9 +3,11 @@ using APSSchool.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using static AfluexSchool.Models.Common;
 
 namespace APSSchool.Controllers
 {
@@ -652,7 +654,7 @@ namespace APSSchool.Controllers
                 return Json(obj, JsonRequestBehavior.AllowGet);
             }
         }
-        #endregion Sylabus
+        #endregion
 
         #region ChangePassword
         public ActionResult ChangePassword(ChangePas objParameters)
@@ -1754,13 +1756,13 @@ namespace APSSchool.Controllers
         public ActionResult AddNotice(AddNotice objParameters)
         {
             AddNotice obj = new AddNotice();
-            if (objParameters.PK_ClassID == "" || objParameters.PK_ClassID == null)
+            if (objParameters.PK_ClassID == "0")
             {
                 obj.Status = "1";
                 obj.ErrorMessage = "Please Pass Class";
                 return Json(obj, JsonRequestBehavior.AllowGet);
             }
-            if (objParameters.PK_SectionId == "" || objParameters.PK_SectionId == null)
+            if (objParameters.PK_SectionId == "0")
             {
                 obj.Status = "1";
                 obj.ErrorMessage = "Please Pass Section";
@@ -2645,9 +2647,665 @@ namespace APSSchool.Controllers
 
         }
 
+        #region HomeworkByTeacher
+        public ActionResult SaveHomework(SaveHomeworkAPI obj, HttpPostedFileBase StudentFiles)
+        {
+           
+
+            if (obj.Fk_ClassID == "0")
+            {
+                obj.Message = "Please Select Class!!";
+                return Json(obj, JsonRequestBehavior.AllowGet);
+            }
+            if (obj.Fk_SectionID == "0")
+            {
+                obj.Message = "Please Select Section!!";
+                return Json(obj, JsonRequestBehavior.AllowGet);
+            }
+            if (obj.SubjectID == "0")
+            {
+                obj.Message = "Please Select Subject!!";
+                return Json(obj, JsonRequestBehavior.AllowGet);
+            }
+            if (obj.HomeworkDate == "" || obj.HomeworkDate == null)
+            {
+                obj.Message = "Please Enter Date!!";
+                return Json(obj, JsonRequestBehavior.AllowGet);
+            }
+            try
+            {
+                if (obj.StudentFiles != null)
+                {
+                    obj.StudentPhoto = "/Homework/" + Guid.NewGuid() + Path.GetExtension(obj.StudentFiles.FileName);
+                    obj.StudentFiles.SaveAs(Path.Combine(Server.MapPath(obj.StudentPhoto)));
+                }
+
+                //obj.AddedBy = Session["PK_TeacherID"].ToString();
+                obj.HomeworkDate = string.IsNullOrEmpty(obj.HomeworkDate) ? null : Common.ConvertToSystemDate(obj.HomeworkDate, "dd/MM/yyyy");
+                //obj.HomeworkBy = "Teacher";
+                DataSet ds = obj.SaveHomework();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count>0)
+                {
+                    if (ds.Tables[0].Rows[0]["msg"].ToString() == "1")
+                    {
+                        SaveHomeworkAPI obj1 = new SaveHomeworkAPI();
+                        obj1.Message = "Homework Assigned successfully";
+                        return Json(obj1, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        SaveHomeworkAPI obj1 = new SaveHomeworkAPI();
+                        obj1.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        return Json(obj1, JsonRequestBehavior.AllowGet);
+                    }
+                }
+            }
+            catch
+            {
+                SaveHomeworkAPI obj1 = new SaveHomeworkAPI();
+                obj1.Message = "Homework Not Assigned Successfully";
+                return Json(obj1, JsonRequestBehavior.AllowGet);
+
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+        
+
+        public ActionResult GetHomeworkList(HomeworkListAPI objParameters)
+        {
+            List<HomeworkListAPI> list = new List<HomeworkListAPI>();
+            DataSet ds = objParameters.HomeworkList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    HomeworkListAPI obj = new HomeworkListAPI();
+                    obj.HomeWorkID = r["Pk_HomeworkID"].ToString();
+                    obj.HomeWorkHTML = r["HomeworkText"].ToString();
+                    obj.StudentPhoto = r["HomeworkFile"].ToString();
+                    obj.HomeworkDate = r["HomeworkDate"].ToString();
+                    obj.ClassName = r["ClassName"].ToString();
+                    obj.SubjectID = r["SubjectName"].ToString();
+                    obj.SectionName = r["SectionName"].ToString();
+                    obj.HomeworkBy = r["HomeworkBy"].ToString();
+                    list.Add(obj);
+                }
+                objParameters.listStudent = list;
+
+                objParameters.Message = "List Fetched.";
+                return Json(objParameters, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                objParameters.Message = "List Not Fetched !!";
+                return Json(objParameters, JsonRequestBehavior.AllowGet);
+            }
+            //HomeworkListAPI obj = new HomeworkListAPI();
+            //List<HomeworkListAPI> datalist = new List<HomeworkListAPI>();
+            //try
+            //{
+
+            //    DataSet dsResult = objParameters.HomeworkList();
+            //    if (dsResult != null && dsResult.Tables[0].Rows.Count > 0)
+            //    {
+            //        foreach (DataRow row0 in (dsResult.Tables[0].Rows))
+            //        {
+            //            obj.lstHomeworkByTeacher = datalist;
+            //        }
+            //        List<HomeworkListAPI> objHomework = new List<HomeworkListAPI>();
+            //        {
+
+            //            foreach (DataRow row1 in (dsResult.Tables[0].Rows))
+            //            {
+            //                objHomework.Add(new HomeworkListAPI
+
+            //                {
+            //                    HomeWorkID = row1["Pk_HomeworkID"].ToString(),
+            //                    HomeWorkHTML = row1["HomeworkText"].ToString(),
+            //                    StudentPhoto = row1["HomeworkFile"].ToString(),
+            //                    HomeworkDate = row1["HomeworkDate"].ToString(),
+            //                    ClassName = row1["ClassName"].ToString(),
+            //                    SubjectID = row1["SubjectName"].ToString(),
+            //                    SectionName = row1["SectionName"].ToString(),
+            //                    HomeworkBy = row1["HomeworkBy"].ToString()
+            //            });
+            //            }
+            //            datalist.Add(new HomeworkListAPI
+            //            {
+            //                Title = "HomeworkList",
+            //                MarksDetails = objHomework
+
+            //            });
+            //        }
+            //    }
+            //    else
+            //    {
+            //        obj.Status = "1";
+            //    }
+            //    return Json(obj, JsonRequestBehavior.AllowGet);
+            //}
+            //catch
+            //{
+            //    obj.Status = "1";
+            //    return Json(obj, JsonRequestBehavior.AllowGet);
+            //}
+        }
+
+        #endregion
+        
+        #region TeacherAttendanceReport
+       
+        public ActionResult AttendanceReportBy(AttendenceReportAPI model)
+        {
+            List<AttendenceReportAPI> lst = new List<AttendenceReportAPI>();
+
+            //model.EmployeeCode = Session["LoginID"].ToString();
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            DataSet ds0 = model.AttendanceReport();
+
+            if (ds0 != null && ds0.Tables.Count > 0 && ds0.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds0.Tables[0].Rows)
+                {
+                    AttendenceReportAPI obj = new AttendenceReportAPI();
+
+                    obj.AttendanceDate = r["AttendanceDate"].ToString();
+                    obj.InTime = r["InTime"].ToString();
+                    obj.OutTime = r["OutTime"].ToString();
+
+                    lst.Add(obj);
+                }
+                model.lstList = lst;
+
+                model.Message = "Attendence List Fetched.";
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                model.Message = "Attendence List Not Fetched.";
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        #endregion
+
+        #region SalarySlipTeacher
+
+        public ActionResult EmployeeSalarySlipBy(TeacherSalarySlipAPI model)
+        {
+
+            List<TeacherSalarySlipAPI> lst = new List<TeacherSalarySlipAPI>();
+            //model.EmployeeID = Session["PK_TeacherID"].ToString();
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            DataSet ds0 = model.EmployeeSalarySlipBy();
+
+            if (ds0 != null && ds0.Tables.Count > 0 && ds0.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds0.Tables[0].Rows)
+                {
+                    TeacherSalarySlipAPI obj = new TeacherSalarySlipAPI();
+                    obj.Pk_PaidSalId = r["Pk_PaidSalId"].ToString();
+                    obj.EmployeeID = r["FK_EmpID"].ToString();
+                    obj.EmployeeCode = r["EmployeeCode"].ToString();
+                    obj.EmployeeName = r["EmployeeName"].ToString();
+                    obj.Basic = r["BasicSalary"].ToString();
+                    obj.HRA = r["HouseRent"].ToString();
+                    obj.MA = r["Medical"].ToString();
+                    obj.PA = r["ProfDevAllowance"].ToString();
+                    obj.CA = r["Conveyance"].ToString();
+                    obj.PF = r["ProfDevAllowance"].ToString();
+                    obj.ExtraWork = r["ExtraWork"].ToString();
+                    obj.Incentive = r["Incentice"].ToString();
+                    obj.OtherPay = r["OtherPay"].ToString();
+                    obj.TotalIncome = r["TotalIncome"].ToString();
+                    obj.ContributionTosociety = r["ContributionTosociety"].ToString();
+                    obj.Advance = r["Advanced"].ToString();
+                    obj.TDS = r["TDS"].ToString();
+                    obj.Insurance = r["Insurance"].ToString();
+                    obj.Other = r["Other"].ToString();
+                    obj.TotalDeduction = r["TotalDeduction"].ToString();
+                    obj.NetSalary = r["NetSalary"].ToString();
+                    obj.MonthName = r["MonthName"].ToString();
+                    obj.Year = r["Year"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstList = lst;
+
+                model.Message = "Salary Slip List Fetched.";
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                model.Message = "Salary Slip List Fetched.";
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+       
+        public ActionResult PrintSalarySlip(string Pk_PaidSalId, string EmployeeID)
+        {
+            SalarySlipPrintAPI model = new SalarySlipPrintAPI();
+
+            List<SalarySlipPrintAPI> lst = new List<SalarySlipPrintAPI>();
+            List<SalarySlipPrintAPI> lst1 = new List<SalarySlipPrintAPI>();
+            model.Pk_PaidSalId = Pk_PaidSalId;
+            model.EmployeeID = EmployeeID;
+            DataSet ds0 = model.EmployeeSalarySlipBy();
+
+            if (ds0 != null && ds0.Tables.Count > 0 && ds0.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds0.Tables[0].Rows)
+                {
+                    model.EmployeeID = ds0.Tables[0].Rows[0]["FK_EmpID"].ToString();
+                    model.EmployeeCode = ds0.Tables[0].Rows[0]["EmployeeCode"].ToString();
+                    model.EmployeeName = ds0.Tables[0].Rows[0]["EmployeeName"].ToString();
+                    model.TotalIncome = ds0.Tables[0].Rows[0]["TotalIncome"].ToString();
+                    model.TotalDeduction = ds0.Tables[0].Rows[0]["TotalDeduction"].ToString();
+                    model.NetSalary = ds0.Tables[0].Rows[0]["NetSalary"].ToString();
+                    model.MonthName = ds0.Tables[0].Rows[0]["MonthName"].ToString();
+                    model.Year = ds0.Tables[0].Rows[0]["Year"].ToString();
+
+
+                    model.Basic = ds0.Tables[0].Rows[0]["BasicSalary"].ToString();
+                    model.HRA = ds0.Tables[0].Rows[0]["HouseRent"].ToString();
+                    model.MA = ds0.Tables[0].Rows[0]["Medical"].ToString();
+                    model.PA = ds0.Tables[0].Rows[0]["ProfDevAllowance"].ToString();
+                    model.CA = ds0.Tables[0].Rows[0]["Conveyance"].ToString();
+                    model.PF = ds0.Tables[0].Rows[0]["ProfDevAllowance"].ToString();
+                    model.ExtraWork = ds0.Tables[0].Rows[0]["ExtraWork"].ToString();
+                    model.Incentive = ds0.Tables[0].Rows[0]["Incentice"].ToString();
+                    model.OtherPay = ds0.Tables[0].Rows[0]["OtherPay"].ToString();
+                    model.ContributionTosociety = ds0.Tables[0].Rows[0]["ContributionTosociety"].ToString();
+                    model.Advance = ds0.Tables[0].Rows[0]["Advanced"].ToString();
+                    model.TDS = ds0.Tables[0].Rows[0]["TDS"].ToString();
+                    model.Insurance = ds0.Tables[0].Rows[0]["Insurance"].ToString();
+                    model.Other = ds0.Tables[0].Rows[0]["Other"].ToString();
 
 
 
+                    ViewBag.CompanyName = SoftwareDetails.CompanyName;
+                    ViewBag.CompanyAddress = SoftwareDetails.CompanyAddress;
+                    ViewBag.Pin1 = SoftwareDetails.Pin1;
+                    ViewBag.State1 = SoftwareDetails.State1;
+                    ViewBag.City1 = SoftwareDetails.City1;
+                    ViewBag.ContactNo = SoftwareDetails.ContactNo;
+                    ViewBag.LandLine = SoftwareDetails.LandLine;
+                    ViewBag.Website = SoftwareDetails.Website;
+                    ViewBag.EmailID = SoftwareDetails.EmailID;
+                }
 
+                model.Message = "Salary Slip Print.";
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                model.Message = "Salary Slip Not Print.";
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        #endregion
+
+        #region Leave Approval/Decline By Teacher
+
+        public ActionResult LeaveListAD(LeaveListAPI model)
+        {
+            //model.PK_TeacherID = Session["PK_TeacherID"].ToString();
+            List<LeaveListAPI> listq = new List<LeaveListAPI>();
+            #region ddlhelclass+
+            try
+            {
+                LeaveListAPI obj = new LeaveListAPI();
+                int count1 = 0;
+                List<SelectListItem> ddlClass = new List<SelectListItem>();
+                DataSet ds2 = obj.GetClassList();
+                if (ds2 != null && ds2.Tables.Count > 0 && ds2.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow r in ds2.Tables[0].Rows)
+                    {
+                        if (count1 == 0)
+                        {
+                            ddlClass.Add(new SelectListItem { Text = "--Select Class--", Value = "0" });
+                        }
+                        ddlClass.Add(new SelectListItem { Text = r["ClassName"].ToString(), Value = r["PK_ClassID"].ToString() });
+                        count1 = count1 + 1;
+                    }
+                }
+
+                ViewBag.ddlClass = ddlClass;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            #endregion
+            List<SelectListItem> ddlSection = new List<SelectListItem>();
+            ddlSection.Add(new SelectListItem { Text = "--Select Section--", Value = "0" });
+            ViewBag.ddlSection = ddlSection;
+
+
+            List<SelectListItem> ddlStatus = Common.Status();
+            ViewBag.ddlStatus = ddlStatus;
+
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            DataSet ds = model.LeaveListParent();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    string s = r["IsApproved"].ToString();
+                    if (s != "Pending")
+                    {
+                        LeaveListAPI obj = new LeaveListAPI();
+
+                        obj.Reason = r["Reason"].ToString();
+                        obj.FromDate = r["FromDate"].ToString();
+                        obj.ToDate = r["ToDate"].ToString();
+                        obj.StudentName = r["StudentName"].ToString();
+                        obj.Status = r["IsApproved"].ToString();
+                        obj.ClassName = r["ClassName"].ToString();
+                        obj.SectionName = r["SectionName"].ToString();
+                        obj.Pk_StudentID = r["FK_StudentID"].ToString();
+                        obj.PK_StdntLeaveID = r["PK_StdntLeaveID"].ToString();
+                        obj.Description = r["Description"].ToString();
+                        listq.Add(obj);
+                    }
+                }
+                model.listStudent = listq;
+
+                model.Message = "Leave List Fetched.";
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                model.Message = "Leave List Not Fetched.";
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+        public ActionResult SearchLeave(SearchLeaveAPI model)
+        {
+            List<SearchLeaveAPI> list = new List<SearchLeaveAPI>();
+            if (model.Status == "0") { model.Status = null; }
+            if (model.PK_ClassID == "0") { model.PK_ClassID = null; }
+            if (model.Fk_SectionID == "0") { model.Fk_SectionID = null; }
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+
+
+            #region ddlhelclass+
+            try
+            {
+                SearchLeaveAPI obj = new SearchLeaveAPI();
+                int count1 = 0;
+                List<SelectListItem> ddlClass = new List<SelectListItem>();
+                DataSet ds2 = obj.GetClassList();
+                if (ds2 != null && ds2.Tables.Count > 0 && ds2.Tables[1].Rows.Count > 0)
+                {
+                    foreach (DataRow r in ds2.Tables[1].Rows)
+                    {
+                        if (count1 == 0)
+                        {
+                            ddlClass.Add(new SelectListItem { Text = "--Select Class--", Value = "0" });
+                        }
+                        ddlClass.Add(new SelectListItem { Text = r["ClassName"].ToString(), Value = r["PK_ClassID"].ToString() });
+                        count1 = count1 + 1;
+                    }
+                }
+
+                ViewBag.ddlClass = ddlClass;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            #endregion
+
+            #region ddlsection
+            try
+            {
+
+                SearchLeaveAPI obj = new SearchLeaveAPI();
+                obj.Pk_ClassId = model.PK_ClassID;
+                if (obj.Pk_ClassId != null)
+                {
+                    int count4 = 0;
+                    List<SelectListItem> ddlSection = new List<SelectListItem>();
+                    DataSet ds4 = obj.GettingSectionList();
+                    if (ds4 != null && ds4.Tables.Count > 0 && ds4.Tables[0].Rows.Count > 0)
+                    {
+                        foreach (DataRow r in ds4.Tables[0].Rows)
+                        {
+                            if (count4 == 0)
+                            {
+                                ddlSection.Add(new SelectListItem { Text = "--Select Section--", Value = "0" });
+                            }
+                            ddlSection.Add(new SelectListItem { Text = r["SectionName"].ToString(), Value = r["PK_SectionID"].ToString() });
+                            count4 = count4 + 1;
+                        }
+                    }
+
+                    ViewBag.ddlSection = ddlSection;
+
+
+
+                }
+                else
+                {
+
+                    List<SelectListItem> ddlsection = new List<SelectListItem>();
+                    ddlsection.Add(new SelectListItem { Text = "--Select Section--", Value = "0" });
+                    ViewBag.ddlSection = ddlsection;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            #endregion
+
+
+
+            List<SelectListItem> ddlStatus = Common.Status();
+            ViewBag.ddlStatus = ddlStatus;
+
+            DataSet ds = model.LeaveListParent();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    string s = r["IsApproved"].ToString();
+                    if (s != "Pending")
+                    {
+                        SearchLeaveAPI obj = new SearchLeaveAPI();
+
+                        obj.Reason = r["Reason"].ToString();
+                        obj.FromDate = r["FromDate"].ToString();
+                        obj.ToDate = r["ToDate"].ToString();
+                        obj.StudentName = r["StudentName"].ToString();
+                        obj.Status = r["isApproved"].ToString();
+                        obj.ClassName = r["ClassName"].ToString();
+                        obj.SectionName = r["SectionName"].ToString();
+                        obj.Pk_StudentID = r["FK_StudentID"].ToString();
+                        obj.PK_StdntLeaveID = r["PK_StdntLeaveID"].ToString();
+                        obj.Description = r["Description"].ToString();
+                        list.Add(obj);
+                    }
+                }
+                model.listStudent = list;
+
+                model.Message = " Search Leave List Fetched.";
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                model.Message = "Search Leave List Not Fetched.";
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+        public ActionResult ApprovePendingLeave(ApproveLeaveAPI model)
+        {
+            string noofrows = Request["hdRows"].ToString();
+
+            string chkselect = "";
+
+            for (int i = 1; i < int.Parse(noofrows); i++)
+            {
+                try
+                {
+
+                   // if (Request["chkSelect_ " + i].ToString() == "Checked")
+                   // {
+                        //model.UpdatedBy = Session["PK_TeacherID"].ToString();
+                        //model.PK_StdntLeaveID = Request["PK_StdntLeaveID_ " + i].ToString();
+                        //model.Description = Request["Description_ " + i].ToString();
+                        //model.Pk_StudentID = Request["Pk_StudentID_ " + i].ToString();
+                        model.Status = "Approved";
+                        DataSet ds = model.UpdatingStudentLeaveAplcn();
+                        if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                        {
+                            if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                            {
+                                model.Message = "Leave Approved Successfully";
+                                return Json(model, JsonRequestBehavior.AllowGet);
+
+                            }
+                            else if (ds.Tables[0].Rows[0]["Msg"].ToString() == "0")
+                            {
+                                model.Message = "Leave Not Approved Successfully";
+                                return Json(model, JsonRequestBehavior.AllowGet);
+                            }
+                        }
+                    //}
+                }
+                catch { chkselect = "0"; }
+
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public ActionResult DeclinePendingLeave(DeclineLeaveAPI model)
+        {
+            string noofrows = Request["hdRows"].ToString();
+
+            string chkselect = "";
+
+            for (int i = 1; i < int.Parse(noofrows); i++)
+            {
+                try
+                {
+
+                    //if (Request["chkSelect_ " + i].ToString() == "Checked")
+                    //{
+                        //model.UpdatedBy = Session["PK_TeacherID"].ToString();
+                        //model.PK_StdntLeaveID = Request["PK_StdntLeaveID_ " + i].ToString();
+                        //model.Description = Request["Description_ " + i].ToString();
+                        //model.Pk_StudentID = Request["Pk_StudentID_ " + i].ToString();
+                        model.Status = "Declined";
+                        DataSet ds = model.UpdatingStudentLeaveAplcn();
+                        if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                        {
+                            if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                            {
+                                model.Message = "Leave Decline Successfully";
+                                return Json(model, JsonRequestBehavior.AllowGet);
+                            }
+                            else if (ds.Tables[0].Rows[0]["Msg"].ToString() == "0")
+                            {
+                                model.Message = "Leave Not Decline Successfully";
+                                return Json(model, JsonRequestBehavior.AllowGet);
+                            }
+                       // }
+                    }
+                }
+                catch { chkselect = "0"; }
+
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public ActionResult PendingLeave(PendingLeaveAPI model)
+        {
+
+           // model.PK_TeacherID = Session["PK_TeacherID"].ToString();
+            model.Status = "Pending";
+            List<PendingLeaveAPI> listq = new List<PendingLeaveAPI>();
+            #region ddlhelclass+
+            try
+            {
+                PendingLeaveAPI obj = new PendingLeaveAPI();
+                int count1 = 0;
+                List<SelectListItem> ddlClass = new List<SelectListItem>();
+                DataSet ds2 = obj.GetClassList();
+                if (ds2 != null && ds2.Tables.Count > 0 && ds2.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow r in ds2.Tables[0].Rows)
+                    {
+                        if (count1 == 0)
+                        {
+                            ddlClass.Add(new SelectListItem { Text = "--Select Class--", Value = "0" });
+                        }
+                        ddlClass.Add(new SelectListItem { Text = r["ClassName"].ToString(), Value = r["PK_ClassID"].ToString() });
+                        count1 = count1 + 1;
+                    }
+                }
+
+                ViewBag.ddlClass = ddlClass;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            #endregion
+            List<SelectListItem> ddlSection = new List<SelectListItem>();
+            ddlSection.Add(new SelectListItem { Text = "--Select Section--", Value = "0" });
+            ViewBag.ddlSection = ddlSection;
+
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+
+            DataSet ds = model.LeaveListParent();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    PendingLeaveAPI obj = new PendingLeaveAPI();
+
+                    obj.Reason = r["Reason"].ToString();
+                    obj.FromDate = r["FromDate"].ToString();
+                    obj.ToDate = r["ToDate"].ToString();
+                    obj.StudentName = r["StudentName"].ToString();
+                    obj.Status = r["IsApproved"].ToString();
+                    obj.ClassName = r["ClassName"].ToString();
+                    obj.SectionName = r["SectionName"].ToString();
+                    obj.Pk_StudentID = r["FK_StudentID"].ToString();
+                    obj.PK_StdntLeaveID = r["PK_StdntLeaveID"].ToString();
+                    obj.Description = r["Description"].ToString();
+                    listq.Add(obj);
+                }
+                model.listStudent = listq;
+
+                model.Message = "Pending Leave List Fetched.";
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                model.Message = "Pending Leave List Not Fetched!!";
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+        }
+        #endregion
     }
 }
