@@ -2830,7 +2830,7 @@ namespace APSSchool.Controllers
 
         #endregion
 
-        #region SalarySlipTeacher
+        
 
         public ActionResult EmployeeSalarySlipBy(TeacherSalarySlipAPI model)
         {
@@ -2922,6 +2922,29 @@ namespace APSSchool.Controllers
                     model.TDS = ds0.Tables[0].Rows[0]["TDS"].ToString();
                     model.Insurance = ds0.Tables[0].Rows[0]["Insurance"].ToString();
                     model.Other = ds0.Tables[0].Rows[0]["Other"].ToString();
+
+                    ViewBag.CompanyName = SoftwareDetails.CompanyName;
+                    ViewBag.CompanyAddress = SoftwareDetails.CompanyAddress;
+                    ViewBag.Pin1 = SoftwareDetails.Pin1;
+                    ViewBag.State1 = SoftwareDetails.State1;
+                    ViewBag.City1 = SoftwareDetails.City1;
+                    ViewBag.ContactNo = SoftwareDetails.ContactNo;
+                    ViewBag.LandLine = SoftwareDetails.LandLine;
+                    ViewBag.Website = SoftwareDetails.Website;
+                    ViewBag.EmailID = SoftwareDetails.EmailID;
+                }
+
+                model.Message = "Salary Slip Print.";
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                model.Message = "Salary Slip Not Print.";
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+     
 
         #region StudentAttendanceFilter
         public ActionResult StudentAttendanceFilter(StudentAttendanceFilter objParameters)
@@ -3050,30 +3073,8 @@ namespace APSSchool.Controllers
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
 
-                    ViewBag.CompanyName = SoftwareDetails.CompanyName;
-                    ViewBag.CompanyAddress = SoftwareDetails.CompanyAddress;
-                    ViewBag.Pin1 = SoftwareDetails.Pin1;
-                    ViewBag.State1 = SoftwareDetails.State1;
-                    ViewBag.City1 = SoftwareDetails.City1;
-                    ViewBag.ContactNo = SoftwareDetails.ContactNo;
-                    ViewBag.LandLine = SoftwareDetails.LandLine;
-                    ViewBag.Website = SoftwareDetails.Website;
-                    ViewBag.EmailID = SoftwareDetails.EmailID;
-                }
 
-                model.Message = "Salary Slip Print.";
-                return Json(model, JsonRequestBehavior.AllowGet);
-            }
-            else
-            {
-                model.Message = "Salary Slip Not Print.";
-                return Json(model, JsonRequestBehavior.AllowGet);
-            }
-        }
 
-        #endregion
-
-        #region Leave Approval/Decline By Teacher
 
         public ActionResult LeaveListAD(LeaveListAPI model)
         {
@@ -3431,6 +3432,6 @@ namespace APSSchool.Controllers
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
         }
-        #endregion
+    
     }
 }
