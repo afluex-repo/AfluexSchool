@@ -426,7 +426,7 @@ namespace APSSchool.Controllers
                                     PaymentDate = row1["PaymentDate"].ToString(),
                                     PaymentMode = row1["PaymentMode"].ToString(),
                                     BankDetails = row1["BankDetails"].ToString(),
-                                    MonthName = row1["MonthName"].ToString(),
+                                    StudentName = row1["StudentName"].ToString(),
 
                                 });
                             }
@@ -2923,7 +2923,132 @@ namespace APSSchool.Controllers
                     model.Insurance = ds0.Tables[0].Rows[0]["Insurance"].ToString();
                     model.Other = ds0.Tables[0].Rows[0]["Other"].ToString();
 
+        #region StudentAttendanceFilter
+        public ActionResult StudentAttendanceFilter(StudentAttendanceFilter objParameters)
+        {
+            StudentAttendanceFilter obj = new StudentAttendanceFilter();
+            List<StudentAttendanceData> datalist1 = new List<StudentAttendanceData>();
+            try
+            {
 
+                DataSet dsResult = objParameters.GetStudentAttendanceDetail();
+                if (dsResult != null && dsResult.Tables[0].Rows.Count > 0)
+                {
+                    if (dsResult.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+
+
+                        obj.Status = "0";
+                        foreach (DataRow row0 in (dsResult.Tables[0].Rows))
+                        {
+
+
+                            obj.ListStudent = datalist1;
+
+
+                        }
+                        List<StudentAttendanceDetails> objstudent = new List<StudentAttendanceDetails>();
+
+                        {
+                            #region Menu
+                            foreach (DataRow row1 in (dsResult.Tables[0].Rows))
+                            {
+                                objstudent.Add(new StudentAttendanceDetails
+
+                                {
+
+
+                                    StudentName = row1["StudentName"].ToString(),
+                                    ClassName = row1["ClassName"].ToString(),
+                                    SectionName = row1["SectionName"].ToString(),
+                                    AttendanceDate = row1["AttendanceDate"].ToString(),
+                                    Status = row1["Status"].ToString(),
+
+
+                                });
+                            }
+                            datalist1.Add(new StudentAttendanceData
+                            {
+                                Title = "Student Attendance Details",
+                                lstStudents = objstudent
+
+                            });
+                            #endregion
+                        }
+                    }
+                }
+                else
+                {
+                    obj.Status = "1";
+
+                }
+                return Json(obj, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                obj.Status = "1";
+
+                return Json(obj, JsonRequestBehavior.AllowGet);
+            }
+        }
+        #endregion
+
+        public ActionResult PrintFeerecipt(PrintReceipt model)
+        {
+            List<PrintReceipt> lst = new List<PrintReceipt>();
+            PrintReceipt obj = new PrintReceipt();
+            try
+            {
+                DataSet ds = model.PrintReceipts();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    obj.Status = "0";
+                    obj.ReceiptNo = ds.Tables[0].Rows[0]["ReceiptNo"].ToString();
+                    obj.StudentId = ds.Tables[0].Rows[0]["LoginID"].ToString();
+                    obj.ParentMobile = ds.Tables[0].Rows[0]["Mobile"].ToString();
+                    obj.StudentName = ds.Tables[0].Rows[0]["StudentName"].ToString();
+                    obj.Address = ds.Tables[0].Rows[0]["Address"].ToString();
+                    obj.TotalFee = ds.Tables[0].Rows[0]["TotalFee"].ToString();
+                    obj.TotalFeeInWords = ds.Tables[0].Rows[0]["TotalFeeInWords"].ToString();
+
+                    obj.PaidAmount = ds.Tables[0].Rows[0]["PaidAmount"].ToString();
+                    obj.AmountInWords = ds.Tables[0].Rows[0]["AmountInWords"].ToString();
+                    obj.PaymentMode = ds.Tables[0].Rows[0]["PaymentMode"].ToString();
+                    obj.TransactionNo = ds.Tables[0].Rows[0]["TransactionNo"].ToString();
+                    obj.TransactionDate = ds.Tables[0].Rows[0]["TransactionDate"].ToString();
+                    obj.BankDetails = ds.Tables[0].Rows[0]["BankDetails"].ToString();
+
+                    obj.LandLine = Common.SoftwareDetails.LandLine;
+                    obj.ContactNo = Common.SoftwareDetails.ContactNo;
+                    obj.Website = Common.SoftwareDetails.Website;
+                    obj.EmailID = Common.SoftwareDetails.EmailID;
+                    obj.CompanyAddress = Common.SoftwareDetails.CompanyAddress;
+
+                    foreach (DataRow r in ds.Tables[1].Rows)
+                    {
+                        obj.Status = "0";
+                        PrintReceipt obj1 = new PrintReceipt();
+                        obj1.FeeTypeName = r["FeeTypeName"].ToString();
+                        obj1.PaidAmount = r["PaidAmt"].ToString();
+                        obj1.InstallmentAmt = r["InstallmentAmt"].ToString();
+                        obj1.PaymentMode = r["PaymentMode"].ToString();
+                        obj1.InstallemntNo = r["InstallemntNo"].ToString();
+                        obj1.DueDate = r["DueDate"].ToString();
+                        obj1.PaymentDate = r["PaymentDate"].ToString();
+                        obj1.BankDetails = r["BankDetails"].ToString();
+                        lst.Add(obj1);
+                    }
+                    obj.lstfeedata = lst;
+                }
+            }
+            catch(Exception ex)
+            {
+                obj.Status = "1";
+
+                return Json(obj, JsonRequestBehavior.AllowGet);
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
 
                     ViewBag.CompanyName = SoftwareDetails.CompanyName;
                     ViewBag.CompanyAddress = SoftwareDetails.CompanyAddress;

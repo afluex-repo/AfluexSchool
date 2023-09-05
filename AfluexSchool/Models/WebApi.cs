@@ -395,10 +395,12 @@ namespace APSSchool.Models
     {
         public List<SylabusData> lstSylabusDetails { get; set; }
         public string Pk_StudentId { get; set; }
+        public string PK_ParentId { get; set; }
         public string Status { get; set; }
         public DataSet GetSylabusDetails()
         {
             SqlParameter[] para = {
+                                  new SqlParameter("@Pk_ParentID",PK_ParentId),
                                     new SqlParameter("@StudentId",Pk_StudentId ),
                                   };
             DataSet ds = Connection.ExecuteQuery("GetSyllabusForParent", para);
@@ -452,7 +454,7 @@ namespace APSSchool.Models
         public string PaymentDate { get; set; }
         public string PaymentMode { get; set; }
         public string ReceiptNo { get; set; }
-
+        public string StudentName { get; set; }
 
 
     }
@@ -1291,7 +1293,110 @@ namespace APSSchool.Models
         public string SubjectCode { get; set; }
 
     }
+    public class StudentAttendanceData
+    {
+        public string Title { get; set; }
+        public List<StudentAttendanceDetails> lstStudents { get; set; }
+    }
+    public class StudentAttendanceDetails
+    {
+        public string SectionName { get; set; }
+        public string AttendanceDate { get; set; }
+        public string SessionName { get; set; }
+        public string Status { get; set; }
+        public string PK_StdntLeaveID { get; set; }
+        public string ClassName { get; set; }
+        public string StudentName { get; set; }
+    }
+    public class StudentAttendanceFilter
+    {
+        public string TeacherID { get; set; }
+        public string PK_SectionID { get; set; }
+        public string Pk_StudentAttendanceID { get; set; }
+        public string Fk_ClassID { get; set; }
+        public string Fk_SectionID { get; set; }
+        public string Pk_StudentID { get; set; }
+        public string Status { get; set; }
+        public string Fk_ParentId { get; set; }
 
+
+        public string StudenLoginID { get; set; }
+       
+      
+       
+       
+        public List<StudentAttendanceData> ListStudent { get; set; }
+
+
+        public DataSet GetClassList()
+        {
+            SqlParameter[] para ={
+                                    new SqlParameter("@PK_ClassID",Fk_ClassID),
+                                    new SqlParameter("@TeacherID",TeacherID),
+
+                                };
+
+            DataSet ds = Connection.ExecuteQuery("GetClassList", para);
+            return ds;
+        }
+        public DataSet GetSectionList()
+        {
+            SqlParameter[] para ={
+                                   new SqlParameter("@PK_SectionID",PK_SectionID)
+                               };
+            DataSet ds = Connection.ExecuteQuery("GetSectionList", para);
+            return ds;
+        }
+
+        public DataSet GetStudentAttendanceDetail()
+        {
+            SqlParameter[] para ={
+                                   new SqlParameter("@Fk_ClassID",Fk_ClassID),
+                                   new SqlParameter("@Fk_SectionID",Fk_SectionID),
+                                      new SqlParameter("@Fk_ParentId",Fk_ParentId),
+                               };
+            DataSet ds = Connection.ExecuteQuery("GetStudentAttendanceDetail", para);
+            return ds;
+        }
+        
+    }
+    public class PrintReceipt
+    {
+        public string ReceiptNo { get; set; }
+        public string Status { get; set;}
+        public string FeeTypeName { get; set; }
+        public string PaidAmount { get; set; }
+        public string InstallmentAmt { get; set; }
+        public string PaymentMode { get; set; }
+        public string InstallemntNo { get; set; }
+        public string DueDate { get; set; }
+        public string PaymentDate { get; set; }
+        public string BankDetails { get; set; }
+
+        public string StudentId { get; set; }
+        public string ParentMobile { get; set; }
+        public string StudentName { get; set; }
+        public string Address { get; set; }
+        public string TotalFeeInWords { get; set; }
+        public string TransactionNo { get; set; }
+        public string TransactionDate { get; set; }
+        public string AmountInWords { get; set; }
+        public string TotalFee { get; set; }
+        public string LandLine { get; set; }
+        public string Website { get; set; }
+        public string ContactNo { get; set; }
+        public string EmailID { get; set; }
+        public string CompanyAddress { get; set; }
+        public List<PrintReceipt> lstfeedata { get; set; }
+        public DataSet PrintReceipts()
+        {
+            SqlParameter[] para = { new SqlParameter("@ReceiptNo", ReceiptNo) };
+
+            DataSet ds = Connection.ExecuteQuery("PrintReceipt", para);
+            return ds;
+
+        }
+    }
 
 
     public class SaveHomeworkAPI

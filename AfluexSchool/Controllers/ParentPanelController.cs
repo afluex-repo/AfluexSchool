@@ -317,23 +317,19 @@ namespace AfluexSchool.Controllers
             if (ds != null && ds.Tables[0].Rows.Count > 0)
             {
                 ViewBag.ReceiptNo = ds.Tables[0].Rows[0]["ReceiptNo"].ToString();
-                ViewBag.StudentId = ds.Tables[1].Rows[0]["LoginID"].ToString();
-                ViewBag.ParentMobile = ds.Tables[1].Rows[0]["Mobile"].ToString();
-                ViewBag.StudentName = ds.Tables[1].Rows[0]["StudentName"].ToString();
-                ViewBag.Address = ds.Tables[1].Rows[0]["Address"].ToString();
-                ViewBag.City = ds.Tables[1].Rows[0]["City"].ToString();
-                ViewBag.Pin = ds.Tables[1].Rows[0]["Pincode"].ToString();
-                ViewBag.State = ds.Tables[1].Rows[0]["State"].ToString();
-                ViewBag.TotalFee = ds.Tables[1].Rows[0]["TotalFee"].ToString();
-                ViewBag.TotalFeeInWords = ds.Tables[1].Rows[0]["TotalFeeInWords"].ToString();
+                ViewBag.StudentId = ds.Tables[0].Rows[0]["LoginID"].ToString();
+                ViewBag.ParentMobile = ds.Tables[0].Rows[0]["Mobile"].ToString();
+                ViewBag.StudentName = ds.Tables[0].Rows[0]["StudentName"].ToString();
+                ViewBag.Address = ds.Tables[0].Rows[0]["Address"].ToString();
+                ViewBag.TotalFee = ds.Tables[0].Rows[0]["TotalFee"].ToString();
+                ViewBag.TotalFeeInWords = ds.Tables[0].Rows[0]["TotalFeeInWords"].ToString();
 
-                ViewBag.PaidAmount = ds.Tables[1].Rows[0]["PaidAmount"].ToString();
-                ViewBag.AmountInWords = ds.Tables[1].Rows[0]["AmountInWords"].ToString();
-                ViewBag.PaymentMode = ds.Tables[1].Rows[0]["PaymentMode"].ToString();
-                ViewBag.TransactionNo = ds.Tables[1].Rows[0]["TransactionNo"].ToString();
-                ViewBag.TransactionDate = ds.Tables[1].Rows[0]["TransactionDate"].ToString();
-                ViewBag.BankName = ds.Tables[1].Rows[0]["BankName"].ToString();
-                ViewBag.BankBranch = ds.Tables[1].Rows[0]["BankBranch"].ToString();
+                ViewBag.PaidAmount = ds.Tables[0].Rows[0]["PaidAmount"].ToString();
+                ViewBag.AmountInWords = ds.Tables[0].Rows[0]["AmountInWords"].ToString();
+                ViewBag.PaymentMode = ds.Tables[0].Rows[0]["PaymentMode"].ToString();
+                ViewBag.TransactionNo = ds.Tables[0].Rows[0]["TransactionNo"].ToString();
+                ViewBag.TransactionDate = ds.Tables[0].Rows[0]["TransactionDate"].ToString();
+                ViewBag.BankDetails = ds.Tables[0].Rows[0]["BankDetails"].ToString();
 
                 ViewBag.LandLine = Common.SoftwareDetails.LandLine;
                 ViewBag.ContactNo = Common.SoftwareDetails.ContactNo;
@@ -341,11 +337,11 @@ namespace AfluexSchool.Controllers
                 ViewBag.EmailID = Common.SoftwareDetails.EmailID;
                 ViewBag.CompanyAddress = Common.SoftwareDetails.CompanyAddress;
 
-                foreach (DataRow r in ds.Tables[0].Rows)
+                foreach (DataRow r in ds.Tables[1].Rows)
                 {
                     Reports obj1 = new Reports();
                     obj1.FeeTypeName = r["FeeTypeName"].ToString();
-                    obj1.PaidAmount = r["PaidAmount"].ToString();
+                    obj1.PaidAmount = r["PaidAmt"].ToString();
                     obj1.InstallmentAmt = r["InstallmentAmt"].ToString();
                     obj1.PaymentMode = r["PaymentMode"].ToString();
                     obj1.InstallemntNo = r["InstallemntNo"].ToString();
@@ -562,7 +558,7 @@ namespace AfluexSchool.Controllers
         public ActionResult SyllabusList(Master model)
         {
             List<Master> list = new List<Master>();
-            model.AddedBy = Session["Pk_ParentID"].ToString();
+            model.PK_ParentId = Session["Pk_ParentID"].ToString();
             DataSet ds = model.SyllabusListForParent();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
