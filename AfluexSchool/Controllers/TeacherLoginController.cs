@@ -1139,6 +1139,8 @@ namespace AfluexSchool.Controllers
                     obj.Other = r["Other"].ToString();
                     obj.TotalDeduction = r["TotalDeduction"].ToString();
                     obj.NetSalary = r["NetSalary"].ToString();
+                    obj.MonthName = r["MonthName"].ToString();
+                    obj.Year = r["Year"].ToString();
                     lst.Add(obj);
                 }
                 model.lstList = lst;

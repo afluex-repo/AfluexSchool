@@ -157,4 +157,57 @@ F:\Sarfraz Ahmad\repository\AfluexSchool\AfluexSchool\bin\Newtonsoft.Json.xml
 F:\Sarfraz Ahmad\repository\AfluexSchool\AfluexSchool\bin\System.Net.Http.Formatting.xml
 F:\Sarfraz Ahmad\repository\AfluexSchool\AfluexSchool\bin\System.Web.Http.xml
 F:\Sarfraz Ahmad\repository\AfluexSchool\AfluexSchool\bin\System.Web.Http.WebHost.xml
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\ApplicationInsights.config
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\roslyn\csc.exe
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\roslyn\Microsoft.CSharp.Core.targets
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\roslyn\Microsoft.VisualBasic.Core.targets
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\roslyn\System.Collections.Immutable.dll
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\roslyn\System.Reflection.Metadata.dll
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\roslyn\vbc.exe
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\roslyn\VBCSCompiler.exe
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\roslyn\VBCSCompiler.exe.config
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\APSSchool.dll.config
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\APSSchool.dll
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\APSSchool.pdb
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\Microsoft.AI.Agent.Intercept.dll
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\Microsoft.AI.DependencyCollector.dll
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\Microsoft.AI.PerfCounterCollector.dll
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\Microsoft.AI.ServerTelemetryChannel.dll
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\Microsoft.AI.Web.dll
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\Microsoft.AI.WindowsServer.dll
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\Microsoft.ApplicationInsights.dll
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\Microsoft.Web.Infrastructure.dll
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\Newtonsoft.Json.dll
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\System.Net.Http.Formatting.dll
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\System.Web.Helpers.dll
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\System.Web.Http.dll
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\System.Web.Http.WebHost.dll
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\System.Web.Mvc.dll
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\System.Web.Razor.dll
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\System.Web.Webpages.Deployment.dll
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\System.Web.Webpages.dll
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\System.Web.Webpages.Razor.dll
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\Microsoft.AI.DependencyCollector.xml
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\Microsoft.AI.ServerTelemetryChannel.xml
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\Microsoft.AI.Web.xml
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\Microsoft.AI.WindowsServer.xml
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\Microsoft.ApplicationInsights.xml
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\System.Web.Razor.xml
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\System.Web.Webpages.xml
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\System.Web.Webpages.Deployment.xml
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\System.Web.Webpages.Razor.xml
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\System.Web.Helpers.xml
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\System.Web.Mvc.xml
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\Newtonsoft.Json.xml
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\System.Net.Http.Formatting.xml
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\System.Web.Http.xml
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\System.Web.Http.WebHost.xml
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\obj\Debug\APSSchool.dll
+E:\Tanishq\Repository\AfluexSchool\AfluexSchool\obj\Debug\APSSchool.pdb
 F:\Sarfraz Ahmad\repository\AfluexSchool\AfluexSchool\obj\Debug\AfluexSchool.csprojResolveAssemblyReference.cache

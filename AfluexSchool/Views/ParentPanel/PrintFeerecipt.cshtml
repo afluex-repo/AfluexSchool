@@ -12,14 +12,14 @@
     <title>Print Student Fee</title>
     <style>
         table, th, td {
-            font-size: 14px;
+            font-size: medium;
             /*border: 1px solid black;*/
             border-collapse: collapse;
         }
 
         th, td {
-            font-size: 14px;
-            padding: 3px;
+            font-size: medium;
+            padding: 5px;
         }
     </style>
 
@@ -29,7 +29,7 @@
         <table style="border: 0px none black;">
             <tr style="border: 0px none black;">
                 <td style="border: 0px none black;">
-                   <img src="../../Websitecss/images/logo.png" style="height:70px;"/>
+                   <img src="../../Websitecss/images/logo.png" style="height:100px;"/>
                 </td>
                 <td style="border: 0px none black;"></td>
 
@@ -53,8 +53,8 @@
 
         <table style="width: 100%;" class="table table-striped">
             <tr>
-                <td style="border: 1px solid black;"><b></b></td>
-                <td colspan="2" style="border: 1px solid black;"><b>Date :    </b>@DateTime.Now.ToString("dd/MM/yyyy")</td>
+                @*<td style="border: 1px solid black;"><b></td>*@
+                <td colspan="2" style="border: 1px solid black;"><b>Receipt Date :    </b>@DateTime.Now.ToString("dd/MM/yyyy")</td>
                 <td style="border: 1px solid black;"><b>Receipt No.    </b>@ViewBag.ReceiptNo</td>
             </tr>
         </table>
@@ -197,18 +197,18 @@
             </tr>
         </table>
         <br />
+        <br />
 
     </div>
 
-    <br />
-    <br />
-    @*<p style="page-break-after: always;">&nbsp;</p>*@
+
+    <p style="page-break-after: always;">&nbsp;</p>
 
     <div style="border:3px solid #a20e0e;padding-left:10px;padding-right:10px;">
         <table style="border: 0px none black;">
             <tr style="border: 0px none black;">
                 <td style="border: 0px none black;">
-                   <img src="../../Websitecss/images/logo.png" style="height:70px;"/>
+                   <img src="../../Websitecss/images/logo.png" style="height:100px;"/>
                 </td>
                 <td style="border: 0px none black;"></td>
 
@@ -232,8 +232,8 @@
 
         <table style="width: 100%;" class="table table-striped">
             <tr>
-                <td style="border: 1px solid black;"><b></b></td>
-                <td colspan="2" style="border: 1px solid black;"><b>Date :    </b>@DateTime.Now.ToString("dd/MM/yyyy")</td>
+                @*<td style="border: 1px solid black;"><b></td>*@
+                <td colspan="2" style="border: 1px solid black;"><b>Receipt Date :    </b>@DateTime.Now.ToString("dd/MM/yyyy")</td>
                 <td style="border: 1px solid black;"><b>Receipt No.    </b>@ViewBag.ReceiptNo</td>
             </tr>
         </table>
@@ -375,6 +375,7 @@
                 </td>
             </tr>
         </table>
+        <br />
         <br />
 
     </div>
