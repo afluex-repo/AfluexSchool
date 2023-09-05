@@ -12,14 +12,14 @@
     <title>Print Student Fee</title>
     <style>
         table, th, td {
-            font-size: medium;
+            font-size: 14px;
             /*border: 1px solid black;*/
             border-collapse: collapse;
         }
 
         th, td {
-            font-size: medium;
-            padding: 5px;
+            font-size: 14px;
+            padding: 3px;
         }
     </style>
 
@@ -29,7 +29,7 @@
         <table style="border: 0px none black;">
             <tr style="border: 0px none black;">
                 <td style="border: 0px none black;">
-                   <img src="../../Websitecss/images/logo.png" style="height:100px;"/>
+                   <img src="../../Websitecss/images/logo.png" style="height:70px;"/>
                 </td>
                 <td style="border: 0px none black;"></td>
 
@@ -53,7 +53,7 @@
 
         <table style="width: 100%;" class="table table-striped">
             <tr>
-                <td style="border: 1px solid black;"><b></td>
+                <td style="border: 1px solid black;"><b></b></td>
                 <td colspan="2" style="border: 1px solid black;"><b>Date :    </b>@DateTime.Now.ToString("dd/MM/yyyy")</td>
                 <td style="border: 1px solid black;"><b>Receipt No.    </b>@ViewBag.ReceiptNo</td>
             </tr>
@@ -72,7 +72,7 @@
             <tr>
                 <td style="border: 1px solid black;"><b>State:    </b>@ViewBag.State</td>
                 <td style="border: 1px solid black;"><b>City:    </b>@ViewBag.City</td>
-                <td style="border: 1px solid black;"><b>Pin Code:    </b>@ViewBag.Pin</td>
+                <td style="border: 1px solid black;"><b>Pin Code:    </b>@ViewBag.Pincode</td>
             </tr>
         </table>
         <br />
@@ -197,18 +197,18 @@
             </tr>
         </table>
         <br />
-        <br />
 
     </div>
 
-
-    <p style="page-break-after: always;">&nbsp;</p>
+    <br />
+    <br />
+    @*<p style="page-break-after: always;">&nbsp;</p>*@
 
     <div style="border:3px solid #a20e0e;padding-left:10px;padding-right:10px;">
         <table style="border: 0px none black;">
             <tr style="border: 0px none black;">
                 <td style="border: 0px none black;">
-                   <img src="../../Websitecss/images/logo.png" style="height:100px;"/>
+                   <img src="../../Websitecss/images/logo.png" style="height:70px;"/>
                 </td>
                 <td style="border: 0px none black;"></td>
 
@@ -232,7 +232,7 @@
 
         <table style="width: 100%;" class="table table-striped">
             <tr>
-                <td style="border: 1px solid black;"><b></td>
+                <td style="border: 1px solid black;"><b></b></td>
                 <td colspan="2" style="border: 1px solid black;"><b>Date :    </b>@DateTime.Now.ToString("dd/MM/yyyy")</td>
                 <td style="border: 1px solid black;"><b>Receipt No.    </b>@ViewBag.ReceiptNo</td>
             </tr>
@@ -251,7 +251,7 @@
             <tr>
                 <td style="border: 1px solid black;"><b>State:    </b>@ViewBag.State</td>
                 <td style="border: 1px solid black;"><b>City:    </b>@ViewBag.City</td>
-                <td style="border: 1px solid black;"><b>Pin Code:    </b>@ViewBag.Pin</td>
+                <td style="border: 1px solid black;"><b>Pin Code:    </b>@ViewBag.Pincode</td>
             </tr>
         </table>
         <br />
@@ -375,7 +375,6 @@
                 </td>
             </tr>
         </table>
-        <br />
         <br />
 
     </div>
