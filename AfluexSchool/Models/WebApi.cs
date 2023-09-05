@@ -1399,6 +1399,425 @@ namespace APSSchool.Models
     }
 
 
+    public class SaveHomeworkAPI
+    {
+        public string Fk_ClassID { get; set; }
+        public string Fk_SectionID { get; set; }
+        public string SubjectID { get; set; }
+        public string HomeworkDate { get; set; }
+        public string StudentPhoto { get; set; }
+        public string AddedBy { get; set; }
+        public string HomeworkBy { get; set; }
+        public string HomeWorkHTML { get; set; }
+        public string SessionName { get; set; }
+        public string Message { get; set; }
+        public HttpPostedFileBase StudentFiles { get; set; }
+
+        public DataSet SaveHomework()
+        {
+            SqlParameter[] para ={
+                                   new SqlParameter("@Fk_ClassID",Fk_ClassID),
+                                   new SqlParameter("@Fk_SectionID",Fk_SectionID),
+                                   new SqlParameter("@SubjectID",SubjectID),
+                                   new SqlParameter("@HomeworkDate",HomeworkDate),
+                                   new SqlParameter("@StudentPhoto",StudentPhoto),
+                                    new SqlParameter("@AddedBy",AddedBy),
+                                     new SqlParameter("@HomeworkBy",HomeworkBy),
+                                      new SqlParameter("@HomeWorkHTML",HomeWorkHTML),
+                                        new SqlParameter("@Fk_SessionId",SessionName),
+                               };
+            DataSet ds = Connection.ExecuteQuery("Homework", para);
+            return ds;
+        }
+    }
 
 
+    public class HomeworkListAPI
+    {
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
+        public string HomeworkBy { get; set; }
+        public string AddedBy { get; set; }
+        public string SessionName { get; set; }
+        public string Fk_ClassID { get; set; }
+        public string Fk_SectionID { get; set; }
+        public string TeacherID { get; set; }
+        public string SubjectID { get; set; }
+        public string HomeworkFile { get; set; }
+        public List<HomeworkListAPI> listStudent { get; set; }
+        public string Status { get; set; }
+        public string HomeWorkID { get; set; }
+        public string HomeWorkHTML { get; set; }
+        public string StudentPhoto { get; set; }
+        public string HomeworkDate { get; set; }
+        public string ClassName { get; set; }
+        public string SectionName { get; set; }
+        public string Title { get; set; }
+        public string MarksDetails { get; set; }
+        public string Message { get; set; }
+
+        public DataSet HomeworkList()
+        {
+            SqlParameter[] para ={
+
+                                    new SqlParameter("@FromDate",FromDate),
+                                      new SqlParameter("@ToDate",ToDate),
+                                       new SqlParameter("@HomeworkBy",HomeworkBy),
+                                      new SqlParameter("@AddedBy",AddedBy),
+                                        new SqlParameter("@Fk_SessionId",SessionName),
+
+                                        new SqlParameter("@Fk_ClassId",Fk_ClassID),
+                                         new SqlParameter("@Fk_SectionID",Fk_SectionID),
+                                         new SqlParameter("@FK_TeacherID",TeacherID),
+                                          new SqlParameter("@Fk_SubjectId",SubjectID),
+                                          new SqlParameter("@HomeworkFile",HomeworkFile)
+
+                               };
+            DataSet ds = Connection.ExecuteQuery("HomeWorkList", para);
+            return ds;
+        }
+    }
+
+    public class AttendenceReportAPI
+    {
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
+        public string EmployeeCode { get; set; }
+        public string Message { get; set; }
+
+        public string AttendanceDate { get; set; }
+        public string InTime { get; set; }
+        public string OutTime { get; set; }
+        public List<AttendenceReportAPI> lstList { get; set; }
+
+        public DataSet AttendanceReport()
+        {
+            SqlParameter[] para ={
+                                       new SqlParameter ("@FromDate",FromDate),
+                                       new SqlParameter ("@ToDate",ToDate),
+                                       new SqlParameter ("@EmployeeCode",EmployeeCode),
+
+            };
+            DataSet ds = Connection.ExecuteQuery("AttendanceReport", para);
+            return ds;
+        }
+    }
+   
+
+    public class TeacherSalarySlipAPI
+    {
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
+        public string Pk_PaidSalId { get; set; }
+        public string EmployeeID { get; set; }
+        public List<TeacherSalarySlipAPI> lstList { get; set; }
+        public string Message { get; set; }
+
+        public string EmployeeCode { get; set; }
+        public string EmployeeName { get; set; }
+        public string Basic { get; set; }
+        public string HRA { get; set; }
+        public string MA { get; set; }
+        public string PA { get; set; }
+        public string CA { get; set; }
+        public string PF { get; set; }
+        public string ExtraWork { get; set; }
+        public string Incentive { get; set; }
+        public string TotalIncome { get; set; }
+        public string OtherPay { get; set; }
+        public string ContributionTosociety { get; set; }
+        public string Advance { get; set; }
+        public string TDS { get; set; }
+        public string Insurance { get; set; }
+        public string Other { get; set; }
+        public string TotalDeduction { get; set; }
+        public string NetSalary { get; set; }
+        public string MonthName { get; set; }
+        public string Year { get; set; }
+
+        public DataSet EmployeeSalarySlipBy()
+        {
+            SqlParameter[] para ={
+                                       new SqlParameter ("@FromDate",FromDate),
+                                       new SqlParameter ("@ToDate",ToDate),
+                                       new SqlParameter ("@Pk_PaidSalId",Pk_PaidSalId),
+                                        new SqlParameter ("@FK_EmpID",EmployeeID),
+            };
+            DataSet ds = Connection.ExecuteQuery("GetDataForSalarySlip", para);
+            return ds;
+        }
+    }
+
+    public class SalarySlipPrintAPI
+    {
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
+        public string Pk_PaidSalId { get; set; }
+        public string EmployeeID { get; set; }
+
+        public string EmployeeCode { get; set; }
+        public string EmployeeName { get; set; }
+        public string TotalIncome { get; set; }
+        public string TotalDeduction { get; set; }
+        public string NetSalary { get; set; }
+        public string MonthName { get; set; }
+        public string Year { get; set; }
+        public string Basic { get; set; }
+        public string HRA { get; set; }
+        public string MA { get; set; }
+        public string PA { get; set; }
+        public string CA { get; set; }
+        public string PF { get; set; }
+        public string ExtraWork { get; set; }
+        public string Incentive { get; set; }
+        public string OtherPay { get; set; }
+        public string ContributionTosociety { get; set; }
+        public string Advance { get; set; }
+        public string TDS { get; set; }
+        public string Insurance { get; set; }
+        public string Other { get; set; }
+        public string Message { get; set; }
+
+        public DataSet EmployeeSalarySlipBy()
+        {
+            SqlParameter[] para ={
+                                       new SqlParameter ("@FromDate",FromDate),
+                                       new SqlParameter ("@ToDate",ToDate),
+                                       new SqlParameter ("@Pk_PaidSalId",Pk_PaidSalId),
+                                        new SqlParameter ("@FK_EmpID",EmployeeID),
+            };
+            DataSet ds = Connection.ExecuteQuery("GetDataForSalarySlip", para);
+            return ds;
+        }
+    }
+
+    public class LeaveListAPI
+    {
+        public string AddedBy { get; set; }
+        public string Pk_StudentID { get; set; }
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
+        public string Status { get; set; }
+        public string StudentName { get; set; }
+        public string PK_ClassID { get; set; }
+        public string Fk_SectionID { get; set; }
+        public string PK_TeacherID { get; set; }
+        public string Message { get; set; }
+        
+        public string Reason { get; set; }
+        public string ClassName { get; set; }
+        public string SectionName { get; set; }
+        public string PK_StdntLeaveID { get; set; }
+        public string Description { get; set; }
+        public List<LeaveListAPI> listStudent { get; set; }
+        public string Fk_ClassID { get; set; }
+        public string TeacherID { get; set; }
+
+        public DataSet LeaveListParent()
+        {
+            SqlParameter[] para ={
+                                     new SqlParameter("@FK_ParentID",AddedBy),
+                                     new SqlParameter("@FK_StudentID",Pk_StudentID),
+                                     new SqlParameter("@FromDate",FromDate),
+                                     new SqlParameter("@ToDate",ToDate),
+                                     new SqlParameter("@Status",Status),
+                                     new SqlParameter("@StudentName",StudentName),
+                                     new SqlParameter("@Fk_ClassID",PK_ClassID),
+                                     new SqlParameter("@Fk_SectionID",Fk_SectionID),
+                                     new SqlParameter("@FK_TeacherID",PK_TeacherID)
+
+                               };
+            DataSet ds = Connection.ExecuteQuery("TeacherStudentsLeaveApplication", para);
+            return ds;
+
+        }
+
+        public DataSet GetClassList()
+        {
+            SqlParameter[] para ={
+                                    new SqlParameter("@PK_ClassID",Fk_ClassID),
+                                    new SqlParameter("@TeacherID",TeacherID),
+
+                                };
+
+            DataSet ds = Connection.ExecuteQuery("GetClassList", para);
+            return ds;
+        }
+    }
+
+    public class SearchLeaveAPI
+    {
+        public string Fk_ClassID { get; set; }
+        public string TeacherID { get; set; }
+
+        public string PK_SectionId { get; set; }
+        public string Pk_ClassId { get; set; }
+
+        public List<SearchLeaveAPI> listStudent { get; set; }
+        public string AddedBy { get; set; }
+        public string Pk_StudentID { get; set; }
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
+        public string Status { get; set; }
+        public string StudentName { get; set; }
+        public string PK_ClassID { get; set; }
+        public string Fk_SectionID { get; set; }
+        public string PK_TeacherID { get; set; }
+        public string Message { get; set; }
+        public string Description { get; set; }
+        public string PK_StdntLeaveID { get; set; }
+        public string SectionName { get; set; }
+        public string ClassName { get; set; }
+        public string Reason { get; set; }
+
+
+        public DataSet GetClassList()
+        {
+            SqlParameter[] para ={
+                                    new SqlParameter("@PK_ClassID",Fk_ClassID),
+                                    new SqlParameter("@TeacherID",TeacherID),
+
+                                };
+
+            DataSet ds = Connection.ExecuteQuery("GetClassList", para);
+            return ds;
+        }
+
+        public DataSet GettingSectionList()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@PK_SectionID",PK_SectionId),
+                new SqlParameter("@Pk_ClassID",Pk_ClassId)
+            };
+            DataSet ds = Connection.ExecuteQuery("GetSectionList", para);
+            return ds;
+        }
+
+        public DataSet LeaveListParent()
+        {
+            SqlParameter[] para ={
+                                     new SqlParameter("@FK_ParentID",AddedBy),
+                                     new SqlParameter("@FK_StudentID",Pk_StudentID),
+                                     new SqlParameter("@FromDate",FromDate),
+                                     new SqlParameter("@ToDate",ToDate),
+                                     new SqlParameter("@Status",Status),
+                                     new SqlParameter("@StudentName",StudentName),
+                                     new SqlParameter("@Fk_ClassID",PK_ClassID),
+                                     new SqlParameter("@Fk_SectionID",Fk_SectionID),
+                                     new SqlParameter("@FK_TeacherID",PK_TeacherID)
+
+                               };
+            DataSet ds = Connection.ExecuteQuery("TeacherStudentsLeaveApplication", para);
+            return ds;
+
+        }
+    }
+
+    public class ApproveLeaveAPI
+    {
+        public string PK_StdntLeaveID { get; set; }
+        public string Pk_StudentID { get; set; }
+        public string Description { get; set; }
+        public string UpdatedBy { get; set; }
+        public string Status { get; set; }
+        public string Session { get; set; }
+        public string Message { get; set; }
+
+        public DataSet UpdatingStudentLeaveAplcn()
+        {
+            SqlParameter[] para ={
+                                   new SqlParameter("@PK_StdntLeaveID",PK_StdntLeaveID),
+                                    new SqlParameter("@Pk_StudentID",Pk_StudentID),
+                                     new SqlParameter("@Description",Description),
+                                      new SqlParameter("@UpdatedBy",UpdatedBy),
+                                      new SqlParameter("@Status",Status),
+                                          new SqlParameter("@SessionID",Session),
+                               };
+            DataSet ds = Connection.ExecuteQuery("UpdateStudentLeaveApplication", para);
+            return ds;
+        }
+    }
+
+
+    public class DeclineLeaveAPI
+    {
+        public string PK_StdntLeaveID { get; set; }
+        public string Pk_StudentID { get; set; }
+        public string Description { get; set; }
+        public string UpdatedBy { get; set; }
+        public string Status { get; set; }
+        public string Session { get; set; }
+        public string Message { get; set; }
+
+        public DataSet UpdatingStudentLeaveAplcn()
+        {
+            SqlParameter[] para ={
+                                   new SqlParameter("@PK_StdntLeaveID",PK_StdntLeaveID),
+                                    new SqlParameter("@Pk_StudentID",Pk_StudentID),
+                                     new SqlParameter("@Description",Description),
+                                      new SqlParameter("@UpdatedBy",UpdatedBy),
+                                      new SqlParameter("@Status",Status),
+                                          new SqlParameter("@SessionID",Session),
+                               };
+            DataSet ds = Connection.ExecuteQuery("UpdateStudentLeaveApplication", para);
+            return ds;
+        }
+    }
+
+    public class PendingLeaveAPI
+    {
+        public string Fk_ClassID { get; set; }
+        public string TeacherID { get; set; }
+        
+        public string AddedBy { get; set; }
+        public string Pk_StudentID { get; set; }
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
+        public string Status { get; set; }
+        public string StudentName { get; set; }
+        public string PK_ClassID { get; set; }
+        public string Fk_SectionID { get; set; }
+        public string PK_TeacherID { get; set; }
+        public string Message { get; set; }
+        public string Description { get; set; }
+        public string PK_StdntLeaveID { get; set; }
+        public string SectionName { get; set; }
+        public string ClassName { get; set; }
+        public string Reason { get; set; }
+        public List<PendingLeaveAPI> listStudent { get; set; }
+
+
+        public DataSet GetClassList()
+        {
+            SqlParameter[] para ={
+                                    new SqlParameter("@PK_ClassID",Fk_ClassID),
+                                    new SqlParameter("@TeacherID",TeacherID),
+
+                                };
+
+            DataSet ds = Connection.ExecuteQuery("GetClassList", para);
+            return ds;
+        }
+
+      
+        public DataSet LeaveListParent()
+        {
+            SqlParameter[] para ={
+                                     new SqlParameter("@FK_ParentID",AddedBy),
+                                     new SqlParameter("@FK_StudentID",Pk_StudentID),
+                                     new SqlParameter("@FromDate",FromDate),
+                                     new SqlParameter("@ToDate",ToDate),
+                                     new SqlParameter("@Status",Status),
+                                     new SqlParameter("@StudentName",StudentName),
+                                     new SqlParameter("@Fk_ClassID",PK_ClassID),
+                                     new SqlParameter("@Fk_SectionID",Fk_SectionID),
+                                     new SqlParameter("@FK_TeacherID",PK_TeacherID)
+
+                               };
+            DataSet ds = Connection.ExecuteQuery("TeacherStudentsLeaveApplication", para);
+            return ds;
+
+        }
+    }
 }
