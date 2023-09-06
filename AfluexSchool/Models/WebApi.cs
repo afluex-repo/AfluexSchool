@@ -768,6 +768,12 @@ namespace APSSchool.Models
 
     }
 
+
+
+
+
+
+
     public class DeleteNotice
     {
         public string Status { get; set; }
@@ -943,7 +949,7 @@ namespace APSSchool.Models
 
         public string DeviceId { get; set; }
 
-
+         
         public DataSet UpdateDeviceId()
         {
             SqlParameter[] para ={new SqlParameter ("@DeviceId",DeviceId),
@@ -954,7 +960,7 @@ namespace APSSchool.Models
         }
 
 
-    }
+    } 
 
 
     public class TeacherLogin
@@ -978,7 +984,7 @@ namespace APSSchool.Models
             SqlParameter[] para ={new SqlParameter ("@LoginId",LoginId),
                                 new SqlParameter("@Password",Password),
              new SqlParameter("@UserType","3")};
-            DataSet ds = Connection.ExecuteQuery("Login", para);
+            DataSet ds = Connection.ExecuteQuery("Login",  para);
             return ds;
         }
         public DataSet SaveDeviceDetails()
