@@ -1232,7 +1232,7 @@ namespace APSSchool.Controllers
                 return Json(obj, JsonRequestBehavior.AllowGet);
             }
             if (objParameters.Password == "" || objParameters.Password == null)
-            {
+             {
                 obj.Status = "1";
                 obj.ErrorMessage = "Please Enter Password";
                 return Json(obj, JsonRequestBehavior.AllowGet);
@@ -1555,7 +1555,7 @@ namespace APSSchool.Controllers
 
         public ActionResult DeleteHomeWork(DeleteHomeWOrk objParameters)
         {
-            DeleteHomeWOrk obj = new DeleteHomeWOrk();
+            DeleteHomeWOrk obj = new DeleteHomeWOrk(); 
 
             try
             {
@@ -1767,7 +1767,7 @@ namespace APSSchool.Controllers
                 obj.Status = "1";
                 obj.ErrorMessage = "Please Pass Section";
                 return Json(obj, JsonRequestBehavior.AllowGet);
-            }
+            } 
             if (objParameters.Notice == "" || objParameters.Notice == null)
             {
                 obj.Status = "1";
@@ -1775,20 +1775,15 @@ namespace APSSchool.Controllers
                 return Json(obj, JsonRequestBehavior.AllowGet);
             }
             try
-            {
-
+             {
                 DataSet dsResult = objParameters.SaveNotice();
                 if (dsResult != null && dsResult.Tables[0].Rows.Count > 0)
                 {
                     if (dsResult.Tables[0].Rows[0]["Msg"].ToString() == "1")
                     {
-
                         obj.Status = "0";
                         obj.ErrorMessage = "Notice saved successfull !!";
-
-
-
-                    }
+                    } 
                     else
                     {
                         obj.Status = "1";
@@ -1811,7 +1806,7 @@ namespace APSSchool.Controllers
         }
 
         public ActionResult NoticeList(NoticeList objParameters)
-        {
+         {
             NoticeList obj = new NoticeList();
             List<NoticeData> datalist = new List<NoticeData>();
             try
@@ -1821,42 +1816,32 @@ namespace APSSchool.Controllers
                 if (dsResult != null && dsResult.Tables[1].Rows.Count > 0)
                 {
                     if (dsResult.Tables[1].Rows[0]["Msg"].ToString() == "1")
-                    {
-
-
+                     {
                         obj.Status = "0";
                         foreach (DataRow row0 in (dsResult.Tables[1].Rows))
                         {
-
-
                             obj.lstNoticeList = datalist;
-
-
                         }
                         List<NoticeDetails> objstudent = new List<NoticeDetails>();
-
                         {
                             #region Menu
-                            foreach (DataRow row1 in (dsResult.Tables[1].Rows))
+                            foreach (DataRow row1  in (dsResult.Tables[1].Rows))
                             {
                                 objstudent.Add(new NoticeDetails
-
                                 {
                                     NoticeName = row1["NoticeName"].ToString(),
                                     NoticeDate = row1["NoticeDate"].ToString(),
                                     PK_NoticeId = row1["PK_NoticeId"].ToString(),
-
                                 });
                             }
                             datalist.Add(new NoticeData
                             {
                                 Title = "Notice Details",
                                 NoticeDetails = objstudent
-
                             });
                             #endregion
                         }
-                    }
+                    } 
                 }
                 else
                 {
@@ -1991,47 +1976,34 @@ namespace APSSchool.Controllers
             List<LeaveListData> datalist = new List<LeaveListData>();
             try
             {
-
                 DataSet dsResult = objParameters.TeacherStudentsLeaveApplication();
-                if (dsResult != null && dsResult.Tables[0].Rows.Count > 0)
+                 if (dsResult != null && dsResult.Tables[0].Rows.Count > 0)
                 {
                     if (dsResult.Tables[0].Rows[0]["Msg"].ToString() == "1")
                     {
-
-
                         obj.Status = "0";
                         foreach (DataRow row0 in (dsResult.Tables[0].Rows))
                         {
-
-
                             obj.lstleavelist = datalist;
-
-
                         }
                         List<LeaveListDetails> objstudent = new List<LeaveListDetails>();
-
                         {
                             #region Menu
                             foreach (DataRow row1 in (dsResult.Tables[0].Rows))
                             {
                                 objstudent.Add(new LeaveListDetails
-
                                 {
-
-
                                     Reason = row1["Reason"].ToString(),
                                     FromDate = row1["FromDate"].ToString(),
                                     ToDate = row1["ToDate"].ToString(),
                                     Status = row1["IsApproved"].ToString(),
                                     PK_StdntLeaveID = row1["PK_StdntLeaveID"].ToString(),
-
                                 });
                             }
                             datalist.Add(new LeaveListData
                             {
                                 Title = "Leave Details",
                                 LeaveListDetails = objstudent
-
                             });
                             #endregion
                         }
@@ -2040,7 +2012,6 @@ namespace APSSchool.Controllers
                 else
                 {
                     obj.Status = "1";
-
                 }
                 return Json(obj, JsonRequestBehavior.AllowGet);
             }
@@ -3414,5 +3385,134 @@ namespace APSSchool.Controllers
             }
         }
     
+
+        public ActionResult GetClassList(GetClassAPI model)
+        {
+            try
+            {
+                //GetClassAPI obj = new GetClassAPI();
+                List<GetClassAPI> listq = new List<GetClassAPI>();
+                int count1 = 0;
+                List<SelectListItem> ddlClass = new List<SelectListItem>();
+                DataSet ds2 = model.GetClassList();
+                if (ds2 != null && ds2.Tables.Count > 0 && ds2.Tables[1].Rows.Count > 0)
+                {
+                    foreach (DataRow r in ds2.Tables[1].Rows)
+                    {
+                        if (count1 == 0)
+                        {
+                            ddlClass.Add(new SelectListItem { Text = "--Select Class--", Value = "0" });
+                        }
+                        ddlClass.Add(new SelectListItem { Text = r["ClassName"].ToString(), Value = r["PK_ClassID"].ToString() });
+                        count1 = count1 + 1;
+                    }
+                }
+
+                ViewBag.ddlClass = ddlClass;
+
+                foreach (DataRow r in ds2.Tables[1].Rows)
+                {
+                    GetClassAPI obj = new GetClassAPI();
+
+                    obj.ClassName = r["ClassName"].ToString();
+                    obj.Fk_ClassID = r["PK_ClassID"].ToString();
+                    listq.Add(obj);
+                }
+                model.listClass = listq;
+
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                model.Message = ex.Message;
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+        public ActionResult GetSectionList(GetSectionAPI model)
+        {
+            try
+            {
+                List<GetSectionAPI> listq = new List<GetSectionAPI>();
+                List<SelectListItem> ddlsection = new List<SelectListItem>();
+               
+                DataSet ds = model.GetSectionByClass();
+
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+                {
+                    foreach (DataRow r in ds.Tables[1].Rows)
+                    {
+
+                        ddlsection.Add(new SelectListItem { Text = r["SectionName"].ToString(), Value = r["PK_SectionID"].ToString() });
+
+                    }
+                }
+
+                ViewBag.ddlsection = ddlsection;
+
+                foreach (DataRow r in ds.Tables[1].Rows)
+                {
+                    GetSectionAPI obj = new GetSectionAPI();
+
+                    obj.ClassName = r["ClassName"].ToString();
+                    obj.Fk_ClassID = r["Fk_ClassID"].ToString();
+                    obj.SectionName = r["SectionName"].ToString();
+                    obj.PK_SectionId = r["PK_SectionID"].ToString();
+                    listq.Add(obj);
+                }
+                model.listSection = listq;
+
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                model.Message = ex.Message;
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+        public ActionResult GetSubjectNameBySection(GetSubjectAPI model)
+        {
+            try
+            {
+                List<GetSubjectAPI> listq = new List<GetSubjectAPI>();
+                List<SelectListItem> ddlSection = new List<SelectListItem>();
+
+                DataSet ds = model.GetSubjectNameBySection();
+
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+                {
+                    foreach (DataRow r in ds.Tables[1].Rows)
+                    {
+
+                        ddlSection.Add(new SelectListItem { Text = r["SubjectName"].ToString(), Value = r["Fk_SubjectID"].ToString() });
+
+                    }
+                }
+                ViewBag.ddlSubjectName = ddlSection;
+
+                foreach (DataRow r in ds.Tables[1].Rows)
+                {
+                    GetSubjectAPI obj = new GetSubjectAPI();
+                    
+                    obj.SubjectName = r["SubjectName"].ToString();
+                    obj.Fk_SubjectID = r["Fk_SubjectID"].ToString();
+                    listq.Add(obj);
+                }
+                model.listSection = listq;
+
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                model.Message = ex.Message;
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+
     }
 }
