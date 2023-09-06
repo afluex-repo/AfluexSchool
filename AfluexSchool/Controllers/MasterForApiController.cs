@@ -1230,7 +1230,7 @@ namespace APSSchool.Controllers
                 return Json(obj, JsonRequestBehavior.AllowGet);
             }
             if (objParameters.Password == "" || objParameters.Password == null)
-            {
+             {
                 obj.Status = "1";
                 obj.ErrorMessage = "Please Enter Password";
                 return Json(obj, JsonRequestBehavior.AllowGet);
@@ -1553,7 +1553,7 @@ namespace APSSchool.Controllers
 
         public ActionResult DeleteHomeWork(DeleteHomeWOrk objParameters)
         {
-            DeleteHomeWOrk obj = new DeleteHomeWOrk();
+            DeleteHomeWOrk obj = new DeleteHomeWOrk(); 
 
             try
             {
@@ -1765,7 +1765,7 @@ namespace APSSchool.Controllers
                 obj.Status = "1";
                 obj.ErrorMessage = "Please Pass Section";
                 return Json(obj, JsonRequestBehavior.AllowGet);
-            }
+            } 
             if (objParameters.Notice == "" || objParameters.Notice == null)
             {
                 obj.Status = "1";
@@ -1773,20 +1773,15 @@ namespace APSSchool.Controllers
                 return Json(obj, JsonRequestBehavior.AllowGet);
             }
             try
-            {
-
+             {
                 DataSet dsResult = objParameters.SaveNotice();
                 if (dsResult != null && dsResult.Tables[0].Rows.Count > 0)
                 {
                     if (dsResult.Tables[0].Rows[0]["Msg"].ToString() == "1")
                     {
-
                         obj.Status = "0";
                         obj.ErrorMessage = "Notice saved successfull !!";
-
-
-
-                    }
+                    } 
                     else
                     {
                         obj.Status = "1";
@@ -1809,7 +1804,7 @@ namespace APSSchool.Controllers
         }
 
         public ActionResult NoticeList(NoticeList objParameters)
-        {
+         {
             NoticeList obj = new NoticeList();
             List<NoticeData> datalist = new List<NoticeData>();
             try
@@ -1819,42 +1814,32 @@ namespace APSSchool.Controllers
                 if (dsResult != null && dsResult.Tables[1].Rows.Count > 0)
                 {
                     if (dsResult.Tables[1].Rows[0]["Msg"].ToString() == "1")
-                    {
-
-
+                     {
                         obj.Status = "0";
                         foreach (DataRow row0 in (dsResult.Tables[1].Rows))
                         {
-
-
                             obj.lstNoticeList = datalist;
-
-
                         }
                         List<NoticeDetails> objstudent = new List<NoticeDetails>();
-
                         {
                             #region Menu
-                            foreach (DataRow row1 in (dsResult.Tables[1].Rows))
+                            foreach (DataRow row1  in (dsResult.Tables[1].Rows))
                             {
                                 objstudent.Add(new NoticeDetails
-
                                 {
                                     NoticeName = row1["NoticeName"].ToString(),
                                     NoticeDate = row1["NoticeDate"].ToString(),
                                     PK_NoticeId = row1["PK_NoticeId"].ToString(),
-
                                 });
                             }
                             datalist.Add(new NoticeData
                             {
                                 Title = "Notice Details",
                                 NoticeDetails = objstudent
-
                             });
                             #endregion
                         }
-                    }
+                    } 
                 }
                 else
                 {
@@ -1989,47 +1974,34 @@ namespace APSSchool.Controllers
             List<LeaveListData> datalist = new List<LeaveListData>();
             try
             {
-
                 DataSet dsResult = objParameters.TeacherStudentsLeaveApplication();
-                if (dsResult != null && dsResult.Tables[0].Rows.Count > 0)
+                 if (dsResult != null && dsResult.Tables[0].Rows.Count > 0)
                 {
                     if (dsResult.Tables[0].Rows[0]["Msg"].ToString() == "1")
                     {
-
-
                         obj.Status = "0";
                         foreach (DataRow row0 in (dsResult.Tables[0].Rows))
                         {
-
-
                             obj.lstleavelist = datalist;
-
-
                         }
                         List<LeaveListDetails> objstudent = new List<LeaveListDetails>();
-
                         {
                             #region Menu
                             foreach (DataRow row1 in (dsResult.Tables[0].Rows))
                             {
                                 objstudent.Add(new LeaveListDetails
-
                                 {
-
-
                                     Reason = row1["Reason"].ToString(),
                                     FromDate = row1["FromDate"].ToString(),
                                     ToDate = row1["ToDate"].ToString(),
                                     Status = row1["IsApproved"].ToString(),
                                     PK_StdntLeaveID = row1["PK_StdntLeaveID"].ToString(),
-
                                 });
                             }
                             datalist.Add(new LeaveListData
                             {
                                 Title = "Leave Details",
                                 LeaveListDetails = objstudent
-
                             });
                             #endregion
                         }
@@ -2038,7 +2010,6 @@ namespace APSSchool.Controllers
                 else
                 {
                     obj.Status = "1";
-
                 }
                 return Json(obj, JsonRequestBehavior.AllowGet);
             }
