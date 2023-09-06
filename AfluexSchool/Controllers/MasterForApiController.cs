@@ -2621,25 +2621,27 @@ namespace APSSchool.Controllers
         #region HomeworkByTeacher
         public ActionResult SaveHomework(SaveHomeworkAPI obj, HttpPostedFileBase StudentFiles)
         {
-           
-
             if (obj.Fk_ClassID == "0")
             {
+                obj.Status = "1";
                 obj.Message = "Please Select Class!!";
                 return Json(obj, JsonRequestBehavior.AllowGet);
             }
             if (obj.Fk_SectionID == "0")
             {
+                obj.Status = "1";
                 obj.Message = "Please Select Section!!";
                 return Json(obj, JsonRequestBehavior.AllowGet);
             }
             if (obj.SubjectID == "0")
             {
+                obj.Status = "1";
                 obj.Message = "Please Select Subject!!";
                 return Json(obj, JsonRequestBehavior.AllowGet);
             }
             if (obj.HomeworkDate == "" || obj.HomeworkDate == null)
             {
+                obj.Status = "1";
                 obj.Message = "Please Enter Date!!";
                 return Json(obj, JsonRequestBehavior.AllowGet);
             }
@@ -2660,12 +2662,15 @@ namespace APSSchool.Controllers
                     if (ds.Tables[0].Rows[0]["msg"].ToString() == "1")
                     {
                         SaveHomeworkAPI obj1 = new SaveHomeworkAPI();
+                        obj1.Status = "0";
                         obj1.Message = "Homework Assigned successfully";
                         return Json(obj1, JsonRequestBehavior.AllowGet);
                     }
                     else
                     {
+                        
                         SaveHomeworkAPI obj1 = new SaveHomeworkAPI();
+                        obj1.Status = "1";
                         obj1.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                         return Json(obj1, JsonRequestBehavior.AllowGet);
                     }
@@ -2674,6 +2679,7 @@ namespace APSSchool.Controllers
             catch
             {
                 SaveHomeworkAPI obj1 = new SaveHomeworkAPI();
+                obj1.Status = "1";
                 obj1.Message = "Homework Not Assigned Successfully";
                 return Json(obj1, JsonRequestBehavior.AllowGet);
 
@@ -2703,11 +2709,13 @@ namespace APSSchool.Controllers
                 }
                 objParameters.listStudent = list;
 
+                objParameters.Status = "0";
                 objParameters.Message = "List Fetched.";
                 return Json(objParameters, JsonRequestBehavior.AllowGet);
             }
             else
             {
+                objParameters.Status = "1";
                 objParameters.Message = "List Not Fetched !!";
                 return Json(objParameters, JsonRequestBehavior.AllowGet);
             }
@@ -2789,11 +2797,13 @@ namespace APSSchool.Controllers
                 }
                 model.lstList = lst;
 
+                model.Status = "0";
                 model.Message = "Attendence List Fetched.";
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
             else
             {
+                model.Status = "1";
                 model.Message = "Attendence List Not Fetched.";
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
@@ -2844,11 +2854,13 @@ namespace APSSchool.Controllers
                 }
                 model.lstList = lst;
 
+                model.Status = "0";
                 model.Message = "Salary Slip List Fetched.";
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
             else
             {
+                model.Status = "1";
                 model.Message = "Salary Slip List Fetched.";
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
@@ -2905,11 +2917,13 @@ namespace APSSchool.Controllers
                     ViewBag.EmailID = SoftwareDetails.EmailID;
                 }
 
+                model.Status = "0";
                 model.Message = "Salary Slip Print.";
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
             else
             {
+                model.Status = "1";
                 model.Message = "Salary Slip Not Print.";
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
@@ -3108,11 +3122,12 @@ namespace APSSchool.Controllers
                         listq.Add(obj);
                 }
                 model.listStudent = listq;
-                
+                model.Status = "0";
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
             else
             {
+                model.Status = "1";
                 model.Message = "Leave List Not Fetched.";
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
@@ -3219,11 +3234,13 @@ namespace APSSchool.Controllers
                         list.Add(obj);
                 }
                 model.listStudent = list;
-                
+
+                model.Status = "0";
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
             else
             {
+                model.Status = "1";
                 model.Message = "Search Leave List Not Fetched.";
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
@@ -3253,19 +3270,23 @@ namespace APSSchool.Controllers
                         {
                             if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                             {
-                                model.Message = "Leave Approved Successfully";
+                            model.Status = "1";
+                            model.Message = "Leave Approved Successfully";
                                 return Json(model, JsonRequestBehavior.AllowGet);
 
                             }
                             else if (ds.Tables[0].Rows[0]["Msg"].ToString() == "0")
                             {
-                                model.Message = "Leave Not Approved Successfully";
+                            model.Status = "1";
+                            model.Message = "Leave Not Approved Successfully";
                                 return Json(model, JsonRequestBehavior.AllowGet);
                             }
                         }
                     //}
                 }
-                catch { chkselect = "0"; }
+                catch { chkselect = "0";
+                    model.Status = "1";
+                }
 
             }
             return Json(model, JsonRequestBehavior.AllowGet);
@@ -3295,18 +3316,22 @@ namespace APSSchool.Controllers
                         {
                             if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                             {
-                                model.Message = "Leave Decline Successfully";
+                            model.Status = "0";
+                            model.Message = "Leave Decline Successfully";
                                 return Json(model, JsonRequestBehavior.AllowGet);
                             }
                             else if (ds.Tables[0].Rows[0]["Msg"].ToString() == "0")
                             {
-                                model.Message = "Leave Not Decline Successfully";
+                            model.Status = "1";
+                            model.Message = "Leave Not Decline Successfully";
                                 return Json(model, JsonRequestBehavior.AllowGet);
                             }
                        // }
                     }
                 }
-                catch { chkselect = "0"; }
+                catch { chkselect = "0";
+                    model.Status = "1";
+                }
 
             }
             return Json(model, JsonRequestBehavior.AllowGet);
@@ -3375,11 +3400,13 @@ namespace APSSchool.Controllers
                 }
                 model.listStudent = listq;
 
+                model.Status = "0";
                 model.Message = "Pending Leave List Fetched.";
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
             else
             {
+                model.Status = "1";
                 model.Message = "Pending Leave List Not Fetched!!";
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
@@ -3420,10 +3447,12 @@ namespace APSSchool.Controllers
                 }
                 model.listClass = listq;
 
+                model.Status = "0";
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
+                model.Status = "1";
                 model.Message = ex.Message;
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
@@ -3463,10 +3492,12 @@ namespace APSSchool.Controllers
                 }
                 model.listSection = listq;
 
+                model.Status = "0";
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
+                model.Status = "1";
                 model.Message = ex.Message;
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
@@ -3503,10 +3534,12 @@ namespace APSSchool.Controllers
                 }
                 model.listSection = listq;
 
+                model.Status = "0";
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
+                model.Status = "1";
                 model.Message = ex.Message;
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
