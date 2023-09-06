@@ -3414,5 +3414,134 @@ namespace APSSchool.Controllers
             }
         }
     
+
+        public ActionResult GetClassList(GetClassAPI model)
+        {
+            try
+            {
+                //GetClassAPI obj = new GetClassAPI();
+                List<GetClassAPI> listq = new List<GetClassAPI>();
+                int count1 = 0;
+                List<SelectListItem> ddlClass = new List<SelectListItem>();
+                DataSet ds2 = model.GetClassList();
+                if (ds2 != null && ds2.Tables.Count > 0 && ds2.Tables[1].Rows.Count > 0)
+                {
+                    foreach (DataRow r in ds2.Tables[1].Rows)
+                    {
+                        if (count1 == 0)
+                        {
+                            ddlClass.Add(new SelectListItem { Text = "--Select Class--", Value = "0" });
+                        }
+                        ddlClass.Add(new SelectListItem { Text = r["ClassName"].ToString(), Value = r["PK_ClassID"].ToString() });
+                        count1 = count1 + 1;
+                    }
+                }
+
+                ViewBag.ddlClass = ddlClass;
+
+                foreach (DataRow r in ds2.Tables[1].Rows)
+                {
+                    GetClassAPI obj = new GetClassAPI();
+
+                    obj.ClassName = r["ClassName"].ToString();
+                    obj.Fk_ClassID = r["PK_ClassID"].ToString();
+                    listq.Add(obj);
+                }
+                model.listClass = listq;
+
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                model.Message = ex.Message;
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+        public ActionResult GetSectionList(GetSectionAPI model)
+        {
+            try
+            {
+                List<GetSectionAPI> listq = new List<GetSectionAPI>();
+                List<SelectListItem> ddlsection = new List<SelectListItem>();
+               
+                DataSet ds = model.GetSectionByClass();
+
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+                {
+                    foreach (DataRow r in ds.Tables[1].Rows)
+                    {
+
+                        ddlsection.Add(new SelectListItem { Text = r["SectionName"].ToString(), Value = r["PK_SectionID"].ToString() });
+
+                    }
+                }
+
+                ViewBag.ddlsection = ddlsection;
+
+                foreach (DataRow r in ds.Tables[1].Rows)
+                {
+                    GetSectionAPI obj = new GetSectionAPI();
+
+                    obj.ClassName = r["ClassName"].ToString();
+                    obj.Fk_ClassID = r["Fk_ClassID"].ToString();
+                    obj.SectionName = r["SectionName"].ToString();
+                    obj.PK_SectionId = r["PK_SectionID"].ToString();
+                    listq.Add(obj);
+                }
+                model.listSection = listq;
+
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                model.Message = ex.Message;
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+        public ActionResult GetSubjectNameBySection(GetSubjectAPI model)
+        {
+            try
+            {
+                List<GetSubjectAPI> listq = new List<GetSubjectAPI>();
+                List<SelectListItem> ddlSection = new List<SelectListItem>();
+
+                DataSet ds = model.GetSubjectNameBySection();
+
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+                {
+                    foreach (DataRow r in ds.Tables[1].Rows)
+                    {
+
+                        ddlSection.Add(new SelectListItem { Text = r["SubjectName"].ToString(), Value = r["Fk_SubjectID"].ToString() });
+
+                    }
+                }
+                ViewBag.ddlSubjectName = ddlSection;
+
+                foreach (DataRow r in ds.Tables[1].Rows)
+                {
+                    GetSubjectAPI obj = new GetSubjectAPI();
+                    
+                    obj.SubjectName = r["SubjectName"].ToString();
+                    obj.Fk_SubjectID = r["Fk_SubjectID"].ToString();
+                    listq.Add(obj);
+                }
+                model.listSection = listq;
+
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                model.Message = ex.Message;
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+
     }
 }

@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace APSSchool.Models
 {
@@ -1818,6 +1819,76 @@ namespace APSSchool.Models
             DataSet ds = Connection.ExecuteQuery("TeacherStudentsLeaveApplication", para);
             return ds;
 
+        }
+    }
+
+
+    public class GetClassAPI
+    {
+        public string Fk_ClassID { get; set; }
+        public string TeacherID { get; set; }
+        public string Message { get; set; }
+        public string Status { get; set; }
+        public string ClassName { get; set; }
+        public List<GetClassAPI> listClass { get; set; }
+
+        public DataSet GetClassList()
+        {
+            SqlParameter[] para ={
+                                    new SqlParameter("@PK_ClassID",Fk_ClassID),
+                                    new SqlParameter("@TeacherID",TeacherID),
+
+                                };
+
+            DataSet ds = Connection.ExecuteQuery("GetClassList", para);
+            return ds;
+        }
+    }
+
+    public class GetSectionAPI
+    {
+        public string PK_SectionId { get; set; }
+        public string SectionName { get; set; }
+        public List<GetSectionAPI> listSection { get; set;}
+        public string Fk_ClassID { get; set; }
+        public string ClassName { get; set; }
+        public string TeacherID { get; set; }
+        public string Message { get; set; }
+
+
+        public DataSet GetSectionByClass()
+        {
+            SqlParameter[] para ={
+                                    new SqlParameter("@Fk_ClassID",Fk_ClassID),
+                                      new SqlParameter("@TeacherID",TeacherID),
+                                };
+            DataSet ds = Connection.ExecuteQuery("GetSectionByClass", para);
+            return ds;
+        }
+    }
+
+
+    public class GetSubjectAPI
+    {
+        public string Fk_SectionID { get; set; }
+        public string SubjectName { get; set; }
+        public List<GetSubjectAPI> listSection { get; set; }
+        public string Fk_ClassID { get; set; }
+        public string Fk_SubjectID { get; set; }
+        public string TeacherID { get; set; }
+        public string Message { get; set; }
+        public string SessionName { get; set; }
+
+        public DataSet GetSubjectNameBySection()
+        {
+            SqlParameter[] para = { new SqlParameter("@Fk_ClassId", Fk_ClassID),
+                                       new SqlParameter("@Fk_SectionId",  Fk_SectionID),
+                                        new SqlParameter("@TeacherID",TeacherID),
+                                           new SqlParameter("@Fk_SessionId",SessionName),
+            };
+
+            DataSet ds = Connection.ExecuteQuery("GetSubjectNameBySection", para);
+            return ds;
         }
     }
 }
