@@ -8,6 +8,8 @@ namespace AfluexSchool.Models
     public class Master : Common
     {
         #region Properties
+        public string Pk_StudentId { get; set; }
+        public string PK_ParentId { get; set; }
         public string ISDailyValue { get; set; }
         public string SessionName { get; set; }
         public string Pk_SessionId { get; set; }
@@ -1139,8 +1141,8 @@ namespace AfluexSchool.Models
         {
             SqlParameter[] para =
            {
-                 new SqlParameter("@Pk_ParentID",AddedBy), 
-                   new SqlParameter("@StudentId",Name)
+                 new SqlParameter("@Pk_ParentID",PK_ParentId), 
+                   new SqlParameter("@StudentId",Pk_StudentId)
             };
             DataSet ds = Connection.ExecuteQuery("GetSyllabusForParent", para);
             return ds;
