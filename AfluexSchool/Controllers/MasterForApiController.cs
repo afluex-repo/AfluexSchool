@@ -3076,9 +3076,9 @@ namespace APSSchool.Controllers
 
 
 
-        public ActionResult LeaveListAD(LeaveListAPI model)
+        public ActionResult TotalLeaveList(LeaveListAPI model)
         {
-            //model.PK_TeacherID = Session["PK_TeacherID"].ToString();
+            
             List<LeaveListAPI> listq = new List<LeaveListAPI>();
             #region ddlhelclass+
             try
@@ -3116,16 +3116,12 @@ namespace APSSchool.Controllers
             List<SelectListItem> ddlStatus = Common.Status();
             ViewBag.ddlStatus = ddlStatus;
 
-            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
-            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+           
             DataSet ds = model.LeaveListParent();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow r in ds.Tables[0].Rows)
                 {
-                    string s = r["IsApproved"].ToString();
-                    if (s != "Pending")
-                    {
                         LeaveListAPI obj = new LeaveListAPI();
 
                         obj.Reason = r["Reason"].ToString();
@@ -3139,11 +3135,9 @@ namespace APSSchool.Controllers
                         obj.PK_StdntLeaveID = r["PK_StdntLeaveID"].ToString();
                         obj.Description = r["Description"].ToString();
                         listq.Add(obj);
-                    }
                 }
                 model.listStudent = listq;
-
-                model.Message = "Leave List Fetched.";
+                
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
             else
@@ -3154,16 +3148,10 @@ namespace APSSchool.Controllers
         }
 
 
-        public ActionResult SearchLeave(SearchLeaveAPI model)
+        public ActionResult TotalLeaves(SearchLeaveAPI model)
         {
             List<SearchLeaveAPI> list = new List<SearchLeaveAPI>();
-            if (model.Status == "0") { model.Status = null; }
-            if (model.PK_ClassID == "0") { model.PK_ClassID = null; }
-            if (model.Fk_SectionID == "0") { model.Fk_SectionID = null; }
-            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
-            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
-
-
+           
             #region ddlhelclass+
             try
             {
@@ -3236,9 +3224,7 @@ namespace APSSchool.Controllers
                 throw ex;
             }
             #endregion
-
-
-
+            
             List<SelectListItem> ddlStatus = Common.Status();
             ViewBag.ddlStatus = ddlStatus;
 
@@ -3247,9 +3233,6 @@ namespace APSSchool.Controllers
             {
                 foreach (DataRow r in ds.Tables[0].Rows)
                 {
-                    string s = r["IsApproved"].ToString();
-                    if (s != "Pending")
-                    {
                         SearchLeaveAPI obj = new SearchLeaveAPI();
 
                         obj.Reason = r["Reason"].ToString();
@@ -3263,11 +3246,9 @@ namespace APSSchool.Controllers
                         obj.PK_StdntLeaveID = r["PK_StdntLeaveID"].ToString();
                         obj.Description = r["Description"].ToString();
                         list.Add(obj);
-                    }
                 }
                 model.listStudent = list;
-
-                model.Message = " Search Leave List Fetched.";
+                
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
             else

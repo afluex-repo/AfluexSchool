@@ -1673,7 +1673,7 @@ namespace AfluexSchool.Controllers
         }
 
         [HttpPost]
-        [OnAction(ButtonName = "SaveAssignTeacher")]
+        [OnAction(ButtonName = "btnSave")]
         [ActionName("AssignSubjecttoTeacher")]
         public ActionResult SaveAssignTeacher(Master model)
         {
