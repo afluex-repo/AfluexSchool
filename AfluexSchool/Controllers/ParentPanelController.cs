@@ -330,6 +330,9 @@ namespace AfluexSchool.Controllers
                 ViewBag.TransactionNo = ds.Tables[0].Rows[0]["TransactionNo"].ToString();
                 ViewBag.TransactionDate = ds.Tables[0].Rows[0]["TransactionDate"].ToString();
                 ViewBag.BankDetails = ds.Tables[0].Rows[0]["BankDetails"].ToString();
+                ViewBag.City = ds.Tables[0].Rows[0]["City"].ToString();
+                ViewBag.Pincode = ds.Tables[0].Rows[0]["PinCode"].ToString();
+                ViewBag.State = ds.Tables[0].Rows[0]["State"].ToString();
 
                 ViewBag.LandLine = Common.SoftwareDetails.LandLine;
                 ViewBag.ContactNo = Common.SoftwareDetails.ContactNo;

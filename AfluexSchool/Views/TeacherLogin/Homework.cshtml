@@ -262,9 +262,9 @@
                 $("#SubjectID").empty();
                 $("#SubjectID").append(
                       $('<option></option>').val(0).html('--Select Subject Name--'));
-                $.each(data.ddlSubjectName, function (index, Sectioncount) {
+                $.each(data.ddlSubjectName, function (index, Subjectcount) {
                     $("#SubjectID").append(
-                          $('<option></option>').val(Sectioncount.Value).html(Sectioncount.Text));
+                          $('<option></option>').val(Subjectcount.Value).html(Subjectcount.Text));
 
                 });
 
