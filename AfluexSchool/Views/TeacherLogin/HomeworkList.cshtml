@@ -225,8 +225,6 @@
             data: { StudentPhoto: $("#HomeworkFile").val(), HomeWorkID: $("#HomeWorkID").val() },
             success: function (data) {
                 if (data.Result == "1") {
-
-
                     var divToPrint = data.HomeworkFile;
                     window.open(divToPrint);
                 }

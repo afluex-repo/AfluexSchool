@@ -1418,6 +1418,7 @@ namespace APSSchool.Models
         public string HomeWorkHTML { get; set; }
         public string SessionName { get; set; }
         public string Message { get; set; }
+        public string Status { get; set; }
         public HttpPostedFileBase StudentFiles { get; set; }
 
         public DataSet SaveHomework()
@@ -1496,6 +1497,7 @@ namespace APSSchool.Models
         public string InTime { get; set; }
         public string OutTime { get; set; }
         public List<AttendenceReportAPI> lstList { get; set; }
+        public string Status { get; set; }
 
         public DataSet AttendanceReport()
         {
@@ -1541,6 +1543,7 @@ namespace APSSchool.Models
         public string NetSalary { get; set; }
         public string MonthName { get; set; }
         public string Year { get; set; }
+        public string Status { get; set; }
 
         public DataSet EmployeeSalarySlipBy()
         {
@@ -1584,6 +1587,7 @@ namespace APSSchool.Models
         public string Insurance { get; set; }
         public string Other { get; set; }
         public string Message { get; set; }
+        public string Status { get; set; }
 
         public DataSet EmployeeSalarySlipBy()
         {
@@ -1860,6 +1864,7 @@ namespace APSSchool.Models
         public string ClassName { get; set; }
         public string TeacherID { get; set; }
         public string Message { get; set; }
+        public string Status { get; set; }
 
 
         public DataSet GetSectionByClass()
@@ -1884,6 +1889,7 @@ namespace APSSchool.Models
         public string TeacherID { get; set; }
         public string Message { get; set; }
         public string SessionName { get; set; }
+        public string Status { get; set; }
 
         public DataSet GetSubjectNameBySection()
         {
