@@ -521,6 +521,7 @@ namespace AfluexSchool.Models
                                          new SqlParameter("@Fk_SectionID",Fk_SectionID),
                                          new SqlParameter("@FK_TeacherID",TeacherID),
                                           new SqlParameter("@Fk_SubjectId",SubjectID)
+                                          //new SqlParameter("@HomeworkFile",HomeworkFile)
 
                                };
             DataSet ds = Connection.ExecuteQuery("HomeWorkList", para);
