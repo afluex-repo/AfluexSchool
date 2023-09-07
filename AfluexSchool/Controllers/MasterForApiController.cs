@@ -2686,89 +2686,53 @@ namespace APSSchool.Controllers
             }
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
-        
 
-        public ActionResult GetHomeworkList(HomeworkListAPI objParameters)
+
+        public ActionResult GetHomeworkList(HomeworkListAPI model)
         {
             List<HomeworkListAPI> list = new List<HomeworkListAPI>();
-            DataSet ds = objParameters.HomeworkList();
-            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            try
             {
-                foreach (DataRow r in ds.Tables[0].Rows)
+                model.HomeworkBy = "Teacher";
+                DataSet ds = model.HomeworkList();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
-                    HomeworkListAPI obj = new HomeworkListAPI();
-                    obj.HomeWorkID = r["Pk_HomeworkID"].ToString();
-                    obj.HomeWorkHTML = r["HomeworkText"].ToString();
-                    obj.StudentPhoto = r["HomeworkFile"].ToString();
-                    obj.HomeworkDate = r["HomeworkDate"].ToString();
-                    obj.ClassName = r["ClassName"].ToString();
-                    obj.SubjectID = r["SubjectName"].ToString();
-                    obj.SectionName = r["SectionName"].ToString();
-                    obj.HomeworkBy = r["HomeworkBy"].ToString();
-                    list.Add(obj);
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        HomeworkListAPI obj = new HomeworkListAPI();
+                        obj.HomeWorkID = r["Pk_HomeworkID"].ToString();
+                        obj.HomeWorkHTML = r["HomeworkText"].ToString();
+                        obj.StudentPhoto = r["HomeworkFile"].ToString();
+                        obj.HomeworkDate = r["HomeworkDate"].ToString();
+                        obj.ClassName = r["ClassName"].ToString();
+                        obj.SubjectID = r["SubjectName"].ToString();
+                        obj.SectionName = r["SectionName"].ToString();
+                        obj.HomeworkBy = r["HomeworkBy"].ToString();
+
+                        list.Add(obj);
+
+                    }
+                    model.listStudent = list;
+
+                    model.Status = "0";
+                    model.Message = "List Fetched.";
+                    return Json(model, JsonRequestBehavior.AllowGet);
                 }
-                objParameters.listStudent = list;
-
-                objParameters.Status = "0";
-                objParameters.Message = "List Fetched.";
-                return Json(objParameters, JsonRequestBehavior.AllowGet);
+                else
+                {
+                    model.Status = "1";
+                    model.Message = "List Not Fetched !!";
+                    return Json(model, JsonRequestBehavior.AllowGet);
+                }
             }
-            else
+            catch
             {
-                objParameters.Status = "1";
-                objParameters.Message = "List Not Fetched !!";
-                return Json(objParameters, JsonRequestBehavior.AllowGet);
+                model.Status = "1";
+                model.Message = "List Not Fetched !!";
+                return Json(model, JsonRequestBehavior.AllowGet);
             }
-            //HomeworkListAPI obj = new HomeworkListAPI();
-            //List<HomeworkListAPI> datalist = new List<HomeworkListAPI>();
-            //try
-            //{
-
-            //    DataSet dsResult = objParameters.HomeworkList();
-            //    if (dsResult != null && dsResult.Tables[0].Rows.Count > 0)
-            //    {
-            //        foreach (DataRow row0 in (dsResult.Tables[0].Rows))
-            //        {
-            //            obj.lstHomeworkByTeacher = datalist;
-            //        }
-            //        List<HomeworkListAPI> objHomework = new List<HomeworkListAPI>();
-            //        {
-
-            //            foreach (DataRow row1 in (dsResult.Tables[0].Rows))
-            //            {
-            //                objHomework.Add(new HomeworkListAPI
-
-            //                {
-            //                    HomeWorkID = row1["Pk_HomeworkID"].ToString(),
-            //                    HomeWorkHTML = row1["HomeworkText"].ToString(),
-            //                    StudentPhoto = row1["HomeworkFile"].ToString(),
-            //                    HomeworkDate = row1["HomeworkDate"].ToString(),
-            //                    ClassName = row1["ClassName"].ToString(),
-            //                    SubjectID = row1["SubjectName"].ToString(),
-            //                    SectionName = row1["SectionName"].ToString(),
-            //                    HomeworkBy = row1["HomeworkBy"].ToString()
-            //            });
-            //            }
-            //            datalist.Add(new HomeworkListAPI
-            //            {
-            //                Title = "HomeworkList",
-            //                MarksDetails = objHomework
-
-            //            });
-            //        }
-            //    }
-            //    else
-            //    {
-            //        obj.Status = "1";
-            //    }
-            //    return Json(obj, JsonRequestBehavior.AllowGet);
-            //}
-            //catch
-            //{
-            //    obj.Status = "1";
-            //    return Json(obj, JsonRequestBehavior.AllowGet);
-            //}
-        }
+        } 
+            
 
         #endregion
         

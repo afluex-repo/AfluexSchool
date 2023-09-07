@@ -1477,8 +1477,8 @@ namespace APSSchool.Models
                                         new SqlParameter("@Fk_ClassId",Fk_ClassID),
                                          new SqlParameter("@Fk_SectionID",Fk_SectionID),
                                          new SqlParameter("@FK_TeacherID",TeacherID),
-                                          new SqlParameter("@Fk_SubjectId",SubjectID),
-                                          new SqlParameter("@HomeworkFile",HomeworkFile)
+                                          new SqlParameter("@Fk_SubjectId",SubjectID)
+                                          //new SqlParameter("@HomeworkFile",HomeworkFile)
 
                                };
             DataSet ds = Connection.ExecuteQuery("HomeWorkList", para);
