@@ -2676,7 +2676,7 @@ namespace APSSchool.Controllers
                     }
                 }
             }
-            catch
+            catch   
             {
                 SaveHomeworkAPI obj1 = new SaveHomeworkAPI();
                 obj1.Status = "1";
