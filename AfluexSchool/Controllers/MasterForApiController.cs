@@ -2671,7 +2671,7 @@ namespace APSSchool.Controllers
                     }
                 }
             }
-            catch
+            catch   
             {
                 SaveHomeworkAPI obj1 = new SaveHomeworkAPI();
                 obj1.Message = "Homework Not Assigned Successfully";
