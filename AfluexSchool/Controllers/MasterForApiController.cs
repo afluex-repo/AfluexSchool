@@ -2705,8 +2705,11 @@ namespace APSSchool.Controllers
                         obj.StudentPhoto = r["HomeworkFile"].ToString();
                         obj.HomeworkDate = r["HomeworkDate"].ToString();
                         obj.ClassName = r["ClassName"].ToString();
-                        obj.SubjectID = r["SubjectName"].ToString();
+                        obj.Fk_ClassID = r["Pk_ClassID"].ToString();
+                        obj.SubjectName = r["SubjectName"].ToString();
+                        obj.SubjectID = r["Pk_SubjectID"].ToString();
                         obj.SectionName = r["SectionName"].ToString();
+                        obj.Fk_SectionID = r["Pk_SectionID"].ToString();
                         obj.HomeworkBy = r["HomeworkBy"].ToString();
 
                         list.Add(obj);
