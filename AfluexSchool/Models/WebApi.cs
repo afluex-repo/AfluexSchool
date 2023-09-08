@@ -1451,6 +1451,7 @@ namespace APSSchool.Models
         public string Fk_SectionID { get; set; }
         public string TeacherID { get; set; }
         public string SubjectID { get; set; }
+        public string SubjectName { get; set; }
         public string HomeworkFile { get; set; }
         public List<HomeworkListAPI> listStudent { get; set; }
         public string Status { get; set; }
