@@ -210,8 +210,7 @@ namespace AfluexSchool.Controllers
 
                     }
                 }
-
-                ViewBag.ddlSubjectName = ddlSection;
+                
                 model.ddlSubjectName = ddlSection;
 
             }
