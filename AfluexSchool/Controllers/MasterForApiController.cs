@@ -2639,12 +2639,12 @@ namespace APSSchool.Controllers
                 obj.Message = "Please Select Subject!!";
                 return Json(obj, JsonRequestBehavior.AllowGet);
             }
-            //if (obj.HomeworkDate == "" || obj.HomeworkDate == null)
-            //{
-            //    obj.Status = "1";
-            //    obj.Message = "Please Enter Date!!";
-            //    return Json(obj, JsonRequestBehavior.AllowGet);
-            //}
+            if (obj.HomeworkDate == "" || obj.HomeworkDate == null)
+            {
+                obj.Status = "1";
+                obj.Message = "Please Enter Date!!";
+                return Json(obj, JsonRequestBehavior.AllowGet);
+            }
             try
             {
                 if (obj.StudentFiles != null)
@@ -2655,7 +2655,7 @@ namespace APSSchool.Controllers
 
                 //obj.AddedBy = Session["PK_TeacherID"].ToString();
                 obj.HomeworkDate = string.IsNullOrEmpty(obj.HomeworkDate) ? null : Common.ConvertToSystemDate(obj.HomeworkDate, "dd/MM/yyyy");
-                //obj.HomeworkBy = "Teacher";
+                obj.HomeworkBy = "Teacher";
                 DataSet ds = obj.SaveHomework();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count>0)
                 {
