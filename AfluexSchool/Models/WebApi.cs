@@ -1904,4 +1904,92 @@ namespace APSSchool.Models
             return ds;
         }
     }
+
+
+
+
+
+
+    public class SaveEmployeeAttendanceRequest
+    {
+        public string InTime { get; set; }
+        public string OutTime { get; set; }
+        public string AttendanceDate { get; set; }
+        public string EmployeeID { get; set; }
+        public string AddedBy { get; set; }
+        public string TeacherPhoto { get; set; }
+        
+       public HttpPostedFileBase UploadFile { get; set; }
+        
+        public string LatiTude { get; set; }
+        public string LongiTude { get; set; }
+        public string Activity { get; set; }
+        
+        public DataSet SaveEmployeeAttendance()
+        {
+            SqlParameter[] para ={
+                                       new SqlParameter ("@Intime",InTime),
+                                       new SqlParameter ("@OutTime",OutTime),
+                                       new SqlParameter ("@AttendanceDate",AttendanceDate),
+                                       new SqlParameter ("@FK_EmpID",EmployeeID),
+                                       new SqlParameter ("@AddedBy",AddedBy),
+                                       new SqlParameter ("@UploadFile",TeacherPhoto),
+                                       new SqlParameter ("@LatiTude",LatiTude),
+                                       new SqlParameter ("@LongiTude",LongiTude)
+            };
+            DataSet ds = Connection.ExecuteQuery("TeacherPunchingPunchout", para);
+            return ds;
+        }
+    }
+
+
+
+    public class SaveEmployeeAttendanceResponse
+    {
+        public string status { get; set; }
+        public string Message { get; set; }
+
+   
+    }
+
+    
+    public class SaveEmployeeAttendancePunchoutRequest
+    {
+        
+        public string OutTime { get; set; }
+        public string AttendanceDate { get; set; }
+        public string EmployeeID { get; set; }
+        public string OutLongitude { get; set; }
+        public string OutLatiTude { get; set; }
+
+        public DataSet SaveEmployeePunchoutAttendance()
+        {
+            SqlParameter[] para ={
+                                       new SqlParameter ("@OutTime",OutTime),
+                                       new SqlParameter ("@AttendanceDate",AttendanceDate),
+                                       new SqlParameter ("@FK_EmpID",EmployeeID),
+                                       new SqlParameter ("@OutLongitude",OutLongitude),
+                                       new SqlParameter ("@OutLatiTude",OutLatiTude)
+            };
+            DataSet ds = Connection.ExecuteQuery("TeacherPunchout", para);
+            return ds;
+        }
+    }
+
+
+
+    public class SaveEmployeeAttendancePunchoutResponse
+    {
+        public string status { get; set; }
+        public string Message { get; set; }
+
+
+    }
+
+
+
+
+
+
+
 }
