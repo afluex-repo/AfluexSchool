@@ -3576,6 +3576,263 @@ namespace APSSchool.Controllers
         }
 
 
+        public ActionResult GetBranch(GetBranchAPI model)
+        {
+            List<GetBranchAPI> listq = new List<GetBranchAPI>();
+            
+            try
+            {
+                int count = 0;
+                List<SelectListItem> ddlBranch = new List<SelectListItem>();
+                DataSet ds1 = model.BranchList();
+                if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow r in ds1.Tables[0].Rows)
+                    {
+                        if (count == 0)
+                        {
+                            ddlBranch.Add(new SelectListItem { Text = "Select Branch", Value = "0" });
+                        }
+                        ddlBranch.Add(new SelectListItem { Text = r["BranchName"].ToString(), Value = r["Pk_BranchID"].ToString() });
+                        count = count + 1;
+                    }
+                }
+
+                ViewBag.ddlBranch = ddlBranch;
+
+                
+                foreach (DataRow r in ds1.Tables[0].Rows)
+                {
+                    GetBranchAPI obj = new GetBranchAPI();
+                    obj.Pk_BranchID = r["Pk_BranchID"].ToString();
+                    obj.BranchName = r["BranchName"].ToString();
+                    listq.Add(obj);
+                }
+                model.listBranch = listq;
+
+                model.Status = "0";
+                model.Message = "Branch Fetched.";
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                model.Status = "1";
+                model.Message = ex.Message;
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+        public ActionResult GetReligion(GetReligionAPI model)
+        {
+            List<GetReligionAPI> listq = new List<GetReligionAPI>();
+            try
+            {
+                int count = 0;
+                List<SelectListItem> ddlReligion = new List<SelectListItem>();
+                DataSet ds1 = model.GetReligion();
+                if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow r in ds1.Tables[0].Rows)
+                    {
+                        if (count == 0)
+                        {
+                            ddlReligion.Add(new SelectListItem { Text = "Select Religion", Value = "0" });
+                        }
+                        ddlReligion.Add(new SelectListItem { Text = r["ReligionName"].ToString(), Value = r["Pk_ReligionId"].ToString() });
+                        count = count + 1;
+                    }
+                }
+
+                ViewBag.ddlReligion = ddlReligion;
+
+                foreach (DataRow r in ds1.Tables[0].Rows)
+                {
+                    GetReligionAPI obj = new GetReligionAPI();
+                    obj.Pk_ReligionId = r["PK_ReligionID"].ToString();
+                    obj.ReligionName = r["ReligionName"].ToString();
+                    listq.Add(obj);
+                }
+                model.listReligion = listq;
+
+                model.Status = "0";
+                model.Message = "Religion Fetched.";
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                model.Status = "1";
+                model.Message = ex.Message;
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+        public ActionResult GetCategory(GetCategoryAPI model)
+        {
+            List<GetCategoryAPI> listq = new List<GetCategoryAPI>();
+            try
+            {
+                int countcat = 0;
+                List<SelectListItem> ddlCategory = new List<SelectListItem>();
+                DataSet ds1 = model.GetCategory();
+                if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow r in ds1.Tables[0].Rows)
+                    {
+                        if (countcat == 0)
+                        {
+                            ddlCategory.Add(new SelectListItem { Text = "Select Category", Value = "0" });
+                        }
+                        ddlCategory.Add(new SelectListItem { Text = r["Category"].ToString(), Value = r["Category"].ToString() });
+                        countcat = countcat + 1;
+                    }
+                }
+                ViewBag.ddlCategory = ddlCategory;
+
+                foreach (DataRow r in ds1.Tables[0].Rows)
+                {
+                    GetCategoryAPI obj = new GetCategoryAPI();
+                    obj.PK_CategoryID = r["PK_CategoryID"].ToString();
+                    obj.Category = r["Category"].ToString();
+                    listq.Add(obj);
+                }
+                model.listCategory = listq;
+
+                model.Status = "0";
+                model.Message = "Category Fetched.";
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                model.Status = "1";
+                model.Message = ex.Message;
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+        public ActionResult GetGender(GetGenderAPI model)
+        {
+            List<GetGenderAPI> listq = new List<GetGenderAPI>();
+            try
+            {
+                int countgen = 0;
+                List<SelectListItem> ddlGender = new List<SelectListItem>();
+                DataSet ds1 = model.GetGender();
+                if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow r in ds1.Tables[0].Rows)
+                    {
+                        if (countgen == 0)
+                        {
+                            ddlGender.Add(new SelectListItem { Text = "Select Gender", Value = "0" });
+                        }
+                        ddlGender.Add(new SelectListItem { Text = r["Gender"].ToString(), Value = r["Gender"].ToString() });
+                        countgen = countgen + 1;
+                    }
+                }
+                ViewBag.ddlGender = ddlGender;
+
+                foreach (DataRow r in ds1.Tables[0].Rows)
+                {
+                    GetGenderAPI obj = new GetGenderAPI();
+                    obj.PK_GenderId = r["PK_GenderId"].ToString();
+                    obj.Gender = r["Gender"].ToString();
+                    listq.Add(obj);
+                }
+                model.listGender = listq;
+
+                model.Status = "0";
+                model.Message = "Gender Fetched.";
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                model.Status = "1";
+                model.Message = ex.Message;
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+        public ActionResult GetTeacherProfile(GetTeacherProfileAPI model)
+        {
+            DataSet ds = model.GetTeacherList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count>0)
+            {
+                model.PK_TeacherID = ds.Tables[0].Rows[0]["PK_TeacherID"].ToString();
+                model.Name = ds.Tables[0].Rows[0]["Name"].ToString();
+                model.FatherName = ds.Tables[0].Rows[0]["FatherName"].ToString();
+                model.DOB = ds.Tables[0].Rows[0]["DOB"].ToString();
+                model.Gender = ds.Tables[0].Rows[0]["Gender"].ToString();
+                model.Category = ds.Tables[0].Rows[0]["Category"].ToString();
+                model.Religion = ds.Tables[0].Rows[0]["FK_ReligionID"].ToString();
+                model.EmailID = ds.Tables[0].Rows[0]["EmailID"].ToString();
+                model.Qualification = ds.Tables[0].Rows[0]["Qualification"].ToString();
+                model.Experience = ds.Tables[0].Rows[0]["Experience"].ToString();
+                model.Image = ds.Tables[0].Rows[0]["ImagePath"].ToString();
+                model.Address = ds.Tables[0].Rows[0]["Address"].ToString();
+                model.LastExperience = ds.Tables[0].Rows[0]["LastExperience"].ToString();
+                model.LastSchool = ds.Tables[0].Rows[0]["LastSchool"].ToString();
+                model.PinCode = ds.Tables[0].Rows[0]["pincode"].ToString();
+                model.City = ds.Tables[0].Rows[0]["City"].ToString();
+                model.State = ds.Tables[0].Rows[0]["State"].ToString();
+                model.MobileNo = ds.Tables[0].Rows[0]["MobileNo"].ToString();
+                model.DOJ = ds.Tables[0].Rows[0]["DOJ"].ToString();
+                model.BranchName = ds.Tables[0].Rows[0]["FK_BranchID"].ToString();
+
+                model.Status = "0";
+                model.Message = "Teacher Details Fetched.";
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                model.Status = "1";
+                model.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+        public ActionResult UpdateTeacherProfile(TeacherProfileUpdate model, HttpPostedFileBase UploadFile)
+        {
+            try
+            {
+                if (model.UploadFile != null)
+                {
+                    model.Image = "../Teacher/" + Guid.NewGuid() + Path.GetExtension(model.UploadFile.FileName);
+                    model.UploadFile.SaveAs(Path.Combine(Server.MapPath(model.Image)));
+                }
+
+                model.DOB = string.IsNullOrEmpty(model.DOB) ? null : Common.ConvertToSystemDate(model.DOB, "dd/MM/yyyy");
+                model.DOJ = string.IsNullOrEmpty(model.DOJ) ? null : Common.ConvertToSystemDate(model.DOJ, "dd/MM/yyyy");
+                DataSet ds = model.UpdateTeacherRecord();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count>0)
+                {
+                    if (ds.Tables[0].Rows[0]["msg"].ToString() == "1")
+                    {
+                        model.Status = "0";
+                        model.Message = "Teacher Details Updated Successfully.";
+                        return Json(model, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        model.Status = "1";
+                        model.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        return Json(model, JsonRequestBehavior.AllowGet);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                model.Status = "1";
+                model.Message = ex.Message;
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
 
 
 
