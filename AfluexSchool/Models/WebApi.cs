@@ -1904,4 +1904,265 @@ namespace APSSchool.Models
             return ds;
         }
     }
+
+
+
+
+
+
+    public class SaveEmployeeAttendanceRequest
+    {
+        public string InTime { get; set; }
+        public string OutTime { get; set; }
+        public string AttendanceDate { get; set; }
+        public string EmployeeID { get; set; }
+        public string AddedBy { get; set; }
+        public string TeacherPhoto { get; set; }
+        
+       public HttpPostedFileBase UploadFile { get; set; }
+        
+        public string LatiTude { get; set; }
+        public string LongiTude { get; set; }
+        public string Activity { get; set; }
+        
+        public DataSet SaveEmployeeAttendance()
+        {
+            SqlParameter[] para ={
+                                       new SqlParameter ("@Intime",InTime),
+                                       new SqlParameter ("@OutTime",OutTime),
+                                       new SqlParameter ("@AttendanceDate",AttendanceDate),
+                                       new SqlParameter ("@FK_EmpID",EmployeeID),
+                                       new SqlParameter ("@AddedBy",AddedBy),
+                                       new SqlParameter ("@UploadFile",TeacherPhoto),
+                                       new SqlParameter ("@LatiTude",LatiTude),
+                                       new SqlParameter ("@LongiTude",LongiTude)
+            };
+            DataSet ds = Connection.ExecuteQuery("TeacherPunchingPunchout", para);
+            return ds;
+        }
+    }
+
+
+
+    public class SaveEmployeeAttendanceResponse
+    {
+        public string status { get; set; }
+        public string Message { get; set; }
+
+   
+    }
+
+    
+    public class SaveEmployeeAttendancePunchoutRequest
+    {
+        
+        public string OutTime { get; set; }
+        public string AttendanceDate { get; set; }
+        public string EmployeeID { get; set; }
+        public string OutLongitude { get; set; }
+        public string OutLatiTude { get; set; }
+
+        public DataSet SaveEmployeePunchoutAttendance()
+        {
+            SqlParameter[] para ={
+                                       new SqlParameter ("@OutTime",OutTime),
+                                       new SqlParameter ("@AttendanceDate",AttendanceDate),
+                                       new SqlParameter ("@FK_EmpID",EmployeeID),
+                                       new SqlParameter ("@OutLongitude",OutLongitude),
+                                       new SqlParameter ("@OutLatiTude",OutLatiTude)
+            };
+            DataSet ds = Connection.ExecuteQuery("TeacherPunchout", para);
+            return ds;
+        }
+    }
+
+
+
+    public class SaveEmployeeAttendancePunchoutResponse
+    {
+        public string status { get; set; }
+        public string Message { get; set; }
+
+
+    }
+
+
+    public class GetBranchAPI
+    {
+        public string Pk_BranchID { get; set; }
+        public string BranchName { get; set; }
+        public string Message { get; set; }
+        public string Status { get; set; }
+        public List<GetBranchAPI> listBranch { get; set; }
+
+        public DataSet BranchList()
+        {
+            SqlParameter[] para ={
+                                   new SqlParameter("@Pk_BranchID",Pk_BranchID)
+                               };
+            DataSet ds = Connection.ExecuteQuery("GetBranchList", para);
+            return ds;
+        }
+    }
+
+   
+    public class GetReligionAPI
+    {
+        public string Pk_ReligionId { get; set; }
+        public string ReligionName { get; set; }
+        public string Message { get; set; }
+        public string Status { get; set; }
+        public List<GetReligionAPI> listReligion { get; set; }
+
+        public DataSet GetReligion()
+        {
+            SqlParameter[] para ={
+                                    new SqlParameter("@Pk_ReligionId",Pk_ReligionId)
+                                };
+            DataSet ds = Connection.ExecuteQuery("GetReligion", para);
+            return ds;
+        }
+    }
+
+
+
+    public class GetCategoryAPI
+    {
+        public string PK_CategoryID { get; set; }
+        public string Category { get; set; }
+        public string Message { get; set; }
+        public string Status { get; set; }
+        public List<GetCategoryAPI> listCategory { get; set; }
+
+        public DataSet GetCategory()
+        {
+
+            DataSet ds = Connection.ExecuteQuery("CategoryList");
+            return ds;
+        }
+    }
+
+
+    public class GetGenderAPI
+    {
+        public string PK_GenderId { get; set; }
+        public string Gender { get; set; }
+        public string Message { get; set; }
+        public string Status { get; set; }
+        public List<GetGenderAPI> listGender { get; set; }
+
+        public DataSet GetGender()
+        {
+
+            DataSet ds = Connection.ExecuteQuery("GenderList");
+            return ds;
+        }
+    }
+
+
+    public class GetTeacherProfileAPI
+    {
+        public string PK_TeacherID { get; set; }
+        public string LoginID { get; set; }
+        public string Name { get; set; }
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
+        public string FatherName { get; set; }
+        public string DOB { get; set; }
+        public string Gender { get; set; }
+        public string Category { get; set; }
+        public string Religion { get; set; }
+        public string EmailID { get; set; }
+        public string Qualification { get; set; }
+        public string Experience { get; set; }
+        public string Image { get; set; }
+        public string Address { get; set; }
+        public string LastExperience { get; set; }
+        public string LastSchool { get; set; }
+        public string PinCode { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string MobileNo { get; set; }
+        public string DOJ { get; set; }
+        public string BranchName { get; set; }
+
+        public string Message { get; set; }
+        public string Status { get; set; }
+
+        public DataSet GetTeacherList()
+        {
+            SqlParameter[] Param ={
+                                      new SqlParameter("@PK_TeacherID",PK_TeacherID),
+                                      new SqlParameter("@LoginID", LoginID),
+                                      new SqlParameter("@TeacherName", Name),
+                                      new SqlParameter("@FromDate",FromDate),
+                                      new SqlParameter("@ToDate",ToDate)
+                                   };
+            DataSet ds = Connection.ExecuteQuery("TeacherList", Param);
+            return ds;
+        }
+    }
+
+
+    public class TeacherProfileUpdate
+    {
+        public string PK_TeacherID { get; set; }
+        public string LoginID { get; set; }
+        public string Name { get; set; }
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
+        public string FatherName { get; set; }
+        public string DOB { get; set; }
+        public string Gender { get; set; }
+        public string Category { get; set; }
+        public string Religion { get; set; }
+        public string EmailID { get; set; }
+        public string Qualification { get; set; }
+        public string Experience { get; set; }
+        public string Image { get; set; }
+        public string Address { get; set; }
+        public string LastExperience { get; set; }
+        public string LastSchool { get; set; }
+        public string PinCode { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string MobileNo { get; set; }
+        public string DOJ { get; set; }
+        public string BranchName { get; set; }
+        public string UpdatedBy { get; set; }
+        public HttpPostedFileBase UploadFile { get; set; }
+
+        public string Message { get; set; }
+        public string Status { get; set; }
+
+        public DataSet UpdateTeacherRecord()
+        {
+            SqlParameter[] Param ={
+                                     new SqlParameter("@PK_TeacherID",PK_TeacherID),
+                                     new SqlParameter("@Name",Name),
+                                     new SqlParameter("@FatherName",FatherName),
+                                     new SqlParameter("@Address",Address),
+                                     new SqlParameter("@pincode",PinCode),
+                                     new SqlParameter("@EmailID",EmailID),
+                                     new SqlParameter("@DOB",DOB),
+                                     new SqlParameter("@LastSchool",LastSchool),
+                                     new SqlParameter("@LastExperience",LastExperience),
+                                     new SqlParameter("@Gender",Gender),
+                                     new SqlParameter("@FK_ReligionID",Religion),
+                                     new SqlParameter("@Category",Category),
+                                     new SqlParameter("@DOJ",DOJ),
+                                     new SqlParameter("Qualification",Qualification),
+                                     new SqlParameter("@Experience",Experience),
+                                     new SqlParameter("@FK_BranchID",BranchName),
+                                     new SqlParameter("@MobileNo",MobileNo),
+                                     new SqlParameter("@Image",Image),
+                                     new SqlParameter("@UpdatedBy",UpdatedBy)
+                                   };
+            DataSet ds = Connection.ExecuteQuery("UpdateTeacherRecord", Param);
+            return ds;
+        }
+    }
+
+
+
 }
