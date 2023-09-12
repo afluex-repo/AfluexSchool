@@ -2676,11 +2676,12 @@ namespace APSSchool.Controllers
                     }
                 }
             }
-            catch
+            catch(Exception ex)
             {
                 SaveHomeworkAPI obj1 = new SaveHomeworkAPI();
                 obj1.Status = "1";
-                obj1.Message = "Homework Not Assigned Successfully";
+                //obj1.Message = "Homework Not Assigned Successfully";
+                obj1.Message = ex.Message;
                 return Json(obj1, JsonRequestBehavior.AllowGet);
 
             }
@@ -3550,7 +3551,7 @@ namespace APSSchool.Controllers
             catch (Exception ex)
             {
                 Response.status = "1";
-                Response.Message = "Somthing Occured Error !";
+                Response.Message = ex.Message;
             }
             return Json(Response, JsonRequestBehavior.AllowGet);
         } 
@@ -3579,10 +3580,10 @@ namespace APSSchool.Controllers
                     }
                 } 
             } 
-            catch 
+            catch (Exception ex)
             {
                 Response.status = "1";
-                Response.Message = "Somthing Occured Error !";
+                Response.Message = ex.Message;
             }
             return Json(Response, JsonRequestBehavior.AllowGet);
         }
