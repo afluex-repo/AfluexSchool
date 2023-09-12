@@ -3217,21 +3217,15 @@ namespace APSSchool.Controllers
 
         public ActionResult ApprovePendingLeave(ApproveLeaveAPI model)
         {
-            string noofrows = Request["hdRows"].ToString();
+            //string noofrows = Request["hdRows"].ToString();
 
-            string chkselect = "";
+            //string chkselect = "";
 
-            for (int i = 1; i < int.Parse(noofrows); i++)
-            {
+            //for (int i = 1; i < int.Parse(noofrows); i++)
+            //{
                 try
                 {
 
-                    // if (Request["chkSelect_ " + i].ToString() == "Checked")
-                    // {
-                    //model.UpdatedBy = Session["PK_TeacherID"].ToString();
-                    //model.PK_StdntLeaveID = Request["PK_StdntLeaveID_ " + i].ToString();
-                    //model.Description = Request["Description_ " + i].ToString();
-                    //model.Pk_StudentID = Request["Pk_StudentID_ " + i].ToString();
                     model.Status = "Approved";
                     DataSet ds = model.UpdatingStudentLeaveAplcn();
                     if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -3254,32 +3248,25 @@ namespace APSSchool.Controllers
                 }
                 catch
                 {
-                    chkselect = "0";
+                    //chkselect = "0";
                     model.Status = "1";
                 }
 
-            }
+            //}
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
 
         public ActionResult DeclinePendingLeave(DeclineLeaveAPI model)
         {
-            string noofrows = Request["hdRows"].ToString();
+            //string noofrows = Request["hdRows"].ToString();
 
-            string chkselect = "";
+            //string chkselect = "";
 
-            for (int i = 1; i < int.Parse(noofrows); i++)
-            {
+            //for (int i = 1; i < int.Parse(noofrows); i++)
+            //{
                 try
                 {
-
-                    //if (Request["chkSelect_ " + i].ToString() == "Checked")
-                    //{
-                    //model.UpdatedBy = Session["PK_TeacherID"].ToString();
-                    //model.PK_StdntLeaveID = Request["PK_StdntLeaveID_ " + i].ToString();
-                    //model.Description = Request["Description_ " + i].ToString();
-                    //model.Pk_StudentID = Request["Pk_StudentID_ " + i].ToString();
                     model.Status = "Declined";
                     DataSet ds = model.UpdatingStudentLeaveAplcn();
                     if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -3301,11 +3288,11 @@ namespace APSSchool.Controllers
                 }
                 catch
                 {
-                    chkselect = "0";
+                    //chkselect = "0";
                     model.Status = "1";
                 }
 
-            }
+            //}
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
