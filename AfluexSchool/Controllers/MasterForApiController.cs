@@ -2647,12 +2647,11 @@ namespace APSSchool.Controllers
             }
             try
             {
-                if (obj.StudentFiles != null)
+                if (StudentFiles != null)
                 {
-                    obj.StudentPhoto = "/Homework/" + Guid.NewGuid() + Path.GetExtension(obj.StudentFiles.FileName);
-                    obj.StudentFiles.SaveAs(Path.Combine(Server.MapPath(obj.StudentPhoto)));
+                    obj.StudentFiles = "/Homework/" + Guid.NewGuid() + Path.GetExtension(StudentFiles.FileName);
+                    StudentFiles.SaveAs(Path.Combine(Server.MapPath(obj.StudentFiles)));
                 }
-
                 //obj.AddedBy = Session["PK_TeacherID"].ToString();
                 obj.HomeworkDate = string.IsNullOrEmpty(obj.HomeworkDate) ? null : Common.ConvertToSystemDate(obj.HomeworkDate, "dd/MM/yyyy");
                 obj.HomeworkBy = "Teacher";
@@ -3507,19 +3506,18 @@ namespace APSSchool.Controllers
 
 
 
-
-        public ActionResult SaveAttendance(SaveEmployeeAttendanceRequest Request, HttpPostedFileBase UploadFile)
+        [HttpPost]
+        public ActionResult SaveAttendance(SaveEmployeeAttendanceRequest Request, HttpPostedFileBase TeacherPhoto)
         {
             SaveEmployeeAttendanceResponse Response = new SaveEmployeeAttendanceResponse();
             Request.AttendanceDate = string.IsNullOrEmpty(Request.AttendanceDate) ? null : Common.ConvertToSystemDate(Request.AttendanceDate, "dd/MM/yyyy");
             try
             {
-                if (Request.UploadFile != null)
+                if (TeacherPhoto != null)
                 {
-                    Request.TeacherPhoto = "/TeacherPunching/" + Guid.NewGuid() + Path.GetExtension(Request.UploadFile.FileName);
-                    Request.UploadFile.SaveAs(Path.Combine(Server.MapPath(Request.TeacherPhoto)));
+                    Request.TeacherPhoto = "/TeacherPunching/" + Guid.NewGuid() + Path.GetExtension(TeacherPhoto.FileName);
+                    TeacherPhoto.SaveAs(Path.Combine(Server.MapPath(Request.TeacherPhoto)));
                 }
-                
                 DataSet ds = Request.SaveEmployeeAttendance();
                 if (ds != null && ds.Tables.Count > 0)
                 {
@@ -3799,14 +3797,30 @@ namespace APSSchool.Controllers
         {
             try
             {
-                if (model.UploadFile != null)
+                if (UploadFile != null)
                 {
-                    model.Image = "../Teacher/" + Guid.NewGuid() + Path.GetExtension(model.UploadFile.FileName);
-                    model.UploadFile.SaveAs(Path.Combine(Server.MapPath(model.Image)));
+                    model.UploadFile = "../Teacher/" + Guid.NewGuid() + Path.GetExtension(UploadFile.FileName);
+                    UploadFile.SaveAs(Path.Combine(Server.MapPath(model.UploadFile)));
                 }
-
-                model.DOB = string.IsNullOrEmpty(model.DOB) ? null : Common.ConvertToSystemDate(model.DOB, "dd/MM/yyyy");
-                model.DOJ = string.IsNullOrEmpty(model.DOJ) ? null : Common.ConvertToSystemDate(model.DOJ, "dd/MM/yyyy");
+                model.PK_TeacherID = model.PK_TeacherID == "0" ? null : model.PK_TeacherID;
+                model.Name = model.Name == "" ? null : model.Name;
+                model.FatherName = model.FatherName == "" ? null : model.FatherName;
+                model.Address = model.Address == "" ? null : model.Address;
+                model.PinCode = model.PinCode == "" ? null : model.PinCode;
+                model.EmailID = model.EmailID == "" ? null : model.EmailID;
+                model.DOB = model.DOB == "" ? null : model.DOB;
+                model.LastSchool = model.LastSchool == "" ? null : model.LastSchool;
+                model.LastExperience = model.LastExperience == "" ? null : model.LastExperience;
+                model.Gender = model.Gender == "" ? null : model.Gender;
+                model.Religion = model.Religion == "" ? null : model.Religion;
+                model.Category = model.Category == "" ? null : model.Category;
+                model.DOJ = model.DOJ == "" ? null : model.DOJ;
+                model.Qualification = model.Qualification == "" ? null : model.Qualification;
+                model.Experience = model.Experience == "" ? null : model.Experience;
+                model.BranchName = model.BranchName == "" ? null : model.BranchName;
+                model.MobileNo = model.MobileNo == "" ? null : model.MobileNo;
+                model.UploadFile = model.UploadFile == "" ? null : model.UploadFile;
+                model.UpdatedBy = model.UpdatedBy == "0" ? null : model.UpdatedBy;
                 DataSet ds = model.UpdateTeacherRecord();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count>0)
                 {

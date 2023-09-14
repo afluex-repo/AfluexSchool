@@ -1412,15 +1412,14 @@ namespace APSSchool.Models
         public string Fk_SectionID { get; set; }
         public string SubjectID { get; set; }
         public string HomeworkDate { get; set; }
-        public string StudentPhoto { get; set; }
+        public string StudentFiles { get; set; }
         public string AddedBy { get; set; }
         public string HomeworkBy { get; set; }
         public string HomeWorkHTML { get; set; }
         public string SessionName { get; set; }
         public string Message { get; set; }
         public string Status { get; set; }
-        public HttpPostedFileBase StudentFiles { get; set; }
-
+       
         public DataSet SaveHomework()
         {
             SqlParameter[] para ={
@@ -1428,7 +1427,7 @@ namespace APSSchool.Models
                                    new SqlParameter("@Fk_SectionID",Fk_SectionID),
                                    new SqlParameter("@SubjectID",SubjectID),
                                    new SqlParameter("@HomeworkDate",HomeworkDate),
-                                   new SqlParameter("@StudentPhoto",StudentPhoto),
+                                   new SqlParameter("@StudentPhoto",StudentFiles),
                                     new SqlParameter("@AddedBy",AddedBy),
                                      new SqlParameter("@HomeworkBy",HomeworkBy),
                                       new SqlParameter("@HomeWorkHTML",HomeWorkHTML),
@@ -1918,9 +1917,6 @@ namespace APSSchool.Models
         public string EmployeeID { get; set; }
         public string AddedBy { get; set; }
         public string TeacherPhoto { get; set; }
-        
-       public HttpPostedFileBase UploadFile { get; set; }
-        
         public string LatiTude { get; set; }
         public string LongiTude { get; set; }
         public string Activity { get; set; }
@@ -2119,7 +2115,7 @@ namespace APSSchool.Models
         public string EmailID { get; set; }
         public string Qualification { get; set; }
         public string Experience { get; set; }
-        public string Image { get; set; }
+        public string UploadFile { get; set; }
         public string Address { get; set; }
         public string LastExperience { get; set; }
         public string LastSchool { get; set; }
@@ -2130,8 +2126,6 @@ namespace APSSchool.Models
         public string DOJ { get; set; }
         public string BranchName { get; set; }
         public string UpdatedBy { get; set; }
-        public HttpPostedFileBase UploadFile { get; set; }
-
         public string Message { get; set; }
         public string Status { get; set; }
 
@@ -2155,7 +2149,7 @@ namespace APSSchool.Models
                                      new SqlParameter("@Experience",Experience),
                                      new SqlParameter("@FK_BranchID",BranchName),
                                      new SqlParameter("@MobileNo",MobileNo),
-                                     new SqlParameter("@Image",Image),
+                                     new SqlParameter("@Image",UploadFile),
                                      new SqlParameter("@UpdatedBy",UpdatedBy)
                                    };
             DataSet ds = Connection.ExecuteQuery("UpdateTeacherRecord", Param);
