@@ -901,7 +901,7 @@ namespace AfluexSchool.Controllers
 
 
             DataSet ds = model.GetTeacherList();
-            if (ds != null && ds.Tables.Count > 0)
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count>0)
             {
                 model.PK_TeacherID = ds.Tables[0].Rows[0]["PK_TeacherID"].ToString();
                 model.Name = ds.Tables[0].Rows[0]["Name"].ToString();
