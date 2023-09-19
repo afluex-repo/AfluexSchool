@@ -13,6 +13,7 @@ namespace AfluexSchool.Models
         [AllowHtml]
         public string HomeWorkHTML { get; set; }
         public string HomeWorkID { get; set; }
+        public string SubjectName { get; set; }
 
 
 
@@ -502,6 +503,7 @@ namespace AfluexSchool.Models
             SqlParameter[] para ={
 
                                     new SqlParameter("@Pk_ParentID",AddedBy),
+                                    new SqlParameter("@StudentId",Pk_StudentID),
 
                                };
             DataSet ds = Connection.ExecuteQuery("GetHomeworkForParent", para);

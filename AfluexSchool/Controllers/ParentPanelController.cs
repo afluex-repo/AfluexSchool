@@ -518,6 +518,58 @@ namespace AfluexSchool.Controllers
         #region homewrok
         public ActionResult Homework(Student model)
         {
+            #region ddlStudent
+               int count = 0;
+                List<SelectListItem> ddlStudent = new List<SelectListItem>();
+                model.Fk_ParentId = Session["Pk_ParentID"].ToString();
+                DataSet ds1 = model.GetStudentList();
+                if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow r in ds1.Tables[0].Rows)
+                    {
+                        if (count == 0)
+                        {
+                            ddlStudent.Add(new SelectListItem { Text = "--Select Student--", Value = "0" });
+                        }
+                        ddlStudent.Add(new SelectListItem { Text = r["StudentName"].ToString(), Value = r["Pk_StudentID"].ToString() });
+                        count = count + 1;
+                    }
+                }
+
+            ViewBag.ddlStudent = ddlStudent;
+            #endregion
+
+            return View(model);
+
+        }
+        [HttpPost]
+        [ActionName("Homework")]
+        [OnAction(ButtonName = "Search")]
+        public ActionResult HomeworkList(Student model)
+        {
+            #region ddlStudent
+            
+                int count = 0;
+                List<SelectListItem> ddlStudent = new List<SelectListItem>();
+                model.Fk_ParentId = Session["Pk_ParentID"].ToString();
+                DataSet ds1 = model.GetStudentList();
+                if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow r in ds1.Tables[0].Rows)
+                    {
+                        if (count == 0)
+                        {
+                            ddlStudent.Add(new SelectListItem { Text = "--Select Student--", Value = "0" });
+                        }
+                        ddlStudent.Add(new SelectListItem { Text = r["StudentName"].ToString(), Value = r["Pk_StudentID"].ToString() });
+                        count = count + 1;
+                    }
+                }
+
+                ViewBag.ddlStudent = ddlStudent;
+          
+          
+            #endregion
 
             List<Student> lst = new List<Student>();
             try
@@ -530,8 +582,8 @@ namespace AfluexSchool.Controllers
                     {
 
                         Student obj = new Student();
-
-                        obj.studentName = r["SubjectName"].ToString();
+                        obj.studentName = r["StudentName"].ToString();
+                        obj.SubjectName = r["SubjectName"].ToString();
                         obj.ClassName = r["ClassName"].ToString();
                         obj.SectionName = r["SectionName"].ToString();
                         obj.AttendanceDate = r["HomeworkDate"].ToString();
@@ -540,7 +592,6 @@ namespace AfluexSchool.Controllers
                         lst.Add(obj);
                     }
                     model.listStudent = lst;
-
                 }
 
             }
@@ -552,7 +603,6 @@ namespace AfluexSchool.Controllers
             return View(model);
 
         }
-
 
         #endregion
 
