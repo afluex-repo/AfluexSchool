@@ -492,6 +492,7 @@ namespace APSSchool.Controllers
 
 
                                     TimeTable = row1["TimeTable"].ToString(),
+                                    StudentName = row1["StudentName"].ToString(),
 
 
                                 });
@@ -526,10 +527,10 @@ namespace APSSchool.Controllers
         public ActionResult ApplyLeave(Leave1 objParameters)
         {
             Leave1 obj = new Leave1();
-            if (objParameters.Pk_StudentId == "" || objParameters.Pk_StudentId == null)
+            if (objParameters.Fk_ParentID == "" || objParameters.Fk_ParentID == null)
             {
                 obj.Status = "1";
-                obj.ErrorMessage = "Please Pass StudentId";
+                obj.ErrorMessage = "Please Pass Fk_ParentID";
                 return Json(obj, JsonRequestBehavior.AllowGet);
             }
             if (objParameters.FromDate == "" || objParameters.FromDate == null)
@@ -922,10 +923,10 @@ namespace APSSchool.Controllers
         public ActionResult Complain(ComplainBox objParameters)
         {
             ComplainBox obj = new ComplainBox();
-            if (objParameters.Pk_StudentId == "" || objParameters.Pk_StudentId == null)
+            if (objParameters.Pk_ParentId == "" || objParameters.Pk_ParentId == null)
             {
                 obj.Status = "1";
-                obj.ErrorMessage = "Please Pass StudentId";
+                obj.ErrorMessage = "Please Pass ParentId";
                 return Json(obj, JsonRequestBehavior.AllowGet);
             }
 
