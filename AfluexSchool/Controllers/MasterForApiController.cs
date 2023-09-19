@@ -527,10 +527,10 @@ namespace APSSchool.Controllers
         public ActionResult ApplyLeave(Leave1 objParameters)
         {
             Leave1 obj = new Leave1();
-            if (objParameters.Fk_ParentID == "" || objParameters.Fk_ParentID == null)
+            if (objParameters.Pk_StudentID == "" || objParameters.Pk_StudentID == null)
             {
                 obj.Status = "1";
-                obj.ErrorMessage = "Please Pass Fk_ParentID";
+                obj.ErrorMessage = "Please Pass StudentID";
                 return Json(obj, JsonRequestBehavior.AllowGet);
             }
             if (objParameters.FromDate == "" || objParameters.FromDate == null)
