@@ -2639,12 +2639,12 @@ namespace APSSchool.Controllers
                 obj.Message = "Please Select Subject!!";
                 return Json(obj, JsonRequestBehavior.AllowGet);
             }
-            if (obj.HomeworkDate == "" || obj.HomeworkDate == null)
-            {
-                obj.Status = "1";
-                obj.Message = "Please Enter Date!!";
-                return Json(obj, JsonRequestBehavior.AllowGet);
-            }
+            //if (obj.HomeworkDate == "" || obj.HomeworkDate == null)
+            //{
+            //    obj.Status = "1";
+            //    obj.Message = "Please Enter Date!!";
+            //    return Json(obj, JsonRequestBehavior.AllowGet);
+            //}
             try
             {
                 if (obj.StudentFiles != null)

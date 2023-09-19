@@ -23,9 +23,10 @@ namespace APSSchool.Models
             public string Pk_ParentID { get; set; }
             public string DeviceId { get; set; }
             public string FireBaseId { get; set; }
+      
 
 
-            public string ParentName { get; set; }
+        public string ParentName { get; set; }
 
             public DataSet LoginAction()
             {
@@ -431,10 +432,21 @@ namespace APSSchool.Models
         public List<FeeReportData> lstfeedetails { get; set; }
         public string Pk_StudentId { get; set; }
         public string Status { get; set; }
+        public string Fk_ParentId { get; set; }
+        public string Session { get; set; }
+        public string ReceiptNo { get; set; }
+        public string Fk_SectionID { get; set; }
+        public string Fk_ClassID { get; set; }
+        public string LoginId { get; set; }
         public DataSet GetFeeReport()
         {
             SqlParameter[] para = {
-                                    new SqlParameter("@Pk_StudentId",Pk_StudentId ),
+                                   new SqlParameter("@LoginId", LoginId),
+                                      new SqlParameter("@Fk_ParentId", Fk_ParentId),
+                                      new SqlParameter("@Fk_ClassId",Fk_ClassID),
+                                      new SqlParameter("@Fk_SectionID",Fk_SectionID),
+                                      new SqlParameter("@ReceiptNo",ReceiptNo),
+                                      new SqlParameter("@Fk_SessionId",Session),
                                   };
             DataSet ds = Connection.ExecuteQuery("GetFeeReport", para);
             return ds;
@@ -1325,7 +1337,9 @@ namespace APSSchool.Models
         public string Pk_StudentID { get; set; }
         public string Status { get; set; }
         public string Fk_ParentId { get; set; }
-
+        public string SessionName { get; set; }
+        public string ToDate { get; set; }
+        public string FromDate { get; set; }
 
         public string StudenLoginID { get; set; }
        
@@ -1358,9 +1372,15 @@ namespace APSSchool.Models
         public DataSet GetStudentAttendanceDetail()
         {
             SqlParameter[] para ={
+                                      new SqlParameter("@FormDate",FromDate),
+                                   new SqlParameter("@ToDate",ToDate),
                                    new SqlParameter("@Fk_ClassID",Fk_ClassID),
                                    new SqlParameter("@Fk_SectionID",Fk_SectionID),
+                                   new SqlParameter("@Pk_StudentID",Pk_StudentID),
+                                     new SqlParameter("@Status",Status),
                                       new SqlParameter("@Fk_ParentId",Fk_ParentId),
+                                       new SqlParameter("@LoginId",StudenLoginID),
+                                         new SqlParameter("@FK_SessionID",SessionName),
                                };
             DataSet ds = Connection.ExecuteQuery("GetStudentAttendanceDetail", para);
             return ds;
