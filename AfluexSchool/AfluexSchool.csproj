@@ -711,6 +711,7 @@
     <Folder Include="Staff\" />
     <Folder Include="Students\" />
     <Folder Include="Syllabus\" />
+    <Folder Include="TeacherPunching\" />
     <Folder Include="Teacher\" />
     <Folder Include="TimeTable\" />
     <Folder Include="UserImage\" />
