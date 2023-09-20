@@ -213,12 +213,24 @@ namespace APSSchool.Models
     public class HomeWork
     {
         public List<HomeWorkData> lsthomeworkDetails { get; set; }
-        public string Pk_ParentID { get; set; }
+        public string Fk_ParentID { get; set; }
         public string Status { get; set; }
+        public string Pk_ClassID { get; set; }
+        public string PK_SectionID { get; set; }
+        public string Pk_StudentID { get; set; }
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
+        public string Message { get; set; }
+
         public DataSet GetHomeworkForParent()
         {
             SqlParameter[] para = {
-                                    new SqlParameter("@Pk_ParentID",Pk_ParentID),
+                                    new SqlParameter("@Pk_ParentID",Fk_ParentID),
+                                    new SqlParameter("@ClassID",Pk_ClassID),
+                                    new SqlParameter("@SectionID",PK_SectionID),
+                                    new SqlParameter("@StudentId",Pk_StudentID),
+                                    new SqlParameter("@FromDate",FromDate),
+                                    new SqlParameter("@ToDate",ToDate)
                                   };
             DataSet ds = Connection.ExecuteQuery("GetHomeworkForParent", para);
             return ds;
@@ -238,10 +250,16 @@ namespace APSSchool.Models
         public string SectionName { get; set; }
         public string HomeworkFile { get; set; }
         public string HomeworkText { get; set; }
-        public string Subject { get; set; }
+        public string SubjectName { get; set; }
         public string Pk_HomeworkID { get; set; }
         public string ClassName { get; set; }
         public string HomeworkDate { get; set; }
+        public string Pk_ClassID { get; set; }
+        public string PK_SectionID { get; set; }
+        public string Pk_StudentID { get; set; }
+        public string StudentName { get; set; }
+        public string Pk_SectionID { get; set; }
+        public string Pk_SubjectID { get; set; }
     }
 
     public class GetClass
