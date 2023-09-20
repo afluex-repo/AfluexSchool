@@ -23,9 +23,10 @@ namespace APSSchool.Models
             public string Pk_ParentID { get; set; }
             public string DeviceId { get; set; }
             public string FireBaseId { get; set; }
+      
 
 
-            public string ParentName { get; set; }
+        public string ParentName { get; set; }
 
             public DataSet LoginAction()
             {
@@ -212,12 +213,24 @@ namespace APSSchool.Models
     public class HomeWork
     {
         public List<HomeWorkData> lsthomeworkDetails { get; set; }
-        public string Pk_StudentId { get; set; }
+        public string Fk_ParentID { get; set; }
         public string Status { get; set; }
+        public string Pk_ClassID { get; set; }
+        public string PK_SectionID { get; set; }
+        public string Pk_StudentID { get; set; }
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
+        public string Message { get; set; }
+
         public DataSet GetHomeworkForParent()
         {
             SqlParameter[] para = {
-                                    new SqlParameter("@StudentId",Pk_StudentId ),
+                                    new SqlParameter("@Pk_ParentID",Fk_ParentID),
+                                    new SqlParameter("@ClassID",Pk_ClassID),
+                                    new SqlParameter("@SectionID",PK_SectionID),
+                                    new SqlParameter("@StudentId",Pk_StudentID),
+                                    new SqlParameter("@FromDate",FromDate),
+                                    new SqlParameter("@ToDate",ToDate)
                                   };
             DataSet ds = Connection.ExecuteQuery("GetHomeworkForParent", para);
             return ds;
@@ -237,10 +250,16 @@ namespace APSSchool.Models
         public string SectionName { get; set; }
         public string HomeworkFile { get; set; }
         public string HomeworkText { get; set; }
-        public string Subject { get; set; }
+        public string SubjectName { get; set; }
         public string Pk_HomeworkID { get; set; }
         public string ClassName { get; set; }
         public string HomeworkDate { get; set; }
+        public string Pk_ClassID { get; set; }
+        public string PK_SectionID { get; set; }
+        public string Pk_StudentID { get; set; }
+        public string StudentName { get; set; }
+        public string Pk_SectionID { get; set; }
+        public string Pk_SubjectID { get; set; }
     }
 
     public class GetClass
@@ -431,10 +450,21 @@ namespace APSSchool.Models
         public List<FeeReportData> lstfeedetails { get; set; }
         public string Pk_StudentId { get; set; }
         public string Status { get; set; }
+        public string Fk_ParentId { get; set; }
+        public string Session { get; set; }
+        public string ReceiptNo { get; set; }
+        public string Fk_SectionID { get; set; }
+        public string Fk_ClassID { get; set; }
+        public string LoginId { get; set; }
         public DataSet GetFeeReport()
         {
             SqlParameter[] para = {
-                                    new SqlParameter("@Pk_StudentId",Pk_StudentId ),
+                                   new SqlParameter("@LoginId", LoginId),
+                                      new SqlParameter("@Fk_ParentId", Fk_ParentId),
+                                      new SqlParameter("@Fk_ClassId",Fk_ClassID),
+                                      new SqlParameter("@Fk_SectionID",Fk_SectionID),
+                                      new SqlParameter("@ReceiptNo",ReceiptNo),
+                                      new SqlParameter("@Fk_SessionId",Session),
                                   };
             DataSet ds = Connection.ExecuteQuery("GetFeeReport", para);
             return ds;
@@ -467,12 +497,14 @@ namespace APSSchool.Models
     public class TimeTable
     {
         public List<TimeTableData> lsttimetabledetails { get; set; }
-        public string Pk_StudentId { get; set; }
+        public string Pk_ParentID { get; set; }
+            public string Name { get; set; }
         public string Status { get; set; }
         public DataSet GetTimeTableForParent()
         {
             SqlParameter[] para = {
-                                    new SqlParameter("@StudentId",Pk_StudentId ),
+                                      new SqlParameter("@Pk_ParentID",Pk_ParentID),
+                   new SqlParameter("@StudentId",Name)
                                   };
             DataSet ds = Connection.ExecuteQuery("GetTimeTableForParent", para);
             return ds;
@@ -490,7 +522,7 @@ namespace APSSchool.Models
     {
 
         public string TimeTable { get; set; }
-
+        public string StudentName { get; set; }
 
     }
 
@@ -499,7 +531,8 @@ namespace APSSchool.Models
     {
         public string Status { get; set; }
         public string ErrorMessage { get; set; }
-        public string Pk_StudentId { get; set; }
+        public string Pk_StudentID { get; set; }
+        public string Fk_ParentID { get; set; }
         public string FromDate { get; set; }
         public string ToDate { get; set; }
         public string Reason { get; set; }
@@ -509,10 +542,12 @@ namespace APSSchool.Models
         {
             SqlParameter[] para ={
 
-                                    new SqlParameter("@Pk_StudentID",Pk_StudentId),
-                                   new SqlParameter("@FromDate",FromDate),
-                                    new SqlParameter("@ToDate",ToDate),
-                                   new SqlParameter("@Reason",Reason),
+                                 new SqlParameter("@Pk_ParentID",Fk_ParentID),
+                                    new SqlParameter("@AddedBy",Fk_ParentID),
+                                     new SqlParameter("@Pk_StudentID",Pk_StudentID),
+                                    new SqlParameter("@FromDate",FromDate),
+                                     new SqlParameter("@ToDate",ToDate),
+                                    new SqlParameter("@Reason",Reason),
                               };
             DataSet ds = Connection.ExecuteQuery("ApplyLeaveForStudentByParent", para);
             return ds;
@@ -830,7 +865,7 @@ namespace APSSchool.Models
     {
         public string Status { get; set; }
         public string ErrorMessage { get; set; }
-        public string Pk_StudentId { get; set; }
+        public string Pk_ParentId { get; set; }
 
         public string Complain { get; set; }
 
@@ -839,9 +874,9 @@ namespace APSSchool.Models
         {
             SqlParameter[] para ={
 
-                                    new SqlParameter("@Fk_UserId",Pk_StudentId),
+                                    new SqlParameter("@Fk_UserId",Pk_ParentId),
                                     new SqlParameter("@Message",Complain),
-                                    new SqlParameter("@AddedBy",Pk_StudentId),
+                                    new SqlParameter("@AddedBy",Pk_ParentId),
                                     new SqlParameter("@MessageBy","Parent"),
                               };
             DataSet ds = Connection.ExecuteQuery("InsertMessage", para);
@@ -1325,7 +1360,9 @@ namespace APSSchool.Models
         public string Pk_StudentID { get; set; }
         public string Status { get; set; }
         public string Fk_ParentId { get; set; }
-
+        public string SessionName { get; set; }
+        public string ToDate { get; set; }
+        public string FromDate { get; set; }
 
         public string StudenLoginID { get; set; }
        
@@ -1358,9 +1395,15 @@ namespace APSSchool.Models
         public DataSet GetStudentAttendanceDetail()
         {
             SqlParameter[] para ={
+                                      new SqlParameter("@FormDate",FromDate),
+                                   new SqlParameter("@ToDate",ToDate),
                                    new SqlParameter("@Fk_ClassID",Fk_ClassID),
                                    new SqlParameter("@Fk_SectionID",Fk_SectionID),
+                                   new SqlParameter("@Pk_StudentID",Pk_StudentID),
+                                     new SqlParameter("@Status",Status),
                                       new SqlParameter("@Fk_ParentId",Fk_ParentId),
+                                       new SqlParameter("@LoginId",StudenLoginID),
+                                         new SqlParameter("@FK_SessionID",SessionName),
                                };
             DataSet ds = Connection.ExecuteQuery("GetStudentAttendanceDetail", para);
             return ds;

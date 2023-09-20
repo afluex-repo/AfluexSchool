@@ -259,7 +259,8 @@ namespace APSSchool.Controllers
             List<HomeWorkData> datalist = new List<HomeWorkData>();
             try
             {
-
+                objParameters.FromDate = Common.ConvertToSystemDate(objParameters.FromDate, "dd/MM/yyyy");
+                objParameters.ToDate = Common.ConvertToSystemDate(objParameters.ToDate, "dd/MM/yyyy");
                 DataSet dsResult = objParameters.GetHomeworkForParent();
                 if (dsResult != null && dsResult.Tables[0].Rows.Count > 0)
                 {
@@ -268,6 +269,7 @@ namespace APSSchool.Controllers
 
 
                         obj.Status = "0";
+                        obj.Message = "Homework List Fetched Successfully.";
                         foreach (DataRow row0 in (dsResult.Tables[0].Rows))
                         {
 
@@ -285,11 +287,18 @@ namespace APSSchool.Controllers
                                 objstudent.Add(new HomeWorkDetails
 
                                 {
-
-                                    Subject = row1["SubjectName"].ToString(),
+                                    StudentName = row1["StudentName"].ToString(),
+                                    Pk_StudentID = row1["Pk_StudentID"].ToString(),
+                                    ClassName = row1["ClassName"].ToString(),
+                                    Pk_ClassID = row1["Pk_ClassID"].ToString(),
+                                    SectionName = row1["SectionName"].ToString(),
+                                    Pk_SectionID = row1["Pk_SectionID"].ToString(),
+                                    SubjectName = row1["SubjectName"].ToString(),
+                                    Pk_SubjectID = row1["Pk_SubjectID"].ToString(),
                                     HomeworkText = row1["HomeworkText"].ToString(),
-                                    SectionName = row1["HomeworkDate"].ToString(),
+                                    HomeworkDate = row1["HomeworkDate"].ToString(),
                                     HomeworkFile = row1["HomeworkFile"].ToString(),
+
 
                                 });
                             }
@@ -492,6 +501,7 @@ namespace APSSchool.Controllers
 
 
                                     TimeTable = row1["TimeTable"].ToString(),
+                                    StudentName = row1["StudentName"].ToString(),
 
 
                                 });
@@ -526,10 +536,10 @@ namespace APSSchool.Controllers
         public ActionResult ApplyLeave(Leave1 objParameters)
         {
             Leave1 obj = new Leave1();
-            if (objParameters.Pk_StudentId == "" || objParameters.Pk_StudentId == null)
+            if (objParameters.Pk_StudentID == "" || objParameters.Pk_StudentID == null)
             {
                 obj.Status = "1";
-                obj.ErrorMessage = "Please Pass StudentId";
+                obj.ErrorMessage = "Please Pass StudentID";
                 return Json(obj, JsonRequestBehavior.AllowGet);
             }
             if (objParameters.FromDate == "" || objParameters.FromDate == null)
@@ -922,10 +932,10 @@ namespace APSSchool.Controllers
         public ActionResult Complain(ComplainBox objParameters)
         {
             ComplainBox obj = new ComplainBox();
-            if (objParameters.Pk_StudentId == "" || objParameters.Pk_StudentId == null)
+            if (objParameters.Pk_ParentId == "" || objParameters.Pk_ParentId == null)
             {
                 obj.Status = "1";
-                obj.ErrorMessage = "Please Pass StudentId";
+                obj.ErrorMessage = "Please Pass ParentId";
                 return Json(obj, JsonRequestBehavior.AllowGet);
             }
 
@@ -1520,7 +1530,7 @@ namespace APSSchool.Controllers
 
                                 {
                                     Pk_HomeworkID = row1["Pk_HomeworkID"].ToString(),
-                                    Subject = row1["SubjectName"].ToString(),
+                                    SubjectName = row1["SubjectName"].ToString(),
                                     ClassName = row1["ClassName"].ToString(),
                                     SectionName = row1["SectionName"].ToString(),
                                     HomeworkDate = row1["HomeworkDate"].ToString(),

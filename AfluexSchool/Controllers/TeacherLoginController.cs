@@ -901,7 +901,7 @@ namespace AfluexSchool.Controllers
 
 
             DataSet ds = model.GetTeacherList();
-            if (ds != null && ds.Tables.Count > 0)
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count>0)
             {
                 model.PK_TeacherID = ds.Tables[0].Rows[0]["PK_TeacherID"].ToString();
                 model.Name = ds.Tables[0].Rows[0]["Name"].ToString();
@@ -1164,6 +1164,7 @@ namespace AfluexSchool.Controllers
                     model.EmployeeID = ds0.Tables[0].Rows[0]["FK_EmpID"].ToString();
                     model.EmployeeCode = ds0.Tables[0].Rows[0]["EmployeeCode"].ToString();
                     model.EmployeeName = ds0.Tables[0].Rows[0]["EmployeeName"].ToString();
+                    model.FatherName = ds0.Tables[0].Rows[0]["FatherName"].ToString();
                     model.TotalIncome = ds0.Tables[0].Rows[0]["TotalIncome"].ToString();
                     model.TotalDeduction = ds0.Tables[0].Rows[0]["TotalDeduction"].ToString();
                     model.NetSalary = ds0.Tables[0].Rows[0]["NetSalary"].ToString();
