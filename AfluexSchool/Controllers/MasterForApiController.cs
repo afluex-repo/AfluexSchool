@@ -2866,8 +2866,7 @@ namespace APSSchool.Controllers
                     model.NetSalary = ds0.Tables[0].Rows[0]["NetSalary"].ToString();
                     model.MonthName = ds0.Tables[0].Rows[0]["MonthName"].ToString();
                     model.Year = ds0.Tables[0].Rows[0]["Year"].ToString();
-
-
+                     
                     model.Basic = ds0.Tables[0].Rows[0]["BasicSalary"].ToString();
                     model.HRA = ds0.Tables[0].Rows[0]["HouseRent"].ToString();
                     model.MA = ds0.Tables[0].Rows[0]["Medical"].ToString();
@@ -3304,11 +3303,9 @@ namespace APSSchool.Controllers
             //}
             return Json(model, JsonRequestBehavior.AllowGet);
         }
-
-
+        
         public ActionResult PendingLeave(PendingLeaveAPI model)
         {
-
             // model.PK_TeacherID = Session["PK_TeacherID"].ToString();
             model.Status = "Pending";
             List<PendingLeaveAPI> listq = new List<PendingLeaveAPI>();
@@ -3379,8 +3376,7 @@ namespace APSSchool.Controllers
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
         }
-
-
+        
         public ActionResult GetClassList(GetClassAPI model)
         {
             try
@@ -3425,8 +3421,7 @@ namespace APSSchool.Controllers
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
         }
-
-
+        
         public ActionResult GetSectionList(GetSectionAPI model)
         {
             try
@@ -3445,9 +3440,7 @@ namespace APSSchool.Controllers
 
                     }
                 }
-
                 ViewBag.ddlsection = ddlsection;
-
                 foreach (DataRow r in ds.Tables[1].Rows)
                 {
                     GetSectionAPI obj = new GetSectionAPI();
@@ -3470,8 +3463,7 @@ namespace APSSchool.Controllers
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
         }
-
-
+        
         public ActionResult GetSubjectNameBySection(GetSubjectAPI model)
         {
             try
@@ -3513,9 +3505,6 @@ namespace APSSchool.Controllers
             }
         }
 
-
-
-
         [HttpPost]
         public ActionResult SaveAttendance(SaveEmployeeAttendanceRequest Request, HttpPostedFileBase TeacherPhoto)
         {
@@ -3551,9 +3540,6 @@ namespace APSSchool.Controllers
             return Json(Response, JsonRequestBehavior.AllowGet);
         } 
 
-
-
-
         public ActionResult SavePunchOutAttendance(SaveEmployeeAttendancePunchoutRequest Request)
         {
             SaveEmployeeAttendancePunchoutResponse Response = new SaveEmployeeAttendancePunchoutResponse();
@@ -3582,12 +3568,10 @@ namespace APSSchool.Controllers
             }
             return Json(Response, JsonRequestBehavior.AllowGet);
         }
-
-
+        
         public ActionResult GetBranch(GetBranchAPI model)
         {
             List<GetBranchAPI> listq = new List<GetBranchAPI>();
-            
             try
             {
                 int count = 0;
@@ -3605,10 +3589,7 @@ namespace APSSchool.Controllers
                         count = count + 1;
                     }
                 }
-
                 ViewBag.ddlBranch = ddlBranch;
-
-                
                 foreach (DataRow r in ds1.Tables[0].Rows)
                 {
                     GetBranchAPI obj = new GetBranchAPI();
@@ -3617,7 +3598,6 @@ namespace APSSchool.Controllers
                     listq.Add(obj);
                 }
                 model.listBranch = listq;
-
                 model.Status = "0";
                 model.Message = "Branch Fetched.";
                 return Json(model, JsonRequestBehavior.AllowGet);
@@ -3629,8 +3609,7 @@ namespace APSSchool.Controllers
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
         }
-
-
+        
         public ActionResult GetReligion(GetReligionAPI model)
         {
             List<GetReligionAPI> listq = new List<GetReligionAPI>();
@@ -3651,7 +3630,6 @@ namespace APSSchool.Controllers
                         count = count + 1;
                     }
                 }
-
                 ViewBag.ddlReligion = ddlReligion;
 
                 foreach (DataRow r in ds1.Tables[0].Rows)
