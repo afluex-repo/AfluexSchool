@@ -504,6 +504,10 @@ namespace AfluexSchool.Models
 
                                     new SqlParameter("@Pk_ParentID",AddedBy),
                                     new SqlParameter("@StudentId",Pk_StudentID),
+                                    new SqlParameter("@ClassID",Fk_ClassID),
+                                    new SqlParameter("@SectionID",PK_SectionID),
+                                    new SqlParameter("@FromDate",FromDate),
+                                    new SqlParameter("@ToDate",ToDate)
 
                                };
             DataSet ds = Connection.ExecuteQuery("GetHomeworkForParent", para);
