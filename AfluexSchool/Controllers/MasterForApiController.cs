@@ -259,8 +259,8 @@ namespace APSSchool.Controllers
             List<HomeWorkData> datalist = new List<HomeWorkData>();
             try
             {
-                objParameters.FromDate = Common.ConvertToSystemDate(objParameters.FromDate, "dd/MM/yyyy");
-                objParameters.ToDate = Common.ConvertToSystemDate(objParameters.ToDate, "dd/MM/yyyy");
+                objParameters.FromDate = string.IsNullOrEmpty(objParameters.FromDate) ? null : Common.ConvertToSystemDate(objParameters.FromDate, "dd/MM/yyyy");
+                objParameters.ToDate = string.IsNullOrEmpty(objParameters.ToDate) ? null : Common.ConvertToSystemDate(objParameters.ToDate, "dd/MM/yyyy");
                 DataSet dsResult = objParameters.GetHomeworkForParent();
                 if (dsResult != null && dsResult.Tables[0].Rows.Count > 0)
                 {
