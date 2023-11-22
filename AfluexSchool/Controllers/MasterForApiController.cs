@@ -83,31 +83,22 @@ namespace APSSchool.Controllers
             List<StudentData> datalist = new List<StudentData>();
             try
             {
-
                 DataSet dsResult = objParameters.GetDashBoardDetails();
                 if (dsResult != null && dsResult.Tables[0].Rows.Count > 0)
                 {
                     if (dsResult.Tables[0].Rows[0]["Msg"].ToString() == "1")
                     {
-
-
                         obj.Status = "0";
                         foreach (DataRow row0 in (dsResult.Tables[0].Rows))
                         {
-
-
                             obj.lstdashboarddata = datalist;
-
-
                         }
                         List<StudentDetails> objstudent = new List<StudentDetails>();
-
                         {
                             #region Menu
                             foreach (DataRow row1 in (dsResult.Tables[0].Rows))
                             {
                                 objstudent.Add(new StudentDetails
-
                                 {
                                     RollNo = row1["RollNo"].ToString(),
                                     StudentName = row1["StudentName"].ToString(),
@@ -562,8 +553,9 @@ namespace APSSchool.Controllers
             }
             try
             {
-                objParameters.FromDate = Common.ConvertToSystemDate(objParameters.FromDate, "dd/MM/yyyy");
-                objParameters.ToDate = Common.ConvertToSystemDate(objParameters.ToDate, "dd/MM/yyyy");
+                objParameters.FromDate = string.IsNullOrEmpty(objParameters.FromDate) ? null : Common.ConvertToSystemDate(objParameters.FromDate, "dd/MM/yyyy");
+                objParameters.ToDate = string.IsNullOrEmpty(objParameters.ToDate) ? null : Common.ConvertToSystemDate(objParameters.ToDate, "dd/MM/yyyy");
+
                 DataSet dsResult = objParameters.SaveLeave();
                 if (dsResult != null && dsResult.Tables[0].Rows.Count > 0)
                 {
@@ -2677,7 +2669,6 @@ namespace APSSchool.Controllers
                     }
                     else
                     {
-
                         SaveHomeworkAPI obj1 = new SaveHomeworkAPI();
                         obj1.Status = "1";
                         obj1.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
@@ -2685,7 +2676,7 @@ namespace APSSchool.Controllers
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 SaveHomeworkAPI obj1 = new SaveHomeworkAPI();
                 obj1.Status = "1";
@@ -2696,8 +2687,6 @@ namespace APSSchool.Controllers
             }
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
-
-
         public ActionResult GetHomeworkList(HomeworkListAPI model)
         {
             List<HomeworkListAPI> list = new List<HomeworkListAPI>();
@@ -2745,12 +2734,8 @@ namespace APSSchool.Controllers
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
         }
-
-
         #endregion
-
         #region TeacherAttendanceReport
-
         public ActionResult AttendanceReportBy(AttendenceReportAPI model)
         {
             List<AttendenceReportAPI> lst = new List<AttendenceReportAPI>();
@@ -2785,11 +2770,7 @@ namespace APSSchool.Controllers
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
         }
-
         #endregion
-
-
-
         public ActionResult EmployeeSalarySlipBy(TeacherSalarySlipAPI model)
         {
 
@@ -2842,8 +2823,6 @@ namespace APSSchool.Controllers
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
         }
-
-
         public ActionResult PrintSalarySlip(string Pk_PaidSalId, string EmployeeID)
         {
             SalarySlipPrintAPI model = new SalarySlipPrintAPI();
@@ -2866,7 +2845,7 @@ namespace APSSchool.Controllers
                     model.NetSalary = ds0.Tables[0].Rows[0]["NetSalary"].ToString();
                     model.MonthName = ds0.Tables[0].Rows[0]["MonthName"].ToString();
                     model.Year = ds0.Tables[0].Rows[0]["Year"].ToString();
-                     
+
                     model.Basic = ds0.Tables[0].Rows[0]["BasicSalary"].ToString();
                     model.HRA = ds0.Tables[0].Rows[0]["HouseRent"].ToString();
                     model.MA = ds0.Tables[0].Rows[0]["Medical"].ToString();
@@ -2892,7 +2871,6 @@ namespace APSSchool.Controllers
                     ViewBag.Website = SoftwareDetails.Website;
                     ViewBag.EmailID = SoftwareDetails.EmailID;
                 }
-
                 model.Status = "0";
                 model.Message = "Salary Slip Print.";
                 return Json(model, JsonRequestBehavior.AllowGet);
@@ -2904,8 +2882,6 @@ namespace APSSchool.Controllers
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
         }
-
-
 
         #region StudentAttendanceFilter
         public ActionResult StudentAttendanceFilter(StudentAttendanceFilter objParameters)
@@ -3231,34 +3207,34 @@ namespace APSSchool.Controllers
 
             //for (int i = 1; i < int.Parse(noofrows); i++)
             //{
-                try
-                {
+            try
+            {
 
-                    model.Status = "Approved";
-                    DataSet ds = model.UpdatingStudentLeaveAplcn();
-                    if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                model.Status = "Approved";
+                DataSet ds = model.UpdatingStudentLeaveAplcn();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                     {
-                        if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
-                        {
-                            model.Status = "1";
-                            model.Message = "Leave Approved Successfully";
-                            return Json(model, JsonRequestBehavior.AllowGet);
+                        model.Status = "1";
+                        model.Message = "Leave Approved Successfully";
+                        return Json(model, JsonRequestBehavior.AllowGet);
 
-                        }
-                        else if (ds.Tables[0].Rows[0]["Msg"].ToString() == "0")
-                        {
-                            model.Status = "1";
-                            model.Message = "Leave Not Approved Successfully";
-                            return Json(model, JsonRequestBehavior.AllowGet);
-                        }
                     }
-                    //}
+                    else if (ds.Tables[0].Rows[0]["Msg"].ToString() == "0")
+                    {
+                        model.Status = "1";
+                        model.Message = "Leave Not Approved Successfully";
+                        return Json(model, JsonRequestBehavior.AllowGet);
+                    }
                 }
-                catch
-                {
-                    //chkselect = "0";
-                    model.Status = "1";
-                }
+                //}
+            }
+            catch
+            {
+                //chkselect = "0";
+                model.Status = "1";
+            }
 
             //}
             return Json(model, JsonRequestBehavior.AllowGet);
@@ -3273,37 +3249,37 @@ namespace APSSchool.Controllers
 
             //for (int i = 1; i < int.Parse(noofrows); i++)
             //{
-                try
+            try
+            {
+                model.Status = "Declined";
+                DataSet ds = model.UpdatingStudentLeaveAplcn();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
-                    model.Status = "Declined";
-                    DataSet ds = model.UpdatingStudentLeaveAplcn();
-                    if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                     {
-                        if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
-                        {
-                            model.Status = "0";
-                            model.Message = "Leave Decline Successfully";
-                            return Json(model, JsonRequestBehavior.AllowGet);
-                        }
-                        else if (ds.Tables[0].Rows[0]["Msg"].ToString() == "0")
-                        {
-                            model.Status = "1";
-                            model.Message = "Leave Not Decline Successfully";
-                            return Json(model, JsonRequestBehavior.AllowGet);
-                        }
-                        // }
+                        model.Status = "0";
+                        model.Message = "Leave Decline Successfully";
+                        return Json(model, JsonRequestBehavior.AllowGet);
                     }
+                    else if (ds.Tables[0].Rows[0]["Msg"].ToString() == "0")
+                    {
+                        model.Status = "1";
+                        model.Message = "Leave Not Decline Successfully";
+                        return Json(model, JsonRequestBehavior.AllowGet);
+                    }
+                    // }
                 }
-                catch
-                {
-                    //chkselect = "0";
-                    model.Status = "1";
-                }
+            }
+            catch
+            {
+                //chkselect = "0";
+                model.Status = "1";
+            }
 
             //}
             return Json(model, JsonRequestBehavior.AllowGet);
         }
-        
+
         public ActionResult PendingLeave(PendingLeaveAPI model)
         {
             // model.PK_TeacherID = Session["PK_TeacherID"].ToString();
@@ -3376,7 +3352,7 @@ namespace APSSchool.Controllers
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
         }
-        
+
         public ActionResult GetClassList(GetClassAPI model)
         {
             try
@@ -3421,7 +3397,7 @@ namespace APSSchool.Controllers
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
         }
-        
+
         public ActionResult GetSectionList(GetSectionAPI model)
         {
             try
@@ -3463,7 +3439,7 @@ namespace APSSchool.Controllers
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
         }
-        
+
         public ActionResult GetSubjectNameBySection(GetSubjectAPI model)
         {
             try
@@ -3538,13 +3514,13 @@ namespace APSSchool.Controllers
                 Response.Message = ex.Message;
             }
             return Json(Response, JsonRequestBehavior.AllowGet);
-        } 
+        }
 
         public ActionResult SavePunchOutAttendance(SaveEmployeeAttendancePunchoutRequest Request)
         {
             SaveEmployeeAttendancePunchoutResponse Response = new SaveEmployeeAttendancePunchoutResponse();
             Request.AttendanceDate = string.IsNullOrEmpty(Request.AttendanceDate) ? null : Common.ConvertToSystemDate(Request.AttendanceDate, "dd/MM/yyyy");
-            try 
+            try
             {
                 DataSet ds = Request.SaveEmployeePunchoutAttendance();
                 if (ds != null && ds.Tables.Count > 0)
@@ -3559,8 +3535,8 @@ namespace APSSchool.Controllers
                         Response.status = "1";
                         Response.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
-                } 
-            } 
+                }
+            }
             catch (Exception ex)
             {
                 Response.status = "1";
@@ -3568,7 +3544,7 @@ namespace APSSchool.Controllers
             }
             return Json(Response, JsonRequestBehavior.AllowGet);
         }
-        
+
         public ActionResult GetBranch(GetBranchAPI model)
         {
             List<GetBranchAPI> listq = new List<GetBranchAPI>();
@@ -3609,7 +3585,7 @@ namespace APSSchool.Controllers
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
         }
-        
+
         public ActionResult GetReligion(GetReligionAPI model)
         {
             List<GetReligionAPI> listq = new List<GetReligionAPI>();
@@ -3745,7 +3721,7 @@ namespace APSSchool.Controllers
         public ActionResult GetTeacherProfile(GetTeacherProfileAPI model)
         {
             DataSet ds = model.GetTeacherList();
-            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count>0)
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 model.PK_TeacherID = ds.Tables[0].Rows[0]["PK_TeacherID"].ToString();
                 model.Name = ds.Tables[0].Rows[0]["Name"].ToString();
@@ -3810,7 +3786,7 @@ namespace APSSchool.Controllers
                 model.UploadFile = model.UploadFile == "" ? null : model.UploadFile;
                 model.UpdatedBy = model.UpdatedBy == "0" ? null : model.UpdatedBy;
                 DataSet ds = model.UpdateTeacherRecord();
-                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count>0)
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
                     if (ds.Tables[0].Rows[0]["msg"].ToString() == "1")
                     {
@@ -3834,9 +3810,52 @@ namespace APSSchool.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+              
+        ////////////////////////////////////////////////////////////////////////////////////////
 
+        public ActionResult GetAttenndaceList(GetAttenndaceListReqst model)
+        {
+            List<GetAttenndaceListRespons> lst = new List<GetAttenndaceListRespons>();
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            DataSet ds0 = model.GetAttenndaceList();
+            if (ds0 != null && ds0.Tables.Count > 0 && ds0.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds0.Tables[0].Rows)
+                {
+                    GetAttenndaceListRespons obj = new GetAttenndaceListRespons();
+                    obj.LoginID = r["LoginID"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.FatherName = r["FatherName"].ToString();
+                    obj.DOB = r["DOB"].ToString();
+                    obj.Gender = r["Gender"].ToString();
+                    obj.MobileNo = r["MobileNo"].ToString();
+                    obj.EmailID = r["EmailID"].ToString();
+                    obj.Address = r["Address"].ToString();
+                    obj.AttendanceDate = r["AttendanceDate"].ToString();
+                    obj.InTime = r["InTime"].ToString();
+                    obj.OutTime = r["OutTime"].ToString();
+                    obj.UploadFile = r["UploadFile"].ToString();
+                    obj.Latitude = r["Latitude"].ToString();
+                    obj.Longitude = r["Longitude"].ToString();
+                    obj.PunchIn = r["PunchIn"].ToString();
+                    obj.PunchOut = r["PunchOut"].ToString();
+                    obj.OutLatitude = r["OutLatitude"].ToString();
+                    obj.OutLongitude = r["OutLongitude"].ToString();
+                    lst.Add(obj);
+                }
+                model.listAttenndace = lst;
 
-
-
+                model.Status = "0";
+                model.Message = "Record Found.";
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                model.Status = "1";
+                model.Message = "Record Not Found.";
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+        }
     }
 }

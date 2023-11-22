@@ -53,8 +53,8 @@
 
         <table style="width: 100%;" class="table table-striped">
             <tr>
-                <td style="border: 1px solid black;"><b></td>
-                <td colspan="2" style="border: 1px solid black;"><b>Date :    </b>@DateTime.Now.ToString("dd/MM/yyyy")</td>
+                @*<td style="border: 1px solid black;"><b></td>*@
+                <td colspan="2" style="border: 1px solid black;"><b>Receipt Date :    </b>@DateTime.Now.ToString("dd/MM/yyyy")</td>
                 <td style="border: 1px solid black;"><b>Receipt No.    </b>@ViewBag.ReceiptNo</td>
             </tr>
         </table>
@@ -72,7 +72,7 @@
             <tr>
                 <td style="border: 1px solid black;"><b>State:    </b>@ViewBag.State</td>
                 <td style="border: 1px solid black;"><b>City:    </b>@ViewBag.City</td>
-                <td style="border: 1px solid black;"><b>Pin Code:    </b>@ViewBag.Pin</td>
+                <td style="border: 1px solid black;"><b>Pin Code:    </b>@ViewBag.Pincode</td>
             </tr>
         </table>
         <br />
@@ -129,7 +129,7 @@
                         <td style="border: 1px solid black;"><b> Via:    </b>@ViewBag.PaymentMode</td>
                         <td style="border: 1px solid black;"><b> ChequeNo:    </b>@ViewBag.TransactionNo</td>
                         <td style="border: 1px solid black;"><b> ChequeDate:    </b>@ViewBag.TransactionDate</td>
-                        <td style="border: 1px solid black;"><b> BankName:    </b>@ViewBag.BankName</td>
+                        <td style="border: 1px solid black;"><b> BankDetails:    </b>@ViewBag.BankName</td>
                         <td style="border: 1px solid black;"><b> BankBranch:    </b>@ViewBag.BankBranch</td>
                     }
                     else if (ViewBag.PaymentMode == "NEFT")
@@ -208,7 +208,7 @@
         <table style="border: 0px none black;">
             <tr style="border: 0px none black;">
                 <td style="border: 0px none black;">
-                   <img src="../../Websitecss/images/logo.png" />
+                   <img src="../../Websitecss/images/logo.png" style="height:100px;"/>
                 </td>
                 <td style="border: 0px none black;"></td>
 
@@ -232,8 +232,8 @@
 
         <table style="width: 100%;" class="table table-striped">
             <tr>
-                <td style="border: 1px solid black;"><b></td>
-                <td colspan="2" style="border: 1px solid black;"><b>Date :    </b>@DateTime.Now.ToString("dd/MM/yyyy")</td>
+                @*<td style="border: 1px solid black;"><b></td>*@
+                <td colspan="2" style="border: 1px solid black;"><b>Receipt Date :    </b>@DateTime.Now.ToString("dd/MM/yyyy")</td>
                 <td style="border: 1px solid black;"><b>Receipt No.    </b>@ViewBag.ReceiptNo</td>
             </tr>
         </table>
@@ -251,7 +251,7 @@
             <tr>
                 <td style="border: 1px solid black;"><b>State:    </b>@ViewBag.State</td>
                 <td style="border: 1px solid black;"><b>City:    </b>@ViewBag.City</td>
-                <td style="border: 1px solid black;"><b>Pin Code:    </b>@ViewBag.Pin</td>
+                <td style="border: 1px solid black;"><b>Pin Code:    </b>@ViewBag.Pincode</td>
             </tr>
         </table>
         <br />

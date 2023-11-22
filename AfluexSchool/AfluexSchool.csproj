@@ -294,6 +294,7 @@
     <Content Include="AdminPanelcss\assets\vendor\bootstrap\css\bootstrap.min.css.map" />
     <None Include="Properties\PublishProfiles\AfluexSchool.pubxml" />
     <None Include="Properties\PublishProfiles\AfluexSchoolDemo.pubxml" />
+    <None Include="Properties\PublishProfiles\school.pubxml" />
     <None Include="scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
