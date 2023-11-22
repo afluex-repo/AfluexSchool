@@ -28,7 +28,8 @@
                                     <div class="col-lg-4 col-md-4">
                                         <div class="form-group ">
                                             <label> Class <span style="color:red">*</span></label>
-                                            @Html.DropDownListFor(m => m.Fk_ClassID, new SelectList(ViewBag.ddlClass, "Value", "Text"), new { @class = "form-control", @onchange = "return GetSectionByClass();" })
+                                       
+                                                 @Html.DropDownListFor(m => m.Fk_ClassID, new SelectList(ViewBag.ddlClass, "Value", "Text"), new { @class = "form-control", @onchange = "return GetSectionByClass();" })
 
                                         </div>
                                     </div>
