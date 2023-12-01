@@ -3181,7 +3181,7 @@ namespace APSSchool.Controllers
                     obj.ClassName = r["ClassName"].ToString();
                     obj.SectionName = r["SectionName"].ToString();
                     obj.Pk_StudentID = r["FK_StudentID"].ToString();
-                    obj.PK_StdntLeaveID = r["PK_StdntLeaveID"].ToString();
+                    obj.PK_StdntLeaveID = r["PK_StdntLeaveID"].ToString(); 
                     obj.Description = r["Description"].ToString();
                     list.Add(obj);
                 }
@@ -3196,7 +3196,7 @@ namespace APSSchool.Controllers
                 model.Message = "Search Leave List Not Fetched.";
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
-        }
+        } 
 
 
         public ActionResult ApprovePendingLeave(ApproveLeaveAPI model)
@@ -3485,7 +3485,7 @@ namespace APSSchool.Controllers
         public ActionResult SaveAttendance(SaveEmployeeAttendanceRequest Request, HttpPostedFileBase TeacherPhoto)
         {
             SaveEmployeeAttendanceResponse Response = new SaveEmployeeAttendanceResponse();
-            Request.AttendanceDate = string.IsNullOrEmpty(Request.AttendanceDate) ? null : Common.ConvertToSystemDate(Request.AttendanceDate, "dd/MM/yyyy");
+            //Request.AttendanceDate = string.IsNullOrEmpty(Request.AttendanceDate) ? null : Common.ConvertToSystemDate(Request.AttendanceDate, "dd/MM/yyyy");
             try
             {
                 if (TeacherPhoto != null)
@@ -3500,6 +3500,8 @@ namespace APSSchool.Controllers
                     {
                         Response.status = "0";
                         Response.Message = "   Punching Successfully !";
+                        Response.PunchInDate = ds.Tables[0].Rows[0]["PunchInDate"].ToString();
+                        Response.PunchInTime = ds.Tables[0].Rows[0]["PunchInTime"].ToString();
                     }
                     else
                     {
@@ -3529,6 +3531,9 @@ namespace APSSchool.Controllers
                     {
                         Response.status = "0";
                         Response.Message = "   PunchOut Successfully !";
+                        Response.PunchOutDate = ds.Tables[0].Rows[0]["PunchOutDate"].ToString();
+                        Response.PunchOutTime = ds.Tables[0].Rows[0]["PunchOutTime"].ToString();
+                        
                     }
                     else
                     {

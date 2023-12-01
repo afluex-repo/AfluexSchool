@@ -1964,9 +1964,9 @@ namespace APSSchool.Models
         public DataSet SaveEmployeeAttendance() 
         {
             SqlParameter[] para ={
-                                       new SqlParameter ("@Intime",InTime),
-                                       new SqlParameter ("@OutTime",OutTime),
-                                       new SqlParameter ("@AttendanceDate",AttendanceDate),
+                                       //new SqlParameter ("@Intime",InTime),
+                                       //new SqlParameter ("@OutTime",OutTime),
+                                       //new SqlParameter ("@AttendanceDate",AttendanceDate),
                                        new SqlParameter ("@FK_EmpID",EmployeeID),
                                        new SqlParameter ("@AddedBy",AddedBy),
                                        new SqlParameter ("@UploadFile",TeacherPhoto),
@@ -1984,8 +1984,9 @@ namespace APSSchool.Models
     {
         public string status { get; set; }
         public string Message { get; set; }
+        public string PunchInDate { get; set; }
+        public string PunchInTime { get; set; }
 
-   
     }
 
     
@@ -2001,8 +2002,8 @@ namespace APSSchool.Models
         public DataSet SaveEmployeePunchoutAttendance()
         {
             SqlParameter[] para ={
-                                       new SqlParameter ("@OutTime",OutTime),
-                                       new SqlParameter ("@AttendanceDate",AttendanceDate),
+                                       //new SqlParameter ("@OutTime",OutTime),
+                                       //new SqlParameter ("@AttendanceDate",AttendanceDate),
                                        new SqlParameter ("@FK_EmpID",EmployeeID),
                                        new SqlParameter ("@OutLongitude",OutLongitude),
                                        new SqlParameter ("@OutLatiTude",OutLatiTude)
@@ -2018,8 +2019,9 @@ namespace APSSchool.Models
     {
         public string status { get; set; }
         public string Message { get; set; }
-
-
+        public string PunchOutDate { get; set; }
+        public string PunchOutTime { get; set; }
+        
     }
 
 
