@@ -3380,7 +3380,6 @@ namespace APSSchool.Controllers
                 foreach (DataRow r in ds2.Tables[1].Rows)
                 {
                     GetClassAPI obj = new GetClassAPI();
-
                     obj.ClassName = r["ClassName"].ToString();
                     obj.Fk_ClassID = r["PK_ClassID"].ToString();
                     listq.Add(obj);
@@ -3397,7 +3396,6 @@ namespace APSSchool.Controllers
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
         }
-
         public ActionResult GetSectionList(GetSectionAPI model)
         {
             try
@@ -3411,9 +3409,7 @@ namespace APSSchool.Controllers
                 {
                     foreach (DataRow r in ds.Tables[1].Rows)
                     {
-
                         ddlsection.Add(new SelectListItem { Text = r["SectionName"].ToString(), Value = r["PK_SectionID"].ToString() });
-
                     }
                 }
                 ViewBag.ddlsection = ddlsection;
@@ -3453,9 +3449,7 @@ namespace APSSchool.Controllers
                 {
                     foreach (DataRow r in ds.Tables[1].Rows)
                     {
-
                         ddlSection.Add(new SelectListItem { Text = r["SubjectName"].ToString(), Value = r["Fk_SubjectID"].ToString() });
-
                     }
                 }
                 ViewBag.ddlSubjectName = ddlSection;
@@ -3634,7 +3628,6 @@ namespace APSSchool.Controllers
             }
         }
 
-
         public ActionResult GetCategory(GetCategoryAPI model)
         {
             List<GetCategoryAPI> listq = new List<GetCategoryAPI>();
@@ -3677,7 +3670,6 @@ namespace APSSchool.Controllers
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
         }
-
 
         public ActionResult GetGender(GetGenderAPI model)
         {
@@ -3722,7 +3714,6 @@ namespace APSSchool.Controllers
             }
         }
 
-
         public ActionResult GetTeacherProfile(GetTeacherProfileAPI model)
         {
             DataSet ds = model.GetTeacherList();
@@ -3760,7 +3751,6 @@ namespace APSSchool.Controllers
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
         }
-
 
         public ActionResult UpdateTeacherProfile(TeacherProfileUpdate model, HttpPostedFileBase UploadFile)
         {
@@ -3817,7 +3807,7 @@ namespace APSSchool.Controllers
         }
               
         ////////////////////////////////////////////////////////////////////////////////////////
-
+    
         public ActionResult GetAttenndaceList(GetAttenndaceListReqst model)
         {
             List<GetAttenndaceListRespons> lst = new List<GetAttenndaceListRespons>();
