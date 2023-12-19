@@ -2401,7 +2401,6 @@ namespace APSSchool.Controllers
                         StudentMarks obj1 = new Models.StudentMarks();
                         obj1.Status = "0";
                         return Json(obj1, JsonRequestBehavior.AllowGet);
-
                     }
                     else
                     {
@@ -2409,7 +2408,6 @@ namespace APSSchool.Controllers
                         obj1.Status = "1";
                         obj1.ErrorMessage = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                         return Json(obj1, JsonRequestBehavior.AllowGet);
-
                     }
                 }
             }
@@ -2434,37 +2432,25 @@ namespace APSSchool.Controllers
                     obj.Status = "0";
                     foreach (DataRow row0 in (dsResult.Tables[0].Rows))
                     {
-
-
                         obj.lstsessiondetails = datalist;
-
-
                     }
                     List<SessionDetails> objstudent = new List<SessionDetails>();
-
                     {
-
                         foreach (DataRow row1 in (dsResult.Tables[0].Rows))
                         {
                             objstudent.Add(new SessionDetails
 
                             {
-
                                 Pk_SessionId = row1["Pk_SessionId"].ToString(),
                                 SessionName = row1["SessionName"].ToString(),
-
-
                             });
                         }
                         datalist.Add(new Session
                         {
                             Title = "Session",
                             SessionDetails = objstudent
-
                         });
-
                     }
-
                 }
                 else
                 {
@@ -2475,11 +2461,9 @@ namespace APSSchool.Controllers
             }
             catch (Exception ex)
             {
-                obj.Status = "1";
-
+                obj.Status = "1";          
                 return Json(obj, JsonRequestBehavior.AllowGet);
             }
-
         }
         public ActionResult GetMarks(GetMarks objParameters)
         {
@@ -2494,11 +2478,7 @@ namespace APSSchool.Controllers
                     obj.Status = "0";
                     foreach (DataRow row0 in (dsResult.Tables[0].Rows))
                     {
-
-
                         obj.lstmarksdetails = datalist;
-
-
                     }
                     List<MarksDetails> objstudent = new List<MarksDetails>();
 
@@ -2520,18 +2500,14 @@ namespace APSSchool.Controllers
                                 Fk_SectionId = row1["Fk_SectionId"].ToString(),
                                 Fk_StudentId = row1["Fk_StudentId"].ToString(),
                                 Fk_ExamTypeId = row1["Fk_ExamTypeId"].ToString(),
-
                             });
                         }
                         datalist.Add(new MarksData
                         {
                             Title = "Marks",
                             MarksDetails = objstudent
-
                         });
-
                     }
-
                 }
                 else
                 {
