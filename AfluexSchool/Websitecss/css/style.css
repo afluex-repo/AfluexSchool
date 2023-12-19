@@ -2931,7 +2931,7 @@ Styles For Inner Pages Ends
     position: absolute;
     top: 0px;
     width: 150px;
-    padding-top: 37px;
+    padding:20px 0px;
 }
 
 nav#responsive-menu {
@@ -2939,7 +2939,7 @@ nav#responsive-menu {
 }
 
 .logo h1.heading1 {
-    font-size: 50px;
+    font-size: 42px;
     /* position: absolute; */
     /* top: 23px; */
     padding-top: 25px;
@@ -3189,27 +3189,36 @@ nav#responsive-menu {
 }
 
 .logo.logohl {
-    float: left;
+    /*float: left;*/
 }
 
 /********************************  Responsive Start for mobile *****************************/
 @media (min-width: 320px) and (max-width: 568px) {
     .logo.logohl {
-        float: right;
+        /*float: right;*/
+        text-align:center!important;
     }
 
         .logo.logohl h1 {
             font-size: 17px !important;
+            padding-top:0px;
         }
 
     .enqr, .label {
         width: 250px !important;
     }
+    .header.header-new .logo img{
+            padding: 38px 0px 18px 10px;
+    }
 }
-
+@media (min-width: 375px) and (max-width: 425px) {
+    .header.header-new .logo img {
+    padding: 24px 0px 4px 10px;
+}
+}
 @media (min-width: 360px) and (max-width: 640px) {
     .logo.logohl {
-        float: right;
+        /*float: right;*/
     }
 
         .logo.logohl h1 {
@@ -3219,7 +3228,7 @@ nav#responsive-menu {
 
 @media (min-width: 375px) and (max-width: 667px) {
     .logo.logohl {
-        float: right;
+        /*float: right;*/
     }
 
     .enqr, .label {
@@ -3229,11 +3238,14 @@ nav#responsive-menu {
 
 @media (min-width: 414px) and (max-width: 736px) {
     .logo.logohl {
-        float: right;
+        /*float: right;*/
     }
 
     .enqr, .label {
         width: 335px !important;
+    }
+    .header.header-new .logo img{
+        top:33px;
     }
 }
 
