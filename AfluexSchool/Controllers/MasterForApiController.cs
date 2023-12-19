@@ -3756,11 +3756,8 @@ namespace APSSchool.Controllers
         {
             try
             {
-
                 model.DOB = string.IsNullOrEmpty(model.DOB) ? null : Common.ConvertToSystemDate(model.DOB, "dd/MM/yyyy");
                 model.DOJ = string.IsNullOrEmpty(model.DOJ) ? null : Common.ConvertToSystemDate(model.DOJ, "dd/MM/yyyy");
-
-
                 if (UploadFile != null)
                 {
                     model.UploadFile = "../Teacher/" + Guid.NewGuid() + Path.GetExtension(UploadFile.FileName);
