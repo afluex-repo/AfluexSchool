@@ -1949,9 +1949,6 @@ namespace APSSchool.Models
 
 
 
-
-
-
     public class SaveEmployeeAttendanceRequest
     {
         public string InTime { get; set; }
@@ -1964,12 +1961,12 @@ namespace APSSchool.Models
         public string LongiTude { get; set; }
         public string Activity { get; set; }
         
-        public DataSet SaveEmployeeAttendance()
+        public DataSet SaveEmployeeAttendance() 
         {
             SqlParameter[] para ={
-                                       new SqlParameter ("@Intime",InTime),
-                                       new SqlParameter ("@OutTime",OutTime),
-                                       new SqlParameter ("@AttendanceDate",AttendanceDate),
+                                       //new SqlParameter ("@Intime",InTime),
+                                       //new SqlParameter ("@OutTime",OutTime),
+                                       //new SqlParameter ("@AttendanceDate",AttendanceDate),
                                        new SqlParameter ("@FK_EmpID",EmployeeID),
                                        new SqlParameter ("@AddedBy",AddedBy),
                                        new SqlParameter ("@UploadFile",TeacherPhoto),
@@ -1987,8 +1984,9 @@ namespace APSSchool.Models
     {
         public string status { get; set; }
         public string Message { get; set; }
+        public string PunchInDate { get; set; }
+        public string PunchInTime { get; set; }
 
-   
     }
 
     
@@ -2004,8 +2002,8 @@ namespace APSSchool.Models
         public DataSet SaveEmployeePunchoutAttendance()
         {
             SqlParameter[] para ={
-                                       new SqlParameter ("@OutTime",OutTime),
-                                       new SqlParameter ("@AttendanceDate",AttendanceDate),
+                                       //new SqlParameter ("@OutTime",OutTime),
+                                       //new SqlParameter ("@AttendanceDate",AttendanceDate),
                                        new SqlParameter ("@FK_EmpID",EmployeeID),
                                        new SqlParameter ("@OutLongitude",OutLongitude),
                                        new SqlParameter ("@OutLatiTude",OutLatiTude)
@@ -2021,8 +2019,9 @@ namespace APSSchool.Models
     {
         public string status { get; set; }
         public string Message { get; set; }
-
-
+        public string PunchOutDate { get; set; }
+        public string PunchOutTime { get; set; }
+        
     }
 
 
@@ -2200,6 +2199,47 @@ namespace APSSchool.Models
         }
     }
 
+    /////////////////////////////////////////////////////////////////////////////
 
-
+    public class GetAttenndaceListReqst
+    {
+        public string FK_EmpID { get; set; }
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
+        public string Message { get; set; }
+        public string Status { get; set; }
+        public List<GetAttenndaceListRespons> listAttenndace { get; set; }
+      
+        public DataSet GetAttenndaceList()
+        {
+            SqlParameter[] para ={      
+                new SqlParameter("@FK_EmpID",FK_EmpID),
+                  new SqlParameter("@FromDate",FromDate),
+                    new SqlParameter("@ToDate",ToDate)
+            };
+            DataSet ds = Connection.ExecuteQuery("GetAttenndaceList", para);
+            return ds;
+        }
+    }
+    public class GetAttenndaceListRespons
+    {
+        public string LoginID { get; set; }
+        public string Name { get; set; }
+        public string FatherName { get; set; }
+        public string DOB { get; set; }
+        public string Gender { get; set; }
+        public string MobileNo { get; set; }
+        public string EmailID { get; set; }
+        public string Address { get; set; }
+        public string AttendanceDate { get; set; }
+        public string InTime { get; set; }
+        public string OutTime { get; set; }
+        public string UploadFile { get; set; }
+        public string Latitude { get; set; }
+        public string Longitude { get; set; }
+        public string PunchIn { get; set; }
+        public string PunchOut { get; set; }
+        public string OutLatitude { get; set; }
+        public string OutLongitude { get; set; }
+    }
 }

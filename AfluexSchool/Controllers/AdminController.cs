@@ -21,7 +21,6 @@ namespace AfluexSchool.Controllers
             ViewBag.TotalStudent = Ds.Tables[1].Rows[0]["TotalStudent"].ToString();
             ViewBag.TotalStaff = Ds.Tables[2].Rows[0]["TotalStaff"].ToString();
             ViewBag.TotalTeacher = Ds.Tables[3].Rows[0]["TotalTeacher"].ToString();
-
             ViewBag.TotalSMS = Ds.Tables[4].Rows[0]["TotalSMS"].ToString();
             ViewBag.TotalSendSMS = Ds.Tables[4].Rows[0]["TotalSendSMS"].ToString();
             ViewBag.TotalUnSendSMS = Ds.Tables[4].Rows[0]["TotalUnSendSMS"].ToString();
@@ -36,14 +35,10 @@ namespace AfluexSchool.Controllers
                     obj.Name = r["Name"].ToString();
                     obj.ImagePath = r["ImagePath"].ToString();
                     obj.Qualification = r["Qualification"].ToString();
-
-                   
                     list.Add(obj);
-
                 }
                 newdata.lstteacher = list;
             }
-           
             return View(newdata);
         }
         public ActionResult BindSMSChart()
