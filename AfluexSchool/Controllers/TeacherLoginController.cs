@@ -1209,7 +1209,6 @@ namespace AfluexSchool.Controllers
             Parent model = new Parent();
             try
             {
-
                 model.PinCode = PinCode;
 
                 DataSet ds = model.GetStateCityByPincode();
