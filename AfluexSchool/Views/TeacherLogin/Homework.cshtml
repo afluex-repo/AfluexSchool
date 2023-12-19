@@ -36,14 +36,12 @@
 
                                         </div>
                                     </div>
-
                                     <div class="col-lg-3 col-md-3">
                                         <div class="form-group ">
                                             <label> Section <span style="color:red">*</span></label>
                                             @Html.DropDownListFor(m => m.Fk_SectionID, new SelectList(ViewBag.ddlsection, "Value", "Text"), new { @class = "form-control", @onchange = "return GetSubjectNameBySection ();" })
                                         </div>
                                     </div>
-
                                     <div class="col-lg-3 col-md-3">
                                         <div class="form-group ">
                                             <label> Subject <span style="color:red">*</span></label>
@@ -56,9 +54,7 @@
                                             @Html.TextBoxFor(m => m.HomeworkDate, new { @class = "form-control", @autoComplete = "off" })
                                         </div>
                                     </div>
-
                                 </div>
-
                                 <div class="row">
                                     <div class="col-lg-3 col-md-3">
                                         <label for="textfield1">Upload File  </label>
@@ -69,7 +65,6 @@
                                         <input type="radio" name="hmwrk" id="text" onclick="return textupload()" />
                                     </div>
                                 </div>
-
                                 <div class="row " id="divtext">
                                     <div class="col-lg-12 col-md-12">
                                         <label for="textfield1">Homework <span style="color:red">*</span></label>
