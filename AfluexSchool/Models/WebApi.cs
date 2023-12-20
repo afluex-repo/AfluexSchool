@@ -1662,7 +1662,6 @@ namespace APSSchool.Models
         }
     }
 
-
     public class SalarySlipPrintResponse
     {
         public string Status { get; set; }
@@ -1700,15 +1699,8 @@ namespace APSSchool.Models
         public string ContactNo { get; set; }
         public string LandLine { get; set; }
         public string Website { get; set; }
-        public string EmailID { get; set; }
-        
+        public string EmailID { get; set; }      
     }
-
-
-
-
-
-
 
     public class LeaveListAPI
     {
@@ -1721,8 +1713,7 @@ namespace APSSchool.Models
         public string PK_ClassID { get; set; }
         public string Fk_SectionID { get; set; }
         public string PK_TeacherID { get; set; }
-        public string Message { get; set; }
-        
+        public string Message { get; set; }       
         public string Reason { get; set; }
         public string ClassName { get; set; }
         public string SectionName { get; set; }
@@ -1748,7 +1739,6 @@ namespace APSSchool.Models
                                };
             DataSet ds = Connection.ExecuteQuery("TeacherStudentsLeaveApplication", para);
             return ds;
-
         }
 
         public DataSet GetClassList()
@@ -1756,9 +1746,7 @@ namespace APSSchool.Models
             SqlParameter[] para ={
                                     new SqlParameter("@PK_ClassID",Fk_ClassID),
                                     new SqlParameter("@TeacherID",TeacherID),
-
                                 };
-
             DataSet ds = Connection.ExecuteQuery("GetClassList", para);
             return ds;
         }
@@ -1768,10 +1756,8 @@ namespace APSSchool.Models
     {
         public string Fk_ClassID { get; set; }
         public string TeacherID { get; set; }
-
         public string PK_SectionId { get; set; }
         public string Pk_ClassId { get; set; }
-
         public List<SearchLeaveAPI> listStudent { get; set; }
         public string AddedBy { get; set; }
         public string Pk_StudentID { get; set; }
@@ -1789,15 +1775,12 @@ namespace APSSchool.Models
         public string ClassName { get; set; }
         public string Reason { get; set; }
 
-
         public DataSet GetClassList()
         {
             SqlParameter[] para ={
                                     new SqlParameter("@PK_ClassID",Fk_ClassID),
                                     new SqlParameter("@TeacherID",TeacherID),
-
                                 };
-
             DataSet ds = Connection.ExecuteQuery("GetClassList", para);
             return ds;
         }
@@ -1829,7 +1812,6 @@ namespace APSSchool.Models
                                };
             DataSet ds = Connection.ExecuteQuery("TeacherStudentsLeaveApplication", para);
             return ds;
-
         }
     }
 
@@ -1857,7 +1839,6 @@ namespace APSSchool.Models
             return ds;
         }
     }
-
 
     public class DeclineLeaveAPI
     {
@@ -1887,8 +1868,7 @@ namespace APSSchool.Models
     public class PendingLeaveAPI
     {
         public string Fk_ClassID { get; set; }
-        public string TeacherID { get; set; }
-        
+        public string TeacherID { get; set; }       
         public string AddedBy { get; set; }
         public string Pk_StudentID { get; set; }
         public string FromDate { get; set; }
@@ -1906,20 +1886,16 @@ namespace APSSchool.Models
         public string Reason { get; set; }
         public List<PendingLeaveAPI> listStudent { get; set; }
 
-
         public DataSet GetClassList()
         {
             SqlParameter[] para ={
                                     new SqlParameter("@PK_ClassID",Fk_ClassID),
                                     new SqlParameter("@TeacherID",TeacherID),
-
                                 };
-
             DataSet ds = Connection.ExecuteQuery("GetClassList", para);
             return ds;
         }
-
-      
+     
         public DataSet LeaveListParent()
         {
             SqlParameter[] para ={
@@ -1936,10 +1912,8 @@ namespace APSSchool.Models
                                };
             DataSet ds = Connection.ExecuteQuery("TeacherStudentsLeaveApplication", para);
             return ds;
-
         }
     }
-
 
     public class GetClassAPI
     {
@@ -1955,9 +1929,7 @@ namespace APSSchool.Models
             SqlParameter[] para ={
                                     new SqlParameter("@PK_ClassID",Fk_ClassID),
                                     new SqlParameter("@TeacherID",TeacherID),
-
                                 };
-
             DataSet ds = Connection.ExecuteQuery("GetClassList", para);
             return ds;
         }
@@ -1974,7 +1946,6 @@ namespace APSSchool.Models
         public string Message { get; set; }
         public string Status { get; set; }
 
-
         public DataSet GetSectionByClass()
         {
             SqlParameter[] para ={
@@ -1985,7 +1956,6 @@ namespace APSSchool.Models
             return ds;
         }
     }
-
 
     public class GetSubjectAPI
     {
@@ -2006,13 +1976,10 @@ namespace APSSchool.Models
                                         new SqlParameter("@TeacherID",TeacherID),
                                            new SqlParameter("@Fk_SessionId",SessionName),
             };
-
             DataSet ds = Connection.ExecuteQuery("GetSubjectNameBySection", para);
             return ds;
         }
     }
-
-
 
     public class SaveEmployeeAttendanceRequest
     {
@@ -2043,21 +2010,16 @@ namespace APSSchool.Models
         }
     }
 
-
-
     public class SaveEmployeeAttendanceResponse
     {
         public string status { get; set; }
         public string Message { get; set; }
         public string PunchInDate { get; set; }
         public string PunchInTime { get; set; }
-
     }
-
-    
+      
     public class SaveEmployeeAttendancePunchoutRequest
-    {
-        
+    {        
         public string OutTime { get; set; }
         public string AttendanceDate { get; set; }
         public string EmployeeID { get; set; }
@@ -2078,17 +2040,13 @@ namespace APSSchool.Models
         }
     }
 
-
-
     public class SaveEmployeeAttendancePunchoutResponse
     {
         public string status { get; set; }
         public string Message { get; set; }
         public string PunchOutDate { get; set; }
-        public string PunchOutTime { get; set; }
-        
+        public string PunchOutTime { get; set; }     
     }
-
 
     public class GetBranchAPI
     {
@@ -2107,8 +2065,7 @@ namespace APSSchool.Models
             return ds;
         }
     }
-
-   
+ 
     public class GetReligionAPI
     {
         public string Pk_ReligionId { get; set; }
@@ -2127,8 +2084,6 @@ namespace APSSchool.Models
         }
     }
 
-
-
     public class GetCategoryAPI
     {
         public string PK_CategoryID { get; set; }
@@ -2145,7 +2100,6 @@ namespace APSSchool.Models
         }
     }
 
-
     public class GetGenderAPI
     {
         public string PK_GenderId { get; set; }
@@ -2156,12 +2110,10 @@ namespace APSSchool.Models
 
         public DataSet GetGender()
         {
-
             DataSet ds = Connection.ExecuteQuery("GenderList");
             return ds;
         }
     }
-
 
     public class GetTeacherProfileAPI
     {
@@ -2188,10 +2140,8 @@ namespace APSSchool.Models
         public string MobileNo { get; set; }
         public string DOJ { get; set; }
         public string BranchName { get; set; }
-
         public string Message { get; set; }
         public string Status { get; set; }
-
         public DataSet GetTeacherList()
         {
             SqlParameter[] Param ={
@@ -2205,7 +2155,6 @@ namespace APSSchool.Models
             return ds;
         }
     }
-
 
     public class TeacherProfileUpdate
     {
@@ -2265,7 +2214,6 @@ namespace APSSchool.Models
     }
 
     /////////////////////////////////////////////////////////////////////////////
-
     public class GetAttenndaceListReqst
     {
         public string FK_EmpID { get; set; }
@@ -2316,7 +2264,6 @@ namespace APSSchool.Models
         public string EmployeeID { get; set; }
         public string FromDate { get; set; }
         public string ToDate { get; set; }
-   
         public List<EmployeeSalarySlipResponse> listEmployeeSalarySlip { get; set; }
 
         public DataSet EmployeeSalarySlipBy()
@@ -2358,16 +2305,6 @@ namespace APSSchool.Models
         public string MonthName { get; set; }
         public string Year { get; set; }
     }
-
-
-
-
-
-
-
-
-
-
 
 
 
