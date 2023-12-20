@@ -1645,7 +1645,10 @@ namespace APSSchool.Models
         public string LandLine { get; set; }
         public string Website { get; set; }
         public string EmailID { get; set; }
-        
+        public string FatherName { get; set; }
+        public string PanNo { get; set; }
+        public string AccountNo { get; set; }
+
         public DataSet EmployeeSalarySlipBy()
         {
             SqlParameter[] para ={
