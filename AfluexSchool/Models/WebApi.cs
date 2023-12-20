@@ -14,6 +14,12 @@ namespace APSSchool.Models
     {
     }
     
+    public class Responses
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }      
+    }
+    
     public class Login
     {
             public string Password { get; set; }
@@ -1601,13 +1607,14 @@ namespace APSSchool.Models
         }
     }
 
-    public class SalarySlipPrintAPI
+    public class SalarySlipPrintRequest
     {
+        public string Status { get; set; }
+        public string Message { get; set; }
         public string FromDate { get; set; }
         public string ToDate { get; set; }
         public string Pk_PaidSalId { get; set; }
         public string EmployeeID { get; set; }
-
         public string EmployeeCode { get; set; }
         public string EmployeeName { get; set; }
         public string TotalIncome { get; set; }
@@ -1629,9 +1636,16 @@ namespace APSSchool.Models
         public string TDS { get; set; }
         public string Insurance { get; set; }
         public string Other { get; set; }
-        public string Message { get; set; }
-        public string Status { get; set; }
-
+        public string CompanyName { get; set; }
+        public string CompanyAddress { get; set; }
+        public string Pin1 { get; set; }
+        public string State1 { get; set; }
+        public string City1 { get; set; }
+        public string ContactNo { get; set; }
+        public string LandLine { get; set; }
+        public string Website { get; set; }
+        public string EmailID { get; set; }
+        
         public DataSet EmployeeSalarySlipBy()
         {
             SqlParameter[] para ={
@@ -1644,6 +1658,54 @@ namespace APSSchool.Models
             return ds;
         }
     }
+
+
+    public class SalarySlipPrintResponse
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
+        public string Pk_PaidSalId { get; set; }
+        public string EmployeeID { get; set; }
+        public string EmployeeCode { get; set; }
+        public string EmployeeName { get; set; }
+        public string TotalIncome { get; set; }
+        public string TotalDeduction { get; set; }
+        public string NetSalary { get; set; }
+        public string MonthName { get; set; }
+        public string Year { get; set; }
+        public string Basic { get; set; }
+        public string HRA { get; set; }
+        public string MA { get; set; }
+        public string PA { get; set; }
+        public string CA { get; set; }
+        public string PF { get; set; }
+        public string ExtraWork { get; set; }
+        public string Incentive { get; set; }
+        public string OtherPay { get; set; }
+        public string ContributionTosociety { get; set; }
+        public string Advance { get; set; }
+        public string TDS { get; set; }
+        public string Insurance { get; set; }
+        public string Other { get; set; }
+        public string CompanyName { get; set; }
+        public string CompanyAddress { get; set; }
+        public string Pin1 { get; set; }
+        public string State1 { get; set; }
+        public string City1 { get; set; }
+        public string ContactNo { get; set; }
+        public string LandLine { get; set; }
+        public string Website { get; set; }
+        public string EmailID { get; set; }
+        
+    }
+
+
+
+
+
+
 
     public class LeaveListAPI
     {
@@ -2242,4 +2304,68 @@ namespace APSSchool.Models
         public string OutLatitude { get; set; }
         public string OutLongitude { get; set; }
     }
+    
+    public class EmployeeSalarySlipRequest
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string Pk_PaidSalId { get; set; }
+        public string EmployeeID { get; set; }
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
+   
+        public List<EmployeeSalarySlipResponse> listEmployeeSalarySlip { get; set; }
+
+        public DataSet EmployeeSalarySlipBy()
+        {
+            SqlParameter[] para ={
+                                       new SqlParameter ("@FromDate",FromDate),
+                                       new SqlParameter ("@ToDate",ToDate),
+                                       new SqlParameter ("@Pk_PaidSalId",Pk_PaidSalId),
+                                        new SqlParameter ("@FK_EmpID",EmployeeID),
+            };
+            DataSet ds = Connection.ExecuteQuery("GetDataForSalarySlip", para);
+            return ds;
+        }
+    }
+    
+    public class EmployeeSalarySlipResponse
+    {
+        public string Pk_PaidSalId { get; set; }
+        public string EmployeeID { get; set; }
+        public string EmployeeCode { get; set; }
+        public string EmployeeName { get; set; }
+        public string Basic { get; set; }
+        public string HRA { get; set; }
+        public string MA { get; set; }
+        public string PA { get; set; }
+        public string CA { get; set; }
+        public string PF { get; set; }
+        public string ExtraWork { get; set; }
+        public string Incentive { get; set; }
+        public string OtherPay { get; set; }
+        public string TotalIncome { get; set; }
+        public string ContributionTosociety { get; set; }
+        public string Advance { get; set; }
+        public string TDS { get; set; }
+        public string Insurance { get; set; }
+        public string Other { get; set; }
+        public string TotalDeduction { get; set; }
+        public string NetSalary { get; set; }
+        public string MonthName { get; set; }
+        public string Year { get; set; }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
