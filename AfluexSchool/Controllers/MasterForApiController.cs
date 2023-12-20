@@ -2833,7 +2833,10 @@ namespace APSSchool.Controllers
                     model.TDS = ds0.Tables[0].Rows[0]["TDS"].ToString();
                     model.Insurance = ds0.Tables[0].Rows[0]["Insurance"].ToString();
                     model.Other = ds0.Tables[0].Rows[0]["Other"].ToString();
-
+                    model.FatherName = ds0.Tables[0].Rows[0]["FatherName"].ToString();
+                    model.PanNo = ds0.Tables[0].Rows[0]["PanNo"].ToString();
+                    model.AccountNo = ds0.Tables[0].Rows[0]["AccountNo"].ToString();
+                
                     model.CompanyName = SoftwareDetails.CompanyName;
                     model.CompanyAddress = SoftwareDetails.CompanyAddress;
                     model.Pin1 = SoftwareDetails.Pin1;
