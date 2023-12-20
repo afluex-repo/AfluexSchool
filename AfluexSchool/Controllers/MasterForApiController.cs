@@ -2659,7 +2659,6 @@ namespace APSSchool.Controllers
                 //obj1.Message = "Homework Not Assigned Successfully";
                 obj1.Message = ex.Message;
                 return Json(obj1, JsonRequestBehavior.AllowGet);
-
             }
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
@@ -2686,9 +2685,7 @@ namespace APSSchool.Controllers
                         obj.SectionName = r["SectionName"].ToString();
                         obj.Fk_SectionID = r["Pk_SectionID"].ToString();
                         obj.HomeworkBy = r["HomeworkBy"].ToString();
-
                         list.Add(obj);
-
                     }
                     model.listStudent = list;
 
@@ -3783,8 +3780,7 @@ namespace APSSchool.Controllers
                 return Json(Response, JsonRequestBehavior.AllowGet);
             }
             return Json(Response, JsonRequestBehavior.AllowGet);
-        }
-              
+        }            
         ////////////////////////////////////////////////////////////////////////////////////////
     
         public ActionResult GetAttenndaceList(GetAttenndaceListReqst model)
@@ -3831,8 +3827,7 @@ namespace APSSchool.Controllers
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
         }
-
-        
+       
         [HttpPost]
         public ActionResult EmployeeSalarySlipBy(EmployeeSalarySlipRequest model)
         {
@@ -3873,10 +3868,8 @@ namespace APSSchool.Controllers
                 }
                 model.listEmployeeSalarySlip = lst;
 
-
                 model.Status = "1";
                 model.Message = "Record Found.";
-
             }
             else
             {
@@ -3884,12 +3877,9 @@ namespace APSSchool.Controllers
                 model.Message = "Record Not Found.";
             }
             return Json(model, JsonRequestBehavior.AllowGet);
-
         }
 
 
-        
-
-
+      
     }
 }
