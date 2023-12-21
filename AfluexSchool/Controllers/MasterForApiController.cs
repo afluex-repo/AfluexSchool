@@ -2667,6 +2667,8 @@ namespace APSSchool.Controllers
             List<HomeworkListAPI> list = new List<HomeworkListAPI>();
             try
             {
+                model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+                model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");              
                 model.HomeworkBy = "Teacher";
                 DataSet ds = model.HomeworkList();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
