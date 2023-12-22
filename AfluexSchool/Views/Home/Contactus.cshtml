@@ -5,7 +5,7 @@
     ViewBag.Title = "Contact Us";
     Layout = "~/Views/Shared/WebsiteLayout.cshtml";
 }
- <!-- breadcrumb-area -->
+<!-- breadcrumb-area -->
 <section class="breadcrumb-area d-flex  p-relative align-items-center" style="background-image: url('../../AssetsWeb/img/bg/bdrc-bg.png'); ">
 
     <div class="container">
@@ -35,9 +35,9 @@
 
 <section class="pt-50">
     <div class="container">
-        @Html.BeginForm("sendemail", "Home")
+        @using (Html.BeginForm("sendemail", "Home", FormMethod.Post, new { @id = "Id" }))
         {
-        <div class="row">
+            <div class="row">
                 <div class="form-group col-md-6 mb-3">
                     <label for="name">
                         Name
@@ -92,14 +92,14 @@
                     </label>
                     @Html.TextAreaFor(m => m.Message, new { @class = "form-control", @placeholder = "Message", required = "required" })
                     @*<textarea name="message" id="message" class="form-control" rows="9" cols="25" required="required"
-                    placeholder="Message"></textarea>*@
+                        placeholder="Message"></textarea>*@
                 </div>
-       
-            <div class="col-md-12">
-                <input type="submit" class="btn btn-info hvr-sweep-to-bottom" id="btnContactUs" />
 
+                <div class="col-md-12">
+                    <input type="submit" class="btn btn-info hvr-sweep-to-bottom" id="btnContactUs" />
+
+                </div>
             </div>
-        </div>
         }
     </div>
 </section>
