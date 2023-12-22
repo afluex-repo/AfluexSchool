@@ -2659,7 +2659,6 @@ namespace APSSchool.Controllers
                 //obj1.Message = "Homework Not Assigned Successfully";
                 obj1.Message = ex.Message;
                 return Json(obj1, JsonRequestBehavior.AllowGet);
-
             }
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
@@ -2668,6 +2667,8 @@ namespace APSSchool.Controllers
             List<HomeworkListAPI> list = new List<HomeworkListAPI>();
             try
             {
+                model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+                model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");              
                 model.HomeworkBy = "Teacher";
                 DataSet ds = model.HomeworkList();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -2686,9 +2687,7 @@ namespace APSSchool.Controllers
                         obj.SectionName = r["SectionName"].ToString();
                         obj.Fk_SectionID = r["Pk_SectionID"].ToString();
                         obj.HomeworkBy = r["HomeworkBy"].ToString();
-
                         list.Add(obj);
-
                     }
                     model.listStudent = list;
 
@@ -2799,20 +2798,17 @@ namespace APSSchool.Controllers
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
         }
-        public ActionResult PrintSalarySlip(string Pk_PaidSalId, string EmployeeID)
-        {
-            SalarySlipPrintAPI model = new SalarySlipPrintAPI();
 
-            List<SalarySlipPrintAPI> lst = new List<SalarySlipPrintAPI>();
-            List<SalarySlipPrintAPI> lst1 = new List<SalarySlipPrintAPI>();
+
+        [HttpPost]
+        public ActionResult PrintSalarySlip(SalarySlipPrintRequest model, string Pk_PaidSalId, string EmployeeID)
+        {
             model.Pk_PaidSalId = Pk_PaidSalId;
             model.EmployeeID = EmployeeID;
             DataSet ds0 = model.EmployeeSalarySlipBy();
 
             if (ds0 != null && ds0.Tables.Count > 0 && ds0.Tables[0].Rows.Count > 0)
             {
-                foreach (DataRow r in ds0.Tables[0].Rows)
-                {
                     model.EmployeeID = ds0.Tables[0].Rows[0]["FK_EmpID"].ToString();
                     model.EmployeeCode = ds0.Tables[0].Rows[0]["EmployeeCode"].ToString();
                     model.EmployeeName = ds0.Tables[0].Rows[0]["EmployeeName"].ToString();
@@ -2836,24 +2832,27 @@ namespace APSSchool.Controllers
                     model.TDS = ds0.Tables[0].Rows[0]["TDS"].ToString();
                     model.Insurance = ds0.Tables[0].Rows[0]["Insurance"].ToString();
                     model.Other = ds0.Tables[0].Rows[0]["Other"].ToString();
+                    model.FatherName = ds0.Tables[0].Rows[0]["FatherName"].ToString();
+                    model.PanNo = ds0.Tables[0].Rows[0]["PanNo"].ToString();
+                    model.AccountNo = ds0.Tables[0].Rows[0]["AccountNo"].ToString();
+                
+                    model.CompanyName = SoftwareDetails.CompanyName;
+                    model.CompanyAddress = SoftwareDetails.CompanyAddress;
+                    model.Pin1 = SoftwareDetails.Pin1;
+                    model.State1 = SoftwareDetails.State1;
+                    model.City1 = SoftwareDetails.City1;
+                    model.ContactNo = SoftwareDetails.ContactNo;
+                    model.LandLine = SoftwareDetails.LandLine;
+                    model.Website = SoftwareDetails.Website;
+                    model.EmailID = SoftwareDetails.EmailID;
 
-                    ViewBag.CompanyName = SoftwareDetails.CompanyName;
-                    ViewBag.CompanyAddress = SoftwareDetails.CompanyAddress;
-                    ViewBag.Pin1 = SoftwareDetails.Pin1;
-                    ViewBag.State1 = SoftwareDetails.State1;
-                    ViewBag.City1 = SoftwareDetails.City1;
-                    ViewBag.ContactNo = SoftwareDetails.ContactNo;
-                    ViewBag.LandLine = SoftwareDetails.LandLine;
-                    ViewBag.Website = SoftwareDetails.Website;
-                    ViewBag.EmailID = SoftwareDetails.EmailID;
-                }
-                model.Status = "0";
-                model.Message = "Salary Slip Print.";
-                return Json(model, JsonRequestBehavior.AllowGet);
+                    model.Status = "1";
+                    model.Message = "Salary Slip Print.";
+                    return Json(model, JsonRequestBehavior.AllowGet);
             }
             else
             {
-                model.Status = "1";
+                model.Status = "0";
                 model.Message = "Salary Slip Not Print.";
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
@@ -3730,6 +3729,7 @@ namespace APSSchool.Controllers
 
         public ActionResult UpdateTeacherProfile(TeacherProfileUpdate model, HttpPostedFileBase UploadFile)
         {
+            Responses Response = new Responses();
             try
             {
                 model.DOB = string.IsNullOrEmpty(model.DOB) ? null : Common.ConvertToSystemDate(model.DOB, "dd/MM/yyyy");
@@ -3763,27 +3763,26 @@ namespace APSSchool.Controllers
                 {
                     if (ds.Tables[0].Rows[0]["msg"].ToString() == "1")
                     {
-                        model.Status = "0";
-                        model.Message = "Teacher Details Updated Successfully.";
-                        return Json(model, JsonRequestBehavior.AllowGet);
+                        Response.Status = "0";
+                        Response.Message = "Teacher Details Updated Successfully.";
+                        return Json(Response, JsonRequestBehavior.AllowGet);
                     }
                     else
                     {
-                        model.Status = "1";
-                        model.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
-                        return Json(model, JsonRequestBehavior.AllowGet);
+                        Response.Status = "1";
+                        Response.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        return Json(Response, JsonRequestBehavior.AllowGet);
                     }
                 }
             }
             catch (Exception ex)
             {
-                model.Status = "1";
-                model.Message = ex.Message;
-                return Json(model, JsonRequestBehavior.AllowGet);
+                Response.Status = "1";
+                Response.Message = ex.Message;
+                return Json(Response, JsonRequestBehavior.AllowGet);
             }
-            return Json(model, JsonRequestBehavior.AllowGet);
-        }
-              
+            return Json(Response, JsonRequestBehavior.AllowGet);
+        }            
         ////////////////////////////////////////////////////////////////////////////////////////
     
         public ActionResult GetAttenndaceList(GetAttenndaceListReqst model)
@@ -3830,5 +3829,59 @@ namespace APSSchool.Controllers
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
         }
+       
+        [HttpPost]
+        public ActionResult EmployeeSalarySlipBy(EmployeeSalarySlipRequest model)
+        {
+            List<EmployeeSalarySlipResponse> lst = new List<EmployeeSalarySlipResponse>();
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            DataSet ds0 = model.EmployeeSalarySlipBy();
+
+            if (ds0 != null && ds0.Tables.Count > 0 && ds0.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds0.Tables[0].Rows)
+                {
+                    EmployeeSalarySlipResponse obj = new EmployeeSalarySlipResponse();
+                    obj.Pk_PaidSalId = r["Pk_PaidSalId"].ToString();
+                    obj.EmployeeID = r["FK_EmpID"].ToString();
+                    obj.EmployeeCode = r["EmployeeCode"].ToString();
+                    obj.EmployeeName = r["EmployeeName"].ToString();
+                    obj.Basic = r["BasicSalary"].ToString();
+                    obj.HRA = r["HouseRent"].ToString();
+                    obj.MA = r["Medical"].ToString();
+                    obj.PA = r["ProfDevAllowance"].ToString();
+                    obj.CA = r["Conveyance"].ToString();
+                    obj.PF = r["ProfDevAllowance"].ToString();
+                    obj.ExtraWork = r["ExtraWork"].ToString();
+                    obj.Incentive = r["Incentice"].ToString();
+                    obj.OtherPay = r["OtherPay"].ToString();
+                    obj.TotalIncome = r["TotalIncome"].ToString();
+                    obj.ContributionTosociety = r["ContributionTosociety"].ToString();
+                    obj.Advance = r["Advanced"].ToString();
+                    obj.TDS = r["TDS"].ToString();
+                    obj.Insurance = r["Insurance"].ToString();
+                    obj.Other = r["Other"].ToString();
+                    obj.TotalDeduction = r["TotalDeduction"].ToString();
+                    obj.NetSalary = r["NetSalary"].ToString();
+                    obj.MonthName = r["MonthName"].ToString();
+                    obj.Year = r["Year"].ToString();
+                    lst.Add(obj);
+                }
+                model.listEmployeeSalarySlip = lst;
+
+                model.Status = "1";
+                model.Message = "Record Found.";
+            }
+            else
+            {
+                model.Status = "0";
+                model.Message = "Record Not Found.";
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+
+      
     }
 }
