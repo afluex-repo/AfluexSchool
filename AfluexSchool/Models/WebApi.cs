@@ -13,55 +13,55 @@ namespace APSSchool.Models
     public class WebApi
     {
     }
-    
+
     public class Responses
     {
         public string Status { get; set; }
-        public string Message { get; set; }      
+        public string Message { get; set; }
     }
-    
+
     public class Login
     {
-            public string Password { get; set; }
-            public string Status { get; set; }
-            public string ErrorMessage { get; set; }
-            public string LoginId { get; set; }
-            public string Pk_ParentID { get; set; }
-            public string DeviceId { get; set; }
-            public string FireBaseId { get; set; }
-      
+        public string Password { get; set; }
+        public string Status { get; set; }
+        public string ErrorMessage { get; set; }
+        public string LoginId { get; set; }
+        public string Pk_ParentID { get; set; }
+        public string DeviceId { get; set; }
+        public string FireBaseId { get; set; }
+
 
 
         public string ParentName { get; set; }
 
-            public DataSet LoginAction()
-            {
-                SqlParameter[] para ={new SqlParameter ("@LoginId",LoginId),
+        public DataSet LoginAction()
+        {
+            SqlParameter[] para ={new SqlParameter ("@LoginId",LoginId),
                                 new SqlParameter("@Password",Password),
              new SqlParameter("@UserType","4")};
-                DataSet ds = Connection.ExecuteQuery("Login", para);
-                return ds;
-            }
-            public DataSet TeacherLoginAction()
-            {
-                SqlParameter[] para ={new SqlParameter ("@LoginId",LoginId),
+            DataSet ds = Connection.ExecuteQuery("Login", para);
+            return ds;
+        }
+        public DataSet TeacherLoginAction()
+        {
+            SqlParameter[] para ={new SqlParameter ("@LoginId",LoginId),
                                 new SqlParameter("@Password",Password),
              new SqlParameter("@UserType","3")};
-                DataSet ds = Connection.ExecuteQuery("Login", para);
-                return ds;
-            }
-            public DataSet SaveDeviceDetails()
-            {
-                SqlParameter[] para ={
+            DataSet ds = Connection.ExecuteQuery("Login", para);
+            return ds;
+        }
+        public DataSet SaveDeviceDetails()
+        {
+            SqlParameter[] para ={
                                     new SqlParameter ("@DeviceId",DeviceId),
                                     new SqlParameter("@FireBaseId",FireBaseId),
                                     new SqlParameter("@AddedBy",Pk_ParentID),
                                 };
-                DataSet ds = Connection.ExecuteQuery("SaveDeviceDetails", para);
-                return ds;
-            }
+            DataSet ds = Connection.ExecuteQuery("SaveDeviceDetails", para);
+            return ds;
         }
-    
+    }
+
     public class DashBoard1
     {
         public string Status { get; set; }
@@ -504,7 +504,7 @@ namespace APSSchool.Models
     {
         public List<TimeTableData> lsttimetabledetails { get; set; }
         public string Pk_ParentID { get; set; }
-            public string Name { get; set; }
+        public string Name { get; set; }
         public string Status { get; set; }
         public DataSet GetTimeTableForParent()
         {
@@ -762,7 +762,10 @@ namespace APSSchool.Models
         public string NoticeDate { get; set; }
         public string NoticeName { get; set; }
         public string PK_NoticeId { get; set; }
-
+        public string SectionName { get; set; }
+        public string FK_SectionId { get; set; }
+        public string ClassName { get; set; }
+        public string FK_ClassId { get; set; }
     }
 
     public class AddNotice
@@ -990,7 +993,7 @@ namespace APSSchool.Models
 
         public string DeviceId { get; set; }
 
-         
+
         public DataSet UpdateDeviceId()
         {
             SqlParameter[] para ={new SqlParameter ("@DeviceId",DeviceId),
@@ -1001,7 +1004,7 @@ namespace APSSchool.Models
         }
 
 
-    } 
+    }
 
 
     public class TeacherLogin
@@ -1025,7 +1028,7 @@ namespace APSSchool.Models
             SqlParameter[] para ={new SqlParameter ("@LoginId",LoginId),
                                 new SqlParameter("@Password",Password),
              new SqlParameter("@UserType","3")};
-            DataSet ds = Connection.ExecuteQuery("Login",  para);
+            DataSet ds = Connection.ExecuteQuery("Login", para);
             return ds;
         }
         public DataSet SaveDeviceDetails()
@@ -1371,10 +1374,10 @@ namespace APSSchool.Models
         public string FromDate { get; set; }
 
         public string StudenLoginID { get; set; }
-       
-      
-       
-       
+
+
+
+
         public List<StudentAttendanceData> ListStudent { get; set; }
 
 
@@ -1414,12 +1417,12 @@ namespace APSSchool.Models
             DataSet ds = Connection.ExecuteQuery("GetStudentAttendanceDetail", para);
             return ds;
         }
-        
+
     }
     public class PrintReceipt
     {
         public string ReceiptNo { get; set; }
-        public string Status { get; set;}
+        public string Status { get; set; }
         public string FeeTypeName { get; set; }
         public string PaidAmount { get; set; }
         public string InstallmentAmt { get; set; }
@@ -1468,7 +1471,7 @@ namespace APSSchool.Models
         public string SessionName { get; set; }
         public string Message { get; set; }
         public string Status { get; set; }
-       
+
         public DataSet SaveHomework()
         {
             SqlParameter[] para ={
@@ -1560,7 +1563,7 @@ namespace APSSchool.Models
             return ds;
         }
     }
-   
+
 
     public class TeacherSalarySlipAPI
     {
@@ -1699,7 +1702,7 @@ namespace APSSchool.Models
         public string ContactNo { get; set; }
         public string LandLine { get; set; }
         public string Website { get; set; }
-        public string EmailID { get; set; }      
+        public string EmailID { get; set; }
     }
 
     public class LeaveListAPI
@@ -1713,7 +1716,7 @@ namespace APSSchool.Models
         public string PK_ClassID { get; set; }
         public string Fk_SectionID { get; set; }
         public string PK_TeacherID { get; set; }
-        public string Message { get; set; }       
+        public string Message { get; set; }
         public string Reason { get; set; }
         public string ClassName { get; set; }
         public string SectionName { get; set; }
@@ -1868,7 +1871,7 @@ namespace APSSchool.Models
     public class PendingLeaveAPI
     {
         public string Fk_ClassID { get; set; }
-        public string TeacherID { get; set; }       
+        public string TeacherID { get; set; }
         public string AddedBy { get; set; }
         public string Pk_StudentID { get; set; }
         public string FromDate { get; set; }
@@ -1895,7 +1898,7 @@ namespace APSSchool.Models
             DataSet ds = Connection.ExecuteQuery("GetClassList", para);
             return ds;
         }
-     
+
         public DataSet LeaveListParent()
         {
             SqlParameter[] para ={
@@ -1939,7 +1942,7 @@ namespace APSSchool.Models
     {
         public string PK_SectionId { get; set; }
         public string SectionName { get; set; }
-        public List<GetSectionAPI> listSection { get; set;}
+        public List<GetSectionAPI> listSection { get; set; }
         public string Fk_ClassID { get; set; }
         public string ClassName { get; set; }
         public string TeacherID { get; set; }
@@ -1992,8 +1995,8 @@ namespace APSSchool.Models
         public string LatiTude { get; set; }
         public string LongiTude { get; set; }
         public string Activity { get; set; }
-        
-        public DataSet SaveEmployeeAttendance() 
+
+        public DataSet SaveEmployeeAttendance()
         {
             SqlParameter[] para ={
                                        //new SqlParameter ("@Intime",InTime),
@@ -2017,9 +2020,9 @@ namespace APSSchool.Models
         public string PunchInDate { get; set; }
         public string PunchInTime { get; set; }
     }
-      
+
     public class SaveEmployeeAttendancePunchoutRequest
-    {        
+    {
         public string OutTime { get; set; }
         public string AttendanceDate { get; set; }
         public string EmployeeID { get; set; }
@@ -2045,7 +2048,7 @@ namespace APSSchool.Models
         public string status { get; set; }
         public string Message { get; set; }
         public string PunchOutDate { get; set; }
-        public string PunchOutTime { get; set; }     
+        public string PunchOutTime { get; set; }
     }
 
     public class GetBranchAPI
@@ -2065,7 +2068,7 @@ namespace APSSchool.Models
             return ds;
         }
     }
- 
+
     public class GetReligionAPI
     {
         public string Pk_ReligionId { get; set; }
@@ -2222,10 +2225,10 @@ namespace APSSchool.Models
         public string Message { get; set; }
         public string Status { get; set; }
         public List<GetAttenndaceListRespons> listAttenndace { get; set; }
-      
+
         public DataSet GetAttenndaceList()
         {
-            SqlParameter[] para ={      
+            SqlParameter[] para ={
                 new SqlParameter("@FK_EmpID",FK_EmpID),
                   new SqlParameter("@FromDate",FromDate),
                     new SqlParameter("@ToDate",ToDate)
@@ -2255,7 +2258,7 @@ namespace APSSchool.Models
         public string OutLatitude { get; set; }
         public string OutLongitude { get; set; }
     }
-    
+
     public class EmployeeSalarySlipRequest
     {
         public string Status { get; set; }
@@ -2278,7 +2281,7 @@ namespace APSSchool.Models
             return ds;
         }
     }
-    
+
     public class EmployeeSalarySlipResponse
     {
         public string Pk_PaidSalId { get; set; }
@@ -2304,6 +2307,195 @@ namespace APSSchool.Models
         public string NetSalary { get; set; }
         public string MonthName { get; set; }
         public string Year { get; set; }
+    }
+
+    public class NoticeMasterRequest
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public string PK_NoticeId { get; set; }
+        public string AddedBy { get; set; }
+        public string SessionName { get; set; }
+        public string Fk_ClassID { get; set; }
+        public string TeacherID { get; set; }
+        public string PK_SectionID { get; set; }
+        public string Fk_SectionID { get; set; }
+        public string NoticeName { get; set; }
+        public List<SelectListItem> ddlclass { get; set; }
+        public List<SelectListItem> ddlsection { get; set; }
+
+        public DataSet GettingNoticeList()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@PK_NoticeId",PK_NoticeId),
+                new SqlParameter("@AddedBy",AddedBy),
+                  new SqlParameter("@Fk_SessionId",SessionName),
+            };
+            DataSet ds = Connection.ExecuteQuery("GetNoticeList", para);
+            return ds;
+        }
+
+        public DataSet GetClassList()
+        {
+            SqlParameter[] para ={
+                                    new SqlParameter("@PK_ClassID",Fk_ClassID),
+                                    new SqlParameter("@TeacherID",TeacherID),
+                                };
+            DataSet ds = Connection.ExecuteQuery("GetClassList", para);
+            return ds;
+        }
+
+        public DataSet GetSectionList()
+        {
+            SqlParameter[] para ={
+                                   new SqlParameter("@PK_SectionID",PK_SectionID)
+                               };
+            DataSet ds = Connection.ExecuteQuery("GetSectionList", para);
+            return ds;
+        }
+    }
+
+    public class UpdateNoticeRequest
+    {
+        public string UpdatedBy { get; set; }
+        public string PK_NoticeId { get; set; }
+        public string Fk_ClassID { get; set; }
+        public string Fk_SectionID { get; set; }
+        public string NoticeName { get; set; }
+
+        public DataSet UpdateNotice()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@UpdatedBy",UpdatedBy),
+                new SqlParameter("@PK_NoticeId",PK_NoticeId),
+                new SqlParameter("@FK_ClassId",Fk_ClassID),
+                new SqlParameter("@FK_SectionId",Fk_SectionID),
+                new SqlParameter("NoticeName",NoticeName)
+            };
+            DataSet ds = Connection.ExecuteQuery("UpdateNotice", para);
+            return ds;
+        }
+    }
+
+    public class DeleteNoticeRequest
+    {
+        public string PK_NoticeId { get; set; }
+        public string DeletedBy { get; set; }
+
+        public DataSet DeletingNotice()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@DeletedBy",DeletedBy),
+                 new SqlParameter("@PK_NoticeId",PK_NoticeId)
+            };
+            DataSet ds = Connection.ExecuteQuery("DeleteNotice", para);
+            return ds;
+        }
+    }
+
+    public class HomeWorkViewRequest
+    {
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
+        public string HomeworkBy { get; set; }
+        public string AddedBy { get; set; }
+        public string SessionName { get; set; }
+        public string Fk_ClassID { get; set; }
+        public string Fk_SectionID { get; set; }
+        public string TeacherID { get; set; }
+        public string SubjectID { get; set; }        
+        //public string Result { get; set; }
+        public string Message { get; set; }
+        public string Status { get; set; }
+        public string HomeWorkID { get; set; }
+        public string HomeworkFile { get; set; }
+        
+        public DataSet HomeworkList()
+        {
+            SqlParameter[] para ={
+                                    new SqlParameter("@FromDate",FromDate),
+                                      new SqlParameter("@ToDate",ToDate),
+                                       new SqlParameter("@HomeworkBy",HomeworkBy),
+                                      new SqlParameter("@AddedBy",AddedBy),
+                                        new SqlParameter("@Fk_SessionId",SessionName),
+                                        new SqlParameter("@Fk_ClassId",Fk_ClassID),
+                                         new SqlParameter("@Fk_SectionID",Fk_SectionID),
+                                         new SqlParameter("@FK_TeacherID",TeacherID),
+                                          new SqlParameter("@Fk_SubjectId",SubjectID),
+                                          new SqlParameter("@HomeworkFile",HomeworkFile),
+                                            new SqlParameter("@HomeWorkID",HomeWorkID)
+                               };
+            DataSet ds = Connection.ExecuteQuery("HomeWorkListForMobile", para);
+            return ds;
+        }
+    }
+
+    public class ChangePasswordRequest
+    {
+        public string OldPassword { get; set; }
+        public string NewPassword { get; set; }
+        public string UpdatedBy { get; set; }
+       
+        public DataSet UpdateTeacherPassword()
+        {
+            SqlParameter[] para ={
+                                   new SqlParameter("@OldPassword",OldPassword),
+                                    new SqlParameter("@NewPassword",NewPassword),
+                                     new SqlParameter("@PK_TeacherID",UpdatedBy),
+                                       new SqlParameter("@UpdatedBy",UpdatedBy)
+                               };
+            DataSet ds = Connection.ExecuteQuery("ChangeTeacherPassword", para);
+            return ds;
+        }
+    }
+
+
+    public class GetOtpRequest
+    {
+        public string Name { get; set; }
+        public string UserType { get; set; }
+        public string LoginId { get; set; }
+        public string MobileNo { get; set; }
+        public string Result { get; set; }
+        public string OTP { get; set; }
+
+        public DataSet GettingPassword()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@UserType",UserType),
+                new SqlParameter("@LoginId",LoginId),
+                 new SqlParameter("@MobileNo",MobileNo)
+            };
+            DataSet ds = Connection.ExecuteQuery("GetPassword", para);
+            return ds;
+        }
+    }
+
+
+
+
+    public class GetPasswordRequest
+    {
+        public string UserType { get; set; }
+        public string LoginId { get; set; }
+        public string MobileNo { get; set; }
+        public string Result { get; set; }
+
+        public DataSet GettingPassword()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@UserType",UserType),
+                new SqlParameter("@LoginId",LoginId),
+                 new SqlParameter("@MobileNo",MobileNo)
+            };
+            DataSet ds = Connection.ExecuteQuery("GetPassword", para);
+            return ds;
+        }
     }
 
 
