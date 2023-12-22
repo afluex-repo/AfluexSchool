@@ -383,6 +383,7 @@
     <Content Include="AssetsWeb\img\class\class-8.jpg" />
     <Content Include="AssetsWeb\img\class\class-9.jpg" />
     <Content Include="AssetsWeb\img\favicon.ico" />
+    <Content Include="AssetsWeb\img\favicon.png" />
     <Content Include="AssetsWeb\img\features\about_img.png" />
     <Content Include="AssetsWeb\img\features\about_img_02.png" />
     <Content Include="AssetsWeb\img\features\about_img_03.png" />
