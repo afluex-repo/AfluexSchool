@@ -3,7 +3,34 @@
     ViewBag.Title = "Admission";
     Layout = "~/Views/Shared/WebsiteLayout.cshtml";
 }
-<div class="welcome-message module" style="margin-top:60px;">
+
+
+<section class="breadcrumb-area d-flex  p-relative align-items-center" style="background-image: url('../../AssetsWeb/img/bg/bdrc-bg.png'); ">
+
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-xl-12 col-lg-12">
+                <div class="breadcrumb-wrap text-left">
+                    <div class="breadcrumb-title">
+                        <h2>Addmission</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="breadcrumb-wrap2">
+
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/home/index">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Addmission</li>
+                    </ol>
+                </nav>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- breadcrumb-area-end -->
+@*<div class="welcome-message module" style="margin-top:60px;">
     <div class="row">
         <div class="medium-6 small-12 columns grouppic">
             <h3 class="text-center">Download Admission form front &nbsp;<i class="fa fa-download"></i> &nbsp;</h3>
@@ -12,17 +39,56 @@
             </a>
             <!-- <a  href="src="../../Websitecss/images/help/admissionform1.jpg"  download><img src="../../Websitecss/images/help/admissionform1.jpg" alt="Education Background" class="img hvr-rectangle-out" /></a> -->
 
-            <a href="../../Websitecss/images/help/admissionform1.jpg" download="admissionform1"><button class="btn btn-danger "><i class="fa fa-download"></i> &nbsp;download </button></a>
+            <a href="../../Websitecss/images/help/admissionform1.jpg" download="admissionform1">
+            <button class="btn btn-danger "><i class="fa fa-download"></i> &nbsp;download </button>
+            </a>
         </div><!-- Left Column /-->
 
         <div class="medium-6 small-12 columns grouppic">
             <h3 class="text-center">Download Admission form  back &nbsp;<i class="fa fa-download"></i> &nbsp;</h3>
 
-            <a href="../../Websitecss/images/help/admissionform2.jpg" download="admissionform2"><img src="../../Websitecss/images/help/admissionform2.jpg" alt="admissionform2" class="img-responsive" /></a>
+            <a href="../../Websitecss/images/help/admissionform2.jpg" download="admissionform2">
+            <img src="../../Websitecss/images/help/admissionform2.jpg" alt="admissionform2" class="img-responsive" />
+            </a>
 
-            <a href="../../Websitecss/images/help/admissionform2.jpg" download="admissionform2"><button class="btn btn-danger "><i class="fa fa-download"></i> &nbsp; Download </button></a>
+            <a href="../../Websitecss/images/help/admissionform2.jpg" download="admissionform2">
+            <button class="btn btn-danger "><i class="fa fa-download"></i> &nbsp; Download </button>
+            </a>
 
         </div><!-- Left Column /-->
 
     </div><!-- Row /-->
-</div>
+</div>*@
+
+<section id="pricing" class="pricing-area pt-150 pb-60 fix p-relative">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <div class="pricing-box pricing-box2 shadow active mb-30">
+                    <div class="pricing-head text-center">
+                        <div class="price-count">
+                            <h2>Download Admission form Front  <i class="fa fa-download"></i></h2>
+                        </div>
+                        <hr>
+                    </div>
+                    <div class="pricing-btn  text-center">
+                        <a href="#!"  download="admissionform1" class="btn ss-btn">Download <i class="fa fa-download"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="pricing-box pricing-box2 shadow mb-30">
+                    <div class="pricing-head text-center">
+                        <div class="price-count">
+                            <h2>Download Admission form Back  <i class="fa fa-download"></i></h2>
+                        </div>
+                        <hr>
+                    </div>
+                    <div class="pricing-btn text-center">
+                        <a href="#!" download="admissionform2" class="btn ss-btn">Download <i class="fa fa-download"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
