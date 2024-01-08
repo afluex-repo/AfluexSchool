@@ -949,12 +949,12 @@ namespace AfluexSchool.Controllers
                     if (file != null && file.ContentLength > 0)
                     {
 
-                        obj.Image = "../Teacher/" + Guid.NewGuid() + Path.GetExtension(file.FileName);
-                        file.SaveAs(Path.Combine(Server.MapPath(obj.Image)));
+                        model.Image = "../Teacher/" + Guid.NewGuid() + Path.GetExtension(file.FileName);
+                        file.SaveAs(Path.Combine(Server.MapPath(model.Image)));
                     }
                     else
                     {
-                        obj.Image = "../../img/no-profile.jpeg";
+                        model.Image = "../../img/no-profile.jpeg";
                     }
                 }
                 model.PK_TeacherID = PK_TeacherID;
@@ -977,20 +977,21 @@ namespace AfluexSchool.Controllers
 
                 model.EmailID = EmailID;
                 model.UpdatedBy = Session["PK_TeacherID"].ToString();
-                obj.DOB = string.IsNullOrEmpty(obj.DOB) ? null : Common.ConvertToSystemDate(obj.DOB, "dd/MM/yyyy");
-                obj.DOJ = string.IsNullOrEmpty(obj.DOJ) ? null : Common.ConvertToSystemDate(obj.DOJ, "dd/MM/yyyy");
+                model.DOB = string.IsNullOrEmpty(model.DOB) ? null : Common.ConvertToSystemDate(model.DOB, "dd/MM/yyyy");
+                model.DOJ = string.IsNullOrEmpty(model.DOJ) ? null : Common.ConvertToSystemDate(model.DOJ, "dd/MM/yyyy");
                 DataSet ds = model.UpdateTeacherRecord();
                 if (ds != null && ds.Tables.Count > 0)
                 {
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
-                        FormName = "EditPtofile";
+                        FormName = "EditProfile";
                         Controller = "TeacherLogin";
                         TempData["TeacherEditProfile"] = "Record updated successfully";
+                        Session["UserImage"] = ds.Tables[0].Rows[0]["ImagePath"].ToString();
                     }
                     else if (ds.Tables[0].Rows[0][0].ToString() == "0")
                     {
-                        FormName = "EditPtofile";
+                        FormName = "EditProfile";
                         Controller = "TeacherLogin";
                         TempData["TeacherEditProfile"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
