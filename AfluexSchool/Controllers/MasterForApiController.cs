@@ -4195,13 +4195,11 @@ namespace APSSchool.Controllers
                     //BLSMS.SendSMS2(Common.SMSCredential.UserName, Common.SMSCredential.Password, Common.SMSCredential.SenderId, model.MobileNo, pass);
 
 
-                    string passwordRecoveryMessage = BLSMS.ForgetPassword(ds.Tables[0].Rows[0]["Name"].ToString(), Crypto.Decrypt(ds.Tables[0].Rows[0]["Password"].ToString()));
-                    string TempId = "1707166036749633527";
-                    BLSMS.SendSMS(ds.Tables[0].Rows[0]["Mobile"].ToString(), passwordRecoveryMessage, TempId);
+                    string passwordRecoveryMessage = BLSMS.ForgetPassword(ds.Tables[0].Rows[0]["Name"].ToString(),(ds.Tables[0].Rows[0]["Password"].ToString()));
+                    string TempId = "1707166203827049342";
+                    BLSMS.SendSMS(ds.Tables[0].Rows[0]["MobileNo"].ToString(), passwordRecoveryMessage, TempId);
                  
-
-
-
+                    
                     if (model.MobileNo.Length < 10)
                     {
                         Status = "Failed";
