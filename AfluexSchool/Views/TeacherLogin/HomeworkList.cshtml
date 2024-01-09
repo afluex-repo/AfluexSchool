@@ -9,12 +9,12 @@
  {
 
 
-    <div>
+    <div class="col-12 col-md-12 col-lg-12 col-xl-12 mx-auto align-self-center">
         <div class="card border-0 shadow-sm mb-4">
-            <div class="card-header border-0 bg-none">
-                <div class="row">
-                    <div class="col-12 col-md">
-                        <p class="fs15">Homework List</p>
+            <div class="card-header">
+                <div class="row ">
+                    <div class="col-auto">
+                        <h4 class="mt-0 mb-1">Homework List</h4>
                     </div>
                     <p style="color:red">
                         @TempData["HomeworkList"]
@@ -22,10 +22,7 @@
                 </div>
             </div>
             <div class="card-body ">
-
-
                 <div class="row">
-
                     <div class="col-md-3">
                         From Date
                         @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", placeholder = "From Date", @ReadOnly = "ReadOnly", @autoComplete = "off" })
@@ -46,7 +43,7 @@
                     </div>
 
                 </div>
-                 <br />
+                <br />
                 <div class="row">
                     <div class="col-md-3">
                         Subject Name
@@ -56,7 +53,7 @@
 
 
                     </div>
-                   
+
                     <div class="col-md-3" style="margin-top:20px">
 
                         <input type="submit" value="Search" name="btnSearch" onclick="return validate();" id="btnSearch" class="btn btn-primary" />
@@ -111,7 +108,7 @@
                                             <td>@(new HtmlString(item.HomeWorkHTML))</td>
                                             <td>
                                                 <input type="button" value="View" class="btn btn-info   " onclick="savemessage('@item.StudentPhoto','@item.HomeWorkID');" />
- <td>
+                                            <td>
 
                                                 <a href="/TeacherLogin/DeleteHomework?HomeWorkID=@item.HomeWorkID" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete?')">Delete</a>
                                                 @*  <a href="/Parent/PrintReceipt?Pk_ParentID=@item.Pk_ParentID" class="btn btn-primary btn-sm" target="_blank"> Receipt</a>*@

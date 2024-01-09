@@ -628,7 +628,9 @@ namespace APSSchool.Models
     }
     public class LeaveListDetails
     {
-
+        public string StudentName { get; set; }
+        public string SectionName { get; set; }
+        public string ClassName { get; set; }
         public string FromDate { get; set; }
         public string ToDate { get; set; }
         public string Reason { get; set; }
