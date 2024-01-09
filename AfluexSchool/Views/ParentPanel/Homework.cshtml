@@ -8,16 +8,19 @@
 
 @using (Html.BeginForm("Homework", "ParentPanel", FormMethod.Post, new { @id = "ReligionList" }))
 {
-    <div>
+    <div class="col-12 col-md-12 col-lg-12 col-xl-12 mx-auto align-self-center">
         <div class="card border-0 shadow-sm mb-4">
-            <div class="card-header border-0 bg-none">
-                <div class="row">
-                    <div class="col-12 col-md">
-                        <p class="fs15">Homework</p>
+            <div class="card-header">
+                <div class="row ">
+                    <div class="col-auto">
+                        <h4 class="mt-0 mb-1">Homework</h4>
                     </div>
-
+                    @*<p style="color:red">
+                            @TempData["EmployeeSalarySlip"]
+                        </p>*@
                 </div>
             </div>
+
             <div class="card-body ">
                 <div class="row">
                     <div class="col-md-3">
@@ -25,13 +28,15 @@
                         @Html.DropDownListFor(m => m.Pk_StudentID, new SelectList(ViewBag.ddlStudent, "Value", "Text"), new { @class = "form-control", @onchange = "return OnchangeSection();" })
                         @Html.HiddenFor(m => m.Fk_ParentId)
                     </div>
-                </div>
-                <div class="card-footer text-left">
-                    <div class="col-md-2">
+
+                    <div class="col-md-3">
+                        <label class="d-block">&nbsp;</label>
                         <input type="submit" class="btn btn-info" name="Search" id="Search" value="Search" />
                     </div>
                 </div>
                 
+                    
+               
                 <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
                     <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
                         <div class="col-sm-12">
@@ -63,10 +68,10 @@
                                                     <td>@item.ClassName          </td>
                                                     <td>@item.SectionName        </td>
                                                     <td>@item.AttendanceDate     </td>
-                                                    <td><a href="@item.Status" target="_blank"><img src="@item.Status" style="height:50px;width:50px;" />  </a>    </td> 
-                                                    @*<td><a href="@item.Status" target="_blank"><img src="@item.Status" style="height:50px;width:50px;" />  </a>    </td>*@ 
+                                                    <td><a href="@item.Status" target="_blank"><img src="@item.Status" style="height:50px;width:50px;" />  </a>    </td>
+                                                    @*<td><a href="@item.Status" target="_blank"><img src="@item.Status" style="height:50px;width:50px;" />  </a>    </td>*@
                                                     <td>@(new HtmlString(item.HomeWorkHTML))</td>
-                                                  </tr>
+                                                </tr>
                                                 i++;
                                             }
                                         }

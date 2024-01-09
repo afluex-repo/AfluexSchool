@@ -6,17 +6,19 @@
 }
  @using (Html.BeginForm("TimeTableList", "ParentPanel", FormMethod.Post, new { @id = "SessionList" }))
  {
-    <div>
+    <div class="col-12 col-md-12 col-lg-12 col-xl-12 mx-auto align-self-center">
         <div class="card border-0 shadow-sm mb-4">
-            <div class="card-header border-0 bg-none">
-                <div class="row">
-                    <div class="col-12 col-md">
-                        <p class="fs15">TimeTable List</p>
-                        
+            <div class="card-header">
+                <div class="row ">
+                    <div class="col-auto">
+                        <h4 class="mt-0 mb-1">TimeTable List</h4>
                     </div>
-
+                    @*<p style="color:red">
+                            @TempData["EmployeeSalarySlip"]
+                        </p>*@
                 </div>
             </div>
+
             <div class="card-body ">
                 <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
                     <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
@@ -29,7 +31,7 @@
                                         <th>Class Name</th>
                                         <th>Section</th>
                                         <th>File</th>
-                                       
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -46,7 +48,7 @@
                                                     <td>@item.ClassName</td>
                                                     <td>@item.SectionName</td>
                                                     <td><a href="@item.TimeTable" target="_blank"><img src="@item.TimeTable" style="height:50px;width:50px;" />  </a>    </td>
-                                                    
+
 
                                                 </tr>
                                                 i++;
