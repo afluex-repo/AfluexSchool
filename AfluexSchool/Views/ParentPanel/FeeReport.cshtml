@@ -15,10 +15,8 @@
                 <div class="card border-0 shadow-sm mb-4">
                     <div class="card-header">
                         <div class="row ">
-
                             <div class="col-auto">
                                 <h4 class="mt-0 mb-1">Fee Report</h4>
-
                             </div>
                             <p style="color:red">
                                 @TempData["FeeReport"]
@@ -29,42 +27,25 @@
 
                         <div class="row">
                             <div class="col-md-3">
-
                                 <label>  Student Id</label>
-
                                 @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control" })
-
-
                             </div>
                             <div class="col-md-3">
-
                                 <label>Class</label>
-
                                 @Html.DropDownListFor(m => m.Fk_ClassID, new SelectList(ViewBag.ddlclass, "Value", "Text"), new { @class = "form-control", @onchange = "return OnchangeSection();" })
-
                             </div>
                             <div class="col-md-3">
-
                                 <label>Section</label>
-
                                 @Html.DropDownListFor(m => m.Fk_SectionID, new SelectList(ViewBag.ddlsection, "Value", "Text"), new { @class = "form-control" })
-
                             </div>
                             <div class="col-md-3">
-
                                 <label>  Receipt No.</label>
-
                                 @Html.TextBoxFor(m => m.ReceiptNo, new { @class = "form-control" })
-
                             </div>
-
-
                         </div>
-                        
-
-                        <div class="card-footer text-left">
-
-                            <div class="col-md-2">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label class="d-block">&nbsp;</label>
                                 <input type="submit" class="btn btn-info" name="Search" id="btnsearch" value="Search" />
                             </div>
                         </div>

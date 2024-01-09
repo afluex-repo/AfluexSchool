@@ -8,12 +8,12 @@
 
 @using (Html.BeginForm("PendingLeave", "TeacherLogin", FormMethod.Post, new { @id = "PendingLeave12" }))
 {
-    <div class="container main-container" id="main-container">
+    <div class="col-12 col-md-12 col-lg-12 col-xl-12 mx-auto align-self-center">
         <div class="card border-0 shadow-sm mb-4">
-            <div class="card-header border-0 bg-none">
-                <div class="row">
-                    <div class="col-12 col-md">
-                        <p class="fs15">Leave Approval</p>
+            <div class="card-header">
+                <div class="row ">
+                    <div class="col-auto">
+                        <h4 class="mt-0 mb-1">Leave Approval</h4>
                     </div>
                     <p style="color:red">
                         @TempData["PendingLeave"]
@@ -27,10 +27,10 @@
                         Student
                         @Html.TextBoxFor(m => m.StudentName, new { @class = "form-control", placeholder = "StudentName" })
                     </div>
-                    
+
                     <div class="col-md-3">
                         From Date
-                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", placeholder = "From Date" , @autoComplete = "off" })
+                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", placeholder = "From Date", @autoComplete = "off" })
                     </div>
                     <div class="col-md-3">
                         To Date
@@ -42,8 +42,8 @@
                         <input type="submit" value="Search" name="btnSearch12" id="btnSearch" class="btn btn-primary" />
                     </div>
                 </div>
-                
-                <div class="row"> 
+
+                <div class="row">
                 </div>
 
                 <div class="col-sm-12 table-responsive">
@@ -128,6 +128,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 }
 

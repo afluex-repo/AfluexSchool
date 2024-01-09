@@ -8,12 +8,12 @@
 
 @using (Html.BeginForm("LeaveList", "TeacherLogin", FormMethod.Post, new { @id = "form1" }))
 {
-    <div class="container main-container" id="main-container">
+    <div class="col-12 col-md-12 col-lg-12 col-xl-12 mx-auto align-self-center">
         <div class="card border-0 shadow-sm mb-4">
-            <div class="card-header border-0 bg-none">
-                <div class="row">
-                    <div class="col-12 col-md">
-                        <p class="fs15">Leave List</p>
+            <div class="card-header">
+                <div class="row ">
+                    <div class="col-auto">
+                        <h4 class="mt-0 mb-1">Leave List</h4>
                     </div>
                     <p style="color:red">
                         @TempData["LeaveList"]
@@ -27,7 +27,7 @@
                         Student
                         @Html.TextBoxFor(m => m.StudentName, new { @class = "form-control", placeholder = "StudentName" })
                     </div>
-                    
+
                     <div class="col-md-3">
                         Status
                         @Html.DropDownListFor(m => m.Status, new SelectList(ViewBag.ddlStatus, "Value", "Text"), new { @class = "form-control", placeholder = "To Date", @ReadOnly = "ReadOnly" })
@@ -84,15 +84,15 @@
                                             <td>
                                                 @item.Reason
                                             </td>
-                                          
-                                                <td>
-                                                    @item.Description
-                                                </td>
-                                           
+
+                                            <td>
+                                                @item.Description
+                                            </td>
+
                                             <td>
                                                 @item.Status
                                             </td>
-                                            
+
                                         </tr>
                                         i++;
                                     }
@@ -101,7 +101,7 @@
                             }
                         </tbody>
                     </table>
-                    
+
                 </div>
             </div>
         </div>
