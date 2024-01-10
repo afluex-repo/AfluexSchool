@@ -180,7 +180,7 @@ namespace AfluexSchool.Models
             public static string City1 = "LUCKNOW";
             public static string ContactNo = "(+91) 7310000413";
             public static string LandLine = "";
-            public static string Website = "http://apsglobeschool.org/";
+            public static string Website = "https://www.afluex.com/";
             public static string EmailID = "info@afluex.com";
             public static string AffliateNo = "17102-06/2018";
         }

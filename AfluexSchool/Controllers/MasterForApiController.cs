@@ -2864,7 +2864,6 @@ namespace APSSchool.Controllers
             List<StudentAttendanceData> datalist1 = new List<StudentAttendanceData>();
             try
             {
-
                 DataSet dsResult = objParameters.GetStudentAttendanceDetail();
                 if (dsResult != null && dsResult.Tables[0].Rows.Count > 0)
                 {
@@ -2875,11 +2874,7 @@ namespace APSSchool.Controllers
                         obj.Status = "0";
                         foreach (DataRow row0 in (dsResult.Tables[0].Rows))
                         {
-
-
                             obj.ListStudent = datalist1;
-
-
                         }
                         List<StudentAttendanceDetails> objstudent = new List<StudentAttendanceDetails>();
 
@@ -2926,6 +2921,57 @@ namespace APSSchool.Controllers
             }
         }
         #endregion
+
+        #region GetComplains
+
+        public ActionResult GetComplains(GetComplainAPI model)
+        {
+            GetComplainAPI obj = new GetComplainAPI();
+            
+            try
+            {
+                DataSet ds11 = model.GetAllMessages();
+
+                if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
+                {
+                    List<Complainlist> lstcomplain = new List<Complainlist>();
+                    foreach (DataRow r in ds11.Tables[0].Rows)
+                    {
+                        Complainlist Objlst = new Complainlist();
+                        Objlst.Pk_MessageId = r["Pk_MessageId"].ToString();
+                        Objlst.Fk_UserId = r["Fk_UserId"].ToString();
+                        Objlst.MemberName = r["Name"].ToString();
+                        Objlst.MessageTitle = r["MessageTitle"].ToString();
+                        Objlst.AddedOn = r["AddedOn"].ToString();
+                        Objlst.Messagess = r["Message"].ToString();
+                        Objlst.cssclass = r["cssclass"].ToString();
+
+                        lstcomplain.Add(Objlst);
+                    }
+                    obj.lstcomplain = lstcomplain;
+
+                    obj.Status = "0";
+                    obj.Message = "Data Fetched";
+                    return Json(obj, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    obj.Status = "1";
+                    obj.Message = ds11.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    return Json(obj, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch(Exception ex)
+            {
+                obj.Status = "1";
+                obj.Message = ex.Message;
+                return Json(obj, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+        #endregion
+
 
         public ActionResult PrintFeerecipt(PrintReceipt model)
         {
@@ -3688,6 +3734,8 @@ namespace APSSchool.Controllers
             }
         }
 
+        #region GetTeacherProfile
+
         public ActionResult GetTeacherProfile(GetTeacherProfileAPI model)
         {
             DataSet ds = model.GetTeacherList();
@@ -3725,6 +3773,10 @@ namespace APSSchool.Controllers
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
         }
+
+        #endregion
+
+        #region UpdateTeacherProfile
 
         public ActionResult UpdateTeacherProfile(TeacherProfileUpdate model, HttpPostedFileBase UploadFile)
         {
@@ -3782,7 +3834,10 @@ namespace APSSchool.Controllers
             }
             return Json(Response, JsonRequestBehavior.AllowGet);
         }
+
+        #endregion
         ////////////////////////////////////////////////////////////////////////////////////////
+        #region GetAttenndaceList
 
         public ActionResult GetAttenndaceList(GetAttenndaceListReqst model)
         {
@@ -3828,6 +3883,10 @@ namespace APSSchool.Controllers
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
         }
+
+        #endregion
+
+        #region EmployeeSalarySlipBy
 
         [HttpPost]
         public ActionResult EmployeeSalarySlipBy(EmployeeSalarySlipRequest model)
@@ -3880,7 +3939,9 @@ namespace APSSchool.Controllers
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
+        #endregion
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        #region EditNoticeMaster
 
         [HttpPost]
         public ActionResult EditNoticeMaster(NoticeMasterRequest model, string PK_NoticeId)
@@ -3941,21 +4002,15 @@ namespace APSSchool.Controllers
 
                     }
                 }
-
                 model.ddlsection = ddlSection;
-
-
+                
                 model.Status = "1";
                 model.Message = "Record Found.";
-
-
-
-
+                
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
             else
             {
-
                 #region ddlhelclass
                 try
                 {
@@ -3991,10 +4046,11 @@ namespace APSSchool.Controllers
 
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
-
         }
 
+        #endregion
 
+        #region UpdateNotice
 
         [HttpPost]
         public ActionResult UpdateNotice(UpdateNoticeRequest model)
@@ -4022,6 +4078,10 @@ namespace APSSchool.Controllers
             }
             return Json(Response, JsonRequestBehavior.AllowGet);
         }
+
+        #endregion
+
+        #region DeleteNotice
 
         [HttpPost]
         public ActionResult DeleteNotice(DeleteNoticeRequest model, string PK_NoticeId)
@@ -4051,6 +4111,10 @@ namespace APSSchool.Controllers
             return Json(Response, JsonRequestBehavior.AllowGet);
         }
 
+        #endregion
+
+        #region HomeWorkView
+
         [HttpPost]
         public ActionResult HomeWorkView(HomeWorkViewRequest model, string StudentPhoto, string HomeWorkID)
         {
@@ -4075,6 +4139,10 @@ namespace APSSchool.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+
+        #endregion
+
+        #region ChangePassword
 
         [HttpPost]
         public ActionResult ChangePassword(ChangePasswordRequest model)
@@ -4108,8 +4176,11 @@ namespace APSSchool.Controllers
                 Responses.Message = ex.Message;
             }
             return Json(Responses, JsonRequestBehavior.AllowGet);
-
         }
+
+        #endregion
+
+        #region GetOtp
 
         [HttpPost]
         public ActionResult GetOtp(GetOtpRequest model, string UserType, string LoginId, string MobileNo)
@@ -4127,7 +4198,6 @@ namespace APSSchool.Controllers
                 {
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
-
                         //model.Name = ds.Tables[0].Rows[0]["FirstName"].ToString();
                         //model.Result = "1";
                         //model.OTP = otpass;
@@ -4137,14 +4207,12 @@ namespace APSSchool.Controllers
                         //Responses.Message = "OTP is sent on your registered mobile no.";
                         //Responses.Status = "1";
                         
-
                         model.Name = ds.Tables[0].Rows[0]["Name"].ToString();
                         model.OTP = otpass;
                         string OTPMessage = BLSMS.DemoRequestOTP(model.Name, model.OTP);
                         string TempId = "1707166203827049342";
                         BLSMS.SendSMS(ds.Tables[0].Rows[0]["MobileNo"].ToString(), OTPMessage, TempId);
                         Responses.Message = "OTP is sent on your registered mobile no.";
-
                     }
                     else if (ds.Tables[0].Rows[0][0].ToString() == "0")
                     {
@@ -4165,6 +4233,10 @@ namespace APSSchool.Controllers
             }
             return Json(Responses, JsonRequestBehavior.AllowGet);
         }
+
+        #endregion
+
+        #region GetPassword
 
         [HttpPost]
         public ActionResult GetPassword(GetPasswordRequest model, string UserType, string LoginId, string MobileNo)
@@ -4192,7 +4264,6 @@ namespace APSSchool.Controllers
                     string TempId = "1707166203827049342";
                     BLSMS.SendSMS(ds.Tables[0].Rows[0]["MobileNo"].ToString(), passwordRecoveryMessage, TempId);
                  
-                    
                     if (model.MobileNo.Length < 10)
                     {
                         Status = "Failed";
@@ -4218,7 +4289,6 @@ namespace APSSchool.Controllers
                     
                     Responses.Message = "Password is sent on your registered mobile no.";
                     Responses.Status = "1";
-                    
                 }
                 else if (ds.Tables[0].Rows[0]["Msg"].ToString() == "0")
                 {
@@ -4234,7 +4304,7 @@ namespace APSSchool.Controllers
             return Json(Responses, JsonRequestBehavior.AllowGet);
         }
 
-
+        #endregion
 
     }
 }
