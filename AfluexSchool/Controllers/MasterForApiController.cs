@@ -597,25 +597,17 @@ namespace APSSchool.Controllers
             List<LeaveListData> datalist = new List<LeaveListData>();
             try
             {
-
                 DataSet dsResult = objParameters.StudentLeaveApplicationList();
                 if (dsResult != null && dsResult.Tables[0].Rows.Count > 0)
                 {
                     if (dsResult.Tables[0].Rows[0]["Msg"].ToString() == "1")
                     {
-
-
                         obj.Status = "0";
                         foreach (DataRow row0 in (dsResult.Tables[0].Rows))
                         {
-
-
                             obj.lstleavelist = datalist;
-
-
                         }
                         List<LeaveListDetails> objstudent = new List<LeaveListDetails>();
-
                         {
                             #region Menu
                             foreach (DataRow row1 in (dsResult.Tables[0].Rows))
@@ -623,8 +615,9 @@ namespace APSSchool.Controllers
                                 objstudent.Add(new LeaveListDetails
 
                                 {
-
-
+                                    StudentName = row1["StudentName"].ToString(),
+                                    ClassName = row1["ClassName"].ToString(),
+                                    SectionName = row1["SectionName"].ToString(),
                                     Reason = row1["Reason"].ToString(),
                                     FromDate = row1["FromDate"].ToString(),
                                     ToDate = row1["ToDate"].ToString(),

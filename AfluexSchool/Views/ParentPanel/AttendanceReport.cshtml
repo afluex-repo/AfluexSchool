@@ -8,14 +8,16 @@
  
 @using (Html.BeginForm("AttendanceReport", "ParentPanel", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
-    <div>
+    <div class="col-12 col-md-12 col-lg-12 col-xl-12 mx-auto align-self-center">
         <div class="card border-0 shadow-sm mb-4">
-            <div class="card-header border-0 bg-none">
-                <div class="row">
-                    <div class="col-12 col-md">
-                        <p class="fs15">Attendance Report</p>
+            <div class="card-header">
+                <div class="row ">
+                    <div class="col-auto">
+                        <h4 class="mt-0 mb-1">Attendance Report</h4>
                     </div>
-                    
+                    @*<p style="color:red">
+                            @TempData["EmployeeSalarySlip"]
+                      </p>*@
                 </div>
             </div>
             <div class="card-body ">
@@ -50,26 +52,23 @@
 
                     </div>
 
-                   
+
                 </div>
                 <div class="row">
                     <div class="col-md-3">
-
                         <label>  To Date</label>
-
                         @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @autoComplete = "off" })
-
-
                     </div>
-                   
-                </div>
-                 
-                <div class="card-footer text-left">
 
-                    <div class="col-md-2">
+                    <div class="col-md-3">
+                        <label class="d-block">&nbsp;</label>
                         <input type="submit" class="btn btn-info" name="Search" id="btnsearch" value="Search" />
                     </div>
                 </div>
+
+                   
+
+
 
                 <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
                     <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
@@ -82,7 +81,7 @@
                                         <th>ClassName</th>
                                         <th>SectionName</th>
                                         <th>AttendanceDate</th>
-                                        <th>Status</th> 
+                                        <th>Status</th>
                                     </tr>
 
                                 </thead>
@@ -93,8 +92,8 @@
                                         {
                                             int i = 1;
                                             foreach (var item in Model.listStudent)
-                                            { 
-                                                <tr> 
+                                            {
+                                                <tr>
                                                     <td> @i </td>
                                                     <td> @item.studentName </td>
                                                     <td> @item.ClassName </td>
@@ -115,6 +114,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 
 }
