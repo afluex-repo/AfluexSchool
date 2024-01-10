@@ -19,6 +19,19 @@
                 </div>
             </div>
             <div class="card-body ">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Student</label>
+                        @Html.DropDownListFor(m => m.Pk_StudentID, new SelectList(ViewBag.ddlStudent, "Value", "Text"), new { @class = "form-control", @onchange = "return OnchangeSection();" })
+                        @Html.HiddenFor(m => m.Fk_ParentId)
+                    </div>
+                </div>
+                <div class="card-footer text-left">
+                    <div class="col-md-2">
+                        <input type="submit" class="btn btn-info" name="Search" id="Search" value="Search" />
+                    </div>
+                </div>
+                
                 <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
                     <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
                         <div class="col-sm-12">
@@ -26,6 +39,7 @@
                                 <thead>
                                     <tr>
                                         <th>Sr.No.</th>
+                                        <th>Student Name   </th>
                                         <th>Subject   </th>
                                         <th>ClassName </th>
                                         <th>SectionName </th>
@@ -45,10 +59,12 @@
                                                 <tr>
                                                     <td>@i</td>
                                                     <td>@item.studentName   </td>
+                                                    <td>@item.SubjectName   </td>
                                                     <td>@item.ClassName          </td>
                                                     <td>@item.SectionName        </td>
                                                     <td>@item.AttendanceDate     </td>
                                                     <td><a href="@item.Status" target="_blank"><img src="@item.Status" style="height:50px;width:50px;" />  </a>    </td> 
+                                                    @*<td><a href="@item.Status" target="_blank"><img src="@item.Status" style="height:50px;width:50px;" />  </a>    </td>*@ 
                                                     <td>@(new HtmlString(item.HomeWorkHTML))</td>
                                                   </tr>
                                                 i++;

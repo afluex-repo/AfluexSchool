@@ -276,9 +276,14 @@ namespace AfluexSchool.Controllers
             {
                 if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                 {
-                    string pass = "Dear "+ ds.Tables[0].Rows[0]["Name"].ToString() + " ,Your Password is :" + ds.Tables[0].Rows[0]["Password"].ToString();
-                    BLSMS.SendSMS2(Common.SMSCredential.UserName, Common.SMSCredential.Password, Common.SMSCredential.SenderId, model.MobileNo, pass);
+                    //string pass = "Dear "+ ds.Tables[0].Rows[0]["Name"].ToString() + " ,Your Password is :" + ds.Tables[0].Rows[0]["Password"].ToString();
+                    //BLSMS.SendSMS2(Common.SMSCredential.UserName, Common.SMSCredential.Password, Common.SMSCredential.SenderId, model.MobileNo, pass);
 
+                    model.MobileNo = ds.Tables[0].Rows[0]["MobileNo"].ToString();
+                    string pass = BLSMS.ForgetPassword(ds.Tables[0].Rows[0]["Name"].ToString(), Crypto.Decrypt(ds.Tables[0].Rows[0]["Password"].ToString()));
+                    string TempId = "1707166036749633527";
+                    BLSMS.SendSMS(model.MobileNo, pass, TempId);
+               
                     if (model.MobileNo.Length < 10)
                     {
                         Status = "Failed";
@@ -327,9 +332,15 @@ namespace AfluexSchool.Controllers
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
                         model.Result = "1";
+                        //model.OTP = otpass;
+                        //BLSMS.SendSMS2(Common.SMSCredential.UserName, Common.SMSCredential.Password, Common.SMSCredential.SenderId, model.MobileNo, otpass);
+                        //model.Result = "1";
+                        
+                        model.Name = ds.Tables[0].Rows[0]["Name"].ToString();
                         model.OTP = otpass;
-                        BLSMS.SendSMS2(Common.SMSCredential.UserName, Common.SMSCredential.Password, Common.SMSCredential.SenderId, model.MobileNo, otpass);
-                        model.Result = "1"; 
+                        string OTPMessage = BLSMS.DemoRequestOTP(model.Name, model.OTP);
+                        string TempId = "1707166203827049342";
+                        BLSMS.SendSMS(ds.Tables[0].Rows[0]["MobileNo"].ToString(), OTPMessage, TempId);                       
                     }
                     else if (ds.Tables[0].Rows[0][0].ToString() == "0")
                     {

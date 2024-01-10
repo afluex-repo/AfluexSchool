@@ -36,6 +36,7 @@ namespace AfluexSchool.Models
         public string Image { get; set; }
         public string Fk_SessionId { get; set; }
         public string PreviousSchool { get; set; }
+        public string Name { get; set; }
 
         public DataSet GetUsersType()
         {

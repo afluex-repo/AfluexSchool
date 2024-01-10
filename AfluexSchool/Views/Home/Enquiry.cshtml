@@ -4,91 +4,127 @@
     ViewBag.Title = "Enquiry";
     Layout = "~/Views/Shared/WebsiteLayout.cshtml";
 }
+
+<section class="breadcrumb-area d-flex  p-relative align-items-center" style="background-image: url('../../AssetsWeb/img/bg/bdrc-bg.png'); ">
+
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-xl-12 col-lg-12">
+                <div class="breadcrumb-wrap text-left">
+                    <div class="breadcrumb-title">
+                        <h2>Enquiry Now</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="breadcrumb-wrap2">
+
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/home/index">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Enquiry Now</li>
+                    </ol>
+                </nav>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- breadcrumb-area-end -->
 @using (Html.BeginForm("Enquiry", "Home", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
 
-    <div class="contact-details padding-120">
+    <section class="contact-details pt-50 pb-50">
         <div class="container">
-            <div class="row">
+            <div class="row justify-content-center">
                 <p style="color:red">
                     @TempData["Enquiry"]
                 </p>
-                <div class="col-lg-12 col-md-12 col-xs-12">
+                <div class="col-lg-8 col-md-12 col-xs-12">
 
-                    <div id="new">
-                        <div class="row">
-                            <div class="col-xs-12 col-lg-6 col-md-6">
-                                <div class="form-group enqr">
-                                    <label>Parent Name <span style="color: red">*</span></label>
-                                    @Html.TextBoxFor(m => m.ParentName, new { @class = "form-control", @Placeholder = "Parent Name" })
-                                    @Html.HiddenFor(m => m.Pk_ParentID)
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-lg-6 col-md-6">
-                                <div class="form-group enqr">
-                                    <label>Mobile <span style="color: red">*</span></label>
-                                    @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", @Placeholder = "Mobile", @maxlength = "10", @onkeypress = "return isNumberKey(event);" })
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-4 col-md-4">
-                                <div class="form-group enqr">
-                                    <label>Student Name  </label>
-                                    @Html.TextBoxFor(m => m.StudentName, new { @class = "form-control", @Placeholder = "Student Name" })
+                   <div class="card shadow p-lg-4">
+                       <div class="card-body">
+                           <div id="new">
+                               <div class="row">
+                                   <div class="col-lg-12 p-relative">
+                                       <div class="section-title center-align mb-10 mb-lg-4 text-center wow fadeInDown  animated" data-animation="fadeInDown" data-delay=".4s" style="visibility: visible; animation-name: fadeInDown;">
 
-                                </div>
-                            </div>
-                            
+                                           <h2>
+                                               Get In Touch
+                                           </h2>
 
-                            <div class="col-lg-4 col-md-4">
-                                <div class="form-group enqr">
-                                    <label> Class </label>
-                                    @Html.DropDownListFor(m => m.Fk_ClassID, new SelectList(ViewBag.ddlclass, "Value", "Text"), new { @class = "form-control" })
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="form-group enqr">
-                                    <label> Previous School </label>
-                                    @Html.TextBoxFor(m => m.PreviousSchool, new { @class = "form-control", @Placeholder = "Previous School" })
-                                </div>
-                            </div>
+                                       </div>
+                                   </div>
+
+                               </div>
+                               <div class="row">
+                                   <div class="col-xs-12 col-lg-4 col-md-4 mb-3">
+                                       <div class="form-group enqr">
+                                           <label>Parent Name <span style="color: red">*</span></label>
+                                           @Html.TextBoxFor(m => m.ParentName, new { @class = "form-control", @Placeholder = "Parent Name" })
+                                           @Html.HiddenFor(m => m.Pk_ParentID)
+                                       </div>
+                                   </div>
+                                   <div class="col-xs-12 col-lg-4 col-md-4 mb-3">
+                                       <div class="form-group enqr">
+                                           <label>Mobile <span style="color: red">*</span></label>
+                                           @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", @Placeholder = "Mobile", @maxlength = "10", @onkeypress = "return isNumberKey(event);" })
+                                       </div>
+                                   </div>
+                                   <div class="col-xs-12 col-lg-4 col-md-4 mb-3">
+                                       <div class="form-group enqr">
+                                           <label>Student Name  </label>
+                                           @Html.TextBoxFor(m => m.StudentName, new { @class = "form-control", @Placeholder = "Student Name" })
+
+                                       </div>
+                                   </div>
 
 
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6">
-                                <div class="form-group enqr">
-                                    <label>Mail Id </label>
-                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @Placeholder = "Mail Id " })
+                                   <div class="col-xs-12 col-lg-4 col-md-4 mb-3">
+                                       <div class="form-group enqr">
+                                           <label> Class </label>
+                                           @Html.DropDownListFor(m => m.Fk_ClassID, new SelectList(ViewBag.ddlclass, "Value", "Text"), new { @class = "form-control c-option" })
+                                       </div>
+                                   </div>
+                                   <div class="col-xs-12 col-lg-4 col-md-4 mb-3">
+                                       <div class="form-group enqr">
+                                           <label> Previous School </label>
+                                           @Html.TextBoxFor(m => m.PreviousSchool, new { @class = "form-control", @Placeholder = "Previous School" })
+                                       </div>
+                                   </div>
 
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6">
-                                <div class="form-group enqr">
-                                    <label> Photo upload </label>
-                                    <input type="file" id="img" name="photo" class="form form-control" />
 
-                                </div>
-                            </div>
-                           
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12">
-                                <div class="form-group enqr">
-                                    <label>Address  </label>
-                                    @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @Placeholder = "Address" })
-                                </div>
-                            </div>
+                                   <div class="col-xs-12 col-lg-4 col-md-4 mb-3">
+                                       <div class="form-group enqr">
+                                           <label>Mail Id </label>
+                                           @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @Placeholder = "Mail Id " })
 
-                        </div>
+                                       </div>
+                                   </div>
+                                   <div class="col-xs-12 col-lg-4 col-md-4 mb-3">
+                                       <div class="form-group enqr">
+                                           <label> Photo upload </label>
+                                           <input type="file" id="img" name="photo" class="form form-control" />
 
-                        <div class="card-footer text-left">
+                                       </div>
+                                   </div>
 
-                            <input class="btn btn-primary" type="submit" onclick="return validateformnew();" name="btnSave" value="Save" id="btnSave" />
+                                   <div class="col-lg-12 col-md-12 mb-3">
+                                       <div class="form-group enqr">
+                                           <label>Address  </label>
+                                           @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @Placeholder = "Address" })
+                                       </div>
+                                   </div>
 
-                        </div>
-                    </div>
+                               </div>
+
+                               <div class="text-left">
+
+                                   <input class="btn btn-primary" style="padding: 10px 30px;" type="submit" onclick="return validateformnew();" name="btnSave" value="Save" id="btnSave" />
+
+                               </div>
+                           </div>
+                       </div>
+                   </div>
 
                     @*<div id="existing" style="display:none">
                             <div class="row">
@@ -151,7 +187,7 @@
             <!-- row -->
         </div>
         <!-- container -->
-    </div>
+    </section>
 
 }
 <script src="../../scripts/jquery-1.10.2.min.js"></script>
