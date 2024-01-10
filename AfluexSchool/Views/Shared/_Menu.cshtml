@@ -1,54 +1,53 @@
 ﻿@model AfluexSchool.Models.Home
 
-<div class="sidebar">
-    <!-- Logo sidebar -->
-    <a href="#" class="logo">
-        <img src="../../Websitecss/images/favicon.png" alt="" class="logo-icon">
-        <div class="logo-text">
-            <h5 class="fs22 mb-0">@Session["FullName"] </h5>
-            <p class="text-uppercase fs11">Admin Dashboard</p>
-        </div>
-    </a>
-
-
+<ul class="metismenu" id="menu">
     @if (Model != null)
     {
         if (Model.lstMenu != null)
         {
-
+            <li>
+                <a class="ai-icon" href="/Admin/Dashboard" aria-expanded="false">
+                    <i class="fa fa-tachometer"></i>
+                    <span class="nav-text">DashBoard</span>
+                </a>
+            </li>
             foreach (var item in Model.lstMenu)
             {
-                <ul class="nav flex-column">
-                    <li class="nav-item dropdown">
-                        @if (item.Url == "#")
+                <li>
+                    @if (item.Url == "#")
                         {
-                            <a class="nav-link dropdown-toggle" href="@item.Url"><i class="@item.Icons"></i> <span>@item.MenuName</span> <i class="material-icons arrow">expand_more</i></a>
+                        @*<a class="nav-link dropdown-toggle" href="@item.Url"><i class="@item.Icons"></i> <span>@item.MenuName</span> <i class="material-icons arrow">expand_more</i></a>*@
+                        <a class="has-arrow" href="@item.Url" aria-expanded="false">
+                            <i class="@item.Icons"></i>
+                            <span class="nav-text">@item.MenuName</span>
+                        </a>
+                    }
+                    else
+                    {
+                        @*<a class="nav-link dropdown-toggle" href="@item.Url"><i class="@item.Icons"></i> <span>@item.MenuName</span> </a>*@
+                        <a href="@item.Url">
+                            <i class="@item.Icons"></i>
+                            <span class="nav-text">@item.MenuName</span>
+                        </a>
+                    }
+                    <ul aria-expanded="false">
 
-                        }
-                        else
-                        {
-                            <a class="nav-link dropdown-toggle" href="@item.Url"><i class="@item.Icons"></i> <span>@item.MenuName</span> </a>
-                        }
                         @if (item.Url == "#")
                         {
-                            <div class="nav flex-column">
-                                @foreach (var item1 in Model.lstsubmenu)
+                            foreach (var item1 in Model.lstsubmenu)
+                            {
+                                if (item1.MenuId == item.MenuId)
                                 {
-                                    if (item1.MenuId == item.MenuId)
-                                    {
-                                        <div class="nav-item"><a class="nav-link" href="@item1.Url"><span>@item1.SubMenuName</span></a></div>
-                                    }
+                                    <li><a href="@item1.Url">@item1.SubMenuName</a></li>
+                                    @*<div class="nav-item"><a class="nav-link" href="@item1.Url"><span>@item1.SubMenuName</span></a></div>*@
                                 }
-                            </div>
+                            }
                         }
-                    </li>
-                </ul>
+                    </ul>
+                </li>
+                
             }
         }
     }
 
-
-    <br>
-
-
-</div>
+</ul>
