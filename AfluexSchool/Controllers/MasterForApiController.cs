@@ -107,7 +107,9 @@ namespace APSSchool.Controllers
                                     City = row1["City"].ToString(),
                                     StudentPhoto = row1["StudentPhoto"].ToString(),
                                     ClassName = row1["ClassName"].ToString(),
+                                    ClassID = row1["Pk_ClassID"].ToString(),
                                     SectionName = row1["SectionName"].ToString(),
+                                    SectionID = row1["Pk_SectionID"].ToString(),
                                     DateOfBirth = row1["DateOfBirth"].ToString(),
                                     Gender = row1["Gender"].ToString(),
                                     Mobile = row1["Mobile"].ToString(),
@@ -385,8 +387,7 @@ namespace APSSchool.Controllers
             }
         }
         #endregion Sylabus
-
-
+        
         #region FeeReport
         public ActionResult FeeReport(FeeReport objParameters)
         {
@@ -1035,6 +1036,7 @@ namespace APSSchool.Controllers
             }
         }
         #endregion Sylabus
+
         #region SaveDeviceDetails
         public ActionResult SaveDeviceDetails(DeviceDetails objParameters)
         {
@@ -1283,8 +1285,7 @@ namespace APSSchool.Controllers
             }
         }
         #endregion TeacherLogin
-
-
+        
         #region TeacherHomeWork
         public ActionResult ClassForTeacher(GetClass objParameters)
         {
@@ -1589,8 +1590,7 @@ namespace APSSchool.Controllers
         }
 
         #endregion TeacherHomeWork
-
-
+        
         #region StudentAttendance
         public ActionResult GetStudentForAttendance(StudentList objParameters)
         {
@@ -1968,8 +1968,7 @@ namespace APSSchool.Controllers
             }
         }
         #endregion SelfAttendance
-
-
+        
         #region StudentListForLeaveApproval
         public ActionResult StudentListForLeaveApproval(LeaveList objParameters)
         {
@@ -2064,8 +2063,7 @@ namespace APSSchool.Controllers
 
         }
         #endregion StudentListForLeaveApproval
-
-
+        
         #region ComplainListForTeacher
         public ActionResult ComplainListForTeacher(ComplainList objParameters)
         {
@@ -2173,8 +2171,7 @@ namespace APSSchool.Controllers
             }
         }
         #endregion ComplainListForTeacher
-
-
+        
         #region ApplyLeave
         public ActionResult ApplyLeaveForTeacher(ApplyLeave objParameters)
         {
@@ -2375,6 +2372,8 @@ namespace APSSchool.Controllers
         }
         #endregion ExamType
 
+        #region SaveStudentMarks
+
         public ActionResult SaveStudentMarks(StudentMarks obj)
         {
             try
@@ -2419,6 +2418,11 @@ namespace APSSchool.Controllers
             }
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
+
+        #endregion
+
+        #region GetSession
+
         public ActionResult GetSession(MarkSheet objParameters)
         {
             MarkSheet obj = new MarkSheet();
@@ -2464,6 +2468,11 @@ namespace APSSchool.Controllers
                 return Json(obj, JsonRequestBehavior.AllowGet);
             }
         }
+
+        #endregion
+
+        #region GetMarks
+
         public ActionResult GetMarks(GetMarks objParameters)
         {
             GetMarks obj = new GetMarks();
@@ -2522,6 +2531,11 @@ namespace APSSchool.Controllers
                 return Json(obj, JsonRequestBehavior.AllowGet);
             }
         }
+
+        #endregion
+
+        #region PrintMarksheet
+
         public ActionResult PrintMarksheet(PrintMarkSheet objParameters)
         {
             PrintMarkSheet obj = new PrintMarkSheet();
@@ -2548,16 +2562,10 @@ namespace APSSchool.Controllers
                     obj.RegistrationNo = dsResult.Tables[0].Rows[0]["RegistrationNo"].ToString();
                     foreach (DataRow row0 in (dsResult.Tables[0].Rows))
                     {
-
-
                         obj.lstsubjectmarksdetails = datalist;
-
-
                     }
                     List<SubjectMarksDetails> objstudent = new List<SubjectMarksDetails>();
-
                     {
-
                         foreach (DataRow row1 in (dsResult.Tables[0].Rows))
                         {
                             objstudent.Add(new SubjectMarksDetails
@@ -2575,9 +2583,7 @@ namespace APSSchool.Controllers
                             listSubjectMarksDetails = objstudent
 
                         });
-
                     }
-
                 }
                 else
                 {
@@ -2594,6 +2600,8 @@ namespace APSSchool.Controllers
             }
 
         }
+
+        #endregion
 
         #region HomeworkByTeacher
         public ActionResult SaveHomework(SaveHomeworkAPI obj, HttpPostedFileBase StudentFiles)
@@ -2709,6 +2717,7 @@ namespace APSSchool.Controllers
             }
         }
         #endregion
+
         #region TeacherAttendanceReport
         public ActionResult AttendanceReportBy(AttendenceReportAPI model)
         {
@@ -2745,6 +2754,9 @@ namespace APSSchool.Controllers
             }
         }
         #endregion
+
+        #region EmployeeSalarySlipBy
+
         public ActionResult EmployeeSalarySlipBy(TeacherSalarySlipAPI model)
         {
 
@@ -2798,6 +2810,9 @@ namespace APSSchool.Controllers
             }
         }
 
+        #endregion
+
+        #region PrintSalarySlip
 
         [HttpPost]
         public ActionResult PrintSalarySlip(SalarySlipPrintRequest model, string Pk_PaidSalId, string EmployeeID)
@@ -2856,6 +2871,8 @@ namespace APSSchool.Controllers
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
         }
+
+        #endregion
 
         #region StudentAttendanceFilter
         public ActionResult StudentAttendanceFilter(StudentAttendanceFilter objParameters)
@@ -2972,6 +2989,7 @@ namespace APSSchool.Controllers
 
         #endregion
 
+        #region PrintFeerecipt
 
         public ActionResult PrintFeerecipt(PrintReceipt model)
         {
@@ -3030,8 +3048,9 @@ namespace APSSchool.Controllers
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
 
+        #endregion
 
-
+        #region TotalLeaveList
 
         public ActionResult TotalLeaveList(LeaveListAPI model)
         {
@@ -3105,6 +3124,9 @@ namespace APSSchool.Controllers
             }
         }
 
+        #endregion
+
+        #region TotalLeaves
 
         public ActionResult TotalLeaves(SearchLeaveAPI model)
         {
@@ -3218,6 +3240,9 @@ namespace APSSchool.Controllers
             }
         }
 
+        #endregion
+
+        #region ApprovePendingLeave
 
         public ActionResult ApprovePendingLeave(ApproveLeaveAPI model)
         {
@@ -3260,6 +3285,9 @@ namespace APSSchool.Controllers
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
+        #endregion
+
+        #region DeclinePendingLeave
 
         public ActionResult DeclinePendingLeave(DeclineLeaveAPI model)
         {
@@ -3299,6 +3327,10 @@ namespace APSSchool.Controllers
             //}
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+
+        #endregion
+
+        #region PendingLeave
 
         public ActionResult PendingLeave(PendingLeaveAPI model)
         {
@@ -3373,6 +3405,10 @@ namespace APSSchool.Controllers
             }
         }
 
+        #endregion
+
+        #region GetClassList
+
         public ActionResult GetClassList(GetClassAPI model)
         {
             try
@@ -3394,7 +3430,6 @@ namespace APSSchool.Controllers
                         count1 = count1 + 1;
                     }
                 }
-
                 ViewBag.ddlClass = ddlClass;
 
                 foreach (DataRow r in ds2.Tables[1].Rows)
@@ -3416,6 +3451,11 @@ namespace APSSchool.Controllers
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
         }
+
+        #endregion
+
+        #region GetSectionList
+
         public ActionResult GetSectionList(GetSectionAPI model)
         {
             try
@@ -3456,6 +3496,10 @@ namespace APSSchool.Controllers
             }
         }
 
+        #endregion
+
+        #region GetSubjectNameBySection
+
         public ActionResult GetSubjectNameBySection(GetSubjectAPI model)
         {
             try
@@ -3495,6 +3539,10 @@ namespace APSSchool.Controllers
             }
         }
 
+        #endregion
+
+        #region SaveAttendance
+
         [HttpPost]
         public ActionResult SaveAttendance(SaveEmployeeAttendanceRequest Request, HttpPostedFileBase TeacherPhoto)
         {
@@ -3532,6 +3580,10 @@ namespace APSSchool.Controllers
             return Json(Response, JsonRequestBehavior.AllowGet);
         }
 
+        #endregion
+
+        #region SavePunchOutAttendance
+
         public ActionResult SavePunchOutAttendance(SaveEmployeeAttendancePunchoutRequest Request)
         {
             SaveEmployeeAttendancePunchoutResponse Response = new SaveEmployeeAttendancePunchoutResponse();
@@ -3564,6 +3616,9 @@ namespace APSSchool.Controllers
             return Json(Response, JsonRequestBehavior.AllowGet);
         }
 
+        #endregion
+
+        #region GetBranch
         public ActionResult GetBranch(GetBranchAPI model)
         {
             List<GetBranchAPI> listq = new List<GetBranchAPI>();
@@ -3604,6 +3659,10 @@ namespace APSSchool.Controllers
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
         }
+
+        #endregion
+
+        #region GetReligion
 
         public ActionResult GetReligion(GetReligionAPI model)
         {
@@ -3648,6 +3707,10 @@ namespace APSSchool.Controllers
             }
         }
 
+        #endregion
+
+        #region GetCategory
+
         public ActionResult GetCategory(GetCategoryAPI model)
         {
             List<GetCategoryAPI> listq = new List<GetCategoryAPI>();
@@ -3691,6 +3754,10 @@ namespace APSSchool.Controllers
             }
         }
 
+        #endregion
+
+        #region GetGender
+
         public ActionResult GetGender(GetGenderAPI model)
         {
             List<GetGenderAPI> listq = new List<GetGenderAPI>();
@@ -3733,6 +3800,8 @@ namespace APSSchool.Controllers
                 return Json(model, JsonRequestBehavior.AllowGet);
             }
         }
+
+        #endregion
 
         #region GetTeacherProfile
 

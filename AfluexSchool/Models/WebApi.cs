@@ -91,7 +91,9 @@ namespace APSSchool.Models
         public string City { get; set; }
         public string StudentPhoto { get; set; }
         public string ClassName { get; set; }
+        public string ClassID { get; set; }
         public string SectionName { get; set; }
+        public string SectionID { get; set; }
         public string DateOfBirth { get; set; }
         public string Gender { get; set; }
         public string Mobile { get; set; }
