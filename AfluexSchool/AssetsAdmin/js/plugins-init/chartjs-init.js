@@ -646,46 +646,46 @@ if(jQuery('#radar_chart').length > 0 ){
     
 
 }
-//pie chart
-if(jQuery('#pie_chart').length > 0 ){
-    //pie chart
-    const pie_chart = document.getElementById("pie_chart").getContext('2d');
-    // pie_chart.height = 100;
-    new Chart(pie_chart, {
-        type: 'pie',
-        data: {
-            defaultFontFamily: 'Poppins',
-            datasets: [{
-                data: [45, 25, 20, 10],
-                borderWidth: 0, 
-                backgroundColor: [
-                    "rgba(102, 115, 253, .9)",
-                    "rgba(102, 115, 253, .7)",
-                    "rgba(102, 115, 253, .5)",
-                    "rgba(0,0,0,0.07)"
-                ],
-                hoverBackgroundColor: [
-                    "rgba(102, 115, 253, .9)",
-                    "rgba(102, 115, 253, .7)",
-                    "rgba(102, 115, 253, .5)",
-                    "rgba(0,0,0,0.07)"
-                ]
+////pie chart
+//if(jQuery('#pie_chart').length > 0 ){
+//    //pie chart
+//    const pie_chart = document.getElementById("pie_chart").getContext('2d');
+//    // pie_chart.height = 100;
+//    new Chart(pie_chart, {
+//        type: 'pie',
+//        data: {
+//            defaultFontFamily: 'Poppins',
+//            datasets: [{
+//                data: [45, 25, 20, 10],
+//                borderWidth: 0, 
+//                backgroundColor: [
+//                    "rgba(102, 115, 253, .9)",
+//                    "rgba(102, 115, 253, .7)",
+//                    "rgba(102, 115, 253, .5)",
+//                    "rgba(0,0,0,0.07)"
+//                ],
+//                hoverBackgroundColor: [
+//                    "rgba(102, 115, 253, .9)",
+//                    "rgba(102, 115, 253, .7)",
+//                    "rgba(102, 115, 253, .5)",
+//                    "rgba(0,0,0,0.07)"
+//                ]
 
-            }],
-            labels: [
-                "one",
-                "two",
-                "three", 
-                "four"
-            ]
-        },
-        options: {
-            responsive: true, 
-            legend: false, 
-            maintainAspectRatio: false
-        }
-    });
-}
+//            }],
+//            labels: [
+//                "one",
+//                "two",
+//                "three", 
+//                "four"
+//            ]
+//        },
+//        options: {
+//            responsive: true, 
+//            legend: false, 
+//            maintainAspectRatio: false
+//        }
+//    });
+//}
     
 if(jQuery('#doughnut_chart').length > 0 ){
     //doughut chart
