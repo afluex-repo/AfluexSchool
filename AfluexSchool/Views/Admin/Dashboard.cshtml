@@ -7,69 +7,184 @@
 
  <div class="container-fluid">
     <div class="row">
-        <div class="col-xl-6 col-xxl-6 col-sm-12">
+        <div class="col-xl-12 col-xxl-12 col-sm-12">
             <div class="row">
-                <div class="col-xl-6 col-xxl-6 col-sm-6">
+                <div class="col-xl-3 col-xxl-3 col-sm-3">
                     <div class="widget-stat card">
                         <div class="card-body">
-                            <h4 class="card-title">Total Students</h4>
-                            <h3>3280</h3>
+                            <h4 class="card-title">Total Parent</h4>
+                            <h3>@ViewBag.TotalParent</h3>
                             <div class="progress mb-2">
-                                <div class="progress-bar progress-animated bg-primary" style="width: 80%">
+                                <div class="progress-bar progress-animated bg-primary" style="width: 50%">
                                 </div>
                             </div>
-                            <small>80% Increase in 20 Days</small>
+                            <small><a href="/Parent/ParentList">View Details</a></small>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-6 col-xxl-6 col-sm-6">
+                <div class="col-xl-3 col-xxl-3 col-sm-3">
                     <div class="widget-stat card">
                         <div class="card-body">
-                            <h4 class="card-title">New Students</h4>
-                            <h3>245</h3>
+                            <h4 class="card-title">Total Student</h4>
+                            <h3>@ViewBag.TotalStudent</h3>
                             <div class="progress mb-2">
-                                <div class="progress-bar progress-animated bg-warning" style="width: 50%">
+                                <div class="progress-bar progress-animated bg-primary" style="width: 50%">
                                 </div>
                             </div>
-                            <small>50% Increase in 25 Days</small>
+                            <small><a href="/Student/StudentRegistrationList">View Details</a></small>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-6 col-xxl-6 col-sm-6">
+                <div class="col-xl-3 col-xxl-3 col-sm-3">
                     <div class="widget-stat card">
                         <div class="card-body">
-                            <h4 class="card-title">Total Course</h4>
-                            <h3>28</h3>
+                            <h4 class="card-title">Total Employee</h4>
+                            <h3>@ViewBag.TotalStaff</h3>
                             <div class="progress mb-2">
-                                <div class="progress-bar progress-animated bg-red" style="width: 76%"></div>
+                                <div class="progress-bar progress-animated bg-red" style="width: 10%">
+                                </div>
                             </div>
-                            <small>76% Increase in 20 Days</small>
+                            <small><a href="/Permission/UserList">View Details</a></small>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-6 col-xxl-6 col-sm-6">
+                <div class="col-xl-3 col-xxl-3 col-sm-3">
                     <div class="widget-stat card">
                         <div class="card-body">
-                            <h4 class="card-title">Fees Collection</h4>
-                            <h3>25160$</h3>
+                            <h4 class="card-title">Total Teacher</h4>
+                            <h3>@ViewBag.TotalTeacher</h3>
                             <div class="progress mb-2">
-                                <div class="progress-bar progress-animated bg-success" style="width: 30%">
+                                <div class="progress-bar progress-animated bg-info" style="width: 20%">
                                 </div>
                             </div>
-                            <small>30% Increase in 30 Days</small>
+                            <small><a href="/Teacher/TeacherList">View Details</a></small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-xxl-3 col-sm-3">
+                    <div class="widget-stat card">
+                        <div class="card-body">
+                            <h4 class="card-title">Total SMS</h4>
+                            <h3>@ViewBag.TotalSMS</h3>
+                            <div class="progress mb-2">
+                                <div class="progress-bar progress-animated bg-primary" style="width: 70%">
+                                </div>
+                            </div>
+                            @*<small><a href="javascript:void(0)">View Details</a></small>*@
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-xxl-3 col-sm-3">
+                    <div class="widget-stat card">
+                        <div class="card-body">
+                            <h4 class="card-title">Send SMS</h4>
+                            <h3>@ViewBag.TotalSendSMS</h3>
+                            <div class="progress mb-2">
+                                <div class="progress-bar progress-animated bg-success" style="width: 50%">
+                                </div>
+                            </div>
+                            <small><a href="/AdminReports/UsedSMS?Status=Send">View Details</a></small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-xxl-3 col-sm-3">
+                    <div class="widget-stat card">
+                        <div class="card-body">
+                            <h4 class="card-title">Failed SMS</h4>
+                            <h3>@ViewBag.TotalUnSendSMS</h3>
+                            <div class="progress mb-2">
+                                <div class="progress-bar progress-animated bg-red" style="width: 30%">
+                                </div>
+                            </div>
+                            <small><a href="/AdminReports/UsedSMS?Status=Failed">View Details</a></small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-xxl-3 col-sm-3">
+                    <div class="widget-stat card">
+                        <div class="card-body">
+                            <h4 class="card-title">Balance</h4>
+                            <h3>@ViewBag.Balance</h3>
+                            <div class="progress mb-2">
+                                <div class="progress-bar progress-animated bg-success" style="width: 70%">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-xl-6 col-xxl-6 col-sm-12">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Income/Expense Report</h3>
+        <div class="col-xl-12 col-xxl-12 col-sm-12">
+            <div class="row">
+                <div class="col-xl-4 col-xxl-4 col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">SMS Summary</h4>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="pie_chart"></canvas>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <div id="morris_bar_2" class="morris_chart_height"></div>
+                <div class="col-xl-4 col-xxl-4 col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Staff/Teacher</h4>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="pie_chartstaff"></canvas>
+                        </div>
+                    </div>
                 </div>
+                <div class="col-xl-4 col-xxl-4 col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Student/Parent</h4>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="pie_chartstudent"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-12 col-xxl-12 col-sm-12 card">
+            <div class="card-header">
+                <h4 class="card-title">Top 10 Teacher</h4>
+            </div>
+            <div class="row card-body">
+                @if (Model != null)
+                {
+                    if (Model.lstteacher != null)
+                    {
+                        foreach (var item in Model.lstteacher)
+                        {
+
+                <div class="col-xl-3 col-xxl-3 col-sm-12">
+                    <div class="card-body shadow">
+                        <div class="text-center">
+                            <div class="profile-photo">
+                                @if (item.ImagePath != null && item.ImagePath != "../../img/no-profile.jpeg")
+                                {
+                                    <img src="./@item.ImagePath" width="100" class="img-fluid rounded-circle" alt="">
+                                }
+                                else
+                                {
+                                    <img src="~/AssetsAdmin/images/avatar/1.png" width="100" class="img-fluid rounded-circle" alt="" />
+                                }
+                               
+                                
+                            </div>
+                            <h3 class="mt-4 mb-1">
+                                @item.Name
+                            </h3>
+                            <p class="text-muted mb-1">@item.Qualification</p>
+                        </div>
+                    </div>
+                </div>
+                        }
+                    }
+                }
             </div>
         </div>
         <div class="col-12">
@@ -1096,9 +1211,11 @@
         </div>
     </div>
 </div>*@
-<script type="text/javascript">
-    google.charts.load('current', { 'packages': ['corechart'] });
-    google.charts.setOnLoadCallback(bindsms);
+
+
+<script>
+    window.onload = bindsms;
+
 
     function bindsms() {
         $.ajax({
@@ -1108,47 +1225,211 @@
             url: '/Admin/BindSMSChart',
             data: JSON.stringify(),
             success:
-            function (response) {
-                var datare = response;
-                var data = new google.visualization.DataTable();
+           function (d) {
+               debugger;
+               var Status = [];
+               var Total = [];
+               var t = JSON.parse(JSON.stringify(d));
+               for (var i = 0; i < t.length; i++) {
+                   Status.push(t[i].Status);
+                   Total.push(t[i].Total);
+               }
+               debugger;
+               //pie chart
+               if (jQuery('#pie_chart').length > 0) {
+                   //pie chart
+                   const pie_chart = document.getElementById("pie_chart").getContext('2d');
+                   // pie_chart.height = 100;
+                   new Chart(pie_chart, {
+                       type: 'pie',
+                       data: {
+                           defaultFontFamily: 'Poppins',
+                           datasets: [{
+                               data: Total,
+                               borderWidth: 0,
+                               backgroundColor: [
+                                   "#0e3a62",
+                                   "rgba(219, 0, 0, 0.8)"
+                               ],
+                               hoverBackgroundColor: [
+                                   "#0e3a62",
+                                   "rgba(219, 0, 0, 0.8)"
+                               ]
 
-                data.addColumn('string', 'Status');
-                data.addColumn('number', 'Total');
-
-
-                for (var i = 0; i < datare.length; i++) {
-                    data.addRow(
-                        [datare[i].Status, parseInt(datare[i].Total)]
-
-                        );
-
-
-                }
-
-
-                var chart = new google.visualization.PieChart(document.getElementById('divsmschart'));
-                var options = {
-                    pieSliceText: 'value-and-percentage',
-                    format: 'decimal',
-                    is3D: true,
-                    legend: { position: 'top' },
-                    animation: {
-                        startup: true,
-                        duration: 1000,
-                        easing: 'out',
-                    }, chartArea: { width: "80%", height: "80%" }
-                };
-
-                chart.draw(data, options);
-
-
-
-
-            },
-            error: function () {
-            }
+                           }],
+                           labels: Status
+                       },
+                       options: {
+                           responsive: true,
+                           legend: false,
+                           maintainAspectRatio: false
+                       }
+                   });
+               }
+           }
         });
+
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            contentType: 'application/json',
+            url: '/Admin/BindStaffChart',
+            data: JSON.stringify(),
+            success:
+           function (d) {
+               debugger;
+               var Status = [];
+               var Total = [];
+               var t = JSON.parse(JSON.stringify(d));
+               for (var i = 0; i < t.length; i++) {
+                   Status.push(t[i].Status);
+                   Total.push(t[i].Total);
+               }
+               debugger;
+               //pie chart
+               if (jQuery('#pie_chartstaff').length > 0) {
+                   //pie chart
+                   const pie_chartstaff = document.getElementById("pie_chartstaff").getContext('2d');
+                   // pie_chart.height = 100;
+                   new Chart(pie_chartstaff, {
+                       type: 'pie',
+                       data: {
+                           defaultFontFamily: 'Poppins',
+                           datasets: [{
+                               data: Total,
+                               borderWidth: 0,
+                               backgroundColor: [
+                                  "rgba(82, 201, 72, 0.8)",
+                                   "#ff8f16"
+                               ],
+                               hoverBackgroundColor: [
+                                  "rgba(82, 201, 72, 0.8)",
+                                   "#ff8f16"
+                               ]
+
+                           }],
+                           labels: Status
+                       },
+                       options: {
+                           responsive: true,
+                           legend: false,
+                           maintainAspectRatio: false
+                       }
+                   });
+               }
+           }
+        });
+
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            contentType: 'application/json',
+            url: '/Admin/BindParentChart',
+            data: JSON.stringify(),
+            success:
+           function (d) {
+               debugger;
+               var Status = [];
+               var Total = [];
+               var t = JSON.parse(JSON.stringify(d));
+               for (var i = 0; i < t.length; i++) {
+                   Status.push(t[i].Status);
+                   Total.push(t[i].Total);
+               }
+               debugger;
+               //pie chart
+               if (jQuery('#pie_chartstudent').length > 0) {
+                   //pie chart
+                   const pie_chartstudent = document.getElementById("pie_chartstudent").getContext('2d');
+                   // pie_chart.height = 100;
+                   new Chart(pie_chartstudent, {
+                       type: 'pie',
+                       data: {
+                           defaultFontFamily: 'Poppins',
+                           datasets: [{
+                               data: Total,
+                               borderWidth: 0,
+                               backgroundColor: [
+                                   "#0e3a62",
+                                   "rgba(7, 155, 213, 0.8)"
+                               ],
+                               hoverBackgroundColor: [
+                                    "#0e3a62",
+                                   "rgba(7, 155, 213, 0.8)"
+                               ]
+
+                           }],
+                           labels: Status
+                       },
+                       options: {
+                           responsive: true,
+                           legend: false,
+                           maintainAspectRatio: false
+                       }
+                   });
+               }
+           }
+        })
+
     }
+
+</script>
+<script type="text/javascript">
+    google.charts.load('current', { 'packages': ['corechart'] });
+    //google.charts.setOnLoadCallback(bindsms);
+
+
+
+
+    //function bindsms() {
+    //    $.ajax({
+    //        type: 'POST',
+    //        dataType: 'json',
+    //        contentType: 'application/json',
+    //        url: '/Admin/BindSMSChart',
+    //        data: JSON.stringify(),
+    //        success:
+    //        function (response) {
+    //            var datare = response;
+    //            var data = new google.visualization.DataTable();
+
+    //            data.addColumn('string', 'Status');
+    //            data.addColumn('number', 'Total');
+
+
+    //            for (var i = 0; i < datare.length; i++) {
+    //                data.addRow(
+    //                    [datare[i].Status, parseInt(datare[i].Total)]
+
+    //                    );
+
+
+    //            }
+
+
+    //            var chart = new google.visualization.PieChart(document.getElementById('divsmschart'));
+    //            var options = {
+    //                pieSliceText: 'value-and-percentage',
+    //                format: 'decimal',
+    //                is3D: true,
+    //                legend: { position: 'top' },
+    //                animation: {
+    //                    startup: true,
+    //                    duration: 1000,
+    //                    easing: 'out',
+    //                }, chartArea: { width: "80%", height: "80%" }
+    //            };
+
+    //            chart.draw(data, options);
+
+
+
+
+    //        },
+    //        error: function () {
+    //        }
+    //    });
+    //}
 
 
     google.charts.load('current', { 'packages': ['corechart'] });
