@@ -91,7 +91,9 @@ namespace APSSchool.Models
         public string City { get; set; }
         public string StudentPhoto { get; set; }
         public string ClassName { get; set; }
+        public string ClassID { get; set; }
         public string SectionName { get; set; }
+        public string SectionID { get; set; }
         public string DateOfBirth { get; set; }
         public string Gender { get; set; }
         public string Mobile { get; set; }
@@ -628,7 +630,9 @@ namespace APSSchool.Models
     }
     public class LeaveListDetails
     {
-
+        public string StudentName { get; set; }
+        public string SectionName { get; set; }
+        public string ClassName { get; set; }
         public string FromDate { get; set; }
         public string ToDate { get; set; }
         public string Reason { get; set; }
@@ -2498,6 +2502,31 @@ namespace APSSchool.Models
         }
     }
 
+    public class GetComplainAPI
+    {
+        public string Pk_ParentID { get; set; }
+        public string Message { get; set; }
+        public string Status { get; set; }
+        public List<Complainlist> lstcomplain { get; set; }
 
+        public DataSet GetAllMessages()
+        {
+            SqlParameter[] para = {
+                                  new SqlParameter("@ParentID", Pk_ParentID)
+                                  };
+            DataSet ds = Connection.ExecuteQuery("GetMessages", para);
+            return ds;
+        }
+    }
 
+    public class Complainlist
+    {
+        public string Pk_MessageId { get; set; }
+        public string Fk_UserId { get; set; }
+        public string MemberName { get; set; }
+        public string MessageTitle { get; set; }
+        public string AddedOn { get; set; }
+        public string Messagess { get; set; }
+        public string cssclass { get; set; }
+    }
 }
