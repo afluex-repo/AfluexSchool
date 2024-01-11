@@ -1,7 +1,7 @@
 ﻿@model AfluexSchool.Models.DashBoard
 
 @{
-    ViewBag.Title = "Dashboard";
+    ViewBag.Title = "School Afluex";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -10,7 +10,7 @@
         <div class="col-xl-12 col-xxl-12 col-sm-12">
             <div class="row">
                 <div class="col-xl-3 col-xxl-3 col-sm-3">
-                    <div class="widget-stat card">
+                    <div class="widget-stat card shadow">
                         <div class="card-body">
                             <h4 class="card-title">Total Parent</h4>
                             <h3>@ViewBag.TotalParent</h3>
@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 <div class="col-xl-3 col-xxl-3 col-sm-3">
-                    <div class="widget-stat card">
+                    <div class="widget-stat card shadow">
                         <div class="card-body">
                             <h4 class="card-title">Total Student</h4>
                             <h3>@ViewBag.TotalStudent</h3>
@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <div class="col-xl-3 col-xxl-3 col-sm-3">
-                    <div class="widget-stat card">
+                    <div class="widget-stat card shadow">
                         <div class="card-body">
                             <h4 class="card-title">Total Employee</h4>
                             <h3>@ViewBag.TotalStaff</h3>
@@ -49,7 +49,7 @@
                     </div>
                 </div>
                 <div class="col-xl-3 col-xxl-3 col-sm-3">
-                    <div class="widget-stat card">
+                    <div class="widget-stat card shadow">
                         <div class="card-body">
                             <h4 class="card-title">Total Teacher</h4>
                             <h3>@ViewBag.TotalTeacher</h3>
@@ -62,7 +62,7 @@
                     </div>
                 </div>
                 <div class="col-xl-3 col-xxl-3 col-sm-3">
-                    <div class="widget-stat card">
+                    <div class="widget-stat card shadow">
                         <div class="card-body">
                             <h4 class="card-title">Total SMS</h4>
                             <h3>@ViewBag.TotalSMS</h3>
@@ -75,7 +75,7 @@
                     </div>
                 </div>
                 <div class="col-xl-3 col-xxl-3 col-sm-3">
-                    <div class="widget-stat card">
+                    <div class="widget-stat card shadow">
                         <div class="card-body">
                             <h4 class="card-title">Send SMS</h4>
                             <h3>@ViewBag.TotalSendSMS</h3>
@@ -88,7 +88,7 @@
                     </div>
                 </div>
                 <div class="col-xl-3 col-xxl-3 col-sm-3">
-                    <div class="widget-stat card">
+                    <div class="widget-stat card shadow">
                         <div class="card-body">
                             <h4 class="card-title">Failed SMS</h4>
                             <h3>@ViewBag.TotalUnSendSMS</h3>
@@ -101,7 +101,7 @@
                     </div>
                 </div>
                 <div class="col-xl-3 col-xxl-3 col-sm-3">
-                    <div class="widget-stat card">
+                    <div class="widget-stat card shadow">
                         <div class="card-body">
                             <h4 class="card-title">Balance</h4>
                             <h3>@ViewBag.Balance</h3>
@@ -117,7 +117,7 @@
         <div class="col-xl-12 col-xxl-12 col-sm-12">
             <div class="row">
                 <div class="col-xl-4 col-xxl-4 col-sm-12">
-                    <div class="card">
+                    <div class="card shadow">
                         <div class="card-header">
                             <h4 class="card-title">SMS Summary</h4>
                         </div>
@@ -127,7 +127,7 @@
                     </div>
                 </div>
                 <div class="col-xl-4 col-xxl-4 col-sm-12">
-                    <div class="card">
+                    <div class="card shadow">
                         <div class="card-header">
                             <h4 class="card-title">Staff/Teacher</h4>
                         </div>
@@ -137,7 +137,7 @@
                     </div>
                 </div>
                 <div class="col-xl-4 col-xxl-4 col-sm-12">
-                    <div class="card">
+                    <div class="card shadow">
                         <div class="card-header">
                             <h4 class="card-title">Student/Parent</h4>
                         </div>
@@ -991,226 +991,6 @@
         </div>
     </div>
 </div>
-@*<div class="container main-container" id="main-container">
-    <div class="row">
-        <div class="col-12 col-md-6 col-lg-6 col-xl-3">
-            <div class="card border-0 shadow-sm overflow-hidden mb-4">
-                <div class="card-body py-0">
-                    <div class="row">
-                        <div class="col py-2 pr-0">
-                            <p>Total Parent</p><br>
-                            <h4 class="font-weight-light mb-0">@ViewBag.TotalParent</h4>
-                        </div>
-                        <div class="col-auto bg-success  text-white py-2">
-                            <a class="mb-0" href="/Parent/ParentList"><span style="margin-top:35px" class="text-mute d-block">View Details</span></a>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-md-6 col-lg-6 col-xl-3">
-            <div class="card border-0 shadow-sm overflow-hidden mb-4">
-                <div class="card-body py-0">
-                    <div class="row">
-                        <div class="col py-2 pr-0">
-                            <p>Total Student</p><br>
-                            <h4 class="font-weight-light mb-0">@ViewBag.TotalStudent</h4>
-                        </div>
-                        <div class="col-auto bg-primary  text-white py-2">
-                            <a class="mb-0" href="/Student/StudentRegistrationList"><span style="margin-top:35px" class="text-mute d-block">View Details</span></a>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-md-6 col-lg-6 col-xl-3">
-            <div class="card border-0 shadow-sm overflow-hidden mb-4">
-                <div class="card-body py-0">
-                    <div class="row">
-                        <div class="col py-2 pr-0">
-                            <p>Total Employee</p><br>
-                            <h4 class="font-weight-light mb-0">@ViewBag.TotalStaff</h4>
-                        </div>
-                        <div class="col-auto bg-info  text-white py-2">
-                            <a class="mb-0" href="/Permission/UserList"><span style="margin-top:35px" class="text-mute d-block">View Details</span></a>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-md-6 col-lg-6 col-xl-3">
-            <div class="card border-0 shadow-sm overflow-hidden mb-4">
-                <div class="card-body py-0">
-                    <div class="row">
-                        <div class="col py-2 pr-0">
-                            <p>Total Teacher</p><br>
-                            <h4 class="font-weight-light mb-0">@ViewBag.TotalTeacher</h4>
-                        </div>
-                        <div class="col-auto bg-danger  text-white py-2">
-                            <a class="mb-0" href="/Teacher/TeacherList"><span style="margin-top:35px" class="text-mute d-block">View Details</span></a>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-12 col-md-6 col-lg-6 col-xl-3">
-            <div class="card border-0 shadow-sm overflow-hidden mb-4">
-                <div class="card-body py-0">
-                    <div class="row">
-                        <div class="col py-2 pr-0">
-                            <p>Total SMS</p><br>
-                            <h4 class="font-weight-light mb-0">@ViewBag.TotalSMS</h4>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-md-6 col-lg-6 col-xl-3">
-            <div class="card border-0 shadow-sm overflow-hidden mb-4">
-                <div class="card-body py-0">
-                    <div class="row">
-                        <div class="col py-2 pr-0">
-                            <p>Send SMS</p><br>
-                            <h4 class="font-weight-light mb-0">@ViewBag.TotalSendSMS</h4>
-                        </div>
-                        <div class="col-auto bg-danger  text-white py-2">
-                            <a class="mb-0" href="/AdminReports/UsedSMS?Status=Send"><span style="margin-top:35px" class="text-mute d-block">View Details</span></a>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-md-6 col-lg-6 col-xl-3">
-            <div class="card border-0 shadow-sm overflow-hidden mb-4">
-                <div class="card-body py-0">
-                    <div class="row">
-                        <div class="col py-2 pr-0">
-                            <p>Failed SMS</p><br>
-                            <h4 class="font-weight-light mb-0">@ViewBag.TotalUnSendSMS</h4>
-                        </div>
-                        <div class="col-auto bg-primary  text-white py-2">
-                            <a class="mb-0" href="/AdminReports/UsedSMS?Status=Failed"><span style="margin-top:35px" class="text-mute d-block">View Details</span></a>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-md-6 col-lg-6 col-xl-3">
-            <div class="card border-0 shadow-sm overflow-hidden mb-4">
-                <div class="card-body py-0">
-                    <div class="row">
-                        <div class="col py-2 pr-0">
-                            <p>Balance</p><br>
-                            <h4 class="font-weight-light mb-0">@ViewBag.Balance</h4>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="row">
-
-        <div class="col-12 col-md-4 col-lg-4 col-xl-4 mb-4">
-            <div class="card border-0 shadow-sm h-100">
-                <div class="card-header border-0 bg-none">
-                    <div class="row">
-                        <div class="col">
-                            <p class="fs15">SMS Summary<br><small class="text-template-primary-light"></small></p>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div id="divsmschart"></div>
-
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-md-4 col-lg-4 col-xl-4 mb-4">
-            <div class="card border-0 shadow-sm h-100">
-                <div class="card-header border-0 bg-none">
-                    <div class="row">
-                        <div class="col">
-                            <p class="fs15">Staff/Teacher<br><small class="text-template-primary-light"></small></p>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div id="divstaffchart"></div>
-
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-md-4 col-lg-4 col-xl-4 mb-4">
-            <div class="card border-0 shadow-sm h-100">
-                <div class="card-header border-0 bg-none">
-                    <div class="row">
-                        <div class="col">
-                            <p class="fs15">Student/Parent<br><small class="text-template-primary-light"></small></p>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div id="divparentchart"></div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-
-        <div class="col-12 col-md-12 col-lg-12 col-xl-12">
-            <div class="card border-0 shadow-sm mb-4">
-                <div class="card-header border-0 bg-none">
-                    <div class="row">
-                        <div class="col align-self-center">
-                            <p class="fs15">Top 10 Teachers<br><small class="text-template-primary-light">Most recent new registrations</small></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body ">
-                    <div class="row">
-                        @if (Model != null)
-                        {
-                            if (Model.lstteacher != null)
-                            {
-                                foreach (var item in Model.lstteacher)
-                                {
-                                    <div class="col-3 mb-3 text-center">
-                                        <figure class="avatar avatar-110 mb-3">
-                                            <button class="btn btn-sm text-danger user-like"><i class="material-icons md-18">favorite</i></button>
-                                            <img src="../@item.ImagePath" alt="">
-                                        </figure>
-                                        <p class="mb-1">@item.Name</p>
-                                        <p class="text-template-primary-light">@item.Qualification</p>
-                                    </div>
-                                }
-                            }
-                        }
-
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>*@
 
 
 <script>

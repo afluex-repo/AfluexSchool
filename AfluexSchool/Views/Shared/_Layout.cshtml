@@ -6,9 +6,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>School Admin Afluex</title>
+    <title>@ViewBag.Title</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="~/AssetsAdmin/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/AssetsWeb/img/favicon.png">
     <link rel="stylesheet" href="~/AssetsAdmin/vendor/bootstrap-select/dist/css/bootstrap-select.min.css">
     <!-- Datatable -->
     <link href="~/AssetsAdmin/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -34,7 +34,7 @@
     <!--******************Main wrapper start*************-->
     <div id="main-wrapper">
         <div class="nav-header">
-            <a href="index.html" class="brand-logo">
+            <a href="/Admin/Dashboard" class="brand-logo">
                 <img class="logo-abbr" src="~/AssetsAdmin/images/logo-white-2.png" alt="">
                 <img class="logo-compact" src="~/AssetsAdmin/images/logo-text-white.png" alt="">
                 <img class="brand-title" src="~/AssetsAdmin/images/logo-text-white.png" alt="">
@@ -66,8 +66,15 @@
 
                         <ul class="navbar-nav header-right">
                             <li class="nav-item dropdown header-profile">
+                                <a class="nav-link" href="#">
+                                    <span><small>Active Session: @Session["SessionName"]</small></span>
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown header-profile">
                                 <a class="nav-link" href="#" role="button" data-toggle="dropdown">
-                                    <img src="images/profile/education/pic1.jpg" width="20" alt="">
+                                    <img src="../../@Session["UserImage"]" width="20" alt="">
+
+                                    <span>@Session["FullName"]</span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a href="app-profile.html" class="dropdown-item ai-icon">
@@ -89,7 +96,7 @@
                                         </svg>
                                         <span class="ml-2">Inbox </span>
                                     </a>
-                                    <a href="page-login.html" class="dropdown-item ai-icon">
+                                    <a href="/Home/Login" class="dropdown-item ai-icon">
                                         <svg id="icon-logout" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                              viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                              stroke-linecap="round" stroke-linejoin="round"
