@@ -1,236 +1,1001 @@
 ﻿@model AfluexSchool.Models.DashBoard
 
 @{
-    ViewBag.Title = "Dashboard";
+    ViewBag.Title = "School Afluex";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container main-container" id="main-container">
+ <div class="container-fluid">
     <div class="row">
-        <div class="col-12 col-md-6 col-lg-6 col-xl-3">
-            <div class="card border-0 shadow-sm overflow-hidden mb-4">
-                <div class="card-body py-0">
-                    <div class="row">
-                        <div class="col py-2 pr-0">
-                            <p>Total Parent</p><br>
-                            <h4 class="font-weight-light mb-0">@ViewBag.TotalParent</h4>
+        <div class="col-xl-12 col-xxl-12 col-sm-12">
+            <div class="row">
+                <div class="col-xl-3 col-xxl-3 col-sm-3">
+                    <div class="widget-stat card shadow">
+                        <div class="card-body">
+                            <h4 class="card-title">Total Parent</h4>
+                            <h3>@ViewBag.TotalParent</h3>
+                            <div class="progress mb-2">
+                                <div class="progress-bar progress-animated bg-primary" style="width: 50%">
+                                </div>
+                            </div>
+                            <small><a href="/Parent/ParentList">View Details</a></small>
                         </div>
-                        <div class="col-auto bg-success  text-white py-2">
-                            <a class="mb-0" href="/Parent/ParentList"><span style="margin-top:35px" class="text-mute d-block">View Details</span></a>
-
+                    </div>
+                </div>
+                <div class="col-xl-3 col-xxl-3 col-sm-3">
+                    <div class="widget-stat card shadow">
+                        <div class="card-body">
+                            <h4 class="card-title">Total Student</h4>
+                            <h3>@ViewBag.TotalStudent</h3>
+                            <div class="progress mb-2">
+                                <div class="progress-bar progress-animated bg-primary" style="width: 50%">
+                                </div>
+                            </div>
+                            <small><a href="/Student/StudentRegistrationList">View Details</a></small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-xxl-3 col-sm-3">
+                    <div class="widget-stat card shadow">
+                        <div class="card-body">
+                            <h4 class="card-title">Total Employee</h4>
+                            <h3>@ViewBag.TotalStaff</h3>
+                            <div class="progress mb-2">
+                                <div class="progress-bar progress-animated bg-red" style="width: 10%">
+                                </div>
+                            </div>
+                            <small><a href="/Permission/UserList">View Details</a></small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-xxl-3 col-sm-3">
+                    <div class="widget-stat card shadow">
+                        <div class="card-body">
+                            <h4 class="card-title">Total Teacher</h4>
+                            <h3>@ViewBag.TotalTeacher</h3>
+                            <div class="progress mb-2">
+                                <div class="progress-bar progress-animated bg-info" style="width: 20%">
+                                </div>
+                            </div>
+                            <small><a href="/Teacher/TeacherList">View Details</a></small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-xxl-3 col-sm-3">
+                    <div class="widget-stat card shadow">
+                        <div class="card-body">
+                            <h4 class="card-title">Total SMS</h4>
+                            <h3>@ViewBag.TotalSMS</h3>
+                            <div class="progress mb-2">
+                                <div class="progress-bar progress-animated bg-primary" style="width: 70%">
+                                </div>
+                            </div>
+                            @*<small><a href="javascript:void(0)">View Details</a></small>*@
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-xxl-3 col-sm-3">
+                    <div class="widget-stat card shadow">
+                        <div class="card-body">
+                            <h4 class="card-title">Send SMS</h4>
+                            <h3>@ViewBag.TotalSendSMS</h3>
+                            <div class="progress mb-2">
+                                <div class="progress-bar progress-animated bg-success" style="width: 50%">
+                                </div>
+                            </div>
+                            <small><a href="/AdminReports/UsedSMS?Status=Send">View Details</a></small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-xxl-3 col-sm-3">
+                    <div class="widget-stat card shadow">
+                        <div class="card-body">
+                            <h4 class="card-title">Failed SMS</h4>
+                            <h3>@ViewBag.TotalUnSendSMS</h3>
+                            <div class="progress mb-2">
+                                <div class="progress-bar progress-animated bg-red" style="width: 30%">
+                                </div>
+                            </div>
+                            <small><a href="/AdminReports/UsedSMS?Status=Failed">View Details</a></small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-xxl-3 col-sm-3">
+                    <div class="widget-stat card shadow">
+                        <div class="card-body">
+                            <h4 class="card-title">Balance</h4>
+                            <h3>@ViewBag.Balance</h3>
+                            <div class="progress mb-2">
+                                <div class="progress-bar progress-animated bg-success" style="width: 70%">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-12 col-md-6 col-lg-6 col-xl-3">
-            <div class="card border-0 shadow-sm overflow-hidden mb-4">
-                <div class="card-body py-0">
-                    <div class="row">
-                        <div class="col py-2 pr-0">
-                            <p>Total Student</p><br>
-                            <h4 class="font-weight-light mb-0">@ViewBag.TotalStudent</h4>
+        <div class="col-xl-12 col-xxl-12 col-sm-12">
+            <div class="row">
+                <div class="col-xl-4 col-xxl-4 col-sm-12">
+                    <div class="card shadow">
+                        <div class="card-header">
+                            <h4 class="card-title">SMS Summary</h4>
                         </div>
-                        <div class="col-auto bg-primary  text-white py-2">
-                            <a  class="mb-0" href="/Student/StudentRegistrationList"><span style="margin-top:35px" class="text-mute d-block">View Details</span></a>
-
+                        <div class="card-body">
+                            <canvas id="pie_chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-xxl-4 col-sm-12">
+                    <div class="card shadow">
+                        <div class="card-header">
+                            <h4 class="card-title">Staff/Teacher</h4>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="pie_chartstaff"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-xxl-4 col-sm-12">
+                    <div class="card shadow">
+                        <div class="card-header">
+                            <h4 class="card-title">Student/Parent</h4>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="pie_chartstudent"></canvas>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-12 col-md-6 col-lg-6 col-xl-3">
-            <div class="card border-0 shadow-sm overflow-hidden mb-4">
-                <div class="card-body py-0">
-                    <div class="row">
-                        <div class="col py-2 pr-0">
-                            <p>Total Employee</p><br>
-                            <h4 class="font-weight-light mb-0">@ViewBag.TotalStaff</h4>
-                        </div>
-                        <div class="col-auto bg-info  text-white py-2">
-                            <a   class="mb-0" href="/Permission/UserList"><span style="margin-top:35px" class="text-mute d-block">View Details</span></a>
-
-                        </div>
-                    </div>
-                </div>
+        <div class="col-xl-12 col-xxl-12 col-sm-12 card">
+            <div class="card-header">
+                <h4 class="card-title">Top 10 Teacher</h4>
             </div>
-        </div>
-        <div class="col-12 col-md-6 col-lg-6 col-xl-3">
-            <div class="card border-0 shadow-sm overflow-hidden mb-4">
-                <div class="card-body py-0">
-                    <div class="row">
-                        <div class="col py-2 pr-0">
-                            <p>Total Teacher</p><br>
-                            <h4 class="font-weight-light mb-0">@ViewBag.TotalTeacher</h4>
-                        </div>
-                        <div class="col-auto bg-danger  text-white py-2">
-                            <a   class="mb-0" href="/Teacher/TeacherList"><span style="margin-top:35px" class="text-mute d-block">View Details</span></a>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-12 col-md-6 col-lg-6 col-xl-3">
-            <div class="card border-0 shadow-sm overflow-hidden mb-4">
-                <div class="card-body py-0">
-                    <div class="row">
-                        <div class="col py-2 pr-0">
-                            <p>Total SMS</p><br>
-                            <h4 class="font-weight-light mb-0">@ViewBag.TotalSMS</h4>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-md-6 col-lg-6 col-xl-3">
-            <div class="card border-0 shadow-sm overflow-hidden mb-4">
-                <div class="card-body py-0">
-                    <div class="row">
-                        <div class="col py-2 pr-0">
-                            <p>Send SMS</p><br>
-                            <h4 class="font-weight-light mb-0">@ViewBag.TotalSendSMS</h4>
-                        </div>
-                        <div class="col-auto bg-danger  text-white py-2">
-                            <a   class="mb-0" href="/AdminReports/UsedSMS?Status=Send"><span style="margin-top:35px" class="text-mute d-block">View Details</span></a>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-md-6 col-lg-6 col-xl-3">
-            <div class="card border-0 shadow-sm overflow-hidden mb-4">
-                <div class="card-body py-0">
-                    <div class="row">
-                        <div class="col py-2 pr-0">
-                            <p>Failed SMS</p><br>
-                            <h4 class="font-weight-light mb-0">@ViewBag.TotalUnSendSMS</h4>
-                        </div>
-                        <div class="col-auto bg-primary  text-white py-2">
-                            <a   class="mb-0" href="/AdminReports/UsedSMS?Status=Failed"><span style="margin-top:35px" class="text-mute d-block">View Details</span></a>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-md-6 col-lg-6 col-xl-3">
-            <div class="card border-0 shadow-sm overflow-hidden mb-4">
-                <div class="card-body py-0">
-                    <div class="row">
-                        <div class="col py-2 pr-0">
-                            <p>Balance</p><br>
-                            <h4 class="font-weight-light mb-0">@ViewBag.Balance</h4>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="row">
-
-        <div class="col-12 col-md-4 col-lg-4 col-xl-4 mb-4">
-            <div class="card border-0 shadow-sm h-100">
-                <div class="card-header border-0 bg-none">
-                    <div class="row">
-                        <div class="col">
-                            <p class="fs15">SMS Summary<br><small class="text-template-primary-light"></small></p>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div id="divsmschart"></div>
-
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-md-4 col-lg-4 col-xl-4 mb-4">
-            <div class="card border-0 shadow-sm h-100">
-                <div class="card-header border-0 bg-none">
-                    <div class="row">
-                        <div class="col">
-                            <p class="fs15">Staff/Teacher<br><small class="text-template-primary-light"></small></p>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div id="divstaffchart"></div>
-
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-md-4 col-lg-4 col-xl-4 mb-4">
-            <div class="card border-0 shadow-sm h-100">
-                <div class="card-header border-0 bg-none">
-                    <div class="row">
-                        <div class="col">
-                            <p class="fs15">Student/Parent<br><small class="text-template-primary-light"></small></p>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div id="divparentchart"></div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-
-        <div class="col-12 col-md-12 col-lg-12 col-xl-12">
-            <div class="card border-0 shadow-sm mb-4">
-                <div class="card-header border-0 bg-none">
-                    <div class="row">
-                        <div class="col align-self-center">
-                            <p class="fs15">Top 10 Teachers<br><small class="text-template-primary-light">Most recent new registrations</small></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body ">
-                    <div class="row">
-                        @if (Model != null)
+            <div class="row card-body">
+                @if (Model != null)
+                {
+                    if (Model.lstteacher != null)
+                    {
+                        foreach (var item in Model.lstteacher)
                         {
-                            if (Model.lstteacher != null)
-                            {
-                                foreach (var item in Model.lstteacher)
+
+                <div class="col-xl-3 col-xxl-3 col-sm-12">
+                    <div class="card-body shadow">
+                        <div class="text-center">
+                            <div class="profile-photo">
+                                @if (item.ImagePath != null && item.ImagePath != "../../img/no-profile.jpeg")
                                 {
-                                    <div class="col-3 mb-3 text-center">
-                                        <figure class="avatar avatar-110 mb-3">
-                                            <button class="btn btn-sm text-danger user-like"><i class="material-icons md-18">favorite</i></button>
-                                            <img src="../@item.ImagePath" alt="">
-                                        </figure>
-                                        <p class="mb-1">@item.Name</p>
-                                        <p class="text-template-primary-light">@item.Qualification</p>
-                                    </div>
+                                    <img src="./@item.ImagePath" width="100" class="img-fluid rounded-circle" alt="">
                                 }
-                            }
+                                else
+                                {
+                                    <img src="~/AssetsAdmin/images/avatar/1.png" width="100" class="img-fluid rounded-circle" alt="" />
+                                }
+                               
+                                
+                            </div>
+                            <h3 class="mt-4 mb-1">
+                                @item.Name
+                            </h3>
+                            <p class="text-muted mb-1">@item.Qualification</p>
+                        </div>
+                    </div>
+                </div>
                         }
+                    }
+                }
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="card shadow">
+                <div class="card-header">
+                    <h4 class="card-title">All Staff</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="example5" class="display" style="min-width: 845px">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Name</th>
+                                    <th>Designation</th>
+                                    <th>Mobile</th>
+                                    <th>Email</th>
+                                    <th>Address</th>
+                                    <th>Joining Date</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><img class="rounded-circle" width="35"
+                                            src="images/profile/small/pic1.jpg" alt=""></td>
+                                    <td>Tiger Nixon</td>
+                                    <td>Clerk</td>
+                                    <td><a href="javascript:void(0);"><strong>123 456 7890</strong></a></td>
+                                    <td><a href="javascript:void(0);"><strong>info@example.com</strong></a>
+                                    </td>
+                                    <td>#8901 Demo Road </td>
+                                    <td>2011/04/25</td>
+                                    <td>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-primary"><i
+                                                class="la la-pencil"></i></a>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i
+                                                class="la la-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><img class="rounded-circle" width="35"
+                                            src="images/profile/small/pic2.jpg" alt=""></td>
+                                    <td>Garrett Winters</td>
+                                    <td>Accountant</td>
+                                    <td><a href="javascript:void(0);"><strong>987 654 3210</strong></a></td>
+                                    <td><a href="javascript:void(0);"><strong>info@example.com</strong></a>
+                                    </td>
+                                    <td>#8901 Demo Road </td>
+                                    <td>2011/07/25</td>
+                                    <td>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-primary"><i
+                                                class="la la-pencil"></i></a>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i
+                                                class="la la-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><img class="rounded-circle" width="35"
+                                            src="images/profile/small/pic3.jpg" alt=""></td>
+                                    <td>Ashton Cox</td>
+                                    <td>Junior Technical</td>
+                                    <td><a href="javascript:void(0);"><strong>(123) 4567 890</strong></a>
+                                    </td>
+                                    <td><a href="javascript:void(0);"><strong>info@example.com</strong></a>
+                                    </td>
+                                    <td>#8901 Demo Road </td>
+                                    <td>2009/01/12</td>
+                                    <td>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-primary"><i
+                                                class="la la-pencil"></i></a>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i
+                                                class="la la-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><img class="rounded-circle" width="35"
+                                            src="images/profile/small/pic4.jpg" alt=""></td>
+                                    <td>Cedric Kelly</td>
+                                    <td>Developer</td>
+                                    <td><a href="javascript:void(0);"><strong>123 456 7890</strong></a></td>
+                                    <td><a href="javascript:void(0);"><strong>info@example.com</strong></a>
+                                    </td>
+                                    <td>#8901 Demo Road </td>
+                                    <td>2012/03/29</td>
+                                    <td>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-primary"><i
+                                                class="la la-pencil"></i></a>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i
+                                                class="la la-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><img class="rounded-circle" width="35"
+                                            src="images/profile/small/pic5.jpg" alt=""></td>
+                                    <td>Airi Satou</td>
+                                    <td>Accountant</td>
+                                    <td><a href="javascript:void(0);"><strong>987 654 3210</strong></a></td>
+                                    <td><a href="javascript:void(0);"><strong>info@example.com</strong></a>
+                                    </td>
+                                    <td>#8901 Demo Road </td>
+                                    <td>2008/11/28</td>
+                                    <td>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-primary"><i
+                                                class="la la-pencil"></i></a>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i
+                                                class="la la-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><img class="rounded-circle" width="35"
+                                            src="images/profile/small/pic6.jpg" alt=""></td>
+                                    <td>Brielle Williamson</td>
+                                    <td>Specialist</td>
+                                    <td><a href="javascript:void(0);"><strong>123 456 7890</strong></a></td>
+                                    <td><a href="javascript:void(0);"><strong>info@example.com</strong></a>
+                                    </td>
+                                    <td>#8901 Demo Road </td>
+                                    <td>2012/12/02</td>
+                                    <td>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-primary"><i
+                                                class="la la-pencil"></i></a>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i
+                                                class="la la-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><img class="rounded-circle" width="35"
+                                            src="images/profile/small/pic7.jpg" alt=""></td>
+                                    <td>Herrod Chandler</td>
+                                    <td>Sales Assistant</td>
+                                    <td><a href="javascript:void(0);"><strong>987 654 3210</strong></a></td>
+                                    <td><a href="javascript:void(0);"><strong>info@example.com</strong></a>
+                                    </td>
+                                    <td>#8901 Demo Road </td>
+                                    <td>2012/08/06</td>
+                                    <td>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-primary"><i
+                                                class="la la-pencil"></i></a>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i
+                                                class="la la-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><img class="rounded-circle" width="35"
+                                            src="images/profile/small/pic8.jpg" alt=""></td>
+                                    <td>Rhona Davidson</td>
+                                    <td>Librarian</td>
+                                    <td><a href="javascript:void(0);"><strong>(123) 4567 890</strong></a>
+                                    </td>
+                                    <td><a href="javascript:void(0);"><strong>info@example.com</strong></a>
+                                    </td>
+                                    <td>#8901 Demo Road </td>
+                                    <td>2010/10/14</td>
+                                    <td>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-primary"><i
+                                                class="la la-pencil"></i></a>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i
+                                                class="la la-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><img class="rounded-circle" width="35"
+                                            src="images/profile/small/pic9.jpg" alt=""></td>
+                                    <td>Colleen Hurst</td>
+                                    <td>Librarian</td>
+                                    <td><a href="javascript:void(0);"><strong>(123) 4567 890</strong></a>
+                                    </td>
+                                    <td><a href="javascript:void(0);"><strong>info@example.com</strong></a>
+                                    </td>
+                                    <td>#8901 Demo Road </td>
+                                    <td>2009/09/15</td>
+                                    <td>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-primary"><i
+                                                class="la la-pencil"></i></a>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i
+                                                class="la la-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><img class="rounded-circle" width="35"
+                                            src="images/profile/small/pic10.jpg" alt=""></td>
+                                    <td>Sonya Frost</td>
+                                    <td>Librarian</td>
+                                    <td><a href="javascript:void(0);"><strong>123 456 7890</strong></a></td>
+                                    <td><a href="javascript:void(0);"><strong>info@example.com</strong></a>
+                                    </td>
+                                    <td>#8901 Demo Road </td>
+                                    <td>2008/12/13</td>
+                                    <td>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-primary"><i
+                                                class="la la-pencil"></i></a>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i
+                                                class="la la-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><img class="rounded-circle" width="35"
+                                            src="images/profile/small/pic1.jpg" alt=""></td>
+                                    <td>Jena Gaines</td>
+                                    <td>Office Manager</td>
+                                    <td><a href="javascript:void(0);"><strong>987 654 3210</strong></a></td>
+                                    <td><a href="javascript:void(0);"><strong>info@example.com</strong></a>
+                                    </td>
+                                    <td>#8901 Demo Road </td>
+                                    <td>2008/12/19</td>
+                                    <td>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-primary"><i
+                                                class="la la-pencil"></i></a>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i
+                                                class="la la-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><img class="rounded-circle" width="35"
+                                            src="images/profile/small/pic2.jpg" alt=""></td>
+                                    <td>Quinn Flynn</td>
+                                    <td>Support Lead</td>
+                                    <td><a href="javascript:void(0);"><strong>(123) 4567 890</strong></a>
+                                    </td>
+                                    <td><a href="javascript:void(0);"><strong>info@example.com</strong></a>
+                                    </td>
+                                    <td>#8901 Demo Road </td>
+                                    <td>2013/03/03</td>
+                                    <td>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-primary"><i
+                                                class="la la-pencil"></i></a>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i
+                                                class="la la-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><img class="rounded-circle" width="35"
+                                            src="images/profile/small/pic3.jpg" alt=""></td>
+                                    <td>Charde Marshall</td>
+                                    <td>Regional Director</td>
+                                    <td><a href="javascript:void(0);"><strong>123 456 7890</strong></a></td>
+                                    <td><a href="javascript:void(0);"><strong>info@example.com</strong></a>
+                                    </td>
+                                    <td>#8901 Demo Road </td>
+                                    <td>2008/10/16</td>
+                                    <td>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-primary"><i
+                                                class="la la-pencil"></i></a>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i
+                                                class="la la-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><img class="rounded-circle" width="35"
+                                            src="images/profile/small/pic4.jpg" alt=""></td>
+                                    <td>Haley Kennedy</td>
+                                    <td>Librarian</td>
+                                    <td><a href="javascript:void(0);"><strong>987 654 3210</strong></a></td>
+                                    <td><a href="javascript:void(0);"><strong>info@example.com</strong></a>
+                                    </td>
+                                    <td>#8901 Demo Road </td>
+                                    <td>2012/12/18</td>
+                                    <td>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-primary"><i
+                                                class="la la-pencil"></i></a>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i
+                                                class="la la-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><img class="rounded-circle" width="35"
+                                            src="images/profile/small/pic5.jpg" alt=""></td>
+                                    <td>Tatyana Fitzpatrick</td>
+                                    <td>Regional Director</td>
+                                    <td><a href="javascript:void(0);"><strong>(123) 4567 890</strong></a>
+                                    </td>
+                                    <td><a href="javascript:void(0);"><strong>info@example.com</strong></a>
+                                    </td>
+                                    <td>#8901 Demo Road </td>
+                                    <td>2010/03/17</td>
+                                    <td>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-primary"><i
+                                                class="la la-pencil"></i></a>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i
+                                                class="la la-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><img class="rounded-circle" width="35"
+                                            src="images/profile/small/pic6.jpg" alt=""></td>
+                                    <td>Michael Silva</td>
+                                    <td>Librarian</td>
+                                    <td><a href="javascript:void(0);"><strong>123 456 7890</strong></a></td>
+                                    <td><a href="javascript:void(0);"><strong>info@example.com</strong></a>
+                                    </td>
+                                    <td>#8901 Demo Road </td>
+                                    <td>2012/11/27</td>
+                                    <td>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-primary"><i
+                                                class="la la-pencil"></i></a>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i
+                                                class="la la-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><img class="rounded-circle" width="35"
+                                            src="images/profile/small/pic7.jpg" alt=""></td>
+                                    <td>Paul Byrd</td>
+                                    <td>Financial Officer</td>
+                                    <td><a href="javascript:void(0);"><strong>987 654 3210</strong></a></td>
+                                    <td><a href="javascript:void(0);"><strong>info@example.com</strong></a>
+                                    </td>
+                                    <td>#8901 Demo Road </td>
+                                    <td>2010/06/09</td>
+                                    <td>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-primary"><i
+                                                class="la la-pencil"></i></a>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i
+                                                class="la la-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><img class="rounded-circle" width="35"
+                                            src="images/profile/small/pic8.jpg" alt=""></td>
+                                    <td>Gloria Little</td>
+                                    <td>Systems Administrator</td>
+                                    <td><a href="javascript:void(0);"><strong>(123) 4567 890</strong></a>
+                                    </td>
+                                    <td><a href="javascript:void(0);"><strong>info@example.com</strong></a>
+                                    </td>
+                                    <td>#8901 Demo Road </td>
+                                    <td>2009/04/10</td>
+                                    <td>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-primary"><i
+                                                class="la la-pencil"></i></a>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i
+                                                class="la la-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><img class="rounded-circle" width="35"
+                                            src="images/profile/small/pic9.jpg" alt=""></td>
+                                    <td>Bradley Greer</td>
+                                    <td>Librarian</td>
+                                    <td><a href="javascript:void(0);"><strong>(123) 4567 890</strong></a>
+                                    </td>
+                                    <td><a href="javascript:void(0);"><strong>info@example.com</strong></a>
+                                    </td>
+                                    <td>#8901 Demo Road </td>
+                                    <td>2012/10/13</td>
+                                    <td>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-primary"><i
+                                                class="la la-pencil"></i></a>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i
+                                                class="la la-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><img class="rounded-circle" width="35"
+                                            src="images/profile/small/pic10.jpg" alt=""></td>
+                                    <td>Dai Rios</td>
+                                    <td>Personnel Lead</td>
+                                    <td><a href="javascript:void(0);"><strong>123 456 7890</strong></a></td>
+                                    <td><a href="javascript:void(0);"><strong>info@example.com</strong></a>
+                                    </td>
+                                    <td>#8901 Demo Road </td>
+                                    <td>2012/09/26</td>
+                                    <td>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-primary"><i
+                                                class="la la-pencil"></i></a>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i
+                                                class="la la-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><img class="rounded-circle" width="35"
+                                            src="images/profile/small/pic1.jpg" alt=""></td>
+                                    <td>Jenette Caldwell</td>
+                                    <td>Receptionist</td>
+                                    <td><a href="javascript:void(0);"><strong>987 654 3210</strong></a></td>
+                                    <td><a href="javascript:void(0);"><strong>info@example.com</strong></a>
+                                    </td>
+                                    <td>#8901 Demo Road </td>
+                                    <td>2011/09/03</td>
+                                    <td>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-primary"><i
+                                                class="la la-pencil"></i></a>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i
+                                                class="la la-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><img class="rounded-circle" width="35"
+                                            src="images/profile/small/pic2.jpg" alt=""></td>
+                                    <td>Yuri Berry</td>
+                                    <td>Receptionist</td>
+                                    <td><a href="javascript:void(0);"><strong>(123) 4567 890</strong></a>
+                                    </td>
+                                    <td><a href="javascript:void(0);"><strong>info@example.com</strong></a>
+                                    </td>
+                                    <td>#8901 Demo Road </td>
+                                    <td>2009/06/25</td>
+                                    <td>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-primary"><i
+                                                class="la la-pencil"></i></a>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i
+                                                class="la la-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><img class="rounded-circle" width="35"
+                                            src="images/profile/small/pic3.jpg" alt=""></td>
+                                    <td>Caesar Vance</td>
+                                    <td>Pre-Sales Support</td>
+                                    <td><a href="javascript:void(0);"><strong>(123) 4567 890</strong></a>
+                                    </td>
+                                    <td><a href="javascript:void(0);"><strong>info@example.com</strong></a>
+                                    </td>
+                                    <td>#8901 Demo Road </td>
+                                    <td>2011/12/12</td>
+                                    <td>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-primary"><i
+                                                class="la la-pencil"></i></a>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i
+                                                class="la la-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><img class="rounded-circle" width="35"
+                                            src="images/profile/small/pic4.jpg" alt=""></td>
+                                    <td>Doris Wilder</td>
+                                    <td>Sales Assistant</td>
+                                    <td><a href="javascript:void(0);"><strong>123 456 7890</strong></a></td>
+                                    <td><a href="javascript:void(0);"><strong>info@example.com</strong></a>
+                                    </td>
+                                    <td>#8901 Demo Road </td>
+                                    <td>2010/09/20</td>
+                                    <td>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-primary"><i
+                                                class="la la-pencil"></i></a>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i
+                                                class="la la-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><img class="rounded-circle" width="35"
+                                            src="images/profile/small/pic5.jpg" alt=""></td>
+                                    <td>Angelica Ramos</td>
+                                    <td>Executive Officer</td>
+                                    <td><a href="javascript:void(0);"><strong>987 654 3210</strong></a></td>
+                                    <td><a href="javascript:void(0);"><strong>info@example.com</strong></a>
+                                    </td>
+                                    <td>#8901 Demo Road </td>
+                                    <td>2009/10/09</td>
+                                    <td>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-primary"><i
+                                                class="la la-pencil"></i></a>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i
+                                                class="la la-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><img class="rounded-circle" width="35"
+                                            src="images/profile/small/pic6.jpg" alt=""></td>
+                                    <td>Gavin Joyce</td>
+                                    <td>Developer</td>
+                                    <td><a href="javascript:void(0);"><strong>(123) 4567 890</strong></a>
+                                    </td>
+                                    <td><a href="javascript:void(0);"><strong>info@example.com</strong></a>
+                                    </td>
+                                    <td>#8901 Demo Road </td>
+                                    <td>2010/12/22</td>
+                                    <td>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-primary"><i
+                                                class="la la-pencil"></i></a>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i
+                                                class="la la-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><img class="rounded-circle" width="35"
+                                            src="images/profile/small/pic7.jpg" alt=""></td>
+                                    <td>Jennifer Chang</td>
+                                    <td>Regional Director</td>
+                                    <td><a href="javascript:void(0);"><strong>(123) 4567 890</strong></a>
+                                    </td>
+                                    <td><a href="javascript:void(0);"><strong>info@example.com</strong></a>
+                                    </td>
+                                    <td>#8901 Demo Road </td>
+                                    <td>2010/11/14</td>
+                                    <td>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-primary"><i
+                                                class="la la-pencil"></i></a>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i
+                                                class="la la-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><img class="rounded-circle" width="35"
+                                            src="images/profile/small/pic8.jpg" alt=""></td>
+                                    <td>Brenden Wagner</td>
+                                    <td>Software Engineer</td>
+                                    <td><a href="javascript:void(0);"><strong>123 456 7890</strong></a></td>
+                                    <td><a href="javascript:void(0);"><strong>info@example.com</strong></a>
+                                    </td>
+                                    <td>#8901 Demo Road </td>
+                                    <td>2011/06/07</td>
+                                    <td>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-primary"><i
+                                                class="la la-pencil"></i></a>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i
+                                                class="la la-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><img class="rounded-circle" width="35"
+                                            src="images/profile/small/pic9.jpg" alt=""></td>
+                                    <td>Fiona Green</td>
+                                    <td>Receptionist</td>
+                                    <td><a href="javascript:void(0);"><strong>987 654 3210</strong></a></td>
+                                    <td><a href="javascript:void(0);"><strong>info@example.com</strong></a>
+                                    </td>
+                                    <td>#8901 Demo Road </td>
+                                    <td>2010/03/11</td>
+                                    <td>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-primary"><i
+                                                class="la la-pencil"></i></a>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i
+                                                class="la la-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><img class="rounded-circle" width="35"
+                                            src="images/profile/small/pic10.jpg" alt=""></td>
+                                    <td>Shou Itou</td>
+                                    <td>Receptionist</td>
+                                    <td><a href="javascript:void(0);"><strong>(123) 4567 890</strong></a>
+                                    </td>
+                                    <td><a href="javascript:void(0);"><strong>info@example.com</strong></a>
+                                    </td>
+                                    <td>#8901 Demo Road </td>
+                                    <td>2011/08/14</td>
+                                    <td>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-primary"><i
+                                                class="la la-pencil"></i></a>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i
+                                                class="la la-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-12 col-lg-12 col-xxl-12 col-md-12">
+            <div class="card shadow">
+                <div class="card-header">
+                    <h4 class="card-title">Student List</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive recentOrderTable">
+                        <table class="table verticle-middle table-responsive-md table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input"
+                                                id="checkAll">
+                                            <label class="custom-control-label" for="checkAll"></label>
+                                        </div>
+                                    </th>
+                                    <th scope="col">Student Name</th>
+                                    <th scope="col">Assigned Coach</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Time</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input"
+                                                id="checkbox2">
+                                            <label class="custom-control-label" for="checkbox2"></label>
+                                        </div>
+                                    </td>
+                                    <td>Angelica Ramos</td>
+                                    <td>Ashton Cox</td>
+                                    <td>12 August 2020</td>
+                                    <td>10:15</td>
+                                    <td>
+                                        <div class="dropdown custom-dropdown mb-0">
+                                            <div data-toggle="dropdown">
+                                                <i class="fa fa-ellipsis-v"></i>
+                                            </div>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item"
+                                                    href="javascript:void(0);">Accept</a>
+                                                <a class="dropdown-item"
+                                                    href="javascript:void(0);">Details</a>
+                                                <a class="dropdown-item text-danger"
+                                                    href="javascript:void(0);">Cancel</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input"
+                                                id="checkbox3">
+                                            <label class="custom-control-label" for="checkbox3"></label>
+                                        </div>
+                                    </td>
+                                    <td>Bradley Greer</td>
+                                    <td>Brenden Wagner</td>
+                                    <td>11 July 2020</td>
+                                    <td>10:00</td>
+                                    <td>
+                                        <div class="dropdown custom-dropdown mb-0">
+                                            <div data-toggle="dropdown">
+                                                <i class="fa fa-ellipsis-v"></i>
+                                            </div>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item"
+                                                    href="javascript:void(0);">Accept</a>
+                                                <a class="dropdown-item"
+                                                    href="javascript:void(0);">Details</a>
+                                                <a class="dropdown-item text-danger"
+                                                    href="javascript:void(0);">Cancel</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input"
+                                                id="checkbox4">
+                                            <label class="custom-control-label" for="checkbox4"></label>
+                                        </div>
+                                    </td>
+                                    <td>Cedric Kelly</td>
+                                    <td>Brielle Williamson</td>
+                                    <td>10 May 2020</td>
+                                    <td>09:45</td>
+                                    <td>
+                                        <div class="dropdown custom-dropdown mb-0">
+                                            <div data-toggle="dropdown">
+                                                <i class="fa fa-ellipsis-v"></i>
+                                            </div>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item"
+                                                    href="javascript:void(0);">Accept</a>
+                                                <a class="dropdown-item"
+                                                    href="javascript:void(0);">Details</a>
+                                                <a class="dropdown-item text-danger"
+                                                    href="javascript:void(0);">Cancel</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input"
+                                                id="checkbox5">
+                                            <label class="custom-control-label" for="checkbox5"></label>
+                                        </div>
+                                    </td>
+                                    <td>Caesar Vance</td>
+                                    <td>Herrod Chandler</td>
+                                    <td>09 April 2020</td>
+                                    <td>09:30</td>
+                                    <td>
+                                        <div class="dropdown custom-dropdown mb-0">
+                                            <div data-toggle="dropdown">
+                                                <i class="fa fa-ellipsis-v"></i>
+                                            </div>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item"
+                                                    href="javascript:void(0);">Accept</a>
+                                                <a class="dropdown-item"
+                                                    href="javascript:void(0);">Details</a>
+                                                <a class="dropdown-item text-danger"
+                                                    href="javascript:void(0);">Cancel</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input"
+                                                id="checkbox6">
+                                            <label class="custom-control-label" for="checkbox6"></label>
+                                        </div>
+                                    </td>
+                                    <td>Rhona Davidson</td>
+                                    <td>Sonya Frost</td>
+                                    <td>08 March 2020</td>
+                                    <td>09:15</td>
+                                    <td>
+                                        <div class="dropdown custom-dropdown mb-0">
+                                            <div data-toggle="dropdown">
+                                                <i class="fa fa-ellipsis-v"></i>
+                                            </div>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item"
+                                                    href="javascript:void(0);">Accept</a>
+                                                <a class="dropdown-item"
+                                                    href="javascript:void(0);">Details</a>
+                                                <a class="dropdown-item text-danger"
+                                                    href="javascript:void(0);">Cancel</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input"
+                                                id="checkbox7">
+                                            <label class="custom-control-label" for="checkbox7"></label>
+                                        </div>
+                                    </td>
+                                    <td>Bradley Greer</td>
+                                    <td>Brenden Wagner</td>
+                                    <td>11 July 2020</td>
+                                    <td>10:00</td>
+                                    <td>
+                                        <div class="dropdown custom-dropdown mb-0">
+                                            <div data-toggle="dropdown">
+                                                <i class="fa fa-ellipsis-v"></i>
+                                            </div>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item"
+                                                    href="javascript:void(0);">Accept</a>
+                                                <a class="dropdown-item"
+                                                    href="javascript:void(0);">Details</a>
+                                                <a class="dropdown-item text-danger"
+                                                    href="javascript:void(0);">Cancel</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-12 col-lg-12 col-xxl-12 col-md-12">
+            <div class="card shadow">
+                <div class="card-header">
+                    <h4 class="card-title">Horizontal Form</h4>
+                </div>
+                <div class="card-body">
+                    <div class="basic-form">
+                        <form>
 
-
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label>First Name</label>
+                                    <input type="text" class="form-control" placeholder="1234 Main St">
+                                </div>
+                                <div class="form-group  col-md-4">
+                                    <label>Email</label>
+                                    <input type="email" class="form-control" placeholder="Email">
+                                </div>
+                                <div class="form-group  col-md-4">
+                                    <label>Password</label>
+                                    <input type="password" class="form-control" placeholder="Password">
+                                </div>
+                                <div class="form-group  col-md-4">
+                                    <label>City</label>
+                                    <input type="text" class="form-control">
+                                </div>
+                                <div class="form-group  col-md-4">
+                                    <label>State</label>
+                                    <select id="inputState" class="form-control">
+                                        <option selected="">Choose...</option>
+                                        <option>Option 1</option>
+                                        <option>Option 2</option>
+                                        <option>Option 3</option>
+                                    </select>
+                                </div>
+                                <div class="form-group  col-md-4">
+                                    <label>Zip</label>
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox">
+                                    <label class="form-check-label">
+                                        Check me out
+                                    </label>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Sign in</button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<script src="../../AdminPanelcss/assets/js/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-<script type="text/javascript">
-    google.charts.load('current', { 'packages': ['corechart'] });
-    google.charts.setOnLoadCallback(bindsms);
+
+<script>
+    window.onload = bindsms;
+
 
     function bindsms() {
         $.ajax({
@@ -240,47 +1005,211 @@
             url: '/Admin/BindSMSChart',
             data: JSON.stringify(),
             success:
-            function (response) {
-                var datare = response;
-                var data = new google.visualization.DataTable();
+           function (d) {
+               debugger;
+               var Status = [];
+               var Total = [];
+               var t = JSON.parse(JSON.stringify(d));
+               for (var i = 0; i < t.length; i++) {
+                   Status.push(t[i].Status);
+                   Total.push(t[i].Total);
+               }
+               debugger;
+               //pie chart
+               if (jQuery('#pie_chart').length > 0) {
+                   //pie chart
+                   const pie_chart = document.getElementById("pie_chart").getContext('2d');
+                   // pie_chart.height = 100;
+                   new Chart(pie_chart, {
+                       type: 'pie',
+                       data: {
+                           defaultFontFamily: 'Poppins',
+                           datasets: [{
+                               data: Total,
+                               borderWidth: 0,
+                               backgroundColor: [
+                                   "#0e3a62",
+                                   "rgba(219, 0, 0, 0.8)"
+                               ],
+                               hoverBackgroundColor: [
+                                   "#0e3a62",
+                                   "rgba(219, 0, 0, 0.8)"
+                               ]
 
-                data.addColumn('string', 'Status');
-                data.addColumn('number', 'Total');
-
-
-                for (var i = 0; i < datare.length; i++) {
-                    data.addRow(
-                        [datare[i].Status, parseInt(datare[i].Total)]
-
-                        );
-
-
-                }
-
-
-                var chart = new google.visualization.PieChart(document.getElementById('divsmschart'));
-                var options = {
-                    pieSliceText: 'value-and-percentage',
-                    format: 'decimal',
-                    is3D: true,
-                    legend: { position: 'top' },
-                    animation: {
-                        startup: true,
-                        duration: 1000,
-                        easing: 'out',
-                    }, chartArea: { width: "80%", height: "80%" }
-                };
-
-                chart.draw(data, options);
-
-
-
-
-            },
-            error: function () {
-            }
+                           }],
+                           labels: Status
+                       },
+                       options: {
+                           responsive: true,
+                           legend: false,
+                           maintainAspectRatio: false
+                       }
+                   });
+               }
+           }
         });
+
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            contentType: 'application/json',
+            url: '/Admin/BindStaffChart',
+            data: JSON.stringify(),
+            success:
+           function (d) {
+               debugger;
+               var Status = [];
+               var Total = [];
+               var t = JSON.parse(JSON.stringify(d));
+               for (var i = 0; i < t.length; i++) {
+                   Status.push(t[i].Status);
+                   Total.push(t[i].Total);
+               }
+               debugger;
+               //pie chart
+               if (jQuery('#pie_chartstaff').length > 0) {
+                   //pie chart
+                   const pie_chartstaff = document.getElementById("pie_chartstaff").getContext('2d');
+                   // pie_chart.height = 100;
+                   new Chart(pie_chartstaff, {
+                       type: 'pie',
+                       data: {
+                           defaultFontFamily: 'Poppins',
+                           datasets: [{
+                               data: Total,
+                               borderWidth: 0,
+                               backgroundColor: [
+                                  "rgba(82, 201, 72, 0.8)",
+                                   "#ff8f16"
+                               ],
+                               hoverBackgroundColor: [
+                                  "rgba(82, 201, 72, 0.8)",
+                                   "#ff8f16"
+                               ]
+
+                           }],
+                           labels: Status
+                       },
+                       options: {
+                           responsive: true,
+                           legend: false,
+                           maintainAspectRatio: false
+                       }
+                   });
+               }
+           }
+        });
+
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            contentType: 'application/json',
+            url: '/Admin/BindParentChart',
+            data: JSON.stringify(),
+            success:
+           function (d) {
+               debugger;
+               var Status = [];
+               var Total = [];
+               var t = JSON.parse(JSON.stringify(d));
+               for (var i = 0; i < t.length; i++) {
+                   Status.push(t[i].Status);
+                   Total.push(t[i].Total);
+               }
+               debugger;
+               //pie chart
+               if (jQuery('#pie_chartstudent').length > 0) {
+                   //pie chart
+                   const pie_chartstudent = document.getElementById("pie_chartstudent").getContext('2d');
+                   // pie_chart.height = 100;
+                   new Chart(pie_chartstudent, {
+                       type: 'pie',
+                       data: {
+                           defaultFontFamily: 'Poppins',
+                           datasets: [{
+                               data: Total,
+                               borderWidth: 0,
+                               backgroundColor: [
+                                   "#0e3a62",
+                                   "rgba(7, 155, 213, 0.8)"
+                               ],
+                               hoverBackgroundColor: [
+                                    "#0e3a62",
+                                   "rgba(7, 155, 213, 0.8)"
+                               ]
+
+                           }],
+                           labels: Status
+                       },
+                       options: {
+                           responsive: true,
+                           legend: false,
+                           maintainAspectRatio: false
+                       }
+                   });
+               }
+           }
+        })
+
     }
+
+</script>
+<script type="text/javascript">
+    google.charts.load('current', { 'packages': ['corechart'] });
+    //google.charts.setOnLoadCallback(bindsms);
+
+
+
+
+    //function bindsms() {
+    //    $.ajax({
+    //        type: 'POST',
+    //        dataType: 'json',
+    //        contentType: 'application/json',
+    //        url: '/Admin/BindSMSChart',
+    //        data: JSON.stringify(),
+    //        success:
+    //        function (response) {
+    //            var datare = response;
+    //            var data = new google.visualization.DataTable();
+
+    //            data.addColumn('string', 'Status');
+    //            data.addColumn('number', 'Total');
+
+
+    //            for (var i = 0; i < datare.length; i++) {
+    //                data.addRow(
+    //                    [datare[i].Status, parseInt(datare[i].Total)]
+
+    //                    );
+
+
+    //            }
+
+
+    //            var chart = new google.visualization.PieChart(document.getElementById('divsmschart'));
+    //            var options = {
+    //                pieSliceText: 'value-and-percentage',
+    //                format: 'decimal',
+    //                is3D: true,
+    //                legend: { position: 'top' },
+    //                animation: {
+    //                    startup: true,
+    //                    duration: 1000,
+    //                    easing: 'out',
+    //                }, chartArea: { width: "80%", height: "80%" }
+    //            };
+
+    //            chart.draw(data, options);
+
+
+
+
+    //        },
+    //        error: function () {
+    //        }
+    //    });
+    //}
 
 
     google.charts.load('current', { 'packages': ['corechart'] });

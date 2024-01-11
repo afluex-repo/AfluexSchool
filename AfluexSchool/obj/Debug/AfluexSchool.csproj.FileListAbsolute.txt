@@ -263,7 +263,6 @@ E:\Repository\AfluexSchool\AfluexSchool\bin\System.Web.Http.xml
 E:\Repository\AfluexSchool\AfluexSchool\bin\System.Web.Http.WebHost.xml
 E:\Repository\AfluexSchool\AfluexSchool\obj\Debug\APSSchool.dll
 E:\Repository\AfluexSchool\AfluexSchool\obj\Debug\APSSchool.pdb
-F:\Sarfraz Ahmad\repository\AfluexSchool\AfluexSchool\obj\Debug\AfluexSchool.csprojResolveAssemblyReference.cache
 D:\Devendra\AfluexSchool\AfluexSchool\bin\ApplicationInsights.config
 D:\Devendra\AfluexSchool\AfluexSchool\bin\roslyn\csc.exe
 D:\Devendra\AfluexSchool\AfluexSchool\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -317,4 +316,4 @@ D:\Devendra\AfluexSchool\AfluexSchool\bin\System.Web.Http.xml
 D:\Devendra\AfluexSchool\AfluexSchool\bin\System.Web.Http.WebHost.xml
 D:\Devendra\AfluexSchool\AfluexSchool\obj\Debug\APSSchool.dll
 D:\Devendra\AfluexSchool\AfluexSchool\obj\Debug\APSSchool.pdb
-D:\Devendra\AfluexSchool\AfluexSchool\obj\Debug\AfluexSchool.csprojResolveAssemblyReference.cache
+E:\Repository\AfluexSchool\AfluexSchool\obj\Debug\AfluexSchool.csprojResolveAssemblyReference.cache
