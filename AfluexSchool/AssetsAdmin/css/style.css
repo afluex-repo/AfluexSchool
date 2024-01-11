@@ -22242,7 +22242,7 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
 .page-titles {
   padding: 0.9375rem 1.25rem;
   background: #fff;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   border-radius: 5px; }
   [data-theme-version="dark"] .page-titles {
     background: #262932; }
@@ -24070,7 +24070,7 @@ table.dataTable tbody tr, table.dataTable tbody td {
   background: transparent !important; }
 
 table.dataTable thead th {
-  color: #454545;
+  color: #000000;
   font-weight: 600; }
   [data-theme-version="dark"] table.dataTable thead th {
     color: #fff; }
