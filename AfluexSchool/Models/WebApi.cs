@@ -2529,4 +2529,29 @@ namespace APSSchool.Models
         public string Messagess { get; set; }
         public string cssclass { get; set; }
     }
+
+    public class GetNoticeAPI
+    {
+        public string Fk_ParentId { get; set; }
+        public string Message { get; set; }
+        public string Status { get; set; }
+        public List<NoticeListParent> lstnotice { get; set; }
+
+        public DataSet GetNoticeList()
+        {
+            SqlParameter[] Param ={
+                                    new SqlParameter("@Fk_ParentId",Fk_ParentId),
+
+                                    };
+            DataSet ds = Connection.ExecuteQuery("GetDashBoardDetailsForParent", Param);
+            return ds;
+        }
+    }
+    public class NoticeListParent
+    {
+        public string ClassName { get; set; }
+        public string SectionName { get; set; }
+        public string Notice { get; set; }
+    }
+
 }
