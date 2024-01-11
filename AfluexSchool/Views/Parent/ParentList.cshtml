@@ -4,86 +4,64 @@
     ViewBag.Title = "ParentList";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<style>
-    @@page {
-        size: auto;
-    }
 
-    @@media print {
-        /*table td:last-child {
-            display: none;
-        }
-
-        table th:last-child {
-            display: none;
-        }*/
-        table td:nth-last-child(-n+3) {
-            display: none;
-        }
-
-        table th:nth-last-child(-n+3) {
-            display: none;
-        }
-    }
-</style>
 @using (Html.BeginForm("ParentList", "Parent", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
-
-
-    <div>
-        <div class="card border-0 shadow-sm mb-4">
-            <div class="card-header border-0 bg-none">
-                <div class="row">
-                    <div class="col-12 col-md">
-                        <p class="fs15">Parent List</p>
-                    </div>
-                    <p style="color:red">
-                        @TempData["ParentUpdate"]
-                    </p>
+    <div class="container-fluid">
+        <div class="row page-titles mx-0">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h3><b>Parent List</b></h3>
                 </div>
             </div>
-            <div class="card-body ">
-
-                <div class="row">
-                    <div class="col-md-3">
-                        Login ID
-                        @Html.TextBoxFor(m => m.LoginID, new { @class = "form-control", placeholder = "Login ID" })
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Reports</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Parent List</a></li>
+                </ol>
+            </div>
+        </div>
+        <div class="card shadow">
+            <div class="card-body">
+                <p style="color:red">
+                    @TempData["ParentUpdate"]
+                </p>
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label>Login ID</label>
+                            @Html.TextBoxFor(m => m.LoginID, new { @class = "form-control", placeholder = "Login ID" })
+                        </div>
+                        <div class="form-group  col-md-3">
+                            <label>Parent Name</label>
+                            @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Parent Name" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>From Date</label>
+                            @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", placeholder = "From Date", @ReadOnly = "ReadOnly" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>To Date</label>
+                            @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", placeholder = "To Date", @ReadOnly = "ReadOnly" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Is Active</label>
+                            @Html.DropDownList("IsActive", new List<SelectListItem>
+                             {
+                                new SelectListItem{ Text="All", Value = null  },
+                                new SelectListItem{ Text="Active", Value = "1" },
+                                new SelectListItem{ Text="Not-Active", Value = "0" }
+                             }, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label class="d-block">&nbsp;</label>
+                            <input type="submit" value="Search" name="btnSearch" id="btnSearch" class="btn btn-primary" />
+                        </div>
                     </div>
-                    <div class="col-md-3">
-                        Parent Name
-                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Parent Name" })
-                    </div>
-                    <div class="col-md-3">
-                        Date Of Inquiry
-                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", placeholder = "From Date", @ReadOnly = "ReadOnly" })
-                    </div>
-                    <div class="col-md-3">
-                        Date Of Inquiry
-                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", placeholder = "To Date", @ReadOnly = "ReadOnly" })
-                    </div>
+                </form>
 
-                </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        Is Active
-                        @Html.DropDownList("IsActive", new List<SelectListItem>
-
-                 {
-                        new SelectListItem{ Text="All", Value = null  },
-                    new SelectListItem{ Text="Active", Value = "1" },
-                    new SelectListItem{ Text="Not-Active", Value = "0" }
-
-                 }, new { @class = "form-control" })
-                    </div>
-                    <div class="col-md-3" style="margin-top:20px">
-                        <input type="submit" value="Search" name="btnSearch" id="btnSearch" class="btn btn-primary" />
-                    </div>
-                </div>
-
-
-                <div class="col-sm-12 table-responsive">
-                    <table class="table table-bordered w-100 mb-0" id="example23">
-
+                <div class="table-responsive mt-3">
+                    <table id="example5" class="display table" style="min-width:845px">
                         <thead>
                             <tr>
                                 <th>S.no</th>
@@ -94,7 +72,6 @@
                                 <th>Mobile</th>
                                 <th>Address</th>
                                 <th>Joining Date</th>
-
                                 <th>IsActive</th>
                                 <th style="display:@ViewBag.IsEdit;">Edit</th>
                                 <th style="display:@ViewBag.IsDelete;">Delete</th>
@@ -109,7 +86,6 @@
                                     int i = 1;
                                     foreach (var item in Model.listparent)
                                     {
-
                                         <tr>
                                             <td>
                                                 @i
@@ -150,24 +126,20 @@
                             }
                         </tbody>
                     </table>
-                    <div class="j-response"></div>
+
                 </div>
 
             </div>
         </div>
     </div>
 
-
-
-
 }
 
 <script src="../../scripts/jquery-1.10.2.min.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
 
-
+    
 <script>
     $(document).ready(function () {
         $("#divload").css({ 'display': 'none' });

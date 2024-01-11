@@ -5,173 +5,136 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<br />
 @using (Html.BeginForm("ParentEnQuiryNew", "Parent", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
-
-    <div>
-        <div class="login-row">
-            <div class="col-12 col-md-12 col-lg-12 col-xl-12 mx-auto align-self-center">
-                <div class="card border-0 shadow-sm mb-4">
-                    <div class="card-header">
-                        <div class="row ">
-
-                            <div class="col-auto">
-                                <h4 class="mt-0 mb-1">Parent Inquiry</h4>
-
-                            </div>
-                            <p style="color:red">
-                                @TempData["ParentEnquiry"]
-                            </p>
-                        </div>
-                    </div>
-                    <div class="card-body">
-
-
-                        <div class="row justify-content-center">
-                            <div class="col-md-12 mx-auto">
-                                <div class="row">
-                                    <div class="col-lg-12 col-md-12">
-                                        <div class="form-group ">
-                                            <input type="radio" name="rdbenquiry" checked="checked" onchange="return showdiv('1')" /> New
-
-                                            <input type="radio" name="rdbenquiry" onchange="return showdiv('0')" /> Existing
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="new">
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="form-group ">
-                                                <label>Parent Name <span style="color: red">*</span></label>
-                                                @Html.TextBoxFor(m => m.ParentName, new { @class = "form-control", @Placeholder = "Parent Name" })
-                                                @Html.HiddenFor(m => m.Pk_ParentID)
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="form-group ">
-                                                <label>Mobile <span style="color: red">*</span></label>
-                                                @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", @Placeholder = "Mobile", @maxlength = "10", @onkeypress = "return isNumberKey(event);" })
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12">
-                                            <div class="form-group ">
-                                                <label>Address  </label>
-                                                @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @Placeholder = "Address" })
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-4 col-md-4">
-                                            <div class="form-group ">
-                                                <label>Student Name  </label>
-                                                @Html.TextBoxFor(m => m.StudentName, new { @class = "form-control", @Placeholder = "Student Name" })
-
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-4">
-                                            <div class="form-group ">
-                                                <label> Class </label>
-                                                @Html.DropDownListFor(m => m.Fk_ClassID, new SelectList(ViewBag.ddlclass, "Value", "Text"), new { @class = "form-control" })
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-4">
-                                            <div class="form-group ">
-                                                <label>Form No </label>
-                                                @Html.TextBoxFor(m => m.FormNo, new { @class = "form-control", @Placeholder = "Form No" })
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-4">
-                                            <div class="form-group ">
-                                                <label>Amount</label>
-                                                @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @Placeholder = "Amount", @onkeypress = "return isNumberKey(event);" })
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card-footer text-left">
-
-                                        <input class="btn btn-primary" type="submit" onclick="return validateformnew();" name="btnsave" value="Save" id="btnSave" />
-
-                                        <input class="btn btn-primary" type="submit" onclick="return validateformnew();" name="btnprint" value="Save and Print" id="btnprint" />
-
-                                    </div>
-                                </div>
-
-                                <div id="existing" style="display:none">
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="form-group ">
-                                                <label>Parent Name <span style="color: red">*</span></label>
-                                                @Html.TextBoxFor(m => m.IDLoginId, new { @class = "form-control", @placeholder = "Parent Name",onchange="return getdetails()" })
-                                                @Html.HiddenFor(m => m.LoginID)
-                                                @Html.HiddenFor(m => m.Pk_ParentID)
-                                                @Html.HiddenFor(m => m.ExistingParentName)
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="form-group ">
-                                                <label>Mobile <span style="color: red">*</span></label>
-                                                @Html.TextBoxFor(m => m.ExistingMobile, new { @class = "form-control", @Readonly = "r", @Placeholder = "Mobile", @maxlength = "10", @onkeypress = "return isNumberKey(event);" })
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12">
-                                            <div class="form-group ">
-                                                <label>Address  </label>
-                                                @Html.TextAreaFor(m => m.ExistingAddress, new { @class = "form-control", @Readonly = "r", @Placeholder = "Address" })
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-4 col-md-4">
-                                            <div class="form-group ">
-                                                <label>Student Name  <span style="color: red">*</span></label>
-                                                @Html.TextBoxFor(m => m.ExistingStudentName, new { @class = "form-control", @Placeholder = "Student Name" })
-
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-4">
-                                            <div class="form-group ">
-                                                <label> Class <span style="color: red">*</span></label>
-                                                @Html.DropDownListFor(m => m.ExistingFk_ClassID, new SelectList(ViewBag.ddlclass, "Value", "Text"), new { @class = "form-control" })
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-4">
-                                            <div class="form-group ">
-                                                <label>Form No<span style="color: red">*</span></label>
-                                                @Html.TextBoxFor(m => m.ExistingFormNo, new { @class = "form-control", @Placeholder = "Form No" })
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-4">
-                                            <div class="form-group ">
-                                                <label>Amount<span style="color: red">*</span></label>
-                                                @Html.TextBoxFor(m => m.ExistingAmount, new { @class = "form-control", @Placeholder = "Amount", @onkeypress = "return isNumberKey(event);" })
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card-footer text-left">
-
-                                        <input class="btn btn-primary" type="submit" onclick="return validateform();" name="btnSaveExisting" value="Save" id="btnSaveExisting" />
-
-                                        <input class="btn btn-primary" type="submit" onclick="return validateform();" name="btnprintExisting" value="Save and Print" id="btnprintExisting" />
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    <div class="container-fluid">
+        <div class="row page-titles mx-0">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h3><b>Parent Enquiry</b></h3>
                 </div>
+            </div>
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Enquiry</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Parent Enquiry</a></li>
+                </ol>
+            </div>
+        </div>
+        <div class="card shadow">
+            <div class="card-body">
+                <p style="color:red">
+                    @TempData["ParentEnquiry"]
+                </p>
+                <form>
+                    <div class="form-row">
+                        <div class="col-md-12 form-group">
+                            <input type="radio" name="rdbenquiry" checked="checked" onchange="return showdiv('1')" /> New
+                            <input type="radio" name="rdbenquiry" onchange="return showdiv('0')" /> Existing
+                        </div>
+                    </div>
+                    <div id="new">
+                        <div class="form-row">
+                            <div class="col-md-6 form-group">
+                                    <label>Parent Name <span style="color: red">*</span></label>
+                                    @Html.TextBoxFor(m => m.ParentName, new { @class = "form-control", @Placeholder = "Parent Name" })
+                                    @Html.HiddenFor(m => m.Pk_ParentID)
+                            </div>
+                            <div class="col-md-6 form-group">
+                                    <label>Mobile <span style="color: red">*</span></label>
+                                    @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", @Placeholder = "Mobile", @maxlength = "10", @onkeypress = "return isNumberKey(event);" })
+                            </div>
+                            <div class="col-md-12 form-group">
+                                    <label>Address</label>
+                                    @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @Placeholder = "Address" })
+                            </div>
+                            <div class="col-md-6 form-group">
+                                    <label>Student Name  </label>
+                                    @Html.TextBoxFor(m => m.StudentName, new { @class = "form-control", @Placeholder = "Student Name" })
+                            </div>
+                            <div class="col-md-6 form-group">
+                                    <label> Class </label>
+                                    @Html.DropDownListFor(m => m.Fk_ClassID, new SelectList(ViewBag.ddlclass, "Value", "Text"), new { @class = "form-control" })
+                            </div>
+                            <div class="col-md-6 form-group">
+                                    <label>Form No </label>
+                                    @Html.TextBoxFor(m => m.FormNo, new { @class = "form-control", @Placeholder = "Form No" })
+                            </div>
+                            <div class="col-md-6 form-group">
+                                    <label>Amount</label>
+                                    @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @Placeholder = "Amount", @onkeypress = "return isNumberKey(event);" })
+                            </div>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <input class="btn btn-primary" type="submit" onclick="return validateformnew();" name="btnsave" value="Save" id="btnSave" />
+                            <input class="btn btn-primary" type="submit" onclick="return validateformnew();" name="btnprint" value="Save and Print" id="btnprint" />
+                        </div>
+                    </div>
+
+                    <div id="existing" style="display:none">
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="form-group ">
+                                    <label>Parent Name <span style="color: red">*</span></label>
+                                    @Html.TextBoxFor(m => m.IDLoginId, new { @class = "form-control", @placeholder = "Parent Name", onchange = "return getdetails()" })
+                                    @Html.HiddenFor(m => m.LoginID)
+                                    @Html.HiddenFor(m => m.Pk_ParentID)
+                                    @Html.HiddenFor(m => m.ExistingParentName)
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group ">
+                                    <label>Mobile <span style="color: red">*</span></label>
+                                    @Html.TextBoxFor(m => m.ExistingMobile, new { @class = "form-control", @Readonly = "r", @Placeholder = "Mobile", @maxlength = "10", @onkeypress = "return isNumberKey(event);" })
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group ">
+                                    <label>Address  </label>
+                                    @Html.TextAreaFor(m => m.ExistingAddress, new { @class = "form-control", @Readonly = "r", @Placeholder = "Address" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group ">
+                                    <label>Student Name  <span style="color: red">*</span></label>
+                                    @Html.TextBoxFor(m => m.ExistingStudentName, new { @class = "form-control", @Placeholder = "Student Name" })
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group ">
+                                    <label> Class <span style="color: red">*</span></label>
+                                    @Html.DropDownListFor(m => m.ExistingFk_ClassID, new SelectList(ViewBag.ddlclass, "Value", "Text"), new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group ">
+                                    <label>Form No<span style="color: red">*</span></label>
+                                    @Html.TextBoxFor(m => m.ExistingFormNo, new { @class = "form-control", @Placeholder = "Form No" })
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                <div class="form-group ">
+                                    <label>Amount<span style="color: red">*</span></label>
+                                    @Html.TextBoxFor(m => m.ExistingAmount, new { @class = "form-control", @Placeholder = "Amount", @onkeypress = "return isNumberKey(event);" })
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 form-group">
+
+                            <input class="btn btn-primary" type="submit" onclick="return validateform();" name="btnSaveExisting" value="Save" id="btnSaveExisting" />
+
+                            <input class="btn btn-primary" type="submit" onclick="return validateform();" name="btnprintExisting" value="Save and Print" id="btnprintExisting" />
+
+                        </div>
+                    </div>
+
+                </form>
             </div>
         </div>
     </div>
-
+    
 }
 <script src="../../scripts/jquery-1.10.2.min.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
