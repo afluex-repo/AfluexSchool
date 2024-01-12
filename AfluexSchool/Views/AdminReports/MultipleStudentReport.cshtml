@@ -7,96 +7,92 @@
 
 @using (Html.BeginForm("MultipleStudentReport", "AdminReports", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
-    <div>
-        <div class="card border-0 shadow-sm mb-4">
-            <div class="card-header border-0 bg-none">
-                <div class="row">
-                    <div class="col-12 col-md">
-                        <p class="fs15">Multiple Student For Same Parent Report</p>
-                    </div>
+    <div class="container-fluid">
+        <div class="row page-titles mx-0">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h3><b>Multiple Student For Same Parent Report</b></h3>
                 </div>
             </div>
-            <div class="card-body ">
-                <div class="row">
-                    <div class="col-md-3">
-                        <label>Parent Name</label>
-                        @Html.TextBoxFor(m => m.ParentName, new { @class = "form-control" })
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Reports</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Multiple Student For Parents</a></li>
+                </ol>
+            </div>
+        </div>
+        <div class="card shadow">
+            <div class="card-body">
+                @*<p style="color:red">
+                    @TempData["LeaveList"]
+                </p>*@
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label>Parent Name</label>
+                            @Html.TextBoxFor(m => m.ParentName, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group  col-md-3">
+                            <label>Login ID</label>
+                            @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label class="d-block">&nbsp;</label>
+                            <input type="submit" class="btn btn-info" name="GetDeatils" id="GetDeatils" value="Search" />
+                        </div>
                     </div>
-                    <div class="col-md-3">
-                        <label> LoginID</label>
-                        @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control" })
-                    </div>
-                    <div class="col-md-6">
-                        <br />
-                        <input type="submit" class="btn btn-info" name="GetDeatils" id="GetDeatils" value="Search" />
-                    </div>
-                </div>
-                <br />
-                <div class="row">
-                    <div class="table-responsive">
-                        <table class="table table-bordered w-100 mb-0" id="example24">
-                            <thead>
-                                <tr>
-                                    <th>S.no</th>
-                                    <th>Login ID</th>
-                                    <th>Name</th>
-                                    <th>No. Of Students</th>
-                                    <th>Mobile</th>
-                                    <th>View</th>
-                                </tr>
+                </form>
 
-                            </thead>
-                            <tbody>
-                                @if (Model != null)
+                <div class="table-responsive mt-3">
+                    <table id="example5" class="display table" style="min-width:845px">
+                        <thead>
+                            <tr>
+                                <th>S.No</th>
+                                <th>Login ID</th>
+                                <th>Name</th>
+                                <th>No. Of Students</th>
+                                <th>Mobile</th>
+                                <th>View</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                if (Model.lstfeedata != null)
                                 {
-                                    if (Model.lstfeedata != null)
+                                    int i = 1;
+                                    foreach (var item in Model.lstfeedata)
                                     {
-                                        int i = 1;
-                                        foreach (var item in Model.lstfeedata)
-                                        {
-
-                                            <tr>
-                                                <td>
-                                                    @i
-                                                </td>
-                                                <td>
-                                                    @item.LoginId
-                                                </td>
-                                                <td>
-                                                    @item.ParentName
-                                                </td>
-                                                <td>
-                                                    @item.ReceiptNo
-                                                </td>
-                                                <td>
-                                                    @item.Mobile
-                                                </td>
-                                                <td>
-                                                  
-                                                    <a href="/AdminReports/GetMultipleStudentByParent?pkid=@item.pkid" class="btn btn-info btn-sm">View</a>
-                                                </td>
-                                            </tr>
-                                            i++;
-                                        }
+                                        <tr>
+                                            <td>
+                                                @i
+                                            </td>
+                                            <td>
+                                                @item.LoginId
+                                            </td>
+                                            <td>
+                                                @item.ParentName
+                                            </td>
+                                            <td>
+                                                @item.ReceiptNo
+                                            </td>
+                                            <td>
+                                                @item.Mobile
+                                            </td>
+                                            <td>
+                                                <a href="/AdminReports/GetMultipleStudentByParent?pkid=@item.pkid" class="btn btn-info btn-sm">View</a>
+                                            </td>
+                                        </tr>
+                                        i++;
                                     }
                                 }
-                            </tbody>
-                        </table>
-
-
-                        <div class="j-response"></div>
-
-                    </div>
-
+                            }
+                        </tbody>
+                    </table>
                 </div>
-                 
             </div>
         </div>
     </div>
-
-
-     
-
 }
 
 
