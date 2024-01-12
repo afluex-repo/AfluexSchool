@@ -6,36 +6,35 @@
 }
 @using (Html.BeginForm("EnquiryReport", "AdminReports", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
-
-
-    <div>
-        <div class="card border-0 shadow-sm mb-4">
-            <div class="card-header border-0 bg-none">
-                <div class="row">
-                    <div class="col-12 col-md">
-                        <p class="fs15">Enquiry Report</p>
-                    </div>
-                    <p style="color:red">
-                        @TempData["EnquiryReport"]
-                    </p>
+    <div class="container-fluid">
+        <div class="row page-titles mx-0">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h3><b>Enquiry Report</b></h3>
                 </div>
             </div>
-            <div class="card-body ">
-
-
-                <div class="col-sm-12 table-responsive">
-                    <table class="table datatable display responsive w-100 dataTable no-footer dtr-inline" id="example23">
-
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Reports</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Enquiry Report</a></li>
+                </ol>
+            </div>
+        </div>
+        <div class="card shadow">
+            <div class="card-body">
+                <p style="color:red">
+                    @TempData["EnquiryReport"]
+                </p>
+                <div class="table-responsive mt-3">
+                    <table id="example5" class="display table" style="min-width:845px">
                         <thead>
                             <tr>
-                                <th>S.no</th>
-                                <th>ParentName    </th>
-                                <th>StudentName    </th>
-
+                                <th>S.No</th>
+                                <th>ParentName</th>
+                                <th>StudentName</th>
                                 <th>Class Name</th>
-                                <th>Previous School   </th>
-                                <th>Mobile   </th>
-
+                                <th>Previous School</th>
+                                <th>Mobile</th>
                                 <th>Email</th>
                                 <th>Address</th>
                                 <th>Enquiry Date</th>
@@ -51,7 +50,6 @@
                                     int i = 1;
                                     foreach (var item in Model.listEnquiry)
                                     {
-
                                         <tr>
                                             <td>
                                                 @i
@@ -60,9 +58,6 @@
                                             <td>
                                                 @item.StudentName
                                             </td>
-                                            
-
-
                                             <td>
                                                 @item.ClassName
                                             </td>
@@ -83,13 +78,10 @@
                                             </td>
                                             <td>
                                                 <img src="@item.Image" id="img" height="100" width="100">
-
                                             </td>
                                             <td>
                                                 <a href="/AdminReports/DeleteEnquiry?Pk_EnquiryId=@item.Pk_EnquiryId" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete?')">Delete</a>
-
                                             </td>
-
                                         </tr>
                                         i++;
                                     }
@@ -97,29 +89,9 @@
                             }
                         </tbody>
                     </table>
-                    <div class="j-response"></div>
                 </div>
-
             </div>
         </div>
     </div>
-
-
-
-
+    
 }
-
-<script src="../../scripts/jquery-1.10.2.min.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
-
-
-<script>
-    $(document).ready(function () {
-        $("#divload").css({ 'display': 'none' });
-
-
-    });
-
-</script>

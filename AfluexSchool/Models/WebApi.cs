@@ -2554,4 +2554,44 @@ namespace APSSchool.Models
         public string Notice { get; set; }
     }
 
+    public class StudentDetailsAPI
+    {
+        public string Fk_StudentId { get; set; }
+        public string Fk_ParentId { get; set; }
+        public string Message { get; set; }
+        public string Status { get; set; }
+        public List<DashBoardStudentDetails> lstStudentdetails { get; set; }
+
+        public DataSet GetDetailsofStudent()
+        {
+            SqlParameter[] Param ={
+                                    new SqlParameter("@Fk_ParentId",Fk_ParentId),
+                                    new SqlParameter("@Fk_StudentId",Fk_StudentId),
+                                    };
+            DataSet ds = Connection.ExecuteQuery("GetDashBoardDetailsofStudent", Param);
+            return ds;
+        }
+    }
+
+    public class DashBoardStudentDetails
+    {
+        public string Pk_StudentId { get; set; }
+        public string RollNo { get; set; }
+        public string StudentName { get; set; }
+        public string State { get; set; }
+        public string City { get; set; }
+        public string StudentPhoto { get; set; }
+        public string ClassName { get; set; }
+        public string ClassID { get; set; }
+        public string SectionName { get; set; }
+        public string SectionID { get; set; }
+        public string DateOfBirth { get; set; }
+        public string Gender { get; set; }
+        public string Mobile { get; set; }
+        public string FatherOcc { get; set; }
+        public string MotherOcc { get; set; }
+        public string CorrespondenceAddress { get; set; }
+        public string PermanentAddress { get; set; }
+    }
+
 }
