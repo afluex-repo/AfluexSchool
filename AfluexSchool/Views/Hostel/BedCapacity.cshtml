@@ -5,87 +5,75 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<style>
+    .errortext{
+        border:1px solid red!important;
+        background-color:#feb2b2!important;
+    }
+</style>
+
  @using (Html.BeginForm("BedCapacity", "Hostel", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
  {
-    <div>
-          <div class="login-row">
-            <div class="col-12 col-md-12 col-lg-12 col-xl-12 mx-auto align-self-center">
-                <div class="card border-0 shadow-sm mb-4">
-                    <div class="card-header">
-                        <div class="row ">
-                            <div class="col-auto">
-                                <h4 class="mt-0 mb-1">Hostel Room Bed Capacity</h4>
-                            </div>
-                            <p style="color:red">
-                                @TempData["BedCapacity"]
-                            </p>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="row justify-content-center">
-                            <div class="col-md-12 mx-auto">
-                                <div class="row ">
-                                    <div class="col-lg-4 col-md-4">
-                                        <div class="form-group ">
-                                            <label>Hostel Type <span style="color: red">*</span></label>
-
-                                            @Html.DropDownListFor(m => m.Pk_HostelTypeId, new SelectList(ViewBag.ddlHostel, "Value", "Text"), new { @class = "form-control", @onchange = "return OnHostelTypeChange();" })
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4">
-                                        <div class="form-group ">
-                                            <label>Hostel Name <span style="color: red">*</span></label>
-                                            @Html.DropDownListFor(m => m.Pk_HostelId, new SelectList(ViewBag.ddlHostelName, "Value", "Text"), new { @class = "form-control", @onchange = "return OnHostelNameChange()" })
-
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4">
-                                        <div class="form-group ">
-                                            <label>Hostel Floor   <span style="color: red">*</span></label>
-                                            @Html.DropDownListFor(m => m.Pk_HostelFloorId, new SelectList(ViewBag.ddlHostelFloor, "Value", "Text"), new { @class = "form-control", @onchange = "return OnHostelFloorChange()" })
-
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-4">
-                                        <div class="form-group ">
-                                            <label> Room   <span style="color: red">*</span></label>
-                                            @Html.DropDownListFor(m => m.Pk_HostelRoomId, new SelectList(ViewBag.ddlHostelroom, "Value", "Text"), new { @class = "form-control" })
-                                           
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4">
-                                        <div class="form-group ">
-                                            <label> No. OF Beds   <span style="color: red">*</span></label>
-                                            @Html.TextBoxFor(m => m.BedCapacity,   new { @class = "form-control",@placeholder= "Enter Bed Capacity" ,@onkeypress= "return validNumber(event)" ,@maxlength="2"})
-                                            @Html.HiddenFor(m => m.Pk_BedId)
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-footer text-left">
-
-                                    @if (Model.Pk_BedId == null)
-                                    {
-                                        <input type="submit" class="btn btn-success" onclick="return validateform();" name="btnSave" id="btnSave" value="Save" />
-
-                                    }
-                                    else
-                                    {
-                                        <input type="submit" class="btn btn-success" onclick="return validateform();" name="btnUpdate" id="btnUpdate" value="Update" />
-                                    }
-
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
+    <div class="container-fluid">
+        <div class="row page-titles mx-0">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h3><b>Hostel Room Bed Capacity</b></h3>
                 </div>
+            </div>
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Leave</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Bed Capacity</a></li>
+                </ol>
+            </div>
+        </div>
+        <div class="card shadow">
+            <div class="card-body">
+                <p style="color:red">
+                    @TempData["BedCapacity"]
+                </p>
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label>Hostel Type<span style="color: red">*</span></label>
+                            @Html.DropDownListFor(m => m.Pk_HostelTypeId, new SelectList(ViewBag.ddlHostel, "Value", "Text"), new { @class = "form-control", @onchange = "return OnHostelTypeChange();" })
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Hostel Name<span style="color: red">*</span></label>
+                            @Html.DropDownListFor(m => m.Pk_HostelId, new SelectList(ViewBag.ddlHostelName, "Value", "Text"), new { @class = "form-control", @onchange = "return OnHostelNameChange()" })
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Hostel Floor<span style="color: red">*</span></label>
+                            @Html.DropDownListFor(m => m.Pk_HostelFloorId, new SelectList(ViewBag.ddlHostelFloor, "Value", "Text"), new { @class = "form-control", @onchange = "return OnHostelFloorChange()" })
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Room<span style="color: red">*</span></label>
+                            @Html.DropDownListFor(m => m.Pk_HostelRoomId, new SelectList(ViewBag.ddlHostelroom, "Value", "Text"), new { @class = "form-control" })
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>No. Of Beds<span style="color: red">*</span></label>
+                            @Html.TextBoxFor(m => m.BedCapacity, new { @class = "form-control", @placeholder = "Enter Bed Capacity", @onkeypress = "return validNumber(event)", @maxlength = "2" })
+                            @Html.HiddenFor(m => m.Pk_BedId)
+                        </div>
+                        <div class="form-group col-md-6">
+                            
+                            @if (Model.Pk_BedId == null)
+                            {
+                                <input type="submit" class="btn btn-success" onclick="return validateform();" name="btnSave" id="btnSave" value="Save" />
+
+                            }
+                            else
+                            {
+                                <input type="submit" class="btn btn-success" onclick="return validateform();" name="btnUpdate" id="btnUpdate" value="Update" />
+                            }
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-
+    
  }
 
 <script>
@@ -107,12 +95,8 @@
                           $('<option></option>').val(Sectioncount.Value).html(Sectioncount.Text));
 
                 });
-
-
             }
-
         });
-
     }
     function OnHostelNameChange() {
         var value = $('#Pk_HostelTypeId').val();
@@ -133,12 +117,8 @@
                           $('<option></option>').val(Sectioncount.Value).html(Sectioncount.Text));
 
                 });
-
-
             }
-
         });
-
     }
     function OnHostelFloorChange() {
         var value = $('#Pk_HostelFloorId').val();
@@ -159,10 +139,7 @@
                           $('<option></option>').val(Sectioncount.Value).html(Sectioncount.Text));
 
                 });
-
-
             }
-
         });
 
     }
