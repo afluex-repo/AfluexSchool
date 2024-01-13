@@ -7,81 +7,74 @@
 
 @using (Html.BeginForm("GetHostelRoomList", "Hostel", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
-
-<div class="container main-container" id="main-container">
-    <div class="card border-0 shadow-sm mb-4">
-        <div class="card-header border-0 bg-none">
-            <div class="row">
-                <div class="col-12 col-md">
-                    <p class="fs15">Hostel Room List</p>
+    <div class="container-fluid">
+        <div class="row page-titles mx-0">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h3><b>Hostel Room List</b></h3>
                 </div>
+            </div>
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Hostel</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Hostel Room List</a></li>
+                </ol>
+            </div>
+        </div>
+        <div class="card shadow">
+            <div class="card-body">
                 <p style="color:red">
                     @TempData["GetHostelRoomList"]
                 </p>
-            </div>
-        </div>
-        <div class="card-body ">
 
-            <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-                <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
-                    <div class="col-sm-12">
-                        <table class="table table-bordered w-100 mb-0" id="example23">
-                            <thead>
-                                <tr>
-                                    <th>S No.</th>
-                                    <th>Hostel Type Name</th>
-                                    <th>Hostel Name</th>
-                                    <th>Floor Name</th>
-                                    <th> Room</th>
-                                   
-                                    
-                                    <th style="display:@ViewBag.IsDelete;">Delete</th>
-                                </tr>
-
-                            </thead>
-                            <tbody>
-                                @if (Model != null)
+                <div class="table-responsive mt-3">
+                    <table id="example5" class="display table" style="min-width:845px">
+                        <thead>
+                            <tr>
+                                <th>S No.</th>
+                                <th>Hostel Type Name</th>
+                                <th>Hostel Name</th>
+                                <th>Floor Name</th>
+                                <th>Room</th>
+                                <th style="display:@ViewBag.IsDelete;">Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                if (Model.lstHostel != null)
                                 {
-                                    if (Model.lstHostel != null)
+                                    int i = 1;
+                                    foreach (var item in Model.lstHostel)
                                     {
-                                        int i = 1;
-                                        foreach (var item in Model.lstHostel)
-                                        {
-                                            <tr>
-                                                <td>
-                                                    @i
-                                                </td>
-                                                <td>@item.TypeName  </td>
-                                                <td>@item.HostelName</td>
-                                                <td>@item.FloorName </td>
-                                                <td>@item.FromRoom </td>
-                                                 
-                                                <td style="display:@ViewBag.IsDelete;">
-                                                 @*   <a href="/Hostel/HostelRoom?Pk_HostelRoomId=@item.Pk_HostelRoomId"><i class="btn btn-success">Edit</i></a>*@
+                                        <tr>
+                                            <td>
+                                                @i
+                                            </td>
+                                            <td>@item.TypeName  </td>
+                                            <td>@item.HostelName</td>
+                                            <td>@item.FloorName </td>
+                                            <td>@item.FromRoom </td>
 
-                                                    <a href="/Hostel/DeleteHostelRoom?Pk_HostelRoomId=@item.Pk_HostelRoomId" onclick="return confirm('Are you sure want to delete?')"><i class="btn btn-danger">Delete</i></a>
+                                            <td style="display:@ViewBag.IsDelete;">
+                                                @*   <a href="/Hostel/HostelRoom?Pk_HostelRoomId=@item.Pk_HostelRoomId"><i class="btn btn-success">Edit</i></a>*@
 
-                                                </td>
-                                            </tr>
-                                            i++;
-                                        }
+                                                <a href="/Hostel/DeleteHostelRoom?Pk_HostelRoomId=@item.Pk_HostelRoomId" onclick="return confirm('Are you sure want to delete?')"><i class="btn btn-danger">Delete</i></a>
+
+                                            </td>
+                                        </tr>
+                                        i++;
                                     }
                                 }
-                            </tbody>
-                        </table>
-                        <div class="j-response"></div>
-                    </div>
-
+                            }
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-
     </div>
 
-</div>
-
 }
-<script src="../../scripts/jquery-1.10.2.min.js"></script>
 
 
 
