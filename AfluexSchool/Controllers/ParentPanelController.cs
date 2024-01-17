@@ -366,17 +366,16 @@ namespace AfluexSchool.Controllers
             try
             {
                 model.Pk_ParentID = Session["Pk_ParentID"].ToString();
-                DataSet ds = model.ParentList();
+                DataSet ds = model.ParentProfileDetails();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
-                    model.Pk_ParentID = ds.Tables[0].Rows[0]["Pk_ParentID"].ToString();
                     model.ParentName = ds.Tables[0].Rows[0]["ParentName"].ToString();
                     model.Email = ds.Tables[0].Rows[0]["Email"].ToString();
                     model.Mobile = ds.Tables[0].Rows[0]["Mobile"].ToString();
                     model.Address = ds.Tables[0].Rows[0]["Address"].ToString();
-                    model.PinCode = ds.Tables[0].Rows[0]["Pincode"].ToString();
-                    model.State = ds.Tables[0].Rows[0]["State"].ToString();
-                    model.City = ds.Tables[0].Rows[0]["City"].ToString();
+                    model.PinCode = ds.Tables[0].Rows[0]["CorrespondencePinCode"].ToString();
+                    model.State = ds.Tables[0].Rows[0]["CorrespondencState"].ToString();
+                    model.City = ds.Tables[0].Rows[0]["CorrespondencCity"].ToString();
 
                 }
             }
@@ -435,21 +434,21 @@ namespace AfluexSchool.Controllers
 
                 obj.UpdatedBy = Session["Pk_ParentID"].ToString();
 
-                DataSet ds = obj.UpdateParentList();
+                DataSet ds = obj.UpdateParentProfile();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
                     if ((ds.Tables[0].Rows[0][0].ToString() == "1"))
                     {
                         TempData["EditProfile"] = "Parent Record is Successfully updated";
                         FormName = "EditProfile";
-                        Controller = "ParentLogin";
+                        Controller = "ParentPanel";
                     }
                     else
                     {
                         Session["Pk_ParentID"] = Pk_ParentID;
                         TempData["EditProfile"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                         FormName = "EditProfile";
-                        Controller = "ParentLogin";
+                        Controller = "ParentPanel";
                     }
                 }
             }
@@ -457,7 +456,7 @@ namespace AfluexSchool.Controllers
             {
                 TempData["EditProfile"] = ex.Message;
                 FormName = "EditProfile";
-                Controller = "ParentLogin";
+                Controller = "ParentPanel";
             }
             return RedirectToAction(FormName, Controller);
         }

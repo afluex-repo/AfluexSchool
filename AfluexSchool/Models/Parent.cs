@@ -220,6 +220,32 @@ namespace AfluexSchool.Models
             return ds;
         }
 
+        public DataSet ParentProfileDetails()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@Pk_ParentID", Pk_ParentID)
+                                  };
+            DataSet ds = Connection.ExecuteQuery("Parentprofiledetails", para);
+            return ds;
+        }
+
+        public DataSet UpdateParentProfile()
+        {
+            SqlParameter[] para ={
+                                    new SqlParameter("@Pk_ParentID",Pk_ParentID),
+                                    new SqlParameter("@ParentName",ParentName),
+                                    new SqlParameter("@Email",Email),
+                                    new SqlParameter("@Mobile",Mobile),
+                                    new SqlParameter("@Address",Address),
+                                    new SqlParameter("@PinCode",PinCode),
+                                    new SqlParameter("@State",State),
+                                    new SqlParameter("@City",City),
+                                    new SqlParameter("@UpdatedBy",UpdatedBy)
+                                };
+            DataSet ds = Connection.ExecuteQuery("UpdateParentProfile", para);
+            return ds;
+        }
+
 
     }
 }

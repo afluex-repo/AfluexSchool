@@ -8,504 +8,377 @@
 
 @using (Html.BeginForm("StudentRegistration", "Student", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
-    <div>
-        <div class="login-row">
-            <div class="col-12 col-md-12 col-lg-12 col-xl-12 mx-auto align-self-center">
-                <div class="card border-0 shadow-sm mb-4">
-                    <div class="card-header">
-                        <div class="row ">
+    <div class="container-fluid">
+        <div class="row page-titles mx-0">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h3><b>Student Registration</b></h3>
+                </div>
+            </div>
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Student</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Student Registration</a></li>
+                </ol>
+            </div>
+        </div>
+        <div class="card shadow">
+            <div class="card-body">
+                <p style="color:red">
+                    @TempData["SaveStudent"]
+                </p>
+                <form>
+                    <div class="form-row">
+                        @if (Model.Pk_StudentID == null && Model.Fk_ParentId != null)
+                        {
+                            <div class="col-md-6">
+                                <div class="form-group ">
+                                    <label> Parent LoginId <span style="color: red">*</span></label>
+                                    @Html.TextBoxFor(m => m.ParentLogin_ID, new { @class = "form-control", @onchange = "return GetParentdetailByLoginID();", @readonly = "read" })
 
-                            <div class="col-auto">
-                                <h4 class="mt-0 mb-1">Student Registration </h4>
-
+                                </div>
                             </div>
-                            <p style="color:red">
-                                @TempData["SaveStudent"]
-                            </p>
+                        }
+                        else if (Model.Pk_StudentID == null)
+                        {
+                            <div class="col-md-6">
+                                <div class="form-group ">
+                                    <label> Parent LoginId <span style="color: red">*</span></label>
+                                    @Html.TextBoxFor(m => m.ParentLogin_ID, new { @class = "form-control", @onchange = "return GetParentdetailByLoginID();" })
+
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-md-6">
+                                <div class="form-group ">
+                                    <label> Parent LoginId <span style="color: red">*</span></label>
+                                    @Html.TextBoxFor(m => m.ParentLogin_ID, new { @class = "form-control", @onchange = "return GetParentdetailByLoginID();", @readonly = "read" })
+
+                                </div>
+                            </div>
+                        }
+                        <div class="form-group col-md-6">
+                            <label>Parent Name</label>
+                            @Html.TextBoxFor(m => m.ParentName, new { @class = "form-control", @readonly = "readonly" })
                         </div>
                     </div>
-                    <div class="card-body">
 
-                        <div class="row justify-content-center">
-                            <div class="col-md-12 mx-auto">
-                                @*@if (Model.Pk_StudentID == null && Model.Fk_ParentId != null)
-                                {
-                                    <div class="row ">
-                                        <div class="col-lg-3 col-md-3">
-                                            <div class="form-group ">
-                                                <label> Session <span style="color: red">*</span></label>
-                                                @Html.DropDownListFor(m => m.SessionName, new SelectList(ViewBag.ddlsession, "Value", "Text"), new { @class = "form-control" })
-                                            </div>
-                                        </div>
-                                    </div>
-                                }
-                                else if (Model.Pk_StudentID == null)
-                                {
-                                    <div class="row ">
-                                        <div class="col-lg-3 col-md-3">
-                                            <div class="form-group ">
-                                                <label> Session <span style="color: red">*</span></label>
-                                                @Html.DropDownListFor(m => m.SessionName, new SelectList(ViewBag.ddlsession, "Value", "Text"), new { @class = "form-control" })
-                                            </div>
-                                        </div>
-                                    </div>
-                                }*@
-                                <div class="row ">
-                                    @if (Model.Pk_StudentID == null && Model.Fk_ParentId != null)
-                                    {
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="form-group ">
-                                                <label> Parent LoginId <span style="color: red">*</span></label>
-                                                @Html.TextBoxFor(m => m.ParentLogin_ID, new { @class = "form-control", @onchange = "return GetParentdetailByLoginID();", @readonly = "read" })
+                        <div class="card-header">
+                            <h4 class="card-title"><b>Student Personal Details</b></h4>
+                        </div>
 
-                                            </div>
-                                        </div>
-                                    }
-                                    else if (Model.Pk_StudentID == null)
-                                    {
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="form-group ">
-                                                <label> Parent LoginId <span style="color: red">*</span></label>
-                                                @Html.TextBoxFor(m => m.ParentLogin_ID, new { @class = "form-control", @onchange = "return GetParentdetailByLoginID();" })
-
-                                            </div>
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="form-group ">
-                                                <label> Parent LoginId <span style="color: red">*</span></label>
-                                                @Html.TextBoxFor(m => m.ParentLogin_ID, new { @class = "form-control", @onchange = "return GetParentdetailByLoginID();", @readonly = "read" })
-
-                                            </div>
-                                        </div>
-                                    }
-
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="form-group ">
-                                            <label> Parent Name</label>
-                                            @Html.TextBoxFor(m => m.ParentName, new { @class = "form-control", @readonly = "readonly" })
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
-
+                    <div class="form-row mt-3">
+                        <div class="form-group  col-md-3">
+                            <label>Branch<span style="color: red">*</span></label>
+                            @Html.DropDownListFor(m => m.Branch, new SelectList(ViewBag.ddlBranch, "Value", "Text"), new { @class = "form-control" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Class<span style="color: red">*</span></label>
+                            @Html.DropDownListFor(m => m.Fk_ClassID, new SelectList(ViewBag.ddlclass, "Value", "Text"), new { @class = "form-control", @onchange = "return OnchangeSection();" })
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group ">
+                                <label>Section<span style="color: red">*</span></label>
+                                @Html.DropDownListFor(m => m.Fk_SectionID, new SelectList(ViewBag.ddlsection, "Value", "Text"), new { @class = "form-control", @onchange = "return GetstudentBySection();" })
                             </div>
                         </div>
-                    </div>
-                    <div class="card-header">
-                        <div class="row ">
+                        <div class="col-md-3">
+                            <div class="form-group ">
+                                <label>Name<span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.studentName, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        @if (Model.Fk_ParentId != null)
+                        {
+                            <div class="col-md-3">
+                                <div class="form-group ">
+                                    <label>Father Name<span style="color: red">*</span></label>
+                                    @Html.TextBoxFor(m => m.FatherName, new { @class = "form-control", @readonly = "read" })
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-md-3">
+                                <div class="form-group ">
+                                    <label>Father Name<span style="color: red">*</span></label>
+                                    @Html.TextBoxFor(m => m.FatherName, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        }
 
-                            <div class="col-auto">
-                                <h4 class="mt-0 mb-1">Student Personal Details</h4>
-
+                        <div class="col-md-3">
+                            <div class="form-group ">
+                                <label>Father's Occuption<span style="color: red">*</span></label>
+                                @Html.DropDownListFor(m => m.FatherOccupation, new SelectList(ViewBag.ddlOccupation, "Value", "Text"), new { @class = "form-control" })
+                            </div>
+                        </div>
+                        @if (Model.Fk_ParentId != null && Model.MotherName != "")
+                        {
+                            <div class="col-md-3">
+                                <div class="form-group ">
+                                    <label>Mother Name<span style="color: red">*</span></label>
+                                    @Html.TextBoxFor(m => m.MotherName, new { @class = "form-control", @readonly = "read" })
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-md-3">
+                                <div class="form-group ">
+                                    <label>Mother Name<span style="color: red">*</span></label>
+                                    @Html.TextBoxFor(m => m.MotherName, new { @class = "form-control", })
+                                </div>
+                            </div>
+                        }
+                        <div class="col-md-3">
+                            <div class="form-group ">
+                                <label>Mother's Occuption<span style="color: red">*</span></label>
+                                @Html.DropDownListFor(m => m.MotherOccupation, new SelectList(ViewBag.ddlOccupationmother, "Value", "Text"), new { @class = "form-control" })
+                            </div>
+                        </div>
+                            <div class="col-md-3">
+                                <div class="form-group ">
+                                    <label>DOB<span style="color: red">*</span></label>
+                                    @Html.TextBoxFor(m => m.Dateofbirth, new { @class = "form-control", @onchange = "return ageCount()" })
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group ">
+                                    <label>Age<span style="color: red">*</span></label>
+                                    @Html.TextBoxFor(m => m.Age, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group ">
+                                    <label>Gender<span style="color: red">*</span></label>
+                                    @Html.DropDownListFor(m => m.Gender, new SelectList(ViewBag.ddlGender, "Value", "Text"), new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group ">
+                                    <label>Category<span style="color: red">*</span></label>
+                                    @Html.DropDownListFor(m => m.Category, new SelectList(ViewBag.ddlCategory, "Value", "Text"), new { @class = "form-control" })
+                                </div>
+                            </div>
+                            @if (Model.Fk_ParentId != null)
+                            {
+                                <div class="col-md-3">
+                                    <div class="form-group ">
+                                        <label>Religion<span style="color: red">*</span></label>
+                                        @Html.DropDownListFor(m => m.Religion, new SelectList(ViewBag.ddlReligion, "Value", "Text"), new { @class = "form-control", @readonly = "read" })
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Religion<span style="color: red">*</span></label>
+                                        @Html.DropDownListFor(m => m.Religion, new SelectList(ViewBag.ddlReligion, "Value", "Text"), new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            }
+                            @if (Model.Fk_ParentId != null)
+                            {
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Nationality<span style="color: red">*</span></label>
+                                        @Html.TextBoxFor(m => m.Nationality, new { @class = "form-control", @readonly = "read" })
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Nationality<span style="color: red">*</span></label>
+                                        @Html.TextBoxFor(m => m.Nationality, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            }
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Medium<span style="color: red">*</span></label>
+                                    @Html.DropDownListFor(m => m.Medium, new SelectList(ViewBag.ddlMedium, "Value", "Text"), new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Aadhar No</label>
+                                    @Html.TextBoxFor(m => m.AadhaarCard, new { @class = "form-control", @onkeypress = "return isNumberKey(event);", @maxlength = "12" })
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group ">
+                                    <label>Photo</label>
+                                    <input type="file" name="StudentFiles" class="bg-default form-control" id="StudentPhoto" />
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group ">
+                                    <label>Birth Certificate</label>
+                                    <input type="file" name="StudentFiles" class="bg-default form-control" id="BirthCetificate" />
+                                </div>
                             </div>
 
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="row justify-content-center">
-                            <div class="col-md-12 mx-auto">
-                                <div class="row ">
-                                    <div class="col-lg-3 col-md-3">
-                                        <div class="form-group ">
-                                            <label> Branch <span style="color: red">*</span></label>
-                                            @Html.DropDownListFor(m => m.Branch, new SelectList(ViewBag.ddlBranch, "Value", "Text"), new { @class = "form-control" })
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-3">
-                                        <div class="form-group ">
-                                            <label> Class <span style="color: red">*</span></label>
-                                            @Html.DropDownListFor(m => m.Fk_ClassID, new SelectList(ViewBag.ddlclass, "Value", "Text"), new { @class = "form-control", @onchange = "return OnchangeSection();" })
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-3">
-                                        <div class="form-group ">
-                                            <label> Section <span style="color: red">*</span></label>
-                                            @Html.DropDownListFor(m => m.Fk_SectionID, new SelectList(ViewBag.ddlsection, "Value", "Text"), new { @class = "form-control", @onchange = "return GetstudentBySection();" })
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-3">
-                                        <div class="form-group ">
-                                            <label> Name <span style="color: red">*</span></label>
-                                            @Html.TextBoxFor(m => m.studentName, new { @class = "form-control" })
-                                        </div>
-                                    </div>
+                            <div class="col-md-3">
+                                <div class="form-group ">
+                                    <label>Transport Required</label>
+                                    <input type="checkbox" name="chk" id="chk" onchange="return trans();" />
                                 </div>
+                            </div>
 
-
-                                <div class="row ">
-                                    @if (Model.Fk_ParentId != null)
-                                    {
-                                        <div class="col-lg-3 col-md-3">
-                                            <div class="form-group ">
-                                                <label> Father Name <span style="color: red">*</span></label>
-                                                @Html.TextBoxFor(m => m.FatherName, new { @class = "form-control", @readonly = "read" })
-                                            </div>
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                        <div class="col-lg-3 col-md-3">
-                                            <div class="form-group ">
-                                                <label> Father Name <span style="color: red">*</span></label>
-                                                @Html.TextBoxFor(m => m.FatherName, new { @class = "form-control" })
-                                            </div>
-                                        </div>
-                                    }
-
-                                    <div class="col-lg-3 col-md-3">
-                                        <div class="form-group ">
-                                            <label> Father's Occuption <span style="color: red">*</span></label>
-                                            @Html.DropDownListFor(m => m.FatherOccupation, new SelectList(ViewBag.ddlOccupation, "Value", "Text"), new { @class = "form-control" })
-                                        </div>
-                                    </div>
-                                    @if (Model.Fk_ParentId != null && Model.MotherName!="")
-                                    {
-                                        <div class="col-lg-3 col-md-3">
-                                            <div class="form-group ">
-                                                <label> Mother Name <span style="color: red">*</span></label>
-                                                @Html.TextBoxFor(m => m.MotherName, new { @class = "form-control", @readonly = "read" })
-                                            </div>
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                        <div class="col-lg-3 col-md-3">
-                                            <div class="form-group ">
-                                                <label> Mother Name <span style="color: red">*</span></label>
-                                                @Html.TextBoxFor(m => m.MotherName, new { @class = "form-control", })
-                                            </div>
-                                        </div>
-                                    }
-                                    <div class="col-lg-3 col-md-3">
-                                        <div class="form-group ">
-                                            <label> Mother's Occuption <span style="color: red">*</span></label>
-                                            @Html.DropDownListFor(m => m.MotherOccupation, new SelectList(ViewBag.ddlOccupationmother, "Value", "Text"), new { @class = "form-control" })
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row ">
-                                    <div class="col-lg-3 col-md-3">
-                                        <div class="form-group ">
-                                            <label> DOB <span style="color: red">*</span></label>
-                                            @Html.TextBoxFor(m => m.Dateofbirth, new { @class = "form-control", @onchange = "return ageCount()" })
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-3">
-                                        <div class="form-group ">
-                                            <label> Age <span style="color: red">*</span></label>
-                                            @Html.TextBoxFor(m => m.Age, new { @class = "form-control", @readonly = "readonly" })
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-3">
-                                        <div class="form-group ">
-                                            <label>Gender <span style="color: red">*</span></label>
-                                            @Html.DropDownListFor(m => m.Gender, new SelectList(ViewBag.ddlGender, "Value", "Text"), new { @class = "form-control" })
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-3">
-                                        <div class="form-group ">
-                                            <label> Category <span style="color: red">*</span></label>
-                                            @Html.DropDownListFor(m => m.Category, new SelectList(ViewBag.ddlCategory, "Value", "Text"), new { @class = "form-control" })
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row ">
-                                    @if (Model.Fk_ParentId != null)
-                                    {
-                                        <div class="col-lg-3 col-md-3">
-                                            <div class="form-group ">
-                                                <label> Religion <span style="color: red">*</span></label>
-                                                @Html.DropDownListFor(m => m.Religion, new SelectList(ViewBag.ddlReligion, "Value", "Text"), new { @class = "form-control", @readonly = "read" })
-                                            </div>
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                        <div class="col-lg-3 col-md-3">
-                                            <div class="form-group ">
-                                                <label> Religion <span style="color: red">*</span></label>
-                                                @Html.DropDownListFor(m => m.Religion, new SelectList(ViewBag.ddlReligion, "Value", "Text"), new { @class = "form-control" })
-                                            </div>
-                                        </div>
-                                    }
-                                    @if (Model.Fk_ParentId != null)
-                                    {
-                                        <div class="col-lg-3 col-md-3">
-                                            <div class="form-group ">
-                                                <label> Nationality <span style="color: red">*</span></label>
-                                                @Html.TextBoxFor(m => m.Nationality, new { @class = "form-control", @readonly = "read" })
-                                            </div>
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                        <div class="col-lg-3 col-md-3">
-                                            <div class="form-group ">
-                                                <label> Nationality <span style="color: red">*</span></label>
-                                                @Html.TextBoxFor(m => m.Nationality, new { @class = "form-control" })
-                                            </div>
-                                        </div>
-                                    }
-                                    <div class="col-lg-3 col-md-3">
-                                        <div class="form-group ">
-                                            <label>Medium <span style="color: red">*</span></label>
-                                            @Html.DropDownListFor(m => m.Medium, new SelectList(ViewBag.ddlMedium, "Value", "Text"), new { @class = "form-control" })
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-3">
-                                        <div class="form-group ">
-                                            <label> Aadhar No </label>
-                                            @Html.TextBoxFor(m => m.AadhaarCard, new { @class = "form-control", @onkeypress = "return isNumberKey(event);", @maxlength = "12" })
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row ">
-                                    <div class="row ">
-                                        <div class="col-lg-3 col-md-3">
-                                            <div class="form-group ">
-                                                <label> Photo</label>
-                                                <input type="file" name="StudentFiles" class="bg-default form-control" id="StudentPhoto" />
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-3">
-                                            <div class="form-group ">
-                                                <label> Birth Certificate</label>
-                                                <input type="file" name="StudentFiles" class="bg-default form-control" id="BirthCetificate" />
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-3 col-md-3">
-                                            <div class="form-group ">
-                                                <label>Transport Required </label>
-                                                <input type="checkbox" name="chk" id="chk" onchange="return trans();" />
-                                            </div>
-                                        </div>
-                                    </div>
+                        <div class="row" id="transport">
+                            <div class="col-md-4">
+                                <div class="form-group" id="PK_Route">
+                                    <label>Route<span style="color: red">*</span></label>
+                                    @Html.DropDownListFor(m => m.PK_RouteId, new SelectList(ViewBag.ddlRoute, "Value", "Text"), new { @class = "form-control", @onchange = "return GetArea()" })
 
                                 </div>
-                                <div class="row" id="transport">
-
-                                    <div class="col-lg-4 col-md-4">
-                                        <div class="form-group " id="PK_Route">
-                                            <label> Route <span style="color: red">*</span></label>
-                                            @Html.DropDownListFor(m => m.PK_RouteId, new SelectList(ViewBag.ddlRoute, "Value", "Text"), new { @class = "form-control", @onchange = "return GetArea()" })
-
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-4 col-md-4">
-                                        <div class="form-group " id="PK_AreaMaster">
-                                            <label> Area <span style="color: red">*</span></label>
-                                            @Html.DropDownListFor(m => m.PK_AreaMasterID, new SelectList(ViewBag.ddlArea, "Value", "Text"), new { @class = "form-control", @onchange = "return GetVehicleDetails()" })
-
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4">
-                                        <div class="form-group " id="Vehicle">
-                                            <label>Vehicle No  <span style="color: red">*</span></label>
-                                            @Html.TextBoxFor(m => m.VehicleNo, new { @class = "form-control", @placeholder = "Vehicle No", @readonly = "readonly" })
-
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-4 col-md-4">
-                                        <div class="form-group " id="Driver">
-                                            <label>Driver Name  </label>
-                                            @Html.TextBoxFor(m => m.DriverName, new { @class = "form-control", @placeholder = "Driver Name", @readonly = "readonly" })
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4">
-                                        <div class="form-group " id="DriverConta">
-                                            <label>Driver Contact No  </label>
-                                            @Html.TextBoxFor(m => m.DriverContactNo, new { @class = "form-control", @Placeholder = "Contact No", @readonly = "readonly" })
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-4 col-md-4">
-                                        <div class="form-group " id="Amou">
-                                            <label> Amount <span style="color: red">*</span></label>
-                                            @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @placeholder = "Amount", @onkeypress = "return validNumber(event)" })
-
-                                        </div>
-                                    </div>
-
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group" id="PK_AreaMaster">
+                                    <label>Area<span style="color: red">*</span></label>
+                                    @Html.DropDownListFor(m => m.PK_AreaMasterID, new SelectList(ViewBag.ddlArea, "Value", "Text"), new { @class = "form-control", @onchange = "return GetVehicleDetails()" })
 
                                 </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group" id="Vehicle">
+                                    <label>Vehicle No<span style="color: red">*</span></label>
+                                    @Html.TextBoxFor(m => m.VehicleNo, new { @class = "form-control", @placeholder = "Vehicle No", @readonly = "readonly" })
 
-
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group" id="Driver">
+                                    <label>Driver Name</label>
+                                    @Html.TextBoxFor(m => m.DriverName, new { @class = "form-control", @placeholder = "Driver Name", @readonly = "readonly" })
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group" id="DriverConta">
+                                    <label>Driver Contact No</label>
+                                    @Html.TextBoxFor(m => m.DriverContactNo, new { @class = "form-control", @Placeholder = "Contact No", @readonly = "readonly" })
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group" id="Amou">
+                                    <label>Amount<span style="color: red">*</span></label>
+                                    @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @placeholder = "Amount", @onkeypress = "return validNumber(event)" })
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="card-header">
-                        <div class="row ">
+                        <h4 class="card-title"><b>Student Address Details</b></h4>
+                    </div>
 
-                            <div class="col-auto">
-                                <h4 class="mt-0 mb-1">Student Address Details</h4>
-
+                    <div class="form-row mt-3">
+                            <div class="col-md-3">
+                                <div class="form-group ">
+                                    <label>Permanent Address<span style="color: red">*</span></label>
+                                    @Html.TextAreaFor(m => m.PermanentAddress, new { @class = "form-control", @cols = "30", row = "10" })
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group ">
+                                    <label>PinCode<span style="color: red">*</span></label>
+                                    @Html.TextBoxFor(m => m.PinCode, new { @class = "form-control", @onchange = "return GetstateCity();", @onkeypress = "return isNumberKey(event);", @maxlength = "6" })
+                                </div>
                             </div>
 
-                        </div>
+                            <div class="col-md-3">
+                                <div class="form-group ">
+                                    <label>State</label>
+                                    @Html.TextBoxFor(m => m.State, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group ">
+                                    <label>City</label>
+                                    @Html.TextBoxFor(m => m.City, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+                       
+                            <div class="col-md-3">
+                                <div class="form-group ">
+                                    <label>Correspondence Address</label>
+                                    @Html.TextAreaFor(m => m.correspondenceAddress, new { @class = "form-control", @cols = "30", row = "10" })
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group ">
+                                    <label>PinCode</label>
+                                    @Html.TextBoxFor(m => m.correspondencPinCode, new { @class = "form-control", @onchange = "return GetstateCity1();", @onkeypress = "return isNumberKey(event);", @maxlength = "6" })
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group ">
+                                    <label>State</label>
+                                    @Html.TextBoxFor(m => m.correspondencState, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group ">
+                                    <label>City</label>
+                                    <input type="checkbox" id="Permanent_ceckbox" onclick="GetpremanentAddress();"><label>Same Permanent Address</label>
+                                    @Html.TextBoxFor(m => m.correspondencCity, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
                     </div>
-                    <div class="card-body">
 
-                        <div class="row justify-content-center">
-                            <div class="col-md-12 mx-auto">
-                                <div class="row ">
-                                    <div class="col-lg-3 col-md-3">
-                                        <div class="form-group ">
-                                            <label> Permanent Address <span style="color: red">*</span></label>
-                                            @Html.TextAreaFor(m => m.PermanentAddress, new { @class = "form-control", @cols = "30", row = "10" })
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-3">
-                                        <div class="form-group ">
-                                            <label> PinCode <span style="color: red">*</span></label>
-                                            @Html.TextBoxFor(m => m.PinCode, new { @class = "form-control", @onchange = "return GetstateCity();", @onkeypress = "return isNumberKey(event);", @maxlength = "6" })
-                                        </div>
-                                    </div>
+                    <div class="card-header">
+                        <h4 class="card-title"><b>Student Communication Details</b></h4>
+                    </div>
 
-                                    <div class="col-lg-3 col-md-3">
-                                        <div class="form-group ">
-                                            <label> State</label>
-                                            @Html.TextBoxFor(m => m.State, new { @class = "form-control", @readonly = "readonly" })
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-3">
-                                        <div class="form-group ">
-                                            <label> City</label>
+                    <div class="form-row  mt-3">
+                        <div class="col-md-4">
+                            <div class="form-group ">
+                                <label>Mobile No<span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", @maxlength = "10", @onkeypress = "return isNumberKey(event);" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group ">
+                                <label>Alternate No.</label>
+                                @Html.TextBoxFor(m => m.AlternateNumber, new { @class = "form-control", @maxlength = "10", @onkeypress = "return isNumberKey(event);" })
+                            </div>
+                        </div>
 
-                                            @Html.TextBoxFor(m => m.City, new { @class = "form-control", @readonly = "readonly" })
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row ">
-                                    <div class="col-lg-3 col-md-3">
-                                        <div class="form-group ">
-                                            <label> Correspondence Address </label>
-
-                                            @Html.TextAreaFor(m => m.correspondenceAddress, new { @class = "form-control", @cols = "30", row = "10" })
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-3">
-                                        <div class="form-group ">
-                                            <label> PinCode </label>
-                                            @Html.TextBoxFor(m => m.correspondencPinCode, new { @class = "form-control", @onchange = "return GetstateCity1();", @onkeypress = "return isNumberKey(event);", @maxlength = "6" })
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-3 col-md-3">
-                                        <div class="form-group ">
-                                            <label> State</label>
-                                            @Html.TextBoxFor(m => m.correspondencState, new { @class = "form-control", @readonly = "readonly" })
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-3">
-                                        <div class="form-group ">
-                                            <label> City</label>
-                                            <input type="checkbox" id="Permanent_ceckbox" onclick="GetpremanentAddress();"><label>Same Permanent Address</label>
-                                            @Html.TextBoxFor(m => m.correspondencCity, new { @class = "form-control", @readonly = "readonly" })
-                                        </div>
-                                    </div>
-                                </div>
-
-
+                        <div class="col-md-4">
+                            <div class="form-group ">
+                                <label>Email Id</label>
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
                             </div>
                         </div>
                     </div>
 
                     <div class="card-header">
-                        <div class="row ">
-
-                            <div class="col-auto">
-                                <h4 class="mt-0 mb-1">Student Communication Details</h4>
-
-                            </div>
-
-                        </div>
+                        <h4 class="card-title"><b>Student Previous Academic Details</b></h4>
                     </div>
 
-                    <div class="card-body">
-
-                        <div class="row justify-content-center">
-                            <div class="col-md-12 mx-auto">
-                                <div class="row ">
-                                    <div class="col-lg-4 col-md-4">
-                                        <div class="form-group ">
-                                            <label> Mobile No <span style="color: red">*</span></label>
-                                            @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", @maxlength = "10", @onkeypress = "return isNumberKey(event);" })
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4">
-                                        <div class="form-group ">
-                                            <label> Alternate No.</label>
-                                            @Html.TextBoxFor(m => m.AlternateNumber, new { @class = "form-control", @maxlength = "10", @onkeypress = "return isNumberKey(event);" })
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-4 col-md-4">
-                                        <div class="form-group ">
-                                            <label> Email Id</label>
-                                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                                        </div>
-                                    </div>
-
-                                </div>
-
+                    <div class="form-row mt-3">
+                        <div class="col-md-6">
+                            <div class="form-group ">
+                                <label>Previous School</label>
+                                @Html.TextBoxFor(m => m.PreviousSchool, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group ">
+                                <label>Previous Class</label>
+                                @Html.DropDownListFor(m => m.PreviousClass, new SelectList(ViewBag.ddlclass, "Value", "Text"), new { @class = "form-control" })
                             </div>
                         </div>
                     </div>
 
-                    <div class="card-header">
-                        <div class="row ">
-
-                            <div class="col-auto">
-                                <h4 class="mt-0 mb-1">Student Previous Academic Details</h4>
-
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="card-body">
-
-                        <div class="row justify-content-center">
-                            <div class="col-md-12 mx-auto">
-                                <div class="row ">
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="form-group ">
-                                            <label> Previous School </label>
-                                            @Html.TextBoxFor(m => m.PreviousSchool, new { @class = "form-control" })
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="form-group ">
-                                            <label> Previous Class</label>
-                                            @Html.DropDownListFor(m => m.PreviousClass, new SelectList(ViewBag.ddlclass, "Value", "Text"), new { @class = "form-control" })
-                                        </div>
-                                    </div>
-
-
-
-                                </div>
-
-
-
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer text-left"> 
+                    <div class="col-md-12 mt-3">
                         @Html.HiddenFor(m => m.Pk_StudentID)
                         @if (Model.Pk_StudentID == null)
                         {
@@ -516,17 +389,18 @@
                             <input class="btn btn-success" type="Submit" onclick="return updateform();" name="btnUpdate" value="Update" id="btnUpdate" />
                         }
                     </div>
-                </div>
+</form>
             </div>
         </div>
     </div>
+
+
 }
 
 <script src="../../AdminPanelcss/assets/js/jquery-3.3.1.min.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
 
 <script>
     $(document).ready(function () {

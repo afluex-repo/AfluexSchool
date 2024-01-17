@@ -2594,4 +2594,62 @@ namespace APSSchool.Models
         public string PermanentAddress { get; set; }
     }
 
+
+    public class ParentProfileAPI
+    {
+        public string Pk_ParentID { get; set; }
+        public string Message { get; set; }
+        public string Status { get; set; }
+        public List<ProfileParentDetails> lstParentProfiledetails { get; set; }
+
+        public DataSet ParentProfileDetails()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@Pk_ParentID", Pk_ParentID)
+                                  };
+            DataSet ds = Connection.ExecuteQuery("Parentprofiledetails", para);
+            return ds;
+        }
+    }
+
+    public class ProfileParentDetails
+    {
+        public string ParentName { get; set; }
+        public string Email { get; set; }
+        public string Mobile { get; set; }
+        public string Address { get; set; }
+        public string PinCode { get; set; }
+        public string State { get; set; }
+        public string City { get; set; }
+    }
+
+    public class UpdateParentProfileAPI
+    {
+        public string Pk_ParentID { get; set; }
+        public string ParentName { get; set; }
+        public string Email { get; set; }
+        public string Mobile { get; set; }
+        public string Address { get; set; }
+        public string PinCode { get; set; }
+        public string State { get; set; }
+        public string City { get; set; }
+
+        public DataSet UpdateParentProfile()
+        {
+            SqlParameter[] para ={
+                                    new SqlParameter("@Pk_ParentID",Pk_ParentID),
+                                    new SqlParameter("@ParentName",ParentName),
+                                    new SqlParameter("@Email",Email),
+                                    new SqlParameter("@Mobile",Mobile),
+                                    new SqlParameter("@Address",Address),
+                                    new SqlParameter("@PinCode",PinCode),
+                                    new SqlParameter("@State",State),
+                                    new SqlParameter("@City",City),
+                                    new SqlParameter("@UpdatedBy",Pk_ParentID)
+                                };
+            DataSet ds = Connection.ExecuteQuery("UpdateParentProfile", para);
+            return ds;
+        }
+    }
+
 }
