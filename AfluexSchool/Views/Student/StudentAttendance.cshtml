@@ -8,162 +8,120 @@
 
 @using (Html.BeginForm("StudentAttendance", "Student", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
-    <div>
-        <div class="card border-0 shadow-sm mb-4">
-            <div class="card-header border-0 bg-none">
-                <div class="row">
-                    <div class="col-12 col-md">
-                        <p class="fs15">Attendance</p>
-                    </div>
-                    <p style="color:red">
-                        @TempData["StudentAttendance"]
-                    </p>
+    <div class="container-fluid">
+        <div class="row page-titles mx-0">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h3><b>Student Attendance</b></h3>
                 </div>
             </div>
-            <div class="card-body ">
-                <div class="row">
-
-                    <div class="col-md-4">
-
-
-
-                        <label>Class <span style="color: red">*</span></label>
-
-                        @Html.DropDownListFor(m => m.Fk_ClassID, new SelectList(ViewBag.ddlclass, "Value", "Text"), new { @class = "form-control", @onchange = "return OnchangeSection();" })
-
-                    </div>
-
-                    <div class="col-md-4">
-
-
-
-
-                        <label>Section <span style="color: red">*</span></label>
-
-                        @Html.DropDownListFor(m => m.Fk_SectionID, new SelectList(ViewBag.ddlsection, "Value", "Text"), new { @class = "form-control", @onchange = "return onDDLchange()" })
-
-
-
-                    </div>
-                    <div class="col-md-4">
-
-
-
-
-                        <label>Attendance Date <span style="color: red">*</span></label>
-
-                        @Html.TextBoxFor(m => m.AttendanceDate, new { @class = "form-control", @readonly = "readonly" })
-
-                        
-
-                    </div>
-
-                </div>
-
-                <div class="card-footer text-left">
-
-                    <div class="col-md-2">
-                        <input class="btn btn-primary btn-sm" type="submit" name="btndetail" onclick="return validateform()" value="Get Detail" id="btndetail" />
-                    </div>
-                </div>
-@if (Model != null)
-{
-    if (Model.listStudent != null)
-    {
-        int i = 1;
-                <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-                    <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
-                        <div class="col-sm-12">
-                            <table class="table datatable display responsive w-100 dataTable no-footer dtr-inline" style="width: 1002px;">
-                                <thead>
-                                    <tr>
-                                        <th>S No.</th>
-                                        <th>StudentName</th>
-                                        <th>LoginID</th>
-                                      
-                                        <th>Mobile</th>
-                                        <th>Medium</th>
-                                        <th> Select All&nbsp;&nbsp; <input type="checkbox" name="checkedAll" id="checkedAll" style="margin-top:3px;" /></th>
-
-                                    </tr>
-
-                                </thead>
-                                <tbody>
-                                   
-                                            @foreach (var item in Model.listStudent)
-                                            {
-
-                                                <tr>
-                                                    <td>
-                                                        @i
-
-                                                    </td>
-                                                    <td>
-                                                        @item.DisplayName
-                                                    </td>
-                                                    <td>
-                                                        @item.LoginID
-                                                    </td>
-
-                                                    <td>
-                                                        @item.Mobile
-                                                    </td>
-                                                    <td>
-                                                        @item.Medium
-                                                    </td>
-
-                                                    <td>
-
-                                                        <input type="hidden" name="hdClassID_ @i" id="hdClassID_ @i" value="@item.Fk_ClassID" />
-                                                        <input type="hidden" name="hdSectionID_ @i" id="hdSectionID_ @i" value="@item.Fk_SectionID" />
-                                                        <input type="hidden" name="hdStudentID_ @i" id="hdStudentID_ @i" value="@item.Pk_StudentID" />
-                                                        <input type="hidden" name="hdMobile_ @i" id="hdMobile_ @i" value="@item.Mobile" />
-                                                        <input type="hidden" name="hdStudentName_ @i" id="hdStudentName_ @i" value="@item.DisplayName" />
-                                                        @if (item.Status != "P")
-                                                        {
-                                                            <input type="checkbox" id="chkSelect_ @i" name="chkSelect_ @i" class="chkclass" />
-
-                                                        }
-                                                        else
-                                                        {
-
-                                                            <input type="checkbox" checked="checked" name="chkSelect_ @i" id="chkSelect_ @i" disabled="disabled" />
-                                                        }
-
-                                                    </td>
-
-                                                </tr>
-                                                i++;
-                                            }
-                                            <input type="hidden" id="hdRows" name="hdRows" value="@i" />
-                                       
-                                </tbody>
-                            </table>
-
-
-                            <div class="j-response"></div>
-
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Student</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Student Attendance</a></li>
+                </ol>
+            </div>
+        </div>
+        <div class="card shadow">
+            <div class="card-body">
+                <p style="color:red">
+                    @TempData["StudentAttendance"]
+                </p>
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label>Class<span style="color: red">*</span></label>
+                            @Html.DropDownListFor(m => m.Fk_ClassID, new SelectList(ViewBag.ddlclass, "Value", "Text"), new { @class = "form-control", @onchange = "return OnchangeSection();" })
                         </div>
-
-
-
+                        <div class="form-group  col-md-3">
+                            <label>Section<span style="color: red">*</span></label>
+                            @Html.DropDownListFor(m => m.Fk_SectionID, new SelectList(ViewBag.ddlsection, "Value", "Text"), new { @class = "form-control", @onchange = "return onDDLchange()" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Attendance Date<span style="color: red">*</span></label>
+                            @Html.TextBoxFor(m => m.AttendanceDate, new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label class="d-block">&nbsp;</label>
+                            <input class="btn btn-primary" type="submit" name="btndetail" onclick="return validateform()" value="Get Detail" id="btndetail" />
+                        </div>
                     </div>
-                </div>
+                </form>
 
-                <div class="card-footer text-left">
+               @if (Model != null)
+               {
+                   if (Model.listStudent != null)
+                   {
+                       int i = 1;
+                    
+                        <div class="mt-3">
+                            <div class="table-responsive">
+                                <table id="example5" class="display table" style="min-width:845px">
+                                    <thead>
+                                        <tr>
+                                            <th>S No.</th>
+                                            <th>StudentName</th>
+                                            <th>LoginID</th>
+                                            <th>Mobile</th>
+                                            <th>Medium</th>
+                                            <th><input type="checkbox" name="checkedAll" id="checkedAll" style="margin-top:3px;" />&nbsp;&nbsp;Select All</th>
 
-                    <div class="col-md-2">
-                        <input class="btn btn-success btn-sm" type="submit" onclick="return validateform();" name="btnsave" value="Save & Send SMS" id="btnSave" />
-                       
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.listStudent)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @i
+                                                </td>
+                                                <td>
+                                                    @item.DisplayName
+                                                </td>
+                                                <td>
+                                                    @item.LoginID
+                                                </td>
+                                                <td>
+                                                    @item.Mobile
+                                                </td>
+                                                <td>
+                                                    @item.Medium
+                                                </td>
+                                                <td>
+                                                    <input type="hidden" name="hdClassID_ @i" id="hdClassID_ @i" value="@item.Fk_ClassID" />
+                                                    <input type="hidden" name="hdSectionID_ @i" id="hdSectionID_ @i" value="@item.Fk_SectionID" />
+                                                    <input type="hidden" name="hdStudentID_ @i" id="hdStudentID_ @i" value="@item.Pk_StudentID" />
+                                                    <input type="hidden" name="hdMobile_ @i" id="hdMobile_ @i" value="@item.Mobile" />
+                                                    <input type="hidden" name="hdStudentName_ @i" id="hdStudentName_ @i" value="@item.DisplayName" />
+                                                    @if (item.Status != "P")
+                                                    {
+                                                        <input type="checkbox" id="chkSelect_ @i" name="chkSelect_ @i" class="chkclass" />
+                                                    }
+                                                    else
+                                                    {
+                                                        <input type="checkbox" checked="checked" name="chkSelect_ @i" id="chkSelect_ @i" disabled="disabled" />
+                                                    }
+                                                </td>
+                                            </tr>
+                                            i++;
+                                        }
+                                        <input type="hidden" id="hdRows" name="hdRows" value="@i" />
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                   
+                    <div class="col-md-12 mt-3">
+                            <input class="btn btn-success" type="submit" onclick="return validateform();" name="btnsave" value="Save & Send SMS" id="btnSave" />
                     </div>
-                </div>
-    }
-}
+                   }
+               }
+
             </div>
         </div>
     </div>
-
-
+    
 
 }
 <script src="../../scripts/jquery-1.10.2.min.js"></script>
