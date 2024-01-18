@@ -4,115 +4,117 @@
     ViewBag.Title = "DueReport";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<style>
-    @@page {
-        size: auto;
-    }
-</style>
+
 @using (Html.BeginForm("DueReport", "AdminReports", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
-    <div>
-        <div class="card border-0 shadow-sm mb-4">
-            <div class="card-header border-0 bg-none">
-                <div class="row">
-                    <div class="col-12 col-md">
-                        <p class="fs15">Due Report Details</p>
-                    </div>
+    <div class="container-fluid">
+        <div class="row page-titles mx-0">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h3><b>Due Report Details</b></h3>
                 </div>
             </div>
-            <div class="card-body ">
-
-                <div class="row">
-                    <div class="col-md-3">
-                        <label>  Date  <span style="color:red;">*</span></label>
-                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control" })
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Reports</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Due Report Details</a></li>
+                </ol>
+            </div>
+        </div>
+        <div class="card shadow">
+            <div class="card-body">
+                @*<p style="color:red">
+                    @TempData["LeaveList"]
+                </p>*@
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label>Date<span style="color:red;">*</span></label>
+                            @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label class="d-block">&nbsp;</label>
+                            <input type="submit" class="btn btn-info" name="btnsearch" id="btnsearch" value="Search" onclick="return validateform();" />
+                        </div>
                     </div>
-                    <div class="col-md-2">
-                        <br />
-                        <input type="submit" class="btn btn-info" name="btnsearch" id="btnsearch" value="Search" onclick="return validateform();" />
-                    </div>
-                </div>
+                </form>
 
-                <div class="col-md-12 table-responsive">
-                    <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-                        <table class="table table-bordered w-100 mb-0" id="example23"> 
-                            <thead>
-                                <tr>
-                                    <th>S.no</th> 
-                                    <th> Student Name</th>
-                                    <th>Father Name</th>
-                                    <th>Mobile</th>
-                                    <th>Class             </th>
-                                    <th>Section          </th>
-                                    <th>RegistrationAmt  </th>
-                                    <th>AdmissionFee     </th>
-                                    <th>TuitionFee       </th>
-                                    <th>ExaminationFee   </th>
-                                    <th>Computerfee      </th>
-                                    <th>Otherfee         </th>
-                                    <th>Totalfee         </th>
-                                    <th>TotalPaid        </th>
-                                    <th>Balance           </th> 
-                                </tr> 
-                            </thead>
-                            <tbody>
-                                @if (Model != null)
+                <div class="table-responsive mt-3">
+                    <table id="example5" class="display table" style="min-width:845px">
+                        <thead>
+                            <tr>
+                                <th>S.no</th>
+                                <th>Student Name</th>
+                                <th>Father Name</th>
+                                <th>Mobile</th>
+                                <th>Class</th>
+                                <th>Section</th>
+                                <th>Registration Amt</th>
+                                <th>Admission Fee</th>
+                                <th>Tuition Fee</th>
+                                <th>Examination Fee</th>
+                                <th>Computer Fee</th>
+                                <th>Other Fee</th>
+                                <th style="min-width:45px">Total Fee</th>
+                                <th style="min-width:45px">Total Paid</th>
+                                <th>Balance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                if (Model.lstfeedata != null)
                                 {
-                                    if (Model.lstfeedata != null)
+                                    int i = 1;
+                                    foreach (var item in Model.lstfeedata)
                                     {
-                                        int i = 1;
-                                        foreach (var item in Model.lstfeedata)
-                                        { 
-                                            <tr>
-                                                <td>
-                                                    @i
-                                                </td>
-                                                <td>@item.StudentName</td>
-                                                <td>@item.FatherName</td>
-                                                <td>@item.Mobile</td>
-                                                <td>@item.ClassName   </td>
-                                                <td>@item.SectionName    </td>
-                                                <td>@item.RegistrationAmt</td>
-                                                <td>@item.AdmissionFee   </td>
-                                                <td>@item.TuitionFee     </td>
-                                                <td>@item.ExaminationFee </td>
-                                                <td>@item.Computerfee    </td>
-                                                <td>@item.Otherfee       </td>
-                                                <td>@item.Totalfee       </td>
-                                                <td>@item.TotalPaid      </td>
-                                                <td>@item.Balance         </td> 
-                                            </tr>
-                                            i++;
-                                        }
+                                        <tr>
+                                            <td>@i</td>
+                                            <td>@item.StudentName</td>
+                                            <td>@item.FatherName</td>
+                                            <td>@item.Mobile</td>
+                                            <td>@item.ClassName</td>
+                                            <td>@item.SectionName</td>
+                                            <td>@item.RegistrationAmt</td>
+                                            <td>@item.AdmissionFee</td>
+                                            <td>@item.TuitionFee</td>
+                                            <td>@item.ExaminationFee</td>
+                                            <td>@item.Computerfee</td>
+                                            <td>@item.Otherfee</td>
+                                            <td>@item.Totalfee</td>
+                                            <td>@item.TotalPaid</td>
+                                            <td>@item.Balance</td>
+                                        </tr>
+                                        i++;
                                     }
                                 }
-                            </tbody>
-                            <tfoot>
-                                <tr> 
-                                    <td>Total</td>
-                                    <td> </td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>@ViewBag.TotalRegistrationAmt       </td>
-                                    <td>@ViewBag.TotalAdmissionFee          </td>
-                                    <td>@ViewBag.TotalTuitionFee            </td>
-                                    <td>@ViewBag.TotalExaminationFee        </td>
-                                    <td>@ViewBag.TotalComputerfee           </td>
-                                    <td>@ViewBag.TotalOtherfee              </td>
-                                    <td>@ViewBag.TotalTotalfee              </td>
-                                    <td>@ViewBag.TotalTotalPaid             </td>
-                                    <td>@ViewBag.Balance                </td> 
-                                </tr>
-                            </tfoot>
-                        </table> 
-                        <div class="j-response"></div> 
-                    </div> 
+                            }
+                        </tbody>
+                        <tfoot style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif">
+                            <tr>
+                                <td></td>
+                                <td> </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>Total:-</td>
+                                <td>@ViewBag.TotalRegistrationAmt</td>
+                                <td>@ViewBag.TotalAdmissionFee</td>
+                                <td>@ViewBag.TotalTuitionFee</td>
+                                <td>@ViewBag.TotalExaminationFee</td>
+                                <td>@ViewBag.TotalComputerfee</td>
+                                <td>@ViewBag.TotalOtherfee</td>
+                                <td>@ViewBag.TotalTotalfee</td>
+                                <td>@ViewBag.TotalTotalPaid</td>
+                                <td>@ViewBag.Balance</td>
+                            </tr>
+                        </tfoot>
+                    </table>
                 </div>
             </div>
         </div>
-    </div> 
+    </div>
+
 }
 
 <script src="../../scripts/jquery-1.10.2.min.js"></script>

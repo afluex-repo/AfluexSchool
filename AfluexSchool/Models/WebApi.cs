@@ -2554,4 +2554,102 @@ namespace APSSchool.Models
         public string Notice { get; set; }
     }
 
+    public class StudentDetailsAPI
+    {
+        public string Fk_StudentId { get; set; }
+        public string Fk_ParentId { get; set; }
+        public string Message { get; set; }
+        public string Status { get; set; }
+        public List<DashBoardStudentDetails> lstStudentdetails { get; set; }
+
+        public DataSet GetDetailsofStudent()
+        {
+            SqlParameter[] Param ={
+                                    new SqlParameter("@Fk_ParentId",Fk_ParentId),
+                                    new SqlParameter("@Fk_StudentId",Fk_StudentId),
+                                    };
+            DataSet ds = Connection.ExecuteQuery("GetDashBoardDetailsofStudent", Param);
+            return ds;
+        }
+    }
+
+    public class DashBoardStudentDetails
+    {
+        public string Pk_StudentId { get; set; }
+        public string RollNo { get; set; }
+        public string StudentName { get; set; }
+        public string State { get; set; }
+        public string City { get; set; }
+        public string StudentPhoto { get; set; }
+        public string ClassName { get; set; }
+        public string ClassID { get; set; }
+        public string SectionName { get; set; }
+        public string SectionID { get; set; }
+        public string DateOfBirth { get; set; }
+        public string Gender { get; set; }
+        public string Mobile { get; set; }
+        public string FatherOcc { get; set; }
+        public string MotherOcc { get; set; }
+        public string CorrespondenceAddress { get; set; }
+        public string PermanentAddress { get; set; }
+    }
+
+
+    public class ParentProfileAPI
+    {
+        public string Pk_ParentID { get; set; }
+        public string Message { get; set; }
+        public string Status { get; set; }
+        public List<ProfileParentDetails> lstParentProfiledetails { get; set; }
+
+        public DataSet ParentProfileDetails()
+        {
+            SqlParameter[] para = {
+                                      new SqlParameter("@Pk_ParentID", Pk_ParentID)
+                                  };
+            DataSet ds = Connection.ExecuteQuery("Parentprofiledetails", para);
+            return ds;
+        }
+    }
+
+    public class ProfileParentDetails
+    {
+        public string ParentName { get; set; }
+        public string Email { get; set; }
+        public string Mobile { get; set; }
+        public string Address { get; set; }
+        public string PinCode { get; set; }
+        public string State { get; set; }
+        public string City { get; set; }
+    }
+
+    public class UpdateParentProfileAPI
+    {
+        public string Pk_ParentID { get; set; }
+        public string ParentName { get; set; }
+        public string Email { get; set; }
+        public string Mobile { get; set; }
+        public string Address { get; set; }
+        public string PinCode { get; set; }
+        public string State { get; set; }
+        public string City { get; set; }
+
+        public DataSet UpdateParentProfile()
+        {
+            SqlParameter[] para ={
+                                    new SqlParameter("@Pk_ParentID",Pk_ParentID),
+                                    new SqlParameter("@ParentName",ParentName),
+                                    new SqlParameter("@Email",Email),
+                                    new SqlParameter("@Mobile",Mobile),
+                                    new SqlParameter("@Address",Address),
+                                    new SqlParameter("@PinCode",PinCode),
+                                    new SqlParameter("@State",State),
+                                    new SqlParameter("@City",City),
+                                    new SqlParameter("@UpdatedBy",Pk_ParentID)
+                                };
+            DataSet ds = Connection.ExecuteQuery("UpdateParentProfile", para);
+            return ds;
+        }
+    }
+
 }

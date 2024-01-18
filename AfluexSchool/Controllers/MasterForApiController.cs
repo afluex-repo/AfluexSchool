@@ -4418,5 +4418,141 @@ namespace APSSchool.Controllers
 
         #endregion
 
+        #region GetDashBoardDetailsofStudent
+
+        public ActionResult GetDashBoardDetailsofStudent(StudentDetailsAPI model)
+        {
+            StudentDetailsAPI obj = new StudentDetailsAPI();
+            try
+            {
+                DataSet ds11 = model.GetDetailsofStudent();
+                if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
+                {
+                    List<DashBoardStudentDetails> lstStudentdetails = new List<DashBoardStudentDetails>();
+                    foreach (DataRow r in ds11.Tables[0].Rows)
+                    {
+                        DashBoardStudentDetails Objlst = new DashBoardStudentDetails();
+                        Objlst.Pk_StudentId = r["Pk_StudentId"].ToString();
+                        Objlst.RollNo = r["RollNo"].ToString();
+                        Objlst.StudentName = r["StudentName"].ToString();
+                        Objlst.State = r["State"].ToString();
+                        Objlst.City = r["City"].ToString();
+                        Objlst.StudentPhoto = r["StudentPhoto"].ToString();
+                        Objlst.ClassName = r["ClassName"].ToString();
+                        Objlst.ClassID = r["Pk_ClassID"].ToString();
+                        Objlst.SectionName = r["SectionName"].ToString();
+                        Objlst.SectionID = r["Pk_SectionID"].ToString();
+                        Objlst.DateOfBirth = r["DateOfBirth"].ToString();
+                        Objlst.Gender = r["Gender"].ToString();
+                        Objlst.Mobile = r["Mobile"].ToString();
+                        Objlst.FatherOcc = r["FatherOcc"].ToString();
+                        Objlst.MotherOcc = r["MotherOcc"].ToString();
+                        Objlst.PermanentAddress = r["PermanentAddress"].ToString();
+                        Objlst.CorrespondenceAddress = r["CorrespondenceAddress"].ToString();
+                        lstStudentdetails.Add(Objlst);
+                    }
+                    obj.lstStudentdetails = lstStudentdetails;
+
+                    obj.Status = "0";
+                    obj.Message = "Data Fetched";
+                    return Json(obj, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    obj.Status = "1";
+                    obj.Message = ds11.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    return Json(obj, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                obj.Status = "1";
+                obj.Message = ex.Message;
+                return Json(obj, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        #endregion
+
+        #region ProfileDetailsParent
+
+        public ActionResult ProfileDetailsParent(ParentProfileAPI model)
+        {
+            ParentProfileAPI obj = new ParentProfileAPI();
+            try
+            {
+                DataSet ds11 = model.ParentProfileDetails();
+                if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[0].Rows.Count > 0)
+                {
+                    List<ProfileParentDetails> lstParentProfiledetails = new List<ProfileParentDetails>();
+                    foreach (DataRow r in ds11.Tables[0].Rows)
+                    {
+                        ProfileParentDetails Objlst = new ProfileParentDetails();
+                        Objlst.ParentName = r["ParentName"].ToString();
+                        Objlst.Email = r["Email"].ToString();
+                        Objlst.Mobile = r["Mobile"].ToString();
+                        Objlst.Address = r["Address"].ToString();
+                        Objlst.PinCode = r["CorrespondencePinCode"].ToString();
+                        Objlst.State = r["CorrespondencState"].ToString();
+                        Objlst.City = r["CorrespondencCity"].ToString();
+                        lstParentProfiledetails.Add(Objlst);
+                    }
+                    obj.lstParentProfiledetails = lstParentProfiledetails;
+
+                    obj.Status = "0";
+                    obj.Message = "Data Fetched";
+                    return Json(obj, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    obj.Status = "1";
+                    obj.Message = ds11.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    return Json(obj, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                obj.Status = "1";
+                obj.Message = ex.Message;
+                return Json(obj, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        #endregion
+
+        #region UpdateParentProfile
+
+        public ActionResult UpdateParentProfile(UpdateParentProfileAPI model)
+        {
+            Responses Response = new Responses();
+            try
+            {
+                DataSet ds = model.UpdateParentProfile();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if ((ds.Tables[0].Rows[0][0].ToString() == "1"))
+                    {
+                        Response.Status = "0";
+                        Response.Message = "Profile Details Updated Successfully";
+                    }
+                    else
+                    {
+                        Response.Status = "1";
+                        Response.Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        return Json(Response, JsonRequestBehavior.AllowGet);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["EditProfile"] = ex.Message;
+                Response.Status = "1";
+                return Json(Response, JsonRequestBehavior.AllowGet);
+            }
+            return Json(Response, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion
+
     }
 }
