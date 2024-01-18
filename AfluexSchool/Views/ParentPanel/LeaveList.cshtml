@@ -7,83 +7,96 @@
 
 @using (Html.BeginForm("LeaveList", "ParentPanel", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
-    <div class="col-12 col-md-12 col-lg-12 col-xl-12 mx-auto align-self-center">
-        <div class="card border-0 shadow-sm mb-4">
-            <div class="card-header">
-                <div class="row ">
-                    <div class="col-auto">
-                        <h4 class="mt-0 mb-1">Leave List</h4>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-xxl-12 col-md-12">
+                <div class="card shadow">
+                    <div class="card-header">
+                        <h4 class="card-title font-weight-bold">Leave List</h4>
+                        @*<p style="color:red">
+                                @TempData["FeeReport"]
+                            </p>*@
                     </div>
-                    @*<p style="color:red">
-                            @TempData["EmployeeSalarySlip"]
-                        </p>*@
+                    <div class="card-body">
+                        <div class="basic-form">
+                            <form>
+                                <div class="form-row">
+                                    <div class="form-group col-md-3">
+                                        <label>  Student Id</label>
+                                        @Html.TextBoxFor(m => m.StudenLoginID, new { @class = "form-control" })
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label>From Date</label>
+                                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", placeholder = "From Date", @ReadOnly = "ReadOnly", @autoComplete = "off" })
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label> To Date</label>
+                                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", placeholder = "To Date", @ReadOnly = "ReadOnly", @autoComplete = "off" })
+                                    </div>
+                                    <div class="form-group  col-md-3">
+                                        <label class="d-lg-block d-none">&nbsp;</label>
+                                        <input type="submit" value="Search" name="btnSearch" id="btnSearch" class="btn btn-primary" />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="card-body ">
-                <div class="row">
-                    <div class="col-md-3">
-                        From Date
-                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", placeholder = "From Date", @ReadOnly = "ReadOnly", @autoComplete = "off" })
-                    </div>
-                    <div class="col-md-3">
-                        To Date
-                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", placeholder = "To Date", @ReadOnly = "ReadOnly", @autoComplete = "off" })
-                    </div>
-                    <div class="col-md-3" style="margin-top:20px">
-
-                        <input type="submit" value="Search" name="btnSearch" id="btnSearch" class="btn btn-primary" />
-                    </div>
-                </div>
-
-                <div class="col-sm-12 table-responsive">
-                    <table class="table table-bordered w-100 mb-0" id="example23">
-                        <thead>
-                            <tr>
-                                <th>S.no</th>
-                                <th>Student</th>
-                                <th>From Date    </th>
-                                <th>To Date   </th>
-                                <th>Reason</th>
-                                <th>Status </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if (Model != null)
-                            {
-                                if (Model.listStudent != null)
-                                {
-                                    int i = 1;
-                                    foreach (var item in Model.listStudent)
+            <div class="col-12">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="example5" class="display">
+                                <thead>
+                                    <tr>
+                                        <th>S.no</th>
+                                        <th>Student</th>
+                                        <th>From Date    </th>
+                                        <th>To Date   </th>
+                                        <th>Reason</th>
+                                        <th>Status </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
                                     {
-                                        <tr>
-                                            <td>
-                                                @i
-                                            </td>
-                                            <td>@item.studentName (@item.ClassName - @item.SectionName)</td>
-                                            <td>
-                                                @item.FromDate
-                                            </td>
-                                            <td>
-                                                @item.ToDate
-                                            </td>
-                                            <td>
-                                                @item.Reason
-                                            </td>
-                                            <td>
-                                                @item.Status
-                                            </td>
+                                        if (Model.listStudent != null)
+                                        {
+                                            int i = 1;
+                                            foreach (var item in Model.listStudent)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @i
+                                                    </td>
+                                                    <td>@item.studentName (@item.ClassName - @item.SectionName)</td>
+                                                    <td>
+                                                        @item.FromDate
+                                                    </td>
+                                                    <td>
+                                                        @item.ToDate
+                                                    </td>
+                                                    <td>
+                                                        @item.Reason
+                                                    </td>
+                                                    <td>
+                                                        @item.Status
+                                                    </td>
 
-                                        </tr>
-                                        i++;
+                                                </tr>
+                                                i++;
+                                            }
+                                        }
                                     }
-                                }
-                            }
-                        </tbody>
-                    </table>
-                    <div class="j-response"></div>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-
             </div>
+
         </div>
     </div>
 

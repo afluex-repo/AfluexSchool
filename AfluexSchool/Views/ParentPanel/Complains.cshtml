@@ -5,63 +5,50 @@
     Layout = "~/Views/Shared/_ParentLayout.cshtml";
 }
 
-<div class="col-12 col-md-12 col-lg-12 col-xl-12 mx-auto align-self-center">
-    <div class="card border-0 shadow-sm mb-4">
-        <div class="card-header">
-            <div class="row ">
-                <div class="col-auto">
-                    <h4 class="mt-0 mb-1">Complains</h4>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-xxl-12 col-md-12">
+            <div class="card shadow">
+                <div class="card-header">
+                    <h4 class="card-title font-weight-bold">Complains</h4>
+                    @*<p style="color:red">
+                            @TempData["FeeReport"]
+                        </p>*@
                 </div>
-                @*<p style="color:red">
-                    @TempData["ApplyLeave"]
-                </p>*@
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="panel panel-default">
-
-                        <div class="panel-body panel-scroll ps-container ps-theme-default ps-active-y" style="height:460px" data-ps-id="dd341fdb-4b50-773a-1735-745af50b49c0">
-                            <ol class="discussion">
-                                @if (Model != null)
-                                {
-                                    if (Model.listparent != null)
+                <div class="card-body">
+                    <div class="basic-form">
+                        <form>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    @if (Model != null)
                                     {
-                                        int i = 1;
-                                        foreach (var item in Model.listparent)
+                                        if (Model.listparent != null)
                                         {
-                                            <li class="@item.cssclass">
-                                                <div class="messages">
-                                                    <p>
-                                                        @item.Message
-                                                    </p>
-                                                    <span class="time"> @item.MemberName @item.AddedOn </span>
-                                                </div>
-                                            </li>
+                                            int i = 1;
+                                            foreach (var item in Model.listparent)
+                                            {
+                                                <div class="alert alert-dark solid"><strong class="text-primary">@item.Message</strong> @item.MemberName @item.AddedOn</div>
+                                                @*<span class="time"> @item.MemberName @item.AddedOn </span>*@
+                                            }
                                         }
                                     }
-                                }
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12">
-                    <div class="chat-form">
-                        <div class="input-group">
-                            <input id="txtmessage" type="text" class="form-control input-sm" placeholder="Type your message here...">
-                            <span class="input-group-btn">
-                                <input class="form-control" type="button" onclick="return savemessage();" value="Save" />
-                                <i class="fa fa-check"></i>
-
-                            </span>
-                        </div>
+                                  
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <input id="txtmessage" type="text" class="form-control" placeholder="Type your message here...">
+                                </div>
+                                <div class="form-group col-md-1">
+                                    <input class="btn btn-info" type="button" onclick="return savemessage();" value="Save" />
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 <script src="../../scripts/jquery-1.10.2.min.js"></script>
 <script>
 

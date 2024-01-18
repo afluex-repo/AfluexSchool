@@ -230,7 +230,7 @@ svg.pulse-svg .first-circle, svg.pulse-svg .second-circle, svg.pulse-svg .third-
 .header-right .header-profile .profile_title {
   background: #ff8f16; }
 [data-sidebar-style="full"][data-layout="vertical"] .menu-toggle .nav-header .nav-control .hamburger .line {
-  background-color: #ff8f16 !important; }
+  background-color: #fff !important; }
 .dlabnav .metismenu > li > a svg {
   color: #ff8f16; }
 .dlabnav .metismenu > li:hover > a, .dlabnav .metismenu > li:focus > a {
