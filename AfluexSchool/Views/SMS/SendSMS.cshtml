@@ -6,121 +6,82 @@
 }
 @using (Html.BeginForm("SendSMS", "SMS", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
-    <div>
-        <div class="login-row">
-            <div class="col-12 col-md-12 col-lg-12 col-xl-12 mx-auto align-self-center">
-                <div class="card border-0 shadow-sm mb-4">
-                    <div class="card-header">
-                        <div class="row ">
-
-                            <div class="col-auto">
-                                <h4 class="mt-0 mb-1">Send SMS</h4>
-
+    <div class="container-fluid">
+        <div class="row page-titles mx-0">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h3><b>Send SMS</b></h3>
+                </div>
+            </div>
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">SMS</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Send SMS</a></li>
+                </ol>
+            </div>
+        </div>
+        <div class="card shadow">
+            <div class="card-body">
+                <p style="color:red">
+                    @TempData["SMSMsg"]
+                </p>
+                <form>
+                    <div class="form-row">
+                        <div class="col-md-3">
+                            <div class="form-group ">
+                                <label>Select Message Template<span style="color: red">*</span></label>
+                                @Html.DropDownListFor(m => m.SMSTemplate, new SelectList(ViewBag.ddlsms, "Value", "Text"), new { @class = "form-control", @onchange = "getsms();" })
                             </div>
-                            <p style="color:red">
-                                @TempData["SMSMsg"]
-                            </p>
+                            @Html.TextBoxFor(m => m.MessageCount, new { @class = "form-control", @Placeholder = "MessageCount", @readonly = "readonly" })
+
+                            @Html.TextBoxFor(m => m.TotalSMS, new { @class = "form-control", @Placeholder = "TotalSMS", @readonly = "readonly" })
+
+                            <input type="text" id="SchoolName" class="form-control" value="@ViewBag.SchoolName" readonly="readonly" />
+                        </div>
+                        <div class="form-group col-md-9">
+                            <label>Message<span style="color: red">*</span></label>
+                            @Html.TextAreaFor(m => m.SMS, new { @class = "form-control", @Placeholder = "Message", @Rows = "7", @cols = "20", @onkeypress = "return countChar(this)", @onchange = "return countChar(this)" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Select Type<span style="color: red">*</span></label>
+                            @Html.DropDownListFor(m => m.Type, new SelectList(ViewBag.ddltype, "Value", "Text"), new { @class = "form-control", @onchange = "getstudentstaff()" })
+                            @Html.HiddenFor(m => m.SMSTemplateText)
+                        </div>
+                        <div class="form-group col-md-3" id="class" style="display:none">
+                            <label>Class</label>
+                            @Html.DropDownListFor(m => m.Fk_ClassId, new SelectList(ViewBag.ddlclass, "Value", "Text"), new { @class = "form-control", @onchange = "return OnchangeSection();" })
+                        </div>
+                        <div class="form-group col-md-3" id="section" style="display:none">
+                            <label>Section</label>
+                            @Html.DropDownListFor(m => m.Fk_SectionId, new SelectList(ViewBag.ddlsection, "Value", "Text"), new { @class = "form-control" })
+                        </div>
+                        <div class="form-group col-md-3" id="Staff">
+                            <label>Teacher</label>
+                            @Html.DropDownListFor(m => m.Fk_StaffId, new SelectList(ViewBag.ddlstaff, "Value", "Text"), new { @class = "form-control" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Father Name</label>
+                            @Html.TextBoxFor(m => m.FatherName, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group col-md-12">
+                            <input type="submit" id="GetDetails" name="GetDetails" value="Get Details" class="btn btn-info" onclick="return fvalidate();" />
                         </div>
                     </div>
-                    <div class="card-body">
-
-                        <div class="row justify-content-center">
-                            <div class="col-md-12 mx-auto">
-                                <div class="row ">
-                                    <div class="col-lg-3 col-md-3">
-                                        <div class="form-group ">
-                                            <label>Select Message Template  <span style="color: red">*</span></label>
-                                            @Html.DropDownListFor(m => m.SMSTemplate, new SelectList(ViewBag.ddlsms, "Value", "Text"), new { @class = "form-control", @onchange = "getsms();" })
-                                        </div>
-
-                                        @Html.TextBoxFor(m => m.MessageCount, new { @class = "form-control", @Placeholder = "MessageCount", @readonly = "readonly" })
-
-                                        @Html.TextBoxFor(m => m.TotalSMS, new { @class = "form-control", @Placeholder = "TotalSMS", @readonly = "readonly" })
-
-                                        <input type="text" id="SchoolName" class="form-control" value="@ViewBag.SchoolName" readonly="readonly" />
-
-                                    </div>
-                                    <div class="col-lg-9 col-md-9">
-                                        <div class="form-group ">
-                                            <label>Message <span style="color: red">*</span></label>
-                                            @Html.TextAreaFor(m => m.SMS, new { @class = "form-control", @Placeholder = "Message", @Rows = "7", @cols = "20", @onkeypress = "return countChar(this)", @onchange = "return countChar(this)" })
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <div class="row ">
-
-
-                                    @*<div class="col-lg-3 col-md-3">
-                                            <br />
-                                            <br />
-                                            @Html.TextBoxFor(m => m.MessageCount, new { @class = "form-control", @Placeholder = "MessageCount", @readonly = "readonly" })
-
-                                            @Html.TextBoxFor(m => m.TotalSMS, new { @class = "form-control", @Placeholder = "TotalSMS", @readonly = "readonly" })
-
-                                            <input type="text" id="SchoolName" class="form-control" value="@ViewBag.SchoolName" readonly="readonly" />
-
-                                        </div>*@
-                                    <div class="col-lg-3 col-md-3">
-                                        <div class="form-group ">
-                                            <label>Select Type <span style="color: red">*</span></label>
-                                            @Html.DropDownListFor(m => m.Type, new SelectList(ViewBag.ddltype, "Value", "Text"), new { @class = "form-control", @onchange = "getstudentstaff()" })
-                                            @Html.HiddenFor(m => m.SMSTemplateText)
-                                        </div>
-
-                                    </div>
-                                    <div class="col-lg-3 col-md-3" id="class" style="display:none">
-                                        <div class="form-group ">
-                                            <label> Class  </label>
-                                            @Html.DropDownListFor(m => m.Fk_ClassId, new SelectList(ViewBag.ddlclass, "Value", "Text"), new { @class = "form-control", @onchange = "return OnchangeSection();" })
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-3" id="section" style="display:none">
-                                        <div class="form-group ">
-                                            <label>Section  </label>
-                                            @Html.DropDownListFor(m => m.Fk_SectionId, new SelectList(ViewBag.ddlsection, "Value", "Text"), new { @class = "form-control" })
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-6 col-md-6" id="Staff">
-                                        <div class="form-group ">
-                                            <label>Teacher  </label>
-                                            @Html.DropDownListFor(m => m.Fk_StaffId, new SelectList(ViewBag.ddlstaff, "Value", "Text"), new { @class = "form-control" })
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-3">
-                                        <div class="form-group ">
-                                            <label>Father Name </label>
-                                            @Html.TextBoxFor(m => m.FatherName, new { @class = "form-control" })
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-3">
-                                        <div class="form-group ">
-                                            <br />
-                                            <input type="submit" id="GetDetails" name="GetDetails" value="Get Details" class="btn btn-info" onclick="return fvalidate();" />
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                            </div>
+                </form>
+                @if (Model != null)
+                {
+                    if (Model.lstsmsdata != null)
+                    {
+                        int i = 1;
+                        <div class="col-md-12 mb-3">
+                            <input type="submit" id="SendSMS1" name="SendSMS1" value="Send SMS" class="btn btn-primary" onclick="return fvalidatesave();" />
                         </div>
-
-                        @if (Model != null)
-                        {
-                            if (Model.lstsmsdata != null)
-                            {
-                                int i = 1;
-                                <div class="card-footer text-left">
-                                    <input type="submit" id="SendSMS1" name="SendSMS1" value="Send SMS" class="btn btn-primary" onclick="return fvalidatesave();" />
-                                </div>
-                                <div class="table-responsive" style="height: 1014px; overflow-y: scroll;">
-                                    <table class="table datatable display responsive w-100 dataTable no-footer dtr-inline" style="width: 1002px;">
+                                <div class="table-responsive">
+                                    <table id="example5" class="display table" style="min-width:845px">
                                         <thead>
                                             <tr>
-                                                <th>S.no</th>
-                                                <th> Select All&nbsp;&nbsp; <input type="checkbox" name="checkedAll" id="checkedAll" style="margin-top:3px;" /></th>
+                                                <th>S.No</th>
+                                                <th><input type="checkbox" name="checkedAll" id="checkedAll" style="margin-top:3px;" />&nbsp;&nbsp;Select All</th>
                                                 <th>Name</th>
                                                 <th>Class</th>
                                                 <th>Section</th>
@@ -129,15 +90,10 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-
                                             @foreach (var item in Model.lstsmsdata)
                                             {
-
                                                 <tr>
-                                                    <td>
-                                                        @i
-
-                                                    </td>
+                                                    <td>@i</td>
                                                     <td>
                                                         <input type="checkbox" class="chkclass" id="chk_@i" name="chk_@i" />
                                                         <input type="hidden" id="Mbile_@i" name="Mbile_@i" value="@item.MobileNo" />
@@ -164,21 +120,17 @@
                                             <input type="hidden" name="Hdrows" id="Hdrows" value="@i" />
 
                                         </tbody>
-
                                     </table>
                                 </div>
-
-
-                                <div class="card-footer text-left">
+                                <div class="col-md-12 mt-3">
                                     <input type="submit" id="SendSMS" name="SendSMS" value="Send SMS" class="btn btn-primary" onclick="return fvalidatesave();" />
                                 </div>
-                            }
-                        }
-                    </div>
-                </div>
+                    }
+                }
             </div>
         </div>
     </div>
+
 }
 <script src="../../scripts/jquery-1.10.2.min.js"></script>
 <script>
