@@ -4375,5 +4375,48 @@ namespace APSSchool.Controllers
 
         #endregion
 
+        #region GetNoticeForParent
+
+        public ActionResult GetNoticeForParent(GetNoticeAPI model)
+        {
+            GetNoticeAPI obj = new GetNoticeAPI();
+            try
+            {
+                DataSet ds11 = model.GetNoticeList();
+
+                if (ds11 != null && ds11.Tables.Count > 0 && ds11.Tables[1].Rows.Count > 0)
+                {
+                    List<NoticeListParent> lstnotice = new List<NoticeListParent>();
+                    foreach (DataRow r in ds11.Tables[1].Rows)
+                    {
+                        NoticeListParent Objlst = new NoticeListParent();
+                        Objlst.Notice = r["NoticeName"].ToString();
+                        Objlst.ClassName = r["ClassName"].ToString();
+                        Objlst.SectionName = r["SectionName"].ToString();
+                        lstnotice.Add(Objlst);
+                    }
+                    obj.lstnotice = lstnotice;
+
+                    obj.Status = "0";
+                    obj.Message = "Data Fetched";
+                    return Json(obj, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    obj.Status = "1";
+                    obj.Message = ds11.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    return Json(obj, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                obj.Status = "1";
+                obj.Message = ex.Message;
+                return Json(obj, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        #endregion
+
     }
 }

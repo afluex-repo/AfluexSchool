@@ -7,47 +7,45 @@
 
 @using (Html.BeginForm("ApplyLeave", "ParentPanel", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
-    <div class="col-12 col-md-12 col-lg-12 col-xl-12 mx-auto align-self-center">
-        <div class="card border-0 shadow-sm mb-4">
-            <div class="card-header">
-                <div class="row ">
-                    <div class="col-auto">
-                        <h4 class="mt-0 mb-1">Apply Leave</h4>
-                    </div>
-                    <p style="color:red">
-                        @TempData["ApplyLeave"]
-                    </p>
-                </div>
-            </div>
 
-            <div class="card-body ">
-                <div class="row">
-                    <div class="col-md-4">
-                        <label>Student</label>
-
-                        @Html.DropDownListFor(m => m.Pk_StudentID, new SelectList(ViewBag.ddlStudent, "Value", "Text"), new { @class = "form-control", @onchange = "return OnchangeSection();" })
-                        @Html.HiddenFor(m => m.Fk_ParentId)
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-xxl-12 col-md-12">
+                <div class="card shadow">
+                    <div class="card-header">
+                        <h4 class="card-title font-weight-bold">Apply Leave</h4>
+                        <p style="color:red">
+                                @TempData["ApplyLeave"]
+                            </p>
                     </div>
-                    <div class="col-md-4">
-                        <label>  From Date</label>
-                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @autoComplete = "off" })
-
-                    </div>
-                    <div class="col-md-4">
-                        <label>  To Date</label>
-                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @autoComplete = "off" })
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <label>Reason</label>
-                        @Html.TextAreaFor(m => m.Reason, new { @class = "form-control" })
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        <label class="d-block">&nbsp;</label>
-                        <input type="submit" class="btn btn-info" name="Apply" id="Apply" value="Apply" />
+                    <div class="card-body">
+                        <div class="basic-form">
+                            <form>
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label>Student</label>
+                                        @Html.DropDownListFor(m => m.Pk_StudentID, new SelectList(ViewBag.ddlStudent, "Value", "Text"), new { @class = "form-control", @onchange = "return OnchangeSection();" })
+                                        @Html.HiddenFor(m => m.Fk_ParentId)
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>  From Date</label>
+                                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @autoComplete = "off" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label>  To Date</label>
+                                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @autoComplete = "off" })
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label>Reason</label>
+                                        @Html.TextAreaFor(m => m.Reason, new { @class = "form-control" })
+                                    </div>
+                                    <div class="form-group  col-md-3">
+                                        <label class="d-lg-block d-none">&nbsp;</label>
+                                        <input type="submit" class="btn btn-info" name="Apply" id="Apply" value="Apply" />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

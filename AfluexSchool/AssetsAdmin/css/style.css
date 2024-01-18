@@ -21260,10 +21260,10 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
 
 .bootstrap-select {
   margin-bottom: 0; }
-  .bootstrap-select .btn {
-    border: 1px solid #eaeaea !important;
-    background-color: #f8f9fa !important;
-    padding: 0.375rem 1rem; }
+  /*.bootstrap-select .btn {
+    border: 1px solid #eaeaea;
+    background-color: #f8f9fa;
+    padding: 0.375rem 1rem; }*/
     [data-theme-version="dark"] .bootstrap-select .btn {
       background: #1d1e26 !important;
       border: 1px solid #383c46 !important;
@@ -22242,7 +22242,7 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
 .page-titles {
   padding: 0.9375rem 1.25rem;
   background: #fff;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   border-radius: 5px; }
   [data-theme-version="dark"] .page-titles {
     background: #262932; }
@@ -24070,7 +24070,7 @@ table.dataTable tbody tr, table.dataTable tbody td {
   background: transparent !important; }
 
 table.dataTable thead th {
-  color: #454545;
+  color: #000000;
   font-weight: 600; }
   [data-theme-version="dark"] table.dataTable thead th {
     color: #fff; }

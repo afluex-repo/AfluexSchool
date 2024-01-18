@@ -7,92 +7,69 @@
 
 @using (Html.BeginForm("Homework", "TeacherLogin", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
-    <div>
-          <div class="login-row">
-            <div class="col-12 col-md-12 col-lg-12 col-xl-12 mx-auto align-self-center">
-                <div class="card border-0 shadow-sm mb-4">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-xxl-12 col-md-12">
+                <div class="card shadow">
                     <div class="card-header">
-                        <div class="row ">
-                            <div class="col-auto">
-                                <h4 class="mt-0 mb-1">Homework </h4>
-                            </div>
-                            <p style="color:red">
-                                @TempData["Homework"]
-                            </p>
-                        </div>
+                        <h4 class="card-title font-weight-bold">Homework</h4>
+                        <p style="color:red">
+                            @TempData["Homework"]
+                        </p>
                     </div>
                     <div class="card-body">
-
-                        <div class="row justify-content-center">
-                            <div class="col-md-12 mx-auto">
-                                <div class="row ">
-
-                                    <div class="col-lg-3 col-md-3">
-                                        <div class="form-group ">
-                                            <label> Class <span style="color:red">*</span></label>
-                                            @Html.DropDownListFor(m => m.Fk_ClassID, new SelectList(ViewBag.ddlClass, "Value", "Text"), new { @class = "form-control", @onchange = "return GetSectionByClass();" })
-
-                                        </div>
+                        <div class="basic-form">
+                            <form>
+                                <div class="form-row">
+                                    <div class="form-group col-md-3">
+                                        <label> Class <span style="color:red">*</span></label>
+                                        @Html.DropDownListFor(m => m.Fk_ClassID, new SelectList(ViewBag.ddlClass, "Value", "Text"), new { @class = "form-control", @onchange = "return GetSectionByClass();" })
                                     </div>
-                                    <div class="col-lg-3 col-md-3">
-                                        <div class="form-group ">
-                                            <label> Section <span style="color:red">*</span></label>
-                                            @Html.DropDownListFor(m => m.Fk_SectionID, new SelectList(ViewBag.ddlsection, "Value", "Text"), new { @class = "form-control", @onchange = "return GetSubjectNameBySection ();" })
-                                        </div>
+                                    <div class="form-group  col-md-3">
+                                        <label> Section <span style="color:red">*</span></label>
+                                        @Html.DropDownListFor(m => m.Fk_SectionID, new SelectList(ViewBag.ddlsection, "Value", "Text"), new { @class = "form-control", @onchange = "return GetSubjectNameBySection ();" })
                                     </div>
-                                    <div class="col-lg-3 col-md-3">
-                                        <div class="form-group ">
-                                            <label> Subject <span style="color:red">*</span></label>
-                                            @Html.DropDownListFor(m => m.SubjectID, new SelectList(ViewBag.ddlSubjectName, "Value", "Text"), new { @class = "form-control" })
-                                        </div>
+                                    <div class="form-group  col-md-3">
+                                        <label> Subject <span style="color:red">*</span></label>
+                                        @Html.DropDownListFor(m => m.SubjectID, new SelectList(ViewBag.ddlSubjectName, "Value", "Text"), new { @class = "form-control" })
                                     </div>
-                                    <div class="col-lg-3 col-md-3">
-                                        <div class="form-group ">
-                                            <label> Date <span style="color:red">*</span></label>
-                                            @Html.TextBoxFor(m => m.HomeworkDate, new { @class = "form-control", @autoComplete = "off" })
-                                        </div>
+                                    <div class="form-group  col-md-3">
+                                        <label> Date <span style="color:red">*</span></label>
+                                        @Html.TextBoxFor(m => m.HomeworkDate, new { @class = "form-control", @autoComplete = "off" })
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-3 col-md-3">
+                                    <div class="form-group  col-md-3">
                                         <label for="textfield1">Upload File  </label>
                                         <input type="radio" name="hmwrk" id="file" onclick="return fileupload()" />
                                     </div>
-                                    <div class="col-lg-3 col-md-3">
+                                    <div class="form-group  col-md-3">
                                         <label for="textfield1">Upload Text  </label>
                                         <input type="radio" name="hmwrk" id="text" onclick="return textupload()" />
                                     </div>
-                                </div>
-                                <div class="row " id="divtext">
-                                    <div class="col-lg-12 col-md-12">
+                                    <div class="col-lg-12 col-md-12" id="divtext">
                                         <label for="textfield1">Homework <span style="color:red">*</span></label>
                                         <textarea class="click2edit" id="summernoteInclusions" name="awardDescription" rows="3"></textarea>
                                         @Html.HiddenFor(m => m.HomeWorkHTML)
                                         @Html.HiddenFor(m => m.HomeWorkID)
                                     </div>
-                                </div>
-
-                                <div class="row" id="divfile">
-                                    <div class="col-lg-3 col-md-3">
+                                    <div class="col-lg-3 col-md-3" id="divfile">
                                         <div class="form-group ">
                                             <label> Upload Work <span style="color: red">*</span></label>
                                             <input type="file" name="StudentFiles" class="bg-default form-control" id="StudentPhoto" accept="image/*" />
                                         </div>
                                     </div>
+                                    <div class="form-group  col-md-3">
+                                        <label class="d-lg-block d-none">&nbsp;</label>
+                                        <input type="submit" class="btn btn-success" onclick="return validateform();" name="btnsave" id="btnSave" value="Save" />
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-
-                        <div class="card-footer text-left">
-                            <input type="submit" class="btn btn-success" onclick="return validateform();" name="btnsave" id="btnSave" value="Save" />
+                            </form>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
-
 
 }
 <script src="../../AdminPanelcss/assets/js/jquery-3.3.1.min.js"></script>

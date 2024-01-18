@@ -5,97 +5,81 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<style>
+    .errortext{
+        border:1px solid red!important;
+        background-color:#fabdbd!important;
+    }
+</style>
+
 @using (Html.BeginForm("EmployeeSalary", "HRManagement", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
-    <div>
-          <div class="login-row">
-            <div class="col-12 col-md-12 col-lg-12 col-xl-12 mx-auto align-self-center">
-                <div class="card border-0 shadow-sm mb-4">
-                    <div class="card-header">
-                        <div class="row ">
-                            <div class="col-auto">
-                                <h4 class="mt-0 mb-1">Teacher Salary</h4>
-                            </div>
-                            <p style="color:red">
-                                @TempData["EmpSal"]
-                            </p>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="row justify-content-center">
-                            <div class="col-md-12 mx-auto">
-                                <div class="row ">
-                                    <div class="col-lg-3 col-md-3">
-                                        <div class="form-group ">
-                                            <label>Customer Branch <span style="color:red">*</span></label>
-
-
-                                            @Html.DropDownListFor(m => m.Branch, new SelectList(ViewBag.ddlbranch, "Value", "Text"), new { @class = "form-control", @onchange = "return GetEmployee();" })
-
-
-                                            @Html.HiddenFor(m => m.LoginId)
-
-
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-3">
-                                        <label>Employee Name <span style="color:red">*</span></label>
-                                        <div class="controls">
-                                            @Html.DropDownListFor(m => m.EmployeeID, new SelectList(ViewBag.ddlEmployee, "Value", "Text"), new { @class = "form-control" })
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-3">
-
-                                        <div class="form-group">
-                                            <label>Payment Date <span style="color:red">*</span></label>
-                                            @Html.TextBoxFor(m => m.PaymentDate, new { @class = "form-control", @Placeholder = "Payment Date" })
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-3">
-
-                                        <div class="controls">
-                                            <br />
-                                            <input type="submit" name="Search" id="Search" value="Search" class="btn btn-info" onclick="return validateform();" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.col -->
-                        </div>
-                    </div>
-                    <!-- /.EndBasicInfo -->
-                    <!-- Validation Forms -->
-                    <!-- /.box-header -->
+    <div class="container-fluid">
+        <div class="row page-titles mx-0">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h3><b>Teacher Salary</b></h3>
                 </div>
-@if (Model != null)
-{
-    if (Model.lstList != null)
-    {
-        int i = 1;
-                <div class="card-body">
-                    <div class="col-lg-12">
-                        <div class="row">
+            </div>
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">HR</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Teacher Salary</a></li>
+                </ol>
+            </div>
+        </div>
+        <div class="card shadow">
+            <div class="card-body">
+                <p style="color:red">
+                    @TempData["EmpSal"]
+                </p>
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label>Customer Branch<span style="color:red">*</span></label>
+                            @Html.DropDownListFor(m => m.Branch, new SelectList(ViewBag.ddlbranch, "Value", "Text"), new { @class = "form-control", @onchange = "return GetEmployee();" })
+                            @Html.HiddenFor(m => m.LoginId)
+                        </div>
+                        <div class="form-group  col-md-3">
+                            <label>Employee Name<span style="color:red">*</span></label>
+                            @Html.DropDownListFor(m => m.EmployeeID, new SelectList(ViewBag.ddlEmployee, "Value", "Text"), new { @class = "form-control" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Payment Date<span style="color:red">*</span></label>
+                            @Html.TextBoxFor(m => m.PaymentDate, new { @class = "form-control", @Placeholder = "Payment Date" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label class="d-block">&nbsp;</label>
+                            <input type="submit" name="Search" id="Search" value="Search" class="btn btn-info" onclick="return validateform();" />
+                        </div>
+                    </div>
+                </form>
 
-
-                            <div class="col-md-12 col-lg-6">
-                                <div>
-                                    <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-
-                                        <!-- /.box-header -->
-                                        <h4 class="page-header">Earning</h4>
+                @if (Model != null)
+                {
+                    if (Model.lstList != null)
+                    {
+                        int i = 1;
+                                <div class="row mt-3">
+                                    <div class="col-md-12 col-lg-6">
                                         <div>
-                                            <table class="table datatable display responsive w-100 dataTable no-footer dtr-inline" style="width: 1002px;">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Code</th>
-                                                        <th>Name</th>
-                                                        <th>IsAmt/Per</th>
-                                                        <th>Value</th>
-                                                        <th>Amount</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                   
+                                            <div class="table-responsive">
+
+                                                <!-- /.box-header -->
+                                                <h4 class="page-header">Earning</h4>
+                                                <div>
+                                                    <table class="display table" style="min-width:845px">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Code</th>
+                                                                <th>Name</th>
+                                                                <th>IsAmt/Per</th>
+                                                                <th>Value</th>
+                                                                <th>Amount</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+
                                                             @foreach (var Item in Model.lstList)
                                                             {
                                                                 <tr class="text-left">
@@ -116,103 +100,86 @@
                                                                 i++;
                                                             }
                                                             <input type='hidden' value='@i' id='hdrows' name='hdrows' />
-                                                        
-                                                </tbody>
-                                                 
-                                            </table>
-                                            @*<div class="text-center">  <h5>Total</h5>   <input type="text" id="txtTotalEarning" /></div>*@
+                                                        </tbody>
+                                                    </table>
+                                                    @*<div class="text-center">  <h5>Total</h5>   <input type="text" id="txtTotalEarning" /></div>*@
 
+                                                </div>
+                                            </div>
                                         </div>
-                                        <!-- /.box-body -->
                                     </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-12 col-lg-6">
-                                <div>
-                                    <h4 class="page-header">Deduction</h4>
-                                    <!-- /.box-header -->
-                                    <div>
-                                        <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-
-                                            <table class="table datatable display responsive w-100 dataTable no-footer dtr-inline" style="width: 1002px;">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Code</th>
-                                                        <th>Name</th>
-                                                        <th>IsAmt/Per</th>
-                                                        <th>Value</th>
-                                                        <th>Amount</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @if (Model != null)
-                                                    {
-                                                        if (Model.lstList1 != null)
-                                                        {
-                                                            int j = 1;
-                                                            foreach (var Item1 in Model.lstList1)
+                                    <div class="col-md-12 col-lg-6">
+                                        <div>
+                                            <h4 class="page-header">Deduction</h4>
+                                            <!-- /.box-header -->
+                                            <div>
+                                                <div class="table-responsive">
+                                                    <table class="display table" style="min-width:845px">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Code</th>
+                                                                <th>Name</th>
+                                                                <th>IsAmt/Per</th>
+                                                                <th>Value</th>
+                                                                <th>Amount</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @if (Model != null)
                                                             {
-                                                                <tr class="text-left">
+                                                                if (Model.lstList1 != null)
+                                                                {
+                                                                    int j = 1;
+                                                                    foreach (var Item1 in Model.lstList1)
+                                                                    {
+                                                                        <tr class="text-left">
 
-                                                                    <td>@Item1.SalaryHeadCode</td>
-                                                                    <td>@Item1.SalaryHeadName</td>
+                                                                            <td>@Item1.SalaryHeadCode</td>
+                                                                            <td>@Item1.SalaryHeadName</td>
 
-                                                                    <td>@Item1.IsAmtPer</td>
-                                                                    <td><input type="text" value="@Item1.Value" class="form-control" id="txtDedVal @j" name="txtDedVal @j" onchange="getdata3(this,'@Item1.IsAmtPer','@j')" /></td>
-                                                                    <td>
-                                                                        <input type="text" class="form-control" value="@Item1.PaidAmount" id="txtDedAmt @j" name="txtDedAmt @j" onchange="getdata4(this)" readonly="readonly" />
+                                                                            <td>@Item1.IsAmtPer</td>
+                                                                            <td><input type="text" value="@Item1.Value" class="form-control" id="txtDedVal @j" name="txtDedVal @j" onchange="getdata3(this,'@Item1.IsAmtPer','@j')" /></td>
+                                                                            <td>
+                                                                                <input type="text" class="form-control" value="@Item1.PaidAmount" id="txtDedAmt @j" name="txtDedAmt @j" onchange="getdata4(this)" readonly="readonly" />
 
-                                                                        <input type='hidden' value='@Item1.SalaryHeadID' id='DSalHeadId_ @j' name='DSalHeadId_ @j'>
-                                                                        <input type='hidden' value='@Item1.SalaryAmount' id='DSalAmt_ @j' name='DSalAmt_ @j'>
+                                                                                <input type='hidden' value='@Item1.SalaryHeadID' id='DSalHeadId_ @j' name='DSalHeadId_ @j'>
+                                                                                <input type='hidden' value='@Item1.SalaryAmount' id='DSalAmt_ @j' name='DSalAmt_ @j'>
 
-                                                                    </td>
-                                                                </tr>
-                                                                j++;
+                                                                            </td>
+                                                                        </tr>
+                                                                        j++;
+                                                                    }
+                                                                    <input type='hidden' value='@j' id='hdrows1' name='hdrows1' />
+                                                                }
                                                             }
-                                                            <input type='hidden' value='@j' id='hdrows1' name='hdrows1' />
-
-
-                                                        }
-                                                    }
-                                                </tbody>
-                                                
-                                            </table>
-                                            @*<div class="text-center">  <h5>Total</h5>   <input type="text" id="txtTotalDeduction" /></div>*@
+                                                        </tbody>
+                                                    </table>
+                                                    @*<div class="text-center">  <h5>Total</h5>   <input type="text" id="txtTotalDeduction" /></div>*@
+                                                </div>
+                                            </div>
                                         </div>
-
-                                        <!-- /.box-body -->
                                     </div>
-
-                                   
+                                    <div class="col-md-12 mt-3">
+                                        <input type="submit" value="Save" id="Save" name="Save" class="btn btn-success" onclick="return SaveValidate();" />
+                                    </div>
+                                    
                                 </div>
+                            <input type="hidden" id="TxtValEarning" />
+                            <input type="hidden" id="headtypeE" />
+                            <input type="hidden" id="TxtAmtEarning" />
+                            <input type="hidden" id="TxtValDeduction" />
+                            <input type="hidden" id="TxtAmtDeduction" />
+                            <input type="hidden" id="headtypeD" />
+                            <input type="hidden" id="hdTotalEarning" />
+                            <input type="hidden" id="hdTotalEarning1" />
+                    }
+                }
 
-                            </div>
-
-                            <!-- /.EndBasicInfo -->
-                            <!-- /.box-body -->
-                            <input type="submit" value="Save" id="Save" name="Save" class="btn btn-success align left" style="text-align:center" onclick="return SaveValidate();" />
-                        </div>
-                        <!-- /.box -->
-
-                    </div>
-                    <input type="hidden" id="TxtValEarning" />
-                    <input type="hidden" id="headtypeE" />
-                    <input type="hidden" id="TxtAmtEarning" />
-                    <input type="hidden" id="TxtValDeduction" />
-                    <input type="hidden" id="TxtAmtDeduction" />
-                    <input type="hidden" id="headtypeD" />
-                    <input type="hidden" id="hdTotalEarning" />
-                    <input type="hidden" id="hdTotalEarning1" />
-                </div>
-    }
-}
             </div>
         </div>
     </div>
 
-
-
+    
 }
 
 
@@ -220,16 +187,18 @@
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
 
 <script>
     $(document).ready(function () {
         debugger;
         $("#divload").css({ 'display': 'none' });
-
+        $(".errortext").removeClass("errortext");
     });
 
     function validateform() {
+        $("#divload").css({ 'display': 'none' });
+        $(".errortext").removeClass("errortext");
+
         if ($("#Branch").val() == "0") {
             $("#Branch").addClass('errortext');
             $("#Branch").focus();
