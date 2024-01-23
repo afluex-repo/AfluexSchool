@@ -8,150 +8,132 @@
 
 @using (Html.BeginForm("EmployeeSalarySlip", "TeacherLogin", FormMethod.Post, new { @id = "signupForm", enctype = "multipart/form-data" }))
 {
-    <div>
-          <div class="login-row">
-            <div class="col-12 col-md-12 col-lg-12 col-xl-12 mx-auto align-self-center">
-                <div class="card border-0 shadow-sm mb-4">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-xxl-12 col-md-12">
+                <div class="card shadow">
                     <div class="card-header">
-                        <div class="row ">
-
-                            <div class="col-auto">
-                                <h4 class="mt-0 mb-1">Teacher Salary Slip</h4>
-
-                            </div>
-                            <p style="color:red">
-                                @TempData["EmployeeSalarySlip"]
-                            </p>
-                        </div>
+                        <h4 class="card-title font-weight-bold">Teacher Salary Slip</h4>
+                        <p style="color:red">
+                            @TempData["EmployeeSalarySlip"]
+                        </p>
                     </div>
                     <div class="card-body">
+                        <div class="basic-form">
+                            <form>
 
-                        <div class="row justify-content-center">
-                            <div class="col-md-12 mx-auto">
-                                <div class="row ">
-                                    <div class="col-lg-3 col-md-3">
-
-                                        <div class="form-group">
-                                            <label>From Date </label>
-                                            @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @Placeholder = "From Date", @autoComplete = "off" })
-                                        </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-3">
+                                        <label>From Date </label>
+                                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @Placeholder = "From Date", @autoComplete = "off" })
                                     </div>
-                                    <div class="col-lg-3 col-md-3">
-
-                                        <div class="form-group">
-                                            <label>ToDate </label>
-                                            @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @Placeholder = "To Date", @autoComplete = "off" })
-                                        </div>
+                                    <div class="form-group  col-md-3">
+                                        <label>To Date </label>
+                                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @Placeholder = "To Date", @autoComplete = "off" })
+                                    </div>
+                                    <div class="form-group  col-md-3">
+                                        <label class="d-lg-block d-none">&nbsp;</label>
+                                        <input type="submit" value="Get Details" class="btn btn-primary" name="Search" onclick="return ValidateSearch();" />
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-lg-3 col-md-3">
-                                        <div class="form-group">
-                                            <input type="submit" value="Get Details" class="btn btn-primary" name="Search" onclick="return ValidateSearch();" />
-                                        </div>
-                                    </div>
-                                </div>
-                                @if (Model != null)
-                {
-                    if (Model.lstList != null)
-                    {
-                                        <div class="row">
-                                            <div class="table-responsive">
-
-                                                <div class="col-md-12 ">
-
-                                                    <table class="table datatable display responsive w-100 dataTable no-footer dtr-inline" style="width: 1002px;">
-                                                        <thead>
-                                                            <tr>
-                                                                <th> </th>
-                                                                <th>Sr.No.</th>
-                                                                <th>Emp Code</th>
-                                                                <th>Emp Name</th>
-                                                                <th>Basic      </th>
-                                                                <th>HRA         </th>
-                                                                <th>MA    </th>
-                                                                <th>PA       </th>
-                                                                <th>CA    </th>
-                                                                <th>PF    </th>
-                                                                <th>ExtraWork              </th>
-                                                                <th>Incentive              </th>
-                                                                <th>OtherPay               </th>
-                                                                <th>TotalIncome            </th>
-                                                                <th>ContributionTosociety  </th>
-                                                                <th>Advance                </th>
-                                                                <th>TDS                    </th>
-                                                                <th>Insurance              </th>
-                                                                <th>Other                  </th>
-                                                                <th>TotalDeduction         </th>
-                                                                <th>MonthName              </th>
-                                                                <th>Year                   </th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            @if (Model != null)
-                                                            {
-                                                                if (Model.lstList != null)
-                                                                {
-                                                                    int i = 1;
-                                                                    foreach (var item in Model.lstList)
-                                                                    {
-                                                                        <tr>
-                                                                            <td>
-                                                                                <a href="/TeacherLogin/PrintSalarySlip?Pk_PaidSalId=@item.Pk_PaidSalId&EmployeeID=@item.EmployeeID" class="btn btn-success btn-sm" target="_blank">Print</a>
-
-                                                                            </td>
-                                                                            <td>
-                                                                                @i
-                                                                            </td>
-                                                                            <td>@item.EmployeeCode   </td>
-                                                                            <td>@item.EmployeeName   </td>
-
-                                                                            <td>@item.Basic</td>
-                                                                            <td>@item.HRA  </td>
-                                                                            <td> @item.MA </td>
-                                                                            <td>@item.PA</td>
-                                                                            <td>@item.CA</td>
-                                                                            <td>@item.PF</td>
-                                                                            <td>@item.ExtraWork </td>
-                                                                            <td>@item.Incentive </td>
-                                                                            <td>@item.OtherPay  </td>
-                                                                            <td>@item.TotalIncome</td>
-                                                                            <td>@item.ContributionTosociety</td>
-                                                                            <td>@item.Advance   </td>
-                                                                            <td>@item.TDS       </td>
-                                                                            <td>@item.Insurance </td>
-                                                                            <td>@item.Other     </td>
-                                                                            <td>@item.TotalDeduction</td>
-                                                                            <td>@item.MonthName  </td>
-                                                                            <td>@item.Year </td>
-                                                                        </tr>
-                                                                        i++;
-                                                                    }
-                                                                    <input type="hidden" id="hdRows" name="hdRows" value="@i" />
-                                                                }
-                                                            }
-
-                                                        </tbody>
-
-                                                    </table>
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    }
-                                }
-                            </div>
+                            </form>
                         </div>
-
                     </div>
-
                 </div>
             </div>
+@if (Model != null)
+{
+    if (Model.lstList != null)
+    {
+            <div class="col-12">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                    
+                            <table id="example5" class="display">
+                                <thead>
+                                    <tr>
+                                        <th> </th>
+                                        <th>Sr.No.</th>
+                                        <th>Emp Code</th>
+                                        <th>Emp Name</th>
+                                        <th>Basic </th>
+                                        <th>HRA </th>
+                                        <th>MA </th>
+                                        <th>PA </th>
+                                        <th>CA </th>
+                                        <th>PF </th>
+                                        <th>ExtraWork </th>
+                                        <th>Incentive </th>
+                                        <th>OtherPay </th>
+                                        <th>TotalIncome </th>
+                                        <th>ContributionTosociety </th>
+                                        <th>Advance </th>
+                                        <th>TDS </th>
+                                        <th>Insurance </th>
+                                        <th>Other </th>
+                                        <th>TotalDeduction </th>
+                                        <th>MonthName </th>
+                                        <th>Year </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
+                                    {
+                                        if (Model.lstList != null)
+                                        {
+                                            int i = 1;
+                                            foreach (var item in Model.lstList)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        <a href="/TeacherLogin/PrintSalarySlip?Pk_PaidSalId=@item.Pk_PaidSalId&EmployeeID=@item.EmployeeID" class="btn btn-success btn-sm" target="_blank">Print</a>
+
+                                                    </td>
+                                                    <td>
+                                                        @i
+                                                    </td>
+                                                    <td>@item.EmployeeCode </td>
+                                                    <td>@item.EmployeeName </td>
+
+                                                    <td>@item.Basic</td>
+                                                    <td>@item.HRA </td>
+                                                    <td> @item.MA </td>
+                                                    <td>@item.PA</td>
+                                                    <td>@item.CA</td>
+                                                    <td>@item.PF</td>
+                                                    <td>@item.ExtraWork </td>
+                                                    <td>@item.Incentive </td>
+                                                    <td>@item.OtherPay </td>
+                                                    <td>@item.TotalIncome</td>
+                                                    <td>@item.ContributionTosociety</td>
+                                                    <td>@item.Advance </td>
+                                                    <td>@item.TDS </td>
+                                                    <td>@item.Insurance </td>
+                                                    <td>@item.Other </td>
+                                                    <td>@item.TotalDeduction</td>
+                                                    <td>@item.MonthName </td>
+                                                    <td>@item.Year </td>
+                                                </tr>
+                                                i++;
+                                            }
+                                            <input type="hidden" id="hdRows" name="hdRows" value="@i" />
+                                        }
+                                    }
+
+                                </tbody>
+
+                            </table>
+                          
+                        </div>
+                    </div>
+                </div>
+            </div>
+    }
+}
         </div>
     </div>
-
-
 
 }
 
@@ -162,39 +144,42 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
 
 <script>
+	$( document ).ready( function () {
+		$( "#divload" ).css( {
+			'display': 'none'
+		} );
+	} );
 
-    $(document).ready(function () {
-        $("#divload").css({ 'display': 'none' });
-    });
+	$( '#FromDate' ).datepicker( {
+		dateFormat: 'dd/mm/yy',
+		changeMonth: true,
+		changeYear: true,
+	} );
 
-    $('#FromDate').datepicker({
-        dateFormat: 'dd/mm/yy',
-        changeMonth: true,
-        changeYear: true,
-    });
+	$( '#ToDate' ).datepicker( {
+		dateFormat: 'dd/mm/yy',
+		changeMonth: true,
+		changeYear: true,
+	} );
 
-    $('#ToDate').datepicker({
-        dateFormat: 'dd/mm/yy',
-        changeMonth: true,
-        changeYear: true,
-    });
+	function ValidateSearch() {
 
-    function ValidateSearch() {
+		$( ".errortext" ).removeClass( "errortext" );
+		if ( $( "#FromDate" ).val() == "" ) {
+			$( "#FromDate" ).addClass( 'errortext' );
+			$( "#FromDate" ).focus();
+			return false;
+		}
+		if ( $( "#ToDate" ).val() == "" ) {
+			$( "#ToDate" ).addClass( 'errortext' );
+			$( "#ToDate" ).focus();
+			return false;
+		}
+		$( "#divload" ).css( {
+			'display': ''
+		} );
+		return true;
 
-        $(".errortext").removeClass("errortext");
-        if ($("#FromDate").val() == "") {
-            $("#FromDate").addClass('errortext');
-            $("#FromDate").focus();
-            return false;
-        }
-        if ($("#ToDate").val() == "") {
-            $("#ToDate").addClass('errortext');
-            $("#ToDate").focus();
-            return false;
-        }
-        $("#divload").css({ 'display': '' });
-        return true;
+	}
 
-    }
 </script>
- 
