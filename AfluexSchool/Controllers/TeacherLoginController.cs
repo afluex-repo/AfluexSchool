@@ -923,11 +923,7 @@ namespace AfluexSchool.Controllers
                 model.MobileNo = ds.Tables[0].Rows[0]["MobileNo"].ToString();
                 model.DOJ = ds.Tables[0].Rows[0]["DOJ"].ToString();
                 model.BranchName = ds.Tables[0].Rows[0]["FK_BranchID"].ToString();
-
-
             }
-
-
             return View(model);
         }
 
@@ -948,7 +944,6 @@ namespace AfluexSchool.Controllers
                 {
                     if (file != null && file.ContentLength > 0)
                     {
-
                         model.Image = "../Teacher/" + Guid.NewGuid() + Path.GetExtension(file.FileName);
                         file.SaveAs(Path.Combine(Server.MapPath(model.Image)));
                     }
@@ -974,7 +969,6 @@ namespace AfluexSchool.Controllers
                 model.Experience = Experience;
                 model.MobileNo = MobileNo;
                 model.DOJ = DOJ;
-
                 model.EmailID = EmailID;
                 model.UpdatedBy = Session["PK_TeacherID"].ToString();
                 model.DOB = string.IsNullOrEmpty(model.DOB) ? null : Common.ConvertToSystemDate(model.DOB, "dd/MM/yyyy");
@@ -996,7 +990,6 @@ namespace AfluexSchool.Controllers
                         TempData["TeacherEditProfile"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
                 }
-
             }
             catch (Exception ex)
             {
@@ -1060,7 +1053,6 @@ namespace AfluexSchool.Controllers
         #region TeacherAttendanceReport
         public ActionResult AttendanceReport(HRManagement model)
         {
-
             return View(model);
         }
         [HttpPost]
@@ -1068,7 +1060,6 @@ namespace AfluexSchool.Controllers
         [OnAction(ButtonName = "Search")]
         public ActionResult AttendanceReportBy(HRManagement model)
         {
-
             List<HRManagement> lst = new List<HRManagement>();
             model.EmployeeCode = Session["LoginID"].ToString();
             model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
@@ -1089,7 +1080,6 @@ namespace AfluexSchool.Controllers
                 }
                 model.lstList = lst;
             }
-
             return View(model);
         }
 
@@ -1211,17 +1201,13 @@ namespace AfluexSchool.Controllers
             try
             {
                 model.PinCode = PinCode;
-
                 DataSet ds = model.GetStateCityByPincode();
-
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
-
                     model.State = ds.Tables[0].Rows[0]["StateName"].ToString();
                     model.City = ds.Tables[0].Rows[0]["CityName"].ToString();
                     model.Result = "Yes";
                 }
-
             }
             catch (Exception ex)
             {
