@@ -12,7 +12,6 @@ namespace AfluexSchool.Models
         {
             try
             {
-              
                 connectionString = "Data Source=103.48.51.111,1232;Initial Catalog=AFluexNewSchoolDB;User Id=afluexschooluser;Password=afluex@83%##1;Integrated Security=false;";
             }
             catch (Exception)
