@@ -6,232 +6,174 @@
 }
 
 
-@using (Html.BeginForm("SalaryPayment", "HRManagement", FormMethod.Post, new { @id = "signupForm", enctype = "multipart/form-data" }))
+@using (Html.BeginForm("SalaryPayment", "HRManagement", FormMethod.Post, new { @id = "signupForm", enctype = "multipart/form-data",@autocomplete="off" }))
 {
-
-    <div>
-          <div class="login-row">
-            <div class="col-12 col-md-12 col-lg-12 col-xl-12 mx-auto align-self-center">
-                <div class="card border-0 shadow-sm mb-4">
-                    <div class="card-header">
-                        <div class="row ">
-
-                            <div class="col-auto">
-                                <h4 class="mt-0 mb-1">Salary Payment</h4>
-
-                            </div>
-                            <p style="color:red">
-                                @TempData["SalaryPayment"]
-                            </p>
-                        </div>
-                    </div>
-                    <div class="card-body">
-
-                        <div class="row justify-content-center">
-                            <div class="col-md-12 mx-auto">
-                                <div class="row ">
-                                    <div class="col-lg-3 col-md-3">
-
-                                        <div class="form-group">
-                                            <label>Payment Date </label>
-                                            @Html.TextBoxFor(m => m.PaymentDate, new { @class = "form-control", @Placeholder = "Payment Date",@readonly="read" })
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-3 col-md-3">
-                                        <div class="form-group">
-                                            <input type="submit" value="Get Details" class="btn btn-primary" name="Search" onclick="return ValidateSearch();" />
-                                        </div>
-                                    </div>
-                                </div>
-                                @if (Model != null)
-                                {
-                                    if (Model.lstList != null)
-                                    {
-                                        <div class="row">
-                                            <div class="table-responsive">
-
-                                                <div class="col-md-12 table-responsive">
-                                                    <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-                                                        <table class="table datatable display responsive w-100 dataTable no-footer dtr-inline" style="width: 1002px;">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th> </th>
-                                                                    <th>Sr.No.</th>
-                                                                    <th>Emp Code</th>
-                                                                    <th>Emp Name</th>
-                                                                    
-                                                                    <th>Basic      </th>
-                                                                    <th>HRA         </th>
-                                                                    <th>MA    </th>
-                                                                    <th>PA       </th>
-                                                                    <th>CA    </th>
-                                                                    <th>PF    </th>
-                                                                    <th>ExtraWork              </th>
-                                                                    <th>Incentive              </th>
-                                                                    <th>OtherPay               </th>
-                                                                    <th>TotalIncome            </th>
-                                                                    <th>ContributionTosociety  </th>
-                                                                    <th>Advance                </th>
-                                                                    <th>TDS                    </th>
-                                                                    <th>Insurance              </th>
-                                                                    <th>Other                  </th>
-                                                                    <th>TotalDeduction         </th>
-                                                                    <th>MonthName              </th>
-                                                                    <th>Year                   </th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                @if (Model != null)
-                                                                {
-                                                                    if (Model.lstList != null)
-                                                                    {
-                                                                        int i = 1;
-                                                                        foreach (var item in Model.lstList)
-                                                                        {
-                                                                            <tr>
-                                                                                <td>
-                                                                                    <a href="#" class="btn btn-success btn-sm" onclick="return EmpDetails('@item.EmployeeID','@item.EmployeeName','@item.EmployeeCode','@item.NetSalary','@item.SalaryDate');">Select</a>
-
-                                                                                </td>
-                                                                                <td>
-                                                                                    @i
-                                                                                </td>
-                                                                                <td>@item.EmployeeCode   </td>
-                                                                                <td>@item.EmployeeName   </td>
-                                                                               
-                                                                                <td>@item.Basic</td>
-                                                                                <td>@item.HRA  </td>
-                                                                                <td> @item.MA </td>
-                                                                                <td>@item.PA</td>
-                                                                                <td>@item.CA</td>
-                                                                                <td>@item.PF</td>
-                                                                                <td>@item.ExtraWork </td>
-                                                                                <td>@item.Incentive </td>
-                                                                                <td>@item.OtherPay  </td>
-                                                                                <td>@item.TotalIncome</td>
-                                                                                <td>@item.ContributionTosociety</td>
-                                                                                <td>@item.Advance   </td>
-                                                                                <td>@item.TDS       </td>
-                                                                                <td>@item.Insurance </td>
-                                                                                <td>@item.Other     </td>
-                                                                                <td>@item.TotalDeduction</td>
-                                                                                <td>@item.MonthName  </td>
-                                                                                <td>@item.Year </td>
-                                                                            </tr>
-                                                                            i++;
-                                                                        }
-                                                                        <input type="hidden" id="hdRows" name="hdRows" value="@i" />
-                                                                    }
-                                                                }
-
-                                                            </tbody>
-
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    }
-                                }
-                                <!-- /.table-responsive -->
-                                <div class="panel-heading">
-                                    @*Payment Details*@
-                                </div>
-                                <!-- /.panel-heading -->
-
-                                <div class="card-body" id="divDetails" style="display:none;">
-
-
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-3">
-                                            <div class="form-group">
-                                                <label>Employee ID </label>
-                                                @Html.TextBoxFor(m => m.EmployeeCode, new { @class = "form-control", @readonly = "read" })
-                                                @Html.HiddenFor(m => m.EmployeeID)
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-3">
-                                            <div class="form-group">
-                                                <label>Employee Name </label>
-                                                @Html.TextBoxFor(m => m.EmployeeName, new { @class = "form-control", @readonly = "read" })
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-3">
-                                            <div class="form-group">
-                                                <label>Net Salary </label>
-                                                @Html.TextBoxFor(m => m.NetSalary, new { @class = "form-control", @readonly = "read" })
-                                            </div>
-                                        </div>
-                                       
-
-                                    </div>
-                                    <div class="row ">
-                                        <div class="col-lg-3 col-md-3">
-                                            <div class="form-group">
-                                                <label>Salary Date </label>
-                                                @Html.TextBoxFor(m => m.SalaryDate, new { @class = "form-control", @readonly = "read" })
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-3">
-
-                                            <div class="form-group">
-                                                <label>     Payment Mode <span style="color:red">*</span></label>
-                                                @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlPaymentMode, "Value", "Text"), new { @class = "form-control", @onchange = "return BindHead()" })
-                                            </div>
-
-                                        </div>
-                                        <div class="col-lg-3 col-md-3">
-                                            <div class="form-group">
-                                                <label>Pay Date </label>
-                                                @Html.TextBoxFor(m => m.PublishDate, new { @class = "form-control", @Placeholder = "Pay Date", @readonly = "read" })
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-3 col-md-3">
-                                            <div class="form-group">
-                                                Account Head<span style="color: red">*</span>
-                                                @Html.DropDownListFor(m => m.AccountHead, new SelectList(ViewBag.ddlAccountHead, "Value", "Text"), new { @class = "form-control" })
-                                                @Html.HiddenFor(m => m.PK_AccountHead)
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row" id="divmodecheque" style="display:none">
-                                        <div class="col-lg-3 col-md-3">
-                                            <div class="form-group">
-                                                <label>ChequeNo </label>
-                                                @Html.TextBoxFor(m => m.ChequeNo, new { @class = "form-control", @Placeholder = "Publish Date" })
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-3">
-                                            <div class="form-group">
-                                                <label>ChequeDate </label>
-                                                @Html.TextBoxFor(m => m.ChequeDate, new { @class = "form-control", @Placeholder = "Publish Date" })
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-3">
-                                            <div class="form-group">
-                                                <input type="submit" value="Publish" class="btn btn-primary" name="Save" onclick="return Validate();" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.panel-body -->
-                        </div>
-                        <!-- /.panel -->
-                    </div>
-                    <!-- /.col-lg-12 -->
+    <div class="container-fluid">
+        <div class="row page-titles mx-0">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h3><b>Salary Payment</b></h3>
                 </div>
+            </div>
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">HR</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Salary Payment</a></li>
+                </ol>
+            </div>
+        </div>
+        <div class="card shadow">
+            <div class="card-body">
+                <p style="color:red">
+                    @TempData["SalaryPayment"]
+                </p>
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label>Payment Date</label>
+                            @Html.TextBoxFor(m => m.PaymentDate, new { @class = "form-control", @Placeholder = "Payment Date", @readonly = "read" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label class="d-block">&nbsp;</label>
+                            <input type="submit" value="Get Details" class="btn btn-primary" name="Search" onclick="return ValidateSearch();" />
+                        </div>
+                    </div>
+                </form>
 
+                @if (Model != null)
+                {
+                    if (Model.lstList != null)
+                    {
+                            <div class="table-responsive">
+                                        <table id="example5" class="display table" style="min-width:845px">
+                                            <thead>
+                                                <tr>
+                                                    <th>Action</th>
+                                                    <th>Sr.No.</th>
+                                                    <th>Emp Code</th>
+                                                    <th>Emp Name</th>
+
+                                                    <th>Basic      </th>
+                                                    <th>HRA         </th>
+                                                    <th>MA    </th>
+                                                    <th>PA       </th>
+                                                    <th>CA    </th>
+                                                    <th>PF    </th>
+                                                    <th>ExtraWork              </th>
+                                                    <th>Incentive              </th>
+                                                    <th>OtherPay               </th>
+                                                    <th>TotalIncome            </th>
+                                                    <th>ContributionTosociety  </th>
+                                                    <th>Advance                </th>
+                                                    <th>TDS                    </th>
+                                                    <th>Insurance              </th>
+                                                    <th>Other                  </th>
+                                                    <th>TotalDeduction         </th>
+                                                    <th>MonthName              </th>
+                                                    <th>Year                   </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Model != null)
+                                                {
+                                                    if (Model.lstList != null)
+                                                    {
+                                                        int i = 1;
+                                                        foreach (var item in Model.lstList)
+                                                        {
+                                                            <tr>
+                                                                <td>
+                                                                    <a href="#" class="btn btn-success btn-sm" onclick="return EmpDetails('@item.EmployeeID','@item.EmployeeName','@item.EmployeeCode','@item.NetSalary','@item.SalaryDate');">Select</a>
+
+                                                                </td>
+                                                                <td>
+                                                                    @i
+                                                                </td>
+                                                                <td>@item.EmployeeCode   </td>
+                                                                <td>@item.EmployeeName   </td>
+
+                                                                <td>@item.Basic</td>
+                                                                <td>@item.HRA  </td>
+                                                                <td> @item.MA </td>
+                                                                <td>@item.PA</td>
+                                                                <td>@item.CA</td>
+                                                                <td>@item.PF</td>
+                                                                <td>@item.ExtraWork </td>
+                                                                <td>@item.Incentive </td>
+                                                                <td>@item.OtherPay  </td>
+                                                                <td>@item.TotalIncome</td>
+                                                                <td>@item.ContributionTosociety</td>
+                                                                <td>@item.Advance   </td>
+                                                                <td>@item.TDS       </td>
+                                                                <td>@item.Insurance </td>
+                                                                <td>@item.Other     </td>
+                                                                <td>@item.TotalDeduction</td>
+                                                                <td>@item.MonthName  </td>
+                                                                <td>@item.Year </td>
+                                                            </tr>
+                                                            i++;
+                                                        }
+                                                        <input type="hidden" id="hdRows" name="hdRows" value="@i" />
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                            </div>
+                    }
+                }
+
+
+                <div class="card-body mt-3" id="divDetails" style="display:none;">
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                                <label>Employee ID</label>
+                                @Html.TextBoxFor(m => m.EmployeeCode, new { @class = "form-control", @readonly = "read" })
+                                @Html.HiddenFor(m => m.EmployeeID)
+                        </div>
+                        <div class="col-md-3 form-group">
+                                <label>Employee Name </label>
+                                @Html.TextBoxFor(m => m.EmployeeName, new { @class = "form-control", @readonly = "read" })
+                        </div>
+                        <div class="col-md-3 form-group">
+                                <label>Net Salary </label>
+                                @Html.TextBoxFor(m => m.NetSalary, new { @class = "form-control", @readonly = "read" })
+                        </div>
+                        <div class="col-md-3 form-group">
+                                <label>Salary Date </label>
+                                @Html.TextBoxFor(m => m.SalaryDate, new { @class = "form-control", @readonly = "read" })
+                        </div>
+                        <div class="col-md-3 form-group">
+                                <label>Payment Mode<span style="color:red">*</span></label>
+                                @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlPaymentMode, "Value", "Text"), new { @class = "form-control", @onchange = "return BindHead()" })
+                        </div>
+                        <div class="col-md-3 form-group">
+                                <label>Pay Date </label>
+                                @Html.TextBoxFor(m => m.PublishDate, new { @class = "form-control", @Placeholder = "Pay Date", @readonly = "read" })
+                        </div>
+                        <div class="col-md-3 form-group">
+                                <label>Account Head<span style="color: red">*</span></label>
+                                @Html.DropDownListFor(m => m.AccountHead, new SelectList(ViewBag.ddlAccountHead, "Value", "Text"), new { @class = "form-control" })
+                                @Html.HiddenFor(m => m.PK_AccountHead)
+                        </div>
+                    </div>
+                    <div class="form-row" id="divmodecheque" style="display:none">
+                        <div class="col-md-3 form-group">
+                                <label>ChequeNo</label>
+                                @Html.TextBoxFor(m => m.ChequeNo, new { @class = "form-control", @Placeholder = "Publish Date" })
+                        </div>
+                        <div class="col-md-3 form-group">
+                                <label>ChequeDate </label>
+                                @Html.TextBoxFor(m => m.ChequeDate, new { @class = "form-control", @Placeholder = "Publish Date" })
+                        </div>
+                    </div>
+                        <div class="col-md-12 form-group">
+                                <input type="submit" value="Publish" class="btn btn-primary" name="Save" onclick="return Validate();" />
+                        </div>
+                </div>
             </div>
         </div>
     </div>
-
+    
 }
 
 
@@ -239,9 +181,6 @@
 <script src="../../AdminPanelcss/assets/js/jquery-3.3.1.min.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
-
 
 <script>
 

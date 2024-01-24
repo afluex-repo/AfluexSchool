@@ -5,87 +5,81 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-
 @using (Html.BeginForm("HostelAllotmentList", "Exam", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
-
-    <div>
-        <div class="card border-0 shadow-sm mb-4">
-            <div class="card-header border-0 bg-none">
-                <div class="row">
-                    <div class="col-12 col-md">
-                        <p class="fs15">Hostel Allotment List</p>
-                    </div>
-                    <p style="color:red">
-                        @TempData["HostelAllotmentList"]
-                    </p>
+    <div class="container-fluid">
+        <div class="row page-titles mx-0">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h3><b>Hostel Allotment List</b></h3>
                 </div>
             </div>
-            <div class="card-body ">
-
-                <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-                    <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
-                        <div class="col-sm-12">
-                            <table class="table table-bordered w-100 mb-0" id="example23">
-                                <thead>
-                                    <tr>
-                                        <th>S No.</th>
-                                        <th>Hostel Type Name</th>
-                                        <th>Hostel </th>
-                                        <th>Floor</th>
-                                        <th>Room</th>
-                                        <th>Class</th>
-                                        <th>Section</th>
-                                        <th>Student</th>
-                                        <th>Amount</th>
-                                        <th style="display:@ViewBag.IsEdit;">Edit</th>
-                                        <th style="display:@ViewBag.IsDelete;">Delete</th>
-                                    </tr>
-
-                                </thead>
-                                <tbody>
-                                    @if (Model != null)
-                                    {
-                                        if (Model.lstHostel != null)
-                                        {
-                                            int i = 1;
-                                            foreach (var item in Model.lstHostel)
-                                            {
-                                                <tr>
-                                                    <td>
-                                                        @i
-                                                    </td>
-                                                    <td>@item.TypeName  </td>
-                                                    <td>@item.HostelName</td>
-                                                    <td>@item.FloorName    </td>
-                                                    <td>@item.FromRoom  </td>
-                                                    <td>@item.Fk_ClassID     </td>
-                                                    <td>@item.Fk_SectionID   </td>
-                                                    <td>@item.Pk_StudentID   </td>
-                                                    <td>@item.Amount   </td>
-                                                    <td style="display:@ViewBag.IsEdit;">
-                                                        <a href="/Hostel/HostelAllotment?Pk_HostelAllotmentId=@item.Pk_HostelAllotmentId"><i class="btn btn-success">Edit</i></a>
-                                                    </td>
-                                                    <td style="display:@ViewBag.IsDelete;"><a href="/Hostel/DeleleHostelAllotment?Pk_HostelAllotmentId=@item.Pk_HostelAllotmentId" onclick="return confirm('Are you sure want to delete?')"><i class="btn btn-danger">Delete</i></a></td>
-                                                </tr>
-                                                i++;
-                                            }
-                                        }
-                                    }
-                                </tbody>
-                            </table>
-                            <div class="j-response"></div>
-                        </div>
-
-                    </div>
-                </div>
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Hostel</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Hostel Room Allotment List</a></li>
+                </ol>
             </div>
-
         </div>
-
+        <div class="card shadow">
+            <div class="card-body">
+                <p style="color:red">
+                   @TempData["HostelAllotmentList"]
+                </p>
+           
+                <div class="table-responsive mt-3">
+                    <table id="example5" class="display table" style="min-width:845px">
+                        <thead>
+                            <tr>
+                                <th>S No.</th>
+                                <th>Hostel Type Name</th>
+                                <th>Hostel </th>
+                                <th>Floor</th>
+                                <th>Room</th>
+                                <th>Class</th>
+                                <th>Section</th>
+                                <th>Student</th>
+                                <th>Amount</th>
+                                <th style="display:@ViewBag.IsEdit;">Edit</th>
+                                <th style="display:@ViewBag.IsDelete;">Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                if (Model.lstHostel != null)
+                                {
+                                    int i = 1;
+                                    foreach (var item in Model.lstHostel)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @i
+                                            </td>
+                                            <td>@item.TypeName</td>
+                                            <td>@item.HostelName</td>
+                                            <td>@item.FloorName</td>
+                                            <td>@item.FromRoom</td>
+                                            <td>@item.Fk_ClassID</td>
+                                            <td>@item.Fk_SectionID</td>
+                                            <td>@item.Pk_StudentID</td>
+                                            <td>@item.Amount</td>
+                                            <td style="display:@ViewBag.IsEdit;">
+                                                <a href="/Hostel/HostelAllotment?Pk_HostelAllotmentId=@item.Pk_HostelAllotmentId"><i class="btn btn-success">Edit</i></a>
+                                            </td>
+                                            <td style="display:@ViewBag.IsDelete;"><a href="/Hostel/DeleleHostelAllotment?Pk_HostelAllotmentId=@item.Pk_HostelAllotmentId" onclick="return confirm('Are you sure want to delete?')"><i class="btn btn-danger">Delete</i></a></td>
+                                        </tr>
+                                        i++;
+                                    }
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 
 }
-<script src="../../scripts/jquery-1.10.2.min.js"></script>
+
 

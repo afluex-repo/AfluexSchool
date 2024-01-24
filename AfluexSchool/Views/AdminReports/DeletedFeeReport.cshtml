@@ -5,125 +5,110 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@using(Html.BeginForm("DeletedFeeReport", "AdminReports", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+@using (Html.BeginForm("DeletedFeeReport", "AdminReports", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
-    <div>
-        <div class="login-row">
-            <div class="col-12 col-md-12 col-lg-12 col-xl-12 mx-auto align-self-center">
-                <div class="card border-0 shadow-sm mb-4">
-                    <div class="card-header">
-                        <div class="row ">
-                            <div class="col-auto">
-                                <h4 class="mt-0 mb-1">Deleted Fee Report</h4>
-                            </div>
+    <div class="container-fluid">
+        <div class="row page-titles mx-0">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h3><b>Deleted Fee Report</b></h3>
+                </div>
+            </div>
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Reports</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Deleted Fee Report</a></li>
+                </ol>
+            </div>
+        </div>
+        <div class="card shadow">
+            <div class="card-body">
+                @*<p style="color:red">
+                    @TempData["LeaveList"]
+                </p>*@
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label>Login ID</label>
+                            @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", placeholder = "Login ID" })
+                        </div>
+                        <div class="form-group  col-md-3">
+                            <label>Student Name</label>
+                            @Html.TextBoxFor(m => m.StudentName, new { @class = "form-control", placeholder = "Student Name" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Receipt No</label>
+                            @Html.TextBoxFor(m => m.ReceiptNo, new { @class = "form-control", placeholder = "ReceiptNo" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>From Payment Date</label>
+                            @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", placeholder = "FromDate" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>To Payment Date</label>
+                            @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", placeholder = "ToDate" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>From Deleted Date</label>
+                            @Html.TextBoxFor(m => m.FromDeletedDate, new { @class = "form-control", placeholder = "FromDeletedDate" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>To Deleted Date</label>
+                            @Html.TextBoxFor(m => m.ToDeletedDate, new { @class = "form-control", placeholder = "ToDeletedDate" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label class="d-block">&nbsp;</label>
+                            <input type="submit" value="Search" name="GetDeatils" id="GetDeatils" class="btn btn-primary" onclick="return favlidate();" />
                         </div>
                     </div>
-                    <div class="card-body">
-                        <div class="row justify-content-center">
-                            <div class="col-md-12 mx-auto">
-                                <div class="row ">
+                </form>
 
-                                    <div class="col-lg-3 col-md-3">
-                                        <div class="form-group ">
-                                            <label> Login Id </label>
-                                            @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", placeholder = "Login ID" })
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-3">
-                                        <div class="form-group ">
-                                            <label> StudentName</label>
-                                            @Html.TextBoxFor(m => m.StudentName, new { @class = "form-control", placeholder = "Student Name" })
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-3">
-                                        <div class="form-group ">
-                                            <label> ReceiptNo</label>
-                                            @Html.TextBoxFor(m => m.ReceiptNo, new { @class = "form-control", placeholder = "ReceiptNo" })
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label>  From Payment Date</label>
-                                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", placeholder = "FromDate" })
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label>  To Payment Date</label>
-                                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", placeholder = "ToDate" })
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label>  From Deleted Date</label>
-                                        @Html.TextBoxFor(m => m.FromDeletedDate, new { @class = "form-control", placeholder = "FromDeletedDate" })
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label>  To Deleted Date</label>
-                                        @Html.TextBoxFor(m => m.ToDeletedDate, new { @class = "form-control", placeholder = "ToDeletedDate" })
-                                    </div>
-                                    <div class="col-md-3">
-                                        <input type="submit" value="Search" name="GetDeatils" id="GetDeatils" class="btn btn-primary" onclick="return favlidate();" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card-footer text-left">
-                            
-                        </div>
-                        <div class="col-md-12 table-responsive">
-                            <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-                                <table class="table table-bordered w-100 mb-0" id="example23"style="width: 1002px;">
-                                   
-                                        <thead>
-                                            <tr>
-                                                <th>S.no</th>
-                                                <th>LoginId        </th>
-                                                <th>StudentName         </th>
-                                                <th>ReceiptNo            </th>
-                                                <th>PaymentDate             </th>
-                                                <th>FeeAmount                  </th>
-                                                <th>LateFee             </th>
-                                                <th>ConcessionFee      </th>
-                                                <th>Discount           </th>
-                                                <th>PaidAmount         </th>
-                                                <th>DeletedBy          </th>
-                                                <th>DeletedOn          </th>
-
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @if (Model != null)
-                                        {
-                                            if (Model.lstfeedata != null)
-                                            {
-                                                int i = 1;
-                                                foreach (var item in Model.lstfeedata)
-                                                {
+                <div class="table-responsive mt-3">
+                    <table id="example5" class="display table" style="min-width:845px">
+                        <thead>
+                            <tr>
+                                <th>S.No</th>
+                                <th>LoginId</th>
+                                <th>Student Name</th>
+                                <th>Receipt No</th>
+                                <th>Payment Date</th>
+                                <th>Fee Amount</th>
+                                <th>Late Fee</th>
+                                <th>Concession Fee</th>
+                                <th>Discount</th>
+                                <th>Paid Amount</th>
+                                <th>DeletedBy</th>
+                                <th>DeletedOn</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                if (Model.lstfeedata != null)
+                                {
+                                    int i = 1;
+                                    foreach (var item in Model.lstfeedata)
+                                    {
                                         <tr>
-                                            <td>
-                                                @i
-                                            </td>
-                                            <td>@item.LoginId     </td>
-                                            <td>@item.StudentName  </td>
-                                            <td>@item.ReceiptNo    </td>
-                                            <td>@item.PaymentDate </td>
-                                            <td>@item.FeeAmount   </td>
-                                            <td>@item.LateFee     </td>
-                                            <td>@item.ConcessionFee  </td>
-                                            <td>@item.Discount  </td>
+                                            <td>@i</td>
+                                            <td>@item.LoginId</td>
+                                            <td>@item.StudentName</td>
+                                            <td>@item.ReceiptNo</td>
+                                            <td>@item.PaymentDate</td>
+                                            <td>@item.FeeAmount</td>
+                                            <td>@item.LateFee</td>
+                                            <td>@item.ConcessionFee</td>
+                                            <td>@item.Discount</td>
                                             <td>@item.PaidAmount</td>
-                                            <td>@item.DeletedBy </td>
-                                            <td>@item.DeletedOn </td>
+                                            <td>@item.DeletedBy</td>
+                                            <td>@item.DeletedOn</td>
                                         </tr>
-                                                    i++;
-                                                }
-                                            }
-                                        }
-                                        </tbody>
-                                    </table>
-                                <div class="j-response"></div>
-                          
-                        </div>
-                    </div>
-
-                    </div>
+                                        i++;
+                                    }
+                                }
+                            }
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
