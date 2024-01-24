@@ -93,8 +93,8 @@
                                                 @item.BankDetails
                                             </td>
                                             <td>
-                                                <a target="_blank" href="/AdminReports/PrintFeereciptForReport?id=@item.ReceiptNo" class="btn btn-info">Print</a>
-
+                                                <a href="#!" class="btn btn-info">Print</a>
+                                                @*<a target="_blank" href="/AdminReports/PrintFeereciptForReport?id=@item.ReceiptNo" class="btn btn-info">Print</a>*@
                                             </td>
                                             <td style="display:@ViewBag.IsDelete;"><a href="/AdminReports/DeleteFee?id=@item.ReceiptNo" class="btn btn-danger" onclick="return confirm('Are you sure want to delete?')">Delete</a></td>
                                         </tr>

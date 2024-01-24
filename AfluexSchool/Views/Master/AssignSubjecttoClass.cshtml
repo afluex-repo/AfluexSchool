@@ -5,6 +5,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #fcbdbd !important;
+    }
+</style>
+
 @using (Html.BeginForm("AssignSubjecttoClass", "Master", FormMethod.Post, new { @id = "AssignSubjecttoClass" }))
 {
     <div class="container-fluid">
@@ -130,6 +137,7 @@
     });
 
     function getdetails() {
+        $('.errortext').removeClass('errortext');
         if ($('#Pk_ClassId').val() == 0) {
             $('#Pk_ClassId').addClass('errortext');
             $('#Pk_ClassId').focus();
