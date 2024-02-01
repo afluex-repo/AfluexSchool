@@ -4,6 +4,14 @@
     ViewBag.Title = "SendSMS";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #fcbdbd !important;
+    }
+</style>
+
 @using (Html.BeginForm("SendSMS", "SMS", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
     <div class="container-fluid">

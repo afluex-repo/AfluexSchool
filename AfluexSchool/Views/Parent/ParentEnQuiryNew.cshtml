@@ -5,6 +5,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #fcbdbd !important;
+    }
+</style>
+
 @using (Html.BeginForm("ParentEnQuiryNew", "Parent", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
     <div class="container-fluid">
@@ -180,6 +187,7 @@
     });
     function validateformnew()
     {
+        $('.errortext').removeClass('errortext');
         $(".errortext").removeClass("errortext");
         if ($('#ParentName').val() == '') {
             $("#ParentName").addClass('errortext');
