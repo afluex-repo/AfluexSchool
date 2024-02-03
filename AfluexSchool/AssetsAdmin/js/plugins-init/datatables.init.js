@@ -91,9 +91,17 @@ let dataSet = [
     });
 	
 	// 
-	var table = $('#example3, #example4, #example5').DataTable();
+	var table = $('#example3, #example4').DataTable();
 	$('#example tbody').on('click', 'tr', function () {
 		var data = table.row( this ).data();
+	});
+	$(document).ready(function () {
+	    $('#example5').DataTable({
+	        dom: 'Bfrtip',
+	        buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+	        ]
+	    });
 	});
    
 })(jQuery);

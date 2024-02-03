@@ -23617,7 +23617,7 @@ button {
     color: #464a53; }
   .widget-stat .media .media-body p {
     text-transform: uppercase;
-    font-weight: 500;
+    font-weight: bold;
     font-size: 14px; }
     [data-theme-version="dark"] .widget-stat .media .media-body p {
       color: #c4c9d5; }
