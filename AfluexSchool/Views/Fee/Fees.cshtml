@@ -9,303 +9,232 @@
 @using (Html.BeginForm("Fees", "Fee", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
 
-    <div>
-        <div class="login-row">
-            <div class="col-12 col-md-12 col-lg-12 col-xl-12 mx-auto align-self-center">
-                <div class="card border-0 shadow-sm mb-4">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-xxl-12 col-md-12">
+                <div class="card shadow">
                     <div class="card-header">
-                        <div class="row ">
-                            <div class="col-auto">
-                                <h4 class="mt-0 mb-1">Monthly Fee</h4>
-                            </div>
-                            <p style="color:red">
-                                @TempData["InstFee"]
-                            </p>
-                        </div>
+                        <h4 class="card-title font-weight-bold">FeeReport</h4>
+                        <p style="color:red">
+                            @TempData["FeeReport"]
+                        </p>
                     </div>
                     <div class="card-body">
-                        <div class="row justify-content-center">
-                            <div class="col-md-12 mx-auto">
-                                <div class="row ">
-                                    <div class="col-lg-4 col-md-4">
-                                        <div class="form-group ">
-                                            <label>Name/Login Id <span style="color: red">*</span></label>
-
-                                            @Html.TextBoxFor(m => m.IDLoginId, new { @class = "form-control", @placeholder = "Student Name/Login Id", onchange = "return concatenatemonthid(this,'0');" })
-                                            @Html.HiddenFor(m => m.MonthId)
-                                            @Html.HiddenFor(m => m.LoginId)
-                                        </div>
+                        <div class="basic-form">
+                            <form>
+                                <div class="form-row">
+                                    <div class="form-group col-md-3">
+                                        <label>  Name/Login Id <span style="color: red">*</span></label>
+                                        @Html.TextBoxFor(m => m.IDLoginId, new { @class = "form-control", @placeholder = "Student Name/Login Id", onchange = "return concatenatemonthid(this,'0');" })
+                                        @Html.HiddenFor(m => m.MonthId)
+                                        @Html.HiddenFor(m => m.LoginId)
                                     </div>
-
-                                    <div class="col-lg-8 col-md-8">
-                                        <br />
-                                        <br />
-                                        <div class="row" id="dvchkbox">
-                                            @*<thead>
-                                                    <tr>
-
-                                                        <th></th>
-                                                        <th></th>
-
-                                                    </tr>
-                                                </thead>*@
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-
-
-                                <div class="row" id="studentbasic" style="display:none">
-                                    <div class="col-lg-3 col-md-3">
-
-                                        <div class="form-group">
-                                            <label>Branch </label>
-
-                                            @Html.TextBoxFor(m => m.BranchName, new { @class = "form-control", @readonly = "gf" })
-
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-3">
-
-                                        <div class="form-group">
-                                            <label>Registration No </label>
-
-                                            @Html.TextBoxFor(m => m.RegistrationNo, new { @class = "form-control", @readonly = "gf" })
-
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-3">
-
-                                        <div class="form-group">
-                                            <label>Student Id </label>
-
-                                            @Html.TextBoxFor(m => m.LOGID, new { @class = "form-control", @readonly = "gf" })
-
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-3">
-
-                                        <div class="form-group">
-                                            <label>Student Name </label>
-
-                                            @Html.TextBoxFor(m => m.DisplayName, new { @class = "form-control", @readonly = "gf" })
-
-                                        </div>
+                                    <div class="form-group col-md-9">
+                                        <label class="d-lg-block d-none">&nbsp;</label>    
+                                        <div id="dvchkbox"></div>
                                     </div>
                                 </div>
-
-                                <div class="row" id="studentparent" style="display:none">
-                                    <div class="col-lg-3 col-md-3">
-
-                                        <div class="form-group">
-                                            <label>Parent Id </label>
-
-                                            @Html.TextBoxFor(m => m.ParentLoginId, new { @class = "form-control", @readonly = "gf" })
-
-                                        </div>
+                                <div class="form-row" id="studentbasic" style="display:none">
+                                    <div class="form-group col-md-3">
+                                        <label>Branch</label>
+                                        @Html.TextBoxFor(m => m.BranchName, new { @class = "form-control", @readonly = "gf" })
                                     </div>
-                                    <div class="col-lg-3 col-md-3">
-
-                                        <div class="form-group">
-                                            <label>Parent Name </label>
-
-                                            @Html.TextBoxFor(m => m.ParentName, new { @class = "form-control", @readonly = "gf" })
-
-                                        </div>
+                                    <div class="form-group col-md-3">
+                                        <label>Registration No </label>
+                                        @Html.TextBoxFor(m => m.RegistrationNo, new { @class = "form-control", @readonly = "gf" })
                                     </div>
-                                    <div class="col-lg-3 col-md-3">
-
-                                        <div class="form-group">
-                                            <label>Parent Mobile </label>
-
-                                            @Html.TextBoxFor(m => m.ParentMobile, new { @class = "form-control", @readonly = "gf" })
-
-                                        </div>
+                                    <div class="form-group col-md-3">
+                                        <label>  Student Id</label>
+                                        @Html.TextBoxFor(m => m.LOGID, new { @class = "form-control", @readonly = "gf" })
                                     </div>
-                                    <div class="col-lg-3 col-md-3">
-
-                                        <div class="form-group">
-                                            <label>Parent EmailId </label>
-
-                                            @Html.TextBoxFor(m => m.ParenteEmailId, new { @class = "form-control", @readonly = "gf" })
-
-                                        </div>
+                                    <div class="form-group col-md-3">
+                                        <label>  Student Name</label>
+                                        @Html.TextBoxFor(m => m.DisplayName, new { @class = "form-control", @readonly = "gf" })
                                     </div>
                                 </div>
-
-                                <div class="row" id="studentclass" style="display:none">
-                                    <div class="col-lg-3 col-md-3">
-
-                                        <div class="form-group">
-                                            <label>Class </label>
-
-                                            @Html.TextBoxFor(m => m.ClassName, new { @class = "form-control", @readonly = "gf" })
-
-                                        </div>
+                                <div class="form-row" id="studentparent" style="display:none">
+                                    <div class="form-group col-md-3">
+                                        <label>  Parent Id </label>
+                                        @Html.TextBoxFor(m => m.ParentLoginId, new { @class = "form-control", @readonly = "gf" })
                                     </div>
-                                    <div class="col-lg-3 col-md-3">
-
-                                        <div class="form-group">
-                                            <label>Section </label>
-
-                                            @Html.TextBoxFor(m => m.SectionName, new { @class = "form-control", @readonly = "gf" })
-
-                                        </div>
+                                    <div class="form-group col-md-3">
+                                        <label>  Parent Name</label>
+                                       @Html.TextBoxFor(m => m.ParentName, new { @class = "form-control", @readonly = "gf" })
                                     </div>
-                                    <div class="col-lg-3 col-md-3">
-
-                                        <div class="form-group">
-                                            <label>Medium </label>
-
-                                            @Html.TextBoxFor(m => m.Medium, new { @class = "form-control", @readonly = "gf" })
-                                            @Html.HiddenFor(m => m.DueDate)
-                                            @Html.HiddenFor(m => m.InstallemntNo)
-                                            @Html.HiddenFor(m => m.InstallmentAmt)
-
-                                            @Html.HiddenFor(m => m.AmountWithoutFine)
-                                        </div>
+                                    <div class="form-group col-md-3">
+                                        <label>  Parent Mobile </label>
+                                        @Html.TextBoxFor(m => m.ParentMobile, new { @class = "form-control", @readonly = "gf" })
                                     </div>
-
+                                    <div class="form-group col-md-3">
+                                        <label>  Parent EmailId</label>
+                                       @Html.TextBoxFor(m => m.ParenteEmailId, new { @class = "form-control", @readonly = "gf" })
+                                    </div>
                                 </div>
-                                <div id="tb" class="dataTables_wrapper dt-bootstrap4 no-footer" style="display:none">
-                                    <div class="row">
-                                        <div class="col-sm-8">
-                                            <table id="tblinst" class="table table-bordered w-100 mb-0" style="width: 1002px;">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Sr No.</th>
-                                                        <th>FeeType</th>
+                                <div class="form-row" id="studentclass" style="display:none">
+                                    <div class="form-group col-md-3">
+                                        <label>  Class</label>
+                                        @Html.TextBoxFor(m => m.ClassName, new { @class = "form-control", @readonly = "gf" })
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label>  Section</label>
+                                        @Html.TextBoxFor(m => m.SectionName, new { @class = "form-control", @readonly = "gf" })
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label>  Medium</label>
+                                        @Html.TextBoxFor(m => m.Medium, new { @class = "form-control", @readonly = "gf" })
+                                        @Html.HiddenFor(m => m.DueDate)
+                                        @Html.HiddenFor(m => m.InstallemntNo)
+                                        @Html.HiddenFor(m => m.InstallmentAmt)
 
-                                                        <th>DueDate</th>
-                                                        <th>InstallmentAmt</th>
+                                        @Html.HiddenFor(m => m.AmountWithoutFine)
+                                    </div>
+                                    @*<div class="form-group  col-md-3">
+                                        <label class="d-lg-block d-none">&nbsp;</label>
+                                        <input type="submit" class="btn btn-info" name="Search" id="btnsearch" value="Search" />
+                                    </div>*@
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12" id="tb" style="display:none">
+                <div class="row">
+                       <div class="col-lg-9">
+                           <div class="card shadow">
+                               <div class="card-body">
+                                   <div class="table-responsive">
 
-                                                    </tr>
-                                                </thead>
+                                       <table id="example5" class="table display table-bordered">
+                                           <thead>
+                                               <tr>
+                                                   <th>Sr No.</th>
+                                                   <th>FeeType</th>
 
-                                            </table>
-                                            <div class="col-auto">
-                                                <h4 class="mt-0 mb-1">Consession</h4>
-                                            </div>
-                                            <table id="tblstconsession" class="table table-bordered w-100 mb-0" style="width: 1002px;">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Sr No.</th>
-                                                        <th>FeeType</th>
+                                                   <th>DueDate</th>
+                                                   <th>InstallmentAmt</th>
 
-                                                        <th>Month</th>
-                                                        <th>Consession</th>
+                                               </tr>
+                                           </thead>
 
-                                                    </tr>
-                                                </thead>
-
-                                            </table>
+                                       </table>
+                                       <div class="card-header my-3">
+                                                <h4 class="card-title font-weight-bold">Consession</h4>
                                         </div>
+                                       <table id="example5" class="table display table-bordered">
+                                           <thead>
+                                               <tr>
+                                                   <th>Sr No.</th>
+                                                   <th>FeeType</th>
 
-                                        <div class="col-sm-4">
-                                            <div class="col-md-12 col-lg-12">
-                                                <div class="form-group">
-                                                    <label>Payment Date <span style="color:red">*</span></label>
-                                                    @Html.TextBoxFor(m => m.PaymentDate, new { @class = "form-control", @readonly = "gf" })
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12 col-lg-12">
-                                                <div class="form-group">
-                                                    Previous Balance<span style="color: red">*</span>
-                                                    @Html.TextBoxFor(m => m.PreviousBalance, new { @class = "form-control", @maxlength = "100", @readonly = "gf", @Placeholder = "Previous Balance" })
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12 col-lg-12">
-                                                <div class="form-group">
-                                                    Late Fee<span style="color: red">*</span>
-                                                    @Html.TextBoxFor(m => m.LateFee, new { @class = "form-control", @maxlength = "100", @readonly = "gf", @Placeholder = "Late Fee", @onchange = "return getamount();" })
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12 col-lg-12">
-                                                <div class="form-group">
-                                                    Total Fee<span style="color: red">*</span>
-                                                    @Html.TextBoxFor(m => m.TotalAmount, new { @class = "form-control", @maxlength = "100", @Placeholder = "Total Fee", @readonly = "fsdf" })
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12 col-lg-12">
-                                                <div class="form-group">
-                                                    Consession Fee<span style="color: red">*</span>
-                                                    @Html.TextBoxFor(m => m.ConsessionFee, new { @class = "form-control", @maxlength = "100", @Placeholder = "Consession Fee", @readonly = "fsdf" })
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12 col-lg-12">
-                                                <div class="form-group">
-                                                    Apply Discount
-                                                    <input type="checkbox" id="chkdiscount" onchange="openpop();" />
-                                                    @*@Html.TextBoxFor(m => m.Discount, new { @class = "form-control", @maxlength = "100", @Placeholder = "Discount", @onchange = "return getpaidamount();" ,onkeypress= "return isNumberKey(event)" })*@
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12 col-lg-12">
-                                                <div class="form-group">
-                                                    Paid Amount<span style="color: red">*</span>
-                                                    @Html.TextBoxFor(m => m.PaidAmount, new { @class = "form-control", @maxlength = "100", @Placeholder = "Paid Amount", onkeypress = "return isNumberKey(event)" })
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12 col-lg-12">
-                                                <div class="form-group">
-                                                    <label>Payment Mode <span style="color:red">*</span></label>
+                                                   <th>Month</th>
+                                                   <th>Consession</th>
+
+                                               </tr>
+                                           </thead>
+
+                                       </table>
+
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                    <div class="col-lg-3">
+                        <div class="card shadow">
+                            <div class="card-body">
+                                <div class="col-md-12 col-lg-12">
+                                    <div class="form-group">
+                                        <label>Payment Date <span style="color:red">*</span></label>
+                                        @Html.TextBoxFor(m => m.PaymentDate, new { @class = "form-control", @readonly = "gf" })
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-lg-12">
+                                    <div class="form-group">
+                                        Previous Balance<span style="color: red">*</span>
+                                        @Html.TextBoxFor(m => m.PreviousBalance, new { @class = "form-control", @maxlength = "100", @readonly = "gf", @Placeholder = "Previous Balance" })
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-lg-12">
+                                    <div class="form-group">
+                                        Late Fee<span style="color: red">*</span>
+                                        @Html.TextBoxFor(m => m.LateFee, new { @class = "form-control", @maxlength = "100", @readonly = "gf", @Placeholder = "Late Fee", @onchange = "return getamount();" })
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-lg-12">
+                                    <div class="form-group">
+                                        Total Fee<span style="color: red">*</span>
+                                        @Html.TextBoxFor(m => m.TotalAmount, new { @class = "form-control", @maxlength = "100", @Placeholder = "Total Fee", @readonly = "fsdf" })
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-lg-12">
+                                    <div class="form-group">
+                                        Consession Fee<span style="color: red">*</span>
+                                        @Html.TextBoxFor(m => m.ConsessionFee, new { @class = "form-control", @maxlength = "100", @Placeholder = "Consession Fee", @readonly = "fsdf" })
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-lg-12">
+                                    <div class="form-group">
+                                        Apply Discount
+                                        <input type="checkbox" id="chkdiscount" onchange="openpop();" />
+                                        @*@Html.TextBoxFor(m => m.Discount, new { @class = "form-control", @maxlength = "100", @Placeholder = "Discount", @onchange = "return getpaidamount();" ,onkeypress= "return isNumberKey(event)" })*@
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-lg-12">
+                                    <div class="form-group">
+                                        Paid Amount<span style="color: red">*</span>
+                                        @Html.TextBoxFor(m => m.PaidAmount, new { @class = "form-control", @maxlength = "100", @Placeholder = "Paid Amount", onkeypress = "return isNumberKey(event)" })
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-lg-12">
+                                    <div class="form-group">
+                                        <label>Payment Mode <span style="color:red">*</span></label>
 
 
-                                                    @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlpaymentmode, "Value", "Text"), new { @class = "form-control", @onchange = "getpaymentdetails();" })
+                                        @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlpaymentmode, "Value", "Text"), new { @class = "form-control", @onchange = "getpaymentdetails();" })
 
-                                                    @Html.HiddenFor(m => m.PK_ClassID)
-                                                    @Html.HiddenFor(m=>m.discountflag)
-
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12 col-lg-12" id="divtransactiono" style="display: none">
-                                                <div class="form-group">
-                                                    <span id="txnNo"></span> <span style="color: red">*</span>
-                                                    @Html.TextBoxFor(m => m.TransactionNumber, new { @class = "form-control", @Placeholder = "Mobile Number", @maxlength = "50" })
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12 col-lg-12" id="divPaymentMode" style="display: none">
-                                                <div class="form-group">
-                                                    <span id="txndt"></span><span style="color: red">*</span>
-                                                    @Html.TextBoxFor(m => m.TransactionDate, new { @class = "form-control", @Placeholder = "Date", @Readonly = "readonly" })
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12 col-lg-12" id="divbankname" style="display: none">
-                                                <div class="form-group">
-                                                    Bank Name <span style="color: red">*</span>
-                                                    @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @maxlength = "100", @Placeholder = "Bank Name" })
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12 col-lg-12" id="divbankbranch" style="display: none">
-                                                <div class="form-group">
-                                                    Bank Branch <span style="color: red">*</span>
-                                                    @Html.TextBoxFor(m => m.BankBranch, new { @class = "form-control", @maxlength = "100", @Placeholder = "Bank Branch" })
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12 col-lg-12">
-                                                <br />
-                                                <input type="submit" class="btn btn-success btn-sm" onclick="return validatesaveform();" name="btnSave" id="btnSave" value="Save" />
-                                            </div>
-                                        </div>
+                                        @Html.HiddenFor(m => m.PK_ClassID)
+                                        @Html.HiddenFor(m => m.discountflag)
 
                                     </div>
                                 </div>
-                                 
-                                <div class="card-footer text-left">
-                                     
+                                <div class="col-md-12 col-lg-12" id="divtransactiono" style="display: none">
+                                    <div class="form-group">
+                                        <span id="txnNo"></span> <span style="color: red">*</span>
+                                        @Html.TextBoxFor(m => m.TransactionNumber, new { @class = "form-control", @Placeholder = "Mobile Number", @maxlength = "50" })
+                                    </div>
                                 </div>
-
+                                <div class="col-md-12 col-lg-12" id="divPaymentMode" style="display: none">
+                                    <div class="form-group">
+                                        <span id="txndt"></span><span style="color: red">*</span>
+                                        @Html.TextBoxFor(m => m.TransactionDate, new { @class = "form-control", @Placeholder = "Date", @Readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-lg-12" id="divbankname" style="display: none">
+                                    <div class="form-group">
+                                        Bank Name <span style="color: red">*</span>
+                                        @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @maxlength = "100", @Placeholder = "Bank Name" })
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-lg-12" id="divbankbranch" style="display: none">
+                                    <div class="form-group">
+                                        Bank Branch <span style="color: red">*</span>
+                                        @Html.TextBoxFor(m => m.BankBranch, new { @class = "form-control", @maxlength = "100", @Placeholder = "Bank Branch" })
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-lg-12">
+                                    <br />
+                                    <input type="submit" class="btn btn-success btn-sm" onclick="return validatesaveform();" name="btnSave" id="btnSave" value="Save" />
+                                </div>
                             </div>
                         </div>
-
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
+
+
+    
     <div id="myModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
 

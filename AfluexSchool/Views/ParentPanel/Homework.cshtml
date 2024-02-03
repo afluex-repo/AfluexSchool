@@ -8,39 +8,42 @@
 
 @using (Html.BeginForm("Homework", "ParentPanel", FormMethod.Post, new { @id = "ReligionList" }))
 {
-    <div class="col-12 col-md-12 col-lg-12 col-xl-12 mx-auto align-self-center">
-        <div class="card border-0 shadow-sm mb-4">
-            <div class="card-header">
-                <div class="row ">
-                    <div class="col-auto">
-                        <h4 class="mt-0 mb-1">Homework</h4>
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-xxl-12 col-md-12">
+                <div class="card shadow">
+                    <div class="card-header">
+                        <h4 class="card-title font-weight-bold">Homework</h4>
+                        <p style="color:red">
+                            @TempData["Homework"]
+                        </p>
                     </div>
-                    @*<p style="color:red">
-                            @TempData["EmployeeSalarySlip"]
-                        </p>*@
+                    <div class="card-body">
+                        <div class="basic-form">
+                            <form>
+                                <div class="form-row">
+                                    <div class="form-group col-md-3">
+                                        <label>Student</label>
+                                        @Html.DropDownListFor(m => m.Pk_StudentID, new SelectList(ViewBag.ddlStudent, "Value", "Text"), new { @class = "form-control", @onchange = "return OnchangeSection();" })
+                                        @Html.HiddenFor(m => m.Fk_ParentId)
+                                    </div>
+                                    <div class="form-group  col-md-3">
+                                        <label class="d-lg-block d-none">&nbsp;</label>
+                                        <input type="submit" class="btn btn-info" name="Search" id="Search" value="Search" />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <div class="card-body ">
-                <div class="row">
-                    <div class="col-md-3">
-                        <label>Student</label>
-                        @Html.DropDownListFor(m => m.Pk_StudentID, new SelectList(ViewBag.ddlStudent, "Value", "Text"), new { @class = "form-control", @onchange = "return OnchangeSection();" })
-                        @Html.HiddenFor(m => m.Fk_ParentId)
-                    </div>
-
-                    <div class="col-md-3">
-                        <label class="d-block">&nbsp;</label>
-                        <input type="submit" class="btn btn-info" name="Search" id="Search" value="Search" />
-                    </div>
-                </div>
-                
-                    
-               
-                <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-                    <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
-                        <div class="col-sm-12">
-                            <table class="table table-bordered w-100 mb-0" id="example23">
+            <div class="col-12">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="example5" class="display">
                                 <thead>
                                     <tr>
                                         <th>Sr.No.</th>
@@ -81,11 +84,10 @@
                             </table>
                         </div>
                     </div>
-
                 </div>
             </div>
-        </div>
 
+        </div>
     </div>
 }
 

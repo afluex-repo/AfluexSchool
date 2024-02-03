@@ -6,129 +6,136 @@
 }
 
 
+
+
+
 @using (Html.BeginForm("PendingLeave", "TeacherLogin", FormMethod.Post, new { @id = "PendingLeave12" }))
 {
-    <div class="col-12 col-md-12 col-lg-12 col-xl-12 mx-auto align-self-center">
-        <div class="card border-0 shadow-sm mb-4">
-            <div class="card-header">
-                <div class="row ">
-                    <div class="col-auto">
-                        <h4 class="mt-0 mb-1">Leave Approval</h4>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-xxl-12 col-md-12">
+                <div class="card shadow">
+                    <div class="card-header">
+                        <h4 class="card-title font-weight-bold">Leave Approval</h4>
+                        <p style="color:red">
+                            @TempData["PendingLeave"]
+                        </p>
                     </div>
-                    <p style="color:red">
-                        @TempData["PendingLeave"]
-                    </p>
+                    <div class="card-body">
+                        <div class="basic-form">
+                            <form>
+
+                                <div class="form-row">
+                                    <div class="form-group col-md-3">
+                                        <label>Student</label>
+                                        @Html.TextBoxFor(m => m.StudentName, new { @class = "form-control", placeholder = "StudentName" })
+                                    </div>
+                                    <div class="form-group  col-md-3">
+                                        <label>From Date</label>
+                                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", placeholder = "From Date", @autoComplete = "off" })
+                                    </div>
+                                    <div class="form-group  col-md-3">
+                                        <label>To Date</label>
+                                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", placeholder = "To Date", @autoComplete = "off" })
+                                    </div>
+                                    <div class="form-group  col-md-3">
+                                        <label class="d-lg-block d-none">&nbsp;</label>
+                                        <input type="submit" value="Search" name="btnSearch12" id="btnSearch" class="btn btn-primary" />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="card-body ">
-                <div class="row">
 
-                    <div class="col-md-3">
-                        Student
-                        @Html.TextBoxFor(m => m.StudentName, new { @class = "form-control", placeholder = "StudentName" })
-                    </div>
-
-                    <div class="col-md-3">
-                        From Date
-                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", placeholder = "From Date", @autoComplete = "off" })
-                    </div>
-                    <div class="col-md-3">
-                        To Date
-                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", placeholder = "To Date", @autoComplete = "off" })
-                    </div>
-
-                    <div class="col-md-3" style="margin-top:20px">
-
-                        <input type="submit" value="Search" name="btnSearch12" id="btnSearch" class="btn btn-primary" />
-                    </div>
-                </div>
-
-                <div class="row">
-                </div>
-
-                <div class="col-sm-12 table-responsive">
-                    <table class="table datatable display responsive w-100 dataTable no-footer dtr-inline">
-                        <thead>
-                            <tr>
-                                <th>S.no</th>
-                                <th>Student</th>
-                                <th>From Date    </th>
-                                <th>To Date   </th>
-                                <th>Reason</th>
-                                <th>Description</th>
-                                <th>Status </th>
-                                <th>App/Dec</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if (Model != null)
-                            {
-                                if (Model.listStudent != null)
-                                {
-                                    int i = 1;
-                                    foreach (var item in Model.listStudent)
-                                    {
-                                        <tr>
-                                            <td>
-                                                @i
-                                            </td>
-                                            <td>@item.StudentName (@item.ClassName - @item.SectionName)</td>
-                                            <td>
-                                                @item.FromDate
-                                            </td>
-                                            <td>
-                                                @item.ToDate
-                                            </td>
-                                            <td>
-                                                @item.Reason
-                                            </td>
-                                            @if (item.Status == "Pending")
-                                            {
-                                                <td>
-                                                    <input type="text" name="Description_ @i" id="Description_" value="@item.Description" onchange="return setdescription(this)" />
-                                                </td>
-                                            }
-                                            else
-                                            {
-                                                <td>
-                                                    <input type="text" name="Description_ @i" id="Description_" value="@item.Description" readonly="readonly" />
-                                                </td>
-                                            }
-                                            <td>
-                                                @item.Status
-                                            </td>
-                                            @if (item.Status == "Pending")
-                                            {
-                                                <td>
-                                                    <input name="chkSelect_ @i" id="chkUnSelect_ @i" type="checkbox" value="Checked" />
-                                                    <input type="hidden" name="Pk_StudentID_ @i" id="Pk_StudentID_ @i" value="@item.Pk_StudentID" />
-                                                    <input type="hidden" name="Description_ @i" id="Description_ @i" value="@item.Description" />
-                                                    <input type="hidden" name="PK_StdntLeaveID_ @i" id="PK_StdntLeaveID_" value="@item.PK_StdntLeaveID" />
-                                                </td>
-                                            }
-                                            else
-                                            {
-                                                <td>
-                                                    <input name="chkSelect_ @i" id="chkUnSelect_ @i" type="checkbox" onclick="return false" checked />
-                                                </td>
-                                            }
-                                        </tr>
-                                        i++;
-                                    }
-                                    <input type="hidden" id="hdRows" name="hdRows" value="@i" />
-                                }
-                            }
-                        </tbody>
-                    </table>
-                    <div class="card-footer text-left">
-
-                        <input type="submit" name="ApproveLeave" id="Approve" value="Approve" class="btn btn-success btn-sm" onclick="return approve(this)">
-                        <input type="submit" name="DeclineLeave" id="Decline" value="Decline" class="btn btn-danger btn-sm" onclick="return decline(this)" />
+            <div class="col-12">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="example5" class="display">
+                                <thead>
+                                    <tr>
+                                        <th>S.no</th>
+                                        <th>Student</th>
+                                        <th>From Date    </th>
+                                        <th>To Date   </th>
+                                        <th>Reason</th>
+                                        <th>Description</th>
+                                        <th>Status </th>
+                                        <th>App/Dec</th>
+                                    </tr>
+                                </thead>
+                                     <tbody>
+                                         @if (Model != null)
+                                         {
+                                             if (Model.listStudent != null)
+                                             {
+                                                 int i = 1;
+                                                 foreach (var item in Model.listStudent)
+                                                 {
+                                                     <tr>
+                                                         <td>
+                                                             @i
+                                                         </td>
+                                                         <td>@item.StudentName (@item.ClassName - @item.SectionName)</td>
+                                                         <td>
+                                                             @item.FromDate
+                                                         </td>
+                                                         <td>
+                                                             @item.ToDate
+                                                         </td>
+                                                         <td>
+                                                             @item.Reason
+                                                         </td>
+                                                         @if (item.Status == "Pending")
+                                                         {
+                                                             <td>
+                                                                 <input type="text" name="Description_ @i" id="Description_" value="@item.Description" onchange="return setdescription(this)" />
+                                                             </td>
+                                                         }
+                                                         else
+                                                         {
+                                                             <td>
+                                                                 <input type="text" name="Description_ @i" id="Description_" value="@item.Description" readonly="readonly" />
+                                                             </td>
+                                                         }
+                                                         <td>
+                                                             @item.Status
+                                                         </td>
+                                                         @if (item.Status == "Pending")
+                                                         {
+                                                             <td>
+                                                                 <input name="chkSelect_ @i" id="chkUnSelect_ @i" type="checkbox" value="Checked" />
+                                                                 <input type="hidden" name="Pk_StudentID_ @i" id="Pk_StudentID_ @i" value="@item.Pk_StudentID" />
+                                                                 <input type="hidden" name="Description_ @i" id="Description_ @i" value="@item.Description" />
+                                                                 <input type="hidden" name="PK_StdntLeaveID_ @i" id="PK_StdntLeaveID_" value="@item.PK_StdntLeaveID" />
+                                                             </td>
+                                                         }
+                                                         else
+                                                         {
+                                                             <td>
+                                                                 <input name="chkSelect_ @i" id="chkUnSelect_ @i" type="checkbox" onclick="return false" checked />
+                                                             </td>
+                                                         }
+                                                     </tr>
+                                                     i++;
+                                                 }
+                                                 <input type="hidden" id="hdRows" name="hdRows" value="@i" />
+                                             }
+                                         }
+                                  </tbody>
+                            </table>
+                        </div>
+                        <div class="card-footer text-left">
+                            <input type="submit" name="ApproveLeave" id="Approve" value="Approve" class="btn btn-success btn-sm" onclick="return approve(this)">
+                            <input type="submit" name="DeclineLeave" id="Decline" value="Decline" class="btn btn-danger btn-sm" onclick="return decline(this)" />
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 }
 
