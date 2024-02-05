@@ -315,6 +315,5 @@ E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\Newtonsoft.Json.xml
 E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\System.Net.Http.Formatting.xml
 E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\System.Web.Http.xml
 E:\Tanishq\Repository\AfluexSchool\AfluexSchool\bin\System.Web.Http.WebHost.xml
-E:\Tanishq\Repository\AfluexSchool\AfluexSchool\obj\Debug\AfluexSchool.csprojResolveAssemblyReference.cache
 E:\Tanishq\Repository\AfluexSchool\AfluexSchool\obj\Debug\APSSchool.dll
 E:\Tanishq\Repository\AfluexSchool\AfluexSchool\obj\Debug\APSSchool.pdb
