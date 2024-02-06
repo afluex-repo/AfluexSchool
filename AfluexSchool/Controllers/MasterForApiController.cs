@@ -3542,8 +3542,7 @@ namespace APSSchool.Controllers
         #endregion
 
         #region SaveAttendance
-
-        [HttpPost]
+        
         public ActionResult SaveAttendance(SaveEmployeeAttendanceRequest Request, HttpPostedFileBase TeacherPhoto)
         {
             SaveEmployeeAttendanceResponse Response = new SaveEmployeeAttendanceResponse();
@@ -3561,7 +3560,7 @@ namespace APSSchool.Controllers
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
                         Response.status = "0";
-                        Response.Message = "   Punching Successfully !";
+                        Response.Message = "Punching Successfully !";
                         Response.PunchInDate = ds.Tables[0].Rows[0]["PunchInDate"].ToString();
                         Response.PunchInTime = ds.Tables[0].Rows[0]["PunchInTime"].ToString();
                     }
