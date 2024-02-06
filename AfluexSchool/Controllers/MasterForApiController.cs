@@ -2685,7 +2685,7 @@ namespace APSSchool.Controllers
                         HomeworkListAPI obj = new HomeworkListAPI();
                         obj.HomeWorkID = r["Pk_HomeworkID"].ToString();
                         obj.HomeWorkHTML = r["HomeworkText"].ToString();
-                        obj.StudentPhoto = r["HomeworkFile"].ToString();
+                        obj.HomeworkFile = r["HomeworkFile"].ToString();
                         obj.HomeworkDate = r["HomeworkDate"].ToString();
                         obj.ClassName = r["ClassName"].ToString();
                         obj.Fk_ClassID = r["Pk_ClassID"].ToString();

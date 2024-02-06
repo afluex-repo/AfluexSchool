@@ -8,7 +8,7 @@ namespace AfluexSchool.Models
     public class SendSMS : Common
     {
         #region Properties
-
+        
         public List<SendSMS> lstsmsdata { get; set; }
         public DataTable dtSMS { get; set; }
         public string SchoolName { get; set; }
