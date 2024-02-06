@@ -3542,8 +3542,7 @@ namespace APSSchool.Controllers
         #endregion
 
         #region SaveAttendance
-
-        [HttpPost]
+        
         public ActionResult SaveAttendance(SaveEmployeeAttendanceRequest Request, HttpPostedFileBase TeacherPhoto)
         {
             SaveEmployeeAttendanceResponse Response = new SaveEmployeeAttendanceResponse();
