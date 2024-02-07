@@ -534,6 +534,18 @@ namespace AfluexSchool.Models
             return ds;
         }
 
+        public DataSet HomeworkListforImage()
+        {
+            SqlParameter[] para ={
+
+                                    new SqlParameter("@HomeWorkID",HomeWorkID),
+                                    new SqlParameter("@HomeworkFile",HomeworkFile)
+                               };
+            DataSet ds = Connection.ExecuteQuery("HomeWorkListforImage", para);
+            return ds;
+        }
+
+
 
         #endregion
 
