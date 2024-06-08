@@ -7,117 +7,94 @@
 
  @using (Html.BeginForm("StudentMarksList", "Exam", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
  {
-    <div>
-        <div class="card border-0 shadow-sm mb-4">
-            <div class="card-header border-0 bg-none">
-                <div class="row">
-                    <div class="col-12 col-md">
-                        <p class="fs15">Student Marks List</p>
-                    </div>
-                    <p style="color:red">
-                       
-                    </p>
+    <div class="container-fluid">
+        <div class="row page-titles mx-0">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h3><b>Student Marks List</b></h3>
                 </div>
             </div>
-            <div class="card-body ">
-                <div class="row ">
-                    <div class="col-lg-3 col-md-3">
-                        <div class="form-group ">
-                            <label> Class </label>
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Exam</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Student Marks List</a></li>
+                </ol>
+            </div>
+        </div>
+        <div class="card shadow">
+            <div class="card-body">
+                @*<p style="color:red">
+                    @TempData["LeaveList"]
+                </p>*@
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label>Class</label>
                             @Html.DropDownListFor(m => m.Fk_ClassID, new SelectList(ViewBag.ddlClass, "Value", "Text"), new { @class = "form-control", @onchange = "return GetSectionByClass();" })
                             @Html.HiddenFor(m => m.Pk_StudentMarksId)
                         </div>
-                    </div>
-                    <div class="col-lg-3 col-md-3">
-                        <div class="form-group ">
-                            <label> Section </label>
+                        <div class="form-group  col-md-3">
+                            <label>Section</label>
                             @Html.DropDownListFor(m => m.Fk_SectionId, new SelectList(ViewBag.ddlsection, "Value", "Text"), new { @class = "form-control", @onchange = "return GetSubjectNameBySection ();" })
-
-
                         </div>
-                    </div>
-
-                    <div class="col-lg-3 col-md-3">
-                        <div class="form-group ">
-                            <label> Subject </label>
+                        <div class="form-group col-md-3">
+                            <label>Subject</label>
                             @Html.DropDownListFor(m => m.SubjectID, new SelectList(ViewBag.ddlSubjectName, "Value", "Text"), new { @class = "form-control" })
-
                         </div>
-                    </div>
-                    <div class="col-lg-3 col-md-3">
-                        <div class="form-group ">
-                            <label> Exam type </label>
+                        <div class="form-group col-md-3">
+                            <label>Exam type</label>
                             @Html.DropDownListFor(m => m.ExamTypeName, new SelectList(ViewBag.ddlExamType, "Value", "Text"), new { @class = "form-control" })
-
-
+                        </div>
+                        <div class="form-group col-md-3">
+                            <input class="btn btn-primary" type="submit" name="Search" value="Get Detail" id="btndetail" />
                         </div>
                     </div>
-                </div>
-                <div class="card-footer text-left">
-                    <input class="btn btn-primary" type="submit" name="Search" value="Get Detail" id="btndetail" />
-                </div>
-                <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-                    <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
-                        <div class="col-sm-12">
-                            <table class="table table-bordered w-100 mb-0" id="example23">
-                                <thead>
-                                    <tr>
+                </form>
 
-                                        <th>S No.</th>
-                                        <th>StudentName</th>
-                                        <th>Class</th>
-                                        <th>Section</th>
-                                        <th>Subject</th>
-                                        <th>Exam Type</th>
-                                        <th>Maximum Marks</th>
-                                        <th>Obtain Marks</th> 
-
-                                    </tr>
-
-                                </thead>
-                                <tbody>
-                                    @if (Model != null)
+                <div class="table-responsive mt-3">
+                    <table id="example5" class="display table" style="min-width:845px">
+                        <thead>
+                            <tr>
+                                <th>S No.</th>
+                                <th>StudentName</th>
+                                <th>Class</th>
+                                <th>Section</th>
+                                <th>Subject</th>
+                                <th>Exam Type</th>
+                                <th>Maximum Marks</th>
+                                <th>Obtain Marks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                if (Model.lststudent != null)
+                                {
+                                    int i = 1;
+                                    foreach (var item in Model.lststudent)
                                     {
-                                        if (Model.lststudent != null)
-                                        {
-                                            int i = 1;
-                                            foreach (var item in Model.lststudent)
-                                            {
-                                                <tr>
-                                                    <td>@i</td>
-                                                    <td> @item.StudentName  </td>
-                                                    <td> @item.ClassName  </td>
-                                                    <td> @item.SectionName  </td>
-                                                    <td> @item.SubjectName  </td>
-                                                    <td> @item.ExamTypeName  </td>
-                                                    <td> @item.MaxMarks  </td>
-                                                    <td> <b>@item.ObtainedMarks</b>  </td>
-                                                </tr>
-                                                i++;
-                                            }
-
-                                        }
+                                        <tr>
+                                            <td>@i</td>
+                                            <td> @item.StudentName</td>
+                                            <td> @item.ClassName</td>
+                                            <td> @item.SectionName</td>
+                                            <td> @item.SubjectName</td>
+                                            <td> @item.ExamTypeName</td>
+                                            <td> @item.MaxMarks  </td>
+                                            <td><b>@item.ObtainedMarks</b></td>
+                                        </tr>
+                                        i++;
                                     }
-                                </tbody>
-                            </table>
-                            <div class="j-response"></div>
-                        </div>
-
-                    </div>
+                                }
+                            }
+                        </tbody>
+                    </table>
                 </div>
             </div>
-
         </div>
-
     </div>
 
  }
-
-<script src="../../scripts/jquery-1.10.2.min.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
-
-
 
 <script>
     

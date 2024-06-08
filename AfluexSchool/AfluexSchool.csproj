@@ -303,7 +303,6 @@
     <Content Include="AssetsAdmin\images\courses\pic6.jpg" />
     <Content Include="AssetsAdmin\images\courses\pic7.jpg" />
     <Content Include="AssetsAdmin\images\courses\pic8.jpg" />
-    <Content Include="AssetsAdmin\images\favicon.png" />
     <Content Include="AssetsAdmin\images\icons\20.png" />
     <Content Include="AssetsAdmin\images\icons\21.png" />
     <Content Include="AssetsAdmin\images\icons\22.png" />
@@ -747,6 +746,7 @@
     <Content Include="AssetsAdmin\vendor\summernote\font\summernote.woff" />
     <None Include="Properties\PublishProfiles\AfluexSchool.pubxml" />
     <None Include="Properties\PublishProfiles\AfluexSchoolDemo.pubxml" />
+    <None Include="Properties\PublishProfiles\Afluex_School.pubxml" />
     <None Include="Properties\PublishProfiles\school.pubxml" />
     <None Include="scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="scripts\bootstrap.js" />

@@ -7,97 +7,79 @@
 
  @using (Html.BeginForm("RouteWiseTransportReport", "AdminReports", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
  {
-    <div>
-        <div class="card border-0 shadow-sm mb-4">
-            <div class="card-header border-0 bg-none">
-                <div class="row">
-                    <div class="col-12 col-md">
-                        <p class="fs15">Route Wise Transport Report</p>
-                    </div>
-                    <p style="color:red">
-
-                    </p>
+    <div class="container-fluid">
+        <div class="row page-titles mx-0">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h3><b>Route Wise Transport Report</b></h3>
                 </div>
             </div>
-            <div class="card-body ">
-                <div class="row ">
-                    <div class="col-lg-3 col-md-3">
-                        <div class="form-group ">
-                            <label> Route No </label>
-                            @Html.DropDownListFor(m => m.RouteNo, new SelectList(ViewBag.ddlRoute, "Value", "Text"), new { @class = "form-control"  })
-                           
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-3">
-                        <div class="form-group ">
-                            <label> Vehicle No </label>
-                            @Html.DropDownListFor(m => m.VehicleNo, new SelectList(ViewBag.ddlVehicleNo, "Value", "Text"), new { @class = "form-control"  })
-                             
-                        </div>
-                    </div>
-                     
-                    </div>
-                </div>
-                <div class="card-footer text-left">
-                    <input class="btn btn-primary" type="submit" name="GetDetails" value="Get Detail" id="btndetail" />
-                </div>
-                <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-                    <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
-                        <div class="col-sm-12">
-                            <table class="table datatable display responsive w-100 dataTable no-footer dtr-inline" id="example23" style="width: 1002px;">
-                                <thead>
-                                    <tr>
-
-                                        <th>S No.</th>
-                                        <th>RouteNo</th>
-                                        <th>AreaName</th>
-                                        <th>VehicleNo</th>
-                                        <th>VehicleType</th>
-                                        <th>Amount</th>
-                                        
-                                    </tr>
-
-                                </thead>
-                                <tbody>
-                                    @if (Model != null)
-                                    {
-                                        if (Model.Arealist != null)
-                                        {
-                                            int i = 1;
-                                            foreach (var item in Model.Arealist)
-                                            {
-                                                <tr>
-                                                    <td>@i</td>
-                                                    <td> @item.RouteNo  </td>
-                                                    <td> @item.AreaName  </td>
-                                                    <td> @item.VehicleNo  </td>
-                                                    <td> @item.VehicleType  </td>
-                                                    <td> @item.Amount  </td>
-                                                    
-                                                </tr>
-                                                i++;
-                                            }
-
-                                        }
-                                    }
-                                </tbody>
-                            </table>
-                            <div class="j-response"></div>
-                        </div>
-
-                    </div>
-                </div>
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Reports</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Route Wise Transport Report</a></li>
+                </ol>
             </div>
-
         </div>
+        <div class="card shadow">
+            <div class="card-body">
+                @*<p style="color:red">
+                    @TempData["LeaveList"]
+                </p>*@
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label>Route No</label>
+                            @Html.DropDownListFor(m => m.RouteNo, new SelectList(ViewBag.ddlRoute, "Value", "Text"), new { @class = "form-control" })
+                        </div>
+                        <div class="form-group  col-md-3">
+                            <label>Vehicle No</label>
+                            @Html.DropDownListFor(m => m.VehicleNo, new SelectList(ViewBag.ddlVehicleNo, "Value", "Text"), new { @class = "form-control" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label class="d-block">&nbsp;</label>
+                            <input class="btn btn-primary" type="submit" name="GetDetails" value="Get Detail" id="btndetail" />
+                        </div>
+                    </div>
+                </form>
 
-  
-
+                <div class="table-responsive mt-3">
+                    <table id="example5" class="display table" style="min-width:845px">
+                        <thead>
+                            <tr>
+                                <th>S No.</th>
+                                <th>RouteNo</th>
+                                <th>AreaName</th>
+                                <th>VehicleNo</th>
+                                <th>VehicleType</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                if (Model.Arealist != null)
+                                {
+                                    int i = 1;
+                                    foreach (var item in Model.Arealist)
+                                    {
+                                        <tr>
+                                            <td>@i</td>
+                                            <td> @item.RouteNo</td>
+                                            <td> @item.AreaName</td>
+                                            <td> @item.VehicleNo</td>
+                                            <td> @item.VehicleType</td>
+                                            <td> @item.Amount</td>
+                                        </tr>
+                                        i++;
+                                    }
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
  }
-
-<script src="../../scripts/jquery-1.10.2.min.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
-
-
- 
