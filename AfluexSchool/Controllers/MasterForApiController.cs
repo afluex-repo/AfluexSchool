@@ -3904,7 +3904,7 @@ namespace APSSchool.Controllers
         }
 
         #endregion
-        ////////////////////////////////////////////////////////////////////////////////////////
+        
         #region GetAttenndaceList
 
         public ActionResult GetAttenndaceList(GetAttenndaceListReqst model)
@@ -4008,7 +4008,7 @@ namespace APSSchool.Controllers
         }
 
         #endregion
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        
         #region EditNoticeMaster
 
         [HttpPost]
