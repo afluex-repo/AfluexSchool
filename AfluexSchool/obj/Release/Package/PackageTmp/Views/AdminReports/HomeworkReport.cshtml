@@ -7,77 +7,72 @@
 
 @using (Html.BeginForm("HomeworkReport", "AdminReports", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
-
-
-    <div>
-        <div class="card border-0 shadow-sm mb-4">
-            <div class="card-header border-0 bg-none">
-                <div class="row">
-                    <div class="col-12 col-md">
-                        <p class="fs15">Homework Report</p>
-                    </div>
-                    <p style="color:red">
-                        @TempData["HomeworkReport"]
-                    </p>
+    <div class="container-fluid">
+        <div class="row page-titles mx-0">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h3><b>Homework Report</b></h3>
                 </div>
             </div>
-            <div class="card-body ">
-
-                <div class="row">
-
-                    <div class="col-md-3">
-                        From Date
-                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", placeholder = "From Date", @ReadOnly = "ReadOnly" })
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Reports</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Homework Report</a></li>
+                </ol>
+            </div>
+        </div>
+        <div class="card shadow">
+            <div class="card-body">
+                <p style="color:red">
+                    @TempData["HomeworkReport"]
+                </p>
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label>From Date</label>
+                            @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", placeholder = "From Date", @ReadOnly = "ReadOnly" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>To Date</label>
+                            @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", placeholder = "To Date", @ReadOnly = "ReadOnly" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Class Name</label>
+                            @Html.DropDownListFor(m => m.Fk_ClassID, new SelectList(ViewBag.ddlClassName, "Value", "Text"), new { @class = "form-control", @onchange = "return GetSection()" })
+                        </div>
+                        <div class="form-group  col-md-3">
+                            <label>Section Name</label>
+                            @Html.HiddenFor(m => m.HomeworkFile)
+                            @Html.HiddenFor(m => m.HomeWorkID)
+                            @Html.DropDownListFor(m => m.Fk_SectionID, new SelectList(ViewBag.ddlSectionName, "Value", "Text"), new { @class = "form-control", @onchange = "return GetSubjectNameBySection()" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Subject Name</label>
+                            @Html.DropDownListFor(m => m.SubjectID, new SelectList(ViewBag.ddlSubjectName, "Value", "Text"), new { @class = "form-control" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Teacher Name</label>
+                            @Html.DropDownListFor(m => m.PK_TeacherID, new SelectList(ViewBag.ddlTeacherName, "Value", "Text"), new { @class = "form-control" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label class="d-block">&nbsp;</label>
+                            <input type="submit" value="Search" name="btnSearch" onclick="return validate();" id="btnSearch" class="btn btn-primary" />
+                        </div>
                     </div>
-                    <div class="col-md-3">
-                        To Date
-                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", placeholder = "To Date", @ReadOnly = "ReadOnly" })
-                    </div>
-                    <div class="col-md-3">
-                        Class Name
-                        @Html.DropDownListFor(m => m.Fk_ClassID, new SelectList(ViewBag.ddlClassName, "Value", "Text"), new { @class = "form-control", @onchange = "return GetSection()" })
+                </form>
 
-                    </div>
-
-                    <div class="col-md-3">
-                        Section Name
-                        @Html.HiddenFor(m => m.HomeworkFile)
-                        @Html.HiddenFor(m => m.HomeWorkID)
-                        @Html.DropDownListFor(m => m.Fk_SectionID, new SelectList(ViewBag.ddlSectionName, "Value", "Text"), new { @class = "form-control", @onchange = "return GetSubjectNameBySection()" })
-                    </div>
-
-                </div>
-                <br />
-                <div class="row">
-                    <div class="col-md-3">
-                        Subject Name
-                        @Html.DropDownListFor(m => m.SubjectID, new SelectList(ViewBag.ddlSubjectName, "Value", "Text"), new { @class = "form-control" })
-                    </div>
-                    <div class="col-md-3">
-                        Teacher Name
-                        @Html.DropDownListFor(m => m.PK_TeacherID, new SelectList(ViewBag.ddlTeacherName, "Value", "Text"), new { @class = "form-control" })
-                    </div>
-                    <div class="col-md-3" style="margin-top:20px">
-
-                        <input type="submit" value="Search" name="btnSearch" onclick="return validate();" id="btnSearch" class="btn btn-primary" />
-                    </div>
-                </div>
-
-
-
-                <div class="col-sm-12 table-responsive">
-                    <table class="table datatable display responsive w-100 dataTable no-footer dtr-inline" id="example23">
-
+                <div class="table-responsive mt-3">
+                    <table id="example5" class="display table" style="min-width:845px">
                         <thead>
                             <tr>
                                 <th>S.no</th>
-                                <th>Homework Date    </th>
-                                <th>Class   </th>
+                                <th>Homework Date</th>
+                                <th>Class</th>
                                 <th>Section</th>
-                                <th>Subject          </th>
+                                <th>Subject</th>
                                 <th>Assigned By</th>
-                                <th>Text          </th>
-                                <th>Homework Photo </th>
+                                <th>Text</th>
+                                <th>Homework Photo</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -88,7 +83,6 @@
                                     int i = 1;
                                     foreach (var item in Model.listStudent)
                                     {
-
                                         <tr>
                                             <td>
                                                 @i
@@ -110,7 +104,6 @@
                                             <td>
                                                 <input type="button" value="View" class="btn btn-info" onclick="savemessage('@item.HomeworkFile','@item.HomeWorkID');" />
                                             </td>
-
                                         </tr>
                                         i++;
                                     }
@@ -118,29 +111,20 @@
                             }
                         </tbody>
                     </table>
-                    <div class="j-response"></div>
                 </div>
-
             </div>
         </div>
     </div>
-
-
-
 
 }
 
 <script src="../../scripts/jquery-1.10.2.min.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
-
 
 <script>
     $(document).ready(function () {
         $("#divload").css({ 'display': 'none' });
-
-
     });
 
     $('#FromDate').datepicker({

@@ -7,23 +7,20 @@
 
 @using (Html.BeginForm("NoticeList", "TeacherLogin", FormMethod.Post, new { @id = "NoticeList" }))
 {
-    <div>
-        <div class="card border-0 shadow-sm mb-4">
-            <div class="card-header border-0 bg-none">
-                <div class="row">
-                    <div class="col-12 col-md">
-                        <p class="fs15">Notice List</p>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card shadow">
+                    <div class="card-header">
+                        <h4 class="card-title font-weight-bold">Notice List</h4>
+                        <p style="color:red">
+                            @TempData["NoticeList"]
+                        </p>
                     </div>
-                    <p style="color:red">
-                        @TempData["NoticeList"]
-                    </p>
-                </div>
-            </div>
-            <div class="card-body ">
-                <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-                    <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
-                        <div class="col-sm-12">
-                            <table class="table table-bordered w-100 mb-0" id="example23">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="example5" class="display">
                                 <thead>
                                     <tr>
                                         <th>Sr.No.</th>
@@ -60,11 +57,10 @@
                             </table>
                         </div>
                     </div>
-
                 </div>
             </div>
-        </div>
 
+        </div>
     </div>
 }
 

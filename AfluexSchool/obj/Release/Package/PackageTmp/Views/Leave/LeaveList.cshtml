@@ -7,110 +7,115 @@
 
 @using (Html.BeginForm("LeaveList", "Leave", FormMethod.Post, new { @id = "form1" }))
 {
-    <div class="container main-container" id="main-container">
-        <div class="card border-0 shadow-sm mb-4">
-            <div class="card-header border-0 bg-none">
-                <div class="row">
-                    <div class="col-12 col-md">
-                        <p class="fs15">Leave List</p>
-                    </div>
-                    <p style="color:red">
-                        @TempData["LeaveList"]
-                    </p>
+    <div class="container-fluid">
+        <div class="row page-titles mx-0">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h3><b>Leave List</b></h3>
                 </div>
             </div>
-            <div class="card-body ">
-                <div class="row">
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Leave</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Leave List</a></li>
+                </ol>
+            </div>
+        </div>
+        <div class="card shadow">
+            <div class="card-body">
+                <p style="color:red">
+                    @TempData["LeaveList"]
+                </p>
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label>Student</label>
+                            @Html.TextBoxFor(m => m.StudentName, new { @class = "form-control", placeholder = "StudentName" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Class</label>
+                            @Html.DropDownListFor(m => m.PK_ClassID, new SelectList(ViewBag.ddlClass, "Value", "Text"), new { @class = "form-control", @onchange = "return getSection()" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Section</label>
+                            @Html.DropDownListFor(m => m.Fk_SectionID, new SelectList(ViewBag.ddlSection, "Value", "Text"), new { @class = "form-control", })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Status</label>
+                            @Html.DropDownListFor(m => m.Status, new SelectList(ViewBag.ddlStatus, "Value", "Text"), new { @class = "form-control", placeholder = "To Date", @ReadOnly = "ReadOnly" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>From Date</label>
+                            @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", placeholder = "From Date" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>To Date</label>
+                            @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", placeholder = "To Date" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label class="d-block">&nbsp;</label>
+                            <input type="submit" value="Search" name="btnSearch" id="btnSearch" class="btn btn-primary" />
+                        </div>
+                    </div>
+                </form>
 
-                    <div class="col-md-3">
-                        Student
-                        @Html.TextBoxFor(m => m.StudentName, new { @class = "form-control", placeholder = "StudentName" })
-                    </div>
-                    <div class="col-md-3">
-                        Class
-                        @Html.DropDownListFor(m => m.PK_ClassID, new SelectList(ViewBag.ddlClass, "Value", "Text"), new { @class = "form-control", @onchange= "return getSection()" })
-                    </div>
-                    <div class="col-md-3">
-                        Section
-                        @Html.DropDownListFor(m => m.Fk_SectionID, new SelectList(ViewBag.ddlSection, "Value", "Text"), new { @class = "form-control",})
-                    </div>
-                    <div class="col-md-3">
-                        Status
-                        @Html.DropDownListFor(m => m.Status, new SelectList(ViewBag.ddlStatus, "Value", "Text"), new { @class = "form-control", placeholder = "To Date", @ReadOnly = "ReadOnly" })
-                    </div>
-                </div>
-                <div class="row">
-
-                    <div class="col-md-3">
-                        From Date
-                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", placeholder = "From Date" })
-                    </div>
-                    <div class="col-md-3">
-                        To Date
-                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", placeholder = "To Date" })
-                    </div>
-                  
-                    <div class="col-md-3" style="margin-top:20px">
-
-                        <input type="submit" value="Search" name="btnSearch" id="btnSearch" class="btn btn-primary" />
-                    </div>
-                </div>
-
-                <div class="col-sm-12 table-responsive">
-                    <table class="table datatable display responsive w-100 dataTable no-footer dtr-inline">
-                        <thead>
-                            <tr>
-                                <th>S.no</th>
-                                <th>Student</th>
-                                <th>From Date    </th>
-                                <th>To Date   </th>
-                                <th>Reason</th>
-                                <th>Description</th>
-                                <th>Status </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if (Model != null)
-                            {
-                                if (Model.listStudent != null)
-                                {
-                                    int i = 1;
-                                    foreach (var item in Model.listStudent)
+                        <div class="table-responsive mt-3">
+                            <table id="example5" class="display table" style="min-width:845px">
+                                <thead>
+                                    <tr>
+                                        <th>S.no</th>
+                                        <th>Student</th>
+                                        <th>From Date</th>
+                                        <th>To Date</th>
+                                        <th>Reason</th>
+                                        <th>Description</th>
+                                        <th>Status </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
                                     {
-                                        <tr>
-                                            <td>
-                                                @i
-                                            </td>
-                                            <td>@item.StudentName (@item.ClassName - @item.SectionName)</td>
-                                            <td>
-                                                @item.FromDate
-                                            </td>
-                                            <td>
-                                                @item.ToDate
-                                            </td>
-                                            <td>
-                                                @item.Reason
-                                            </td>
-                                            <td>
-                                                @item.Description
-                                            </td>
-                                            <td>
-                                                @item.Status
-                                            </td>
-                                           
-                                        </tr>
-                                        i++;
+                                        if (Model.listStudent != null)
+                                        {
+                                            int i = 1;
+                                            foreach (var item in Model.listStudent)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @i
+                                                    </td>
+                                                    <td>@item.StudentName (@item.ClassName - @item.SectionName)</td>
+                                                    <td>
+                                                        @item.FromDate
+                                                    </td>
+                                                    <td>
+                                                        @item.ToDate
+                                                    </td>
+                                                    <td>
+                                                        @item.Reason
+                                                    </td>
+                                                    <td>
+                                                        @item.Description
+                                                    </td>
+                                                    <td>
+                                                        @item.Status
+                                                    </td>
+
+                                                </tr>
+                                                i++;
+                                            }
+                                            <input type="hidden" id="hdRows" name="hdRows" value="@i" />
+                                        }
                                     }
-                                    <input type="hidden" id="hdRows" name="hdRows" value="@i" />
-                                }
-                            }
-                        </tbody>
-                    </table>
-                   
-                </div>
+                                </tbody>
+                            </table>
+                            
+                        </div>
+
             </div>
         </div>
     </div>
+
 }
 
 <script src="../../scripts/jquery-1.10.2.min.js"></script>

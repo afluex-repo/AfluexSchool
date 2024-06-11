@@ -5,160 +5,132 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<style>
+    .errortext{
+        border:1px solid red!important;
+        background-color:#faa9a9!important;
+    }
+</style>
+
 @using (Html.BeginForm("AssignSubjecttoTeacher", "Master", FormMethod.Post, new { @id = "AssignSubjecttoTeacher" }))
 {
-
-    <div>
-
-          <div class="login-row">
-            <div class="col-12 col-md-12 col-lg-12 col-xl-12 mx-auto align-self-center">
-                <div class="card border-0 shadow-sm mb-4">
-                    <div class="card-header">
-                        <div class="row ">
-                            <div class="col-auto">
-                                <h4 class="mt-0 mb-1">Assign Subject to Teacher</h4>
-                            </div>
-                            <p style="color:red">
-                                @TempData["AssignSubjecttoTeacher"]
-                            </p>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="row justify-content-center">
-                            <div class="col-md-12 mx-auto">
-                                <div class="row ">
-                                    
-                                    <div class="col-lg-3 col-md-3">
-                                        <div class="form-group ">
-                                            <label> Teacher Name <span style="color: red">*</span></label>
-                                            @Html.DropDownListFor(m => m.PK_TeacherID, new SelectList(ViewBag.ddlTeacherName, "Value", "Text"), new { @class = "form-control", @onchange = "return selectType();" })
-
-                                            @Html.HiddenFor(m => m.Pk_SubjecttoTeacherId, new { @class = "form-control" })
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-3">
-                                        <div class="form-group ">
-                                            <label> Class Name <span style="color: red">*</span></label>
-                                            @Html.DropDownListFor(m => m.Pk_ClassId, new SelectList(ViewBag.ddlClassName, "Value", "Text"), new { @class = "form-control", @onchange = "return GetSection()" })
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-3 col-md-3">
-                                        <div class="form-group ">
-                                            <label>Section Name <span style="color: red">*</span></label>
-                                            @Html.DropDownListFor(m => m.PK_SectionId, new SelectList(ViewBag.ddlSectionName, "Value", "Text"), new { @class = "form-control" })
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                                <div class="row ">
-                                    <div class="col-lg-1 col-lg-1">
-                                        <div class="form-group ">
-                                            <div class="col-lg-1 col-lg-1">
-                                                <div class="form-group ">
-                                                    <input type="submit" class="btn btn-success" value="Get Subject" onclick="return getdetails()" style="margin-top:25px" name="GetSubjectNameByTeacher" />
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
+    <div class="container-fluid">
+        <div class="row page-titles mx-0">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h3><b>Assign Subject to Teacher</b></h3>
                 </div>
-
             </div>
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Teacher</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Assign Subject to Teacher</a></li>
+                </ol>
+            </div>
+        </div>
+        <div class="card shadow">
+            <div class="card-body">
+                <p style="color:red">
+                    @TempData["AssignSubjecttoTeacher"]
+                </p>
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label>Teacher Name<span style="color: red">*</span></label>
+                            @Html.DropDownListFor(m => m.PK_TeacherID, new SelectList(ViewBag.ddlTeacherName, "Value", "Text"), new { @class = "form-control", @onchange = "return selectType();" })
 
-            <div class="card-body ">
-                <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-                    <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
-                        <div class="col-sm-12">
-                            <table style="display:none" id="tabl" class="table datatable display responsive w-100 dataTable no-footer dtr-inline" style="width: 1002px;">
-                                <thead>
-                                    <tr>
-                                        <th>S No.</th>
-                                        <th>Subject Name</th>
-                                        <th>Check For Assign</th>
-                                    </tr>
+                            @Html.HiddenFor(m => m.Pk_SubjecttoTeacherId, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group  col-md-3">
+                            <label>Class Name<span style="color: red">*</span></label>
+                            @Html.DropDownListFor(m => m.Pk_ClassId, new SelectList(ViewBag.ddlClassName, "Value", "Text"), new { @class = "form-control", @onchange = "return GetSection()" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Section Name<span style="color: red">*</span></label>
+                            @Html.DropDownListFor(m => m.PK_SectionId, new SelectList(ViewBag.ddlSectionName, "Value", "Text"), new { @class = "form-control" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label class="d-block">&nbsp;</label>
+                            <input type="submit" class="btn btn-success" value="Get Subject" onclick="return getdetails()" name="GetSubjectNameByTeacher" />
+                        </div>
+                    </div>
+                </form>
 
-                                </thead>
-                                <tbody id="tblData">
-                                    @if (Model != null)
+                <div class="table-responsive mt-3">
+                    <table id="example5" class="display table" style="min-width:845px">
+                        <thead>
+                            <tr>
+                                <th>S No.</th>
+                                <th>Subject Name</th>
+                                <th>Check For Assign</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tblData">
+                            @if (Model != null)
+                            {
+                                if (Model.subjectLst != null)
+                                {
+                                    int i = 1;
+                                    foreach (var item in Model.subjectLst)
                                     {
-                                        if (Model.subjectLst != null)
-                                        {
-                                            int i = 1;
-                                            foreach (var item in Model.subjectLst)
+                                        <tr>
+                                            <td>
+                                                @i
+                                            </td>
+                                            <td>
+                                                @item.SubjectName
+                                            </td>
+                                            @if (item.Status == "Checked")
                                             {
-
-                                                <tr>
-                                                    <td>
-                                                        @i
-
-                                                    </td>
-                                                    <td>
-                                                        @item.SubjectName
-                                                    </td>
-                                                    @if (item.Status == "Checked")
-                                                    {
-                                                        <td><input name="chkSelect_ @i" id="chkUnSelect_ @i" type="checkbox" value="Checked" checked /></td>
+                                                <td><input name="chkSelect_ @i" id="chkUnSelect_ @i" type="checkbox" value="Checked" checked /></td>
 
                                                         <input type="hidden" name="PK_TeacherID_ @i" id="PK_TeacherID_ @i" value="@item.PK_TeacherID" />
                                                         <input type="hidden" name="Pk_ClassId_ @i" id="Pk_ClassId_ @i" value="@item.Pk_ClassId" />
                                                         <input type="hidden" name="PK_SectionId_ @i" id="PK_SectionId_ @i" value="@item.PK_SectionId" />
                                                         <input type="hidden" name="PK_SubjectID_ @i" id="PK_SubjectID_ @i" value="@item.Pk_SubjectId" />
                                                         <input type="hidden" name="SubjectName_ @i" id="SubjectName_ @i" value="@item.SubjectName" />
-                                                        
+
                                                         <input type="hidden" name="Pk_SubjecttoTeacherId_ @i" id="Pk_SubjecttoTeacherId_ @i" value="@item.Pk_SubjecttoTeacherId" />
-                                                    }
-                                                    else
-                                                    {
-                                                        <td>
-                                                            <input type="checkbox" value="Checked" name="chkSelect_ @i" id="chkUnSelect_ @i" />
-                                                            <input type="hidden" name="PK_SubjectID_ @i" id="PK_SubjectID_ @i" value="@item.Pk_SubjectId" />
-                                                            <input type="hidden" name="SubjectName_ @i" id="SubjectName_ @i" value="@item.SubjectName" />
-                                                            <input type="hidden" name="PK_TeacherID_ @i" id="PK_TeacherID_ @i" value="@item.PK_TeacherID" />
-                                                            <input type="hidden" name="Pk_ClassId_ @i" id="Pk_ClassId_ @i" value="@item.Pk_ClassId" />
-                                                            <input type="hidden" name="PK_SectionId_ @i" id="PK_SectionId_ @i" value="@item.PK_SectionId" />
-
-                                                            <input type="hidden" name="Pk_SubjecttoTeacherId_ @i" id="Pk_SubjecttoTeacherId_ @i" value="@item.Pk_SubjecttoTeacherId" />
-                                                        </td>
-                                                    }
-                                                </tr>
-                                                i++;
                                             }
-                                            <input type="hidden" id="hdRows" name="hdRows" value="@i" />
-                                        }
+                                            else
+                                            {
+                                                <td>
+                                                    <input type="checkbox" value="Checked" name="chkSelect_ @i" id="chkUnSelect_ @i" />
+                                                    <input type="hidden" name="PK_SubjectID_ @i" id="PK_SubjectID_ @i" value="@item.Pk_SubjectId" />
+                                                    <input type="hidden" name="SubjectName_ @i" id="SubjectName_ @i" value="@item.SubjectName" />
+                                                    <input type="hidden" name="PK_TeacherID_ @i" id="PK_TeacherID_ @i" value="@item.PK_TeacherID" />
+                                                    <input type="hidden" name="Pk_ClassId_ @i" id="Pk_ClassId_ @i" value="@item.Pk_ClassId" />
+                                                    <input type="hidden" name="PK_SectionId_ @i" id="PK_SectionId_ @i" value="@item.PK_SectionId" />
+
+                                                    <input type="hidden" name="Pk_SubjecttoTeacherId_ @i" id="Pk_SubjecttoTeacherId_ @i" value="@item.Pk_SubjecttoTeacherId" />
+                                                </td>
+                                            }
+                                        </tr>
+                                        i++;
                                     }
-                                </tbody>
+                                    <input type="hidden" id="hdRows" name="hdRows" value="@i" />
+                                }
+                            }
+                        </tbody>
+                    </table>
+                    <div class="col-md-12 mt-3">
+                        @if (Model.Pk_SubjecttoTeacherId == null)
+                        {
+                            <input type="submit" id="btnSave" style="display:none" class="btn btn-success" value="Save" name="btnSave" onclick="return validate();" />
 
-                            </table>
-                        </div>
+                        }
+                        else
+                        {
+                            <input type="submit" id="btnUpdate" class="btn btn-success" value="Update" name="UpdateSubjectMaster" onclick="return validate();" />
+
+                        }
                     </div>
-
                 </div>
 
-                <div class="card-footer text-left">
-                    @if (Model.Pk_SubjecttoTeacherId == null)
-                    {
-                        <input type="submit" id="btnSave" style="display:none" class="btn btn-success" value="Save" name="btnSave" onclick="return validate();" />
-
-                    }
-                    else
-                    {
-                        <input type="submit" id="btnUpdate" class="btn btn-success" value="Update" name="UpdateSubjectMaster" onclick="return validate();" />
-
-                    }
-                </div>
             </div>
-
         </div>
-
     </div>
+
 }
 
 
@@ -180,6 +152,10 @@
     });
 
     function getdetails() {
+
+        $('.errortext').removeClass('errortext');
+        $('#divload').css({ 'display': 'none' });
+
         if ($('#PK_TeacherID').val() == 0) {
             $('#PK_TeacherID').addClass('errortext');
             $('#PK_TeacherID').focus();
@@ -206,7 +182,10 @@
     }
 
     function validate() {
+
+        $('#divload').css({ 'display': 'none' });
         $('.errortext').removeClass('errortext');
+
         if ($('#PK_TeacherID').val() == 0) {
             $('#PK_TeacherID').addClass('errortext');
             $('#PK_TeacherID').focus();

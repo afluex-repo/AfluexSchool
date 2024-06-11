@@ -12,7 +12,10 @@ namespace AfluexSchool.Models
         {
             try
             {
-                connectionString = "Data Source=103.48.51.111,1232;Initial Catalog=AFluexNewSchoolDB;User Id=afluexschooluser;Password=afluex@83%##1;Integrated Security=false;";
+                connectionString = "Data Source=101.53.150.222,1440;Initial Catalog=AFluexNewSchoolDB; User Id=sa; Password=Fx1479LVAPbF;Integrated Security=false;";
+
+
+                //connectionString = "Data Source=103.48.51.111,1232;Initial Catalog=AFluexNewSchoolDB;User Id=afluexschooluser;Password=afluex@83%##1;Integrated Security=false;";
             }
             catch (Exception)
             {

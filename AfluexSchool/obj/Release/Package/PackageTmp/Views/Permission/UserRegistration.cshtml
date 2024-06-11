@@ -5,157 +5,127 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<style>
+    .errortext{
+        border:1px solid red!important;
+        background-color:#fabfbf!important;
+    }
+</style>
+
 @using (Html.BeginForm("UserRegistration", "Permission", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
-    <div>
-          <div class="login-row">
-            <div class="col-12 col-md-12 col-lg-12 col-xl-12 mx-auto align-self-center">
-                <div class="card border-0 shadow-sm mb-4">
-                    <div class="card-header">
-                        <div class="row ">
-
-                            <div class="col-auto">
-                                <h4 class="mt-0 mb-1">User Registration </h4>
-
-                            </div>
-                            <p style="color:red">
-                                @TempData["AdminLogin"]
-                            </p>
-                        </div>
-                    </div>
-                    <div class="card-body">
-
-                        <div class="row justify-content-center">
-                            <div class="col-md-12 mx-auto">
-                                <div class="row ">
-                                    <div class="col-lg-4 col-md-4">
-                                        <div class="form-group ">
-                                            <label> Branch <span style="color: red">*</span></label>
-                                            @Html.DropDownListFor(m => m.Branch, new SelectList(ViewBag.ddlbranch1, "Value", "Text"), new { @class = "form-control" })
-
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4">
-                                        <div class="form-group ">
-                                            <label> Name <span style="color: red">*</span></label>
-                                           @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @Placeholder = "Name" })
-                                        @Html.HiddenFor(m => m.Pk_AdminId)
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4">
-                                        <div class="form-group ">
-                                            <label> Mobile No <span style="color: red">*</span></label>
-                                            @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control", @Placeholder = "Mobile No", maxlength = "10", minlength = "10", onkeypress = "return validateNumber(event);" })
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row ">
-                                    
-                                    <div class="col-lg-4 col-md-4">
-                                        <div class="form-group ">
-                                            <label> Email Id <span style="color: red">*</span></label>
-                                           @Html.TextBoxFor(m => m.EmailId, new { @class = "form-control", @Placeholder = "Email", onchange = "return ValidateEmail(EmailId);" })
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4">
-                                        <div class="form-group ">
-                                            <label> User Type <span style="color: red">*</span></label>
-                                            @Html.DropDownListFor(m => m.UserType, new SelectList(ViewBag.ddlusertype, "Value", "Text"), new { @class = "form-control" })
-
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4">
-                                        <div class="form-group ">
-                                            <label>  Address <span style="color: red">*</span></label>
-                                            @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @cols = "30", row = "10" })
-                                        </div>
-                                    </div>
-                                </div>
-
-                               
-                                <div class="row ">
-                                   
-                                    <div class="col-lg-4 col-md-4">
-                                        <div class="form-group ">
-                                            <label> PinCode <span style="color: red">*</span></label>
-                                            @Html.TextBoxFor(m => m.PinCode, new { @class = "form-control", @onchange = "return GetstateCity();", @onkeypress = "return isNumberKey(event);" })
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-4 col-md-4">
-                                        <div class="form-group ">
-                                            <label> State</label>
-                                            @Html.TextBoxFor(m => m.State, new { @class = "form-control", @readonly = "readonly" })
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4">
-                                        <div class="form-group ">
-                                            <label> City</label>
-
-                                            @Html.TextBoxFor(m => m.City, new { @class = "form-control", @readonly = "readonly" })
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row ">
-                                    <div class="col-lg-4 col-md-4">
-                                        <div class="form-group ">
-                                            <label>User Photo <span style="color: red">*</span></label>
-                                            <input type="file" name="Files" class="bg-default form-control" id="UserImage" />
-                                        </div>
-                                    </div>
-                                   
-                                    <div class="col-lg-4 col-md-4">
-                                        <div class="form-group ">
-                                            <label> PAN</label>
-                                            @Html.TextBoxFor(m => m.PAN, new { @class = "form-control", @placeholder = "PAN" })
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4">
-                                        <div class="form-group ">
-                                            <label> PAN Image  </label>
-                                            <input type="file" name="Files" class="bg-default form-control" id="PANImage" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row ">
-                                  
-
-                                    <div class="col-lg-4 col-md-4">
-                                        <div class="form-group ">
-                                            <label> Aadhar Card No</label>
-                                            @Html.TextBoxFor(m => m.AddharNo, new { @class = "form-control", @placeholder = "Aadhar Card No" })
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4">
-                                        <div class="form-group ">
-                                            <label>  Aadhar Card Image  </label>
-                                            <input type="file" name="Files" class="bg-default form-control" id="AadharImage" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-footer text-left">
-
-                                   
-                                    @if (Model.Pk_AdminId == null)
-                                    {
-                                        <input type="submit" class="btn btn-success" value="Register" name="saveUser" onclick="return validateForm();" />
-                                    }
-                                    else
-                                    {
-                                        <input type="submit" class="btn btn-success" value="Update" name="updateUser" onclick="return validateupdateForm();" />
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    <div class="container-fluid">
+        <div class="row page-titles mx-0">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h3><b>User Registration</b></h3>
                 </div>
+            </div>
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Permission</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">User Registration</a></li>
+                </ol>
+            </div>
+        </div>
+        <div class="card shadow">
+            <div class="card-body">
+                <p style="color:red">
+                   @TempData["AdminLogin"]
+                </p>
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label>Branch<span style="color: red">*</span></label>
+                            @Html.DropDownListFor(m => m.Branch, new SelectList(ViewBag.ddlbranch1, "Value", "Text"), new { @class = "form-control" })
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Name<span style="color: red">*</span></label>
+                            @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @Placeholder = "Name" })
+                            @Html.HiddenFor(m => m.Pk_AdminId)
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Mobile No<span style="color: red">*</span></label>
+                            @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control", @Placeholder = "Mobile No", maxlength = "10", minlength = "10", onkeypress = "return validateNumber(event);" })
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Email Id<span style="color: red">*</span></label>
+                            @Html.TextBoxFor(m => m.EmailId, new { @class = "form-control", @Placeholder = "Email", onchange = "return ValidateEmail(EmailId);" })
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>User Type<span style="color: red">*</span></label>
+                            @Html.DropDownListFor(m => m.UserType, new SelectList(ViewBag.ddlusertype, "Value", "Text"), new { @class = "form-control" })
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Address<span style="color: red">*</span></label>
+                            @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @cols = "30", row = "10" })
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group ">
+                                <label>PinCode<span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.PinCode, new { @class = "form-control", @onchange = "return GetstateCity();", @onkeypress = "return isNumberKey(event);" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>State</label>
+                                @Html.TextBoxFor(m => m.State, new { @class = "form-control", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group ">
+                                <label>City</label>
+                                @Html.TextBoxFor(m => m.City, new { @class = "form-control", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group ">
+                                <label>User Photo<span style="color: red">*</span></label>
+                                <input type="file" name="Files" class="bg-default form-control" id="UserImage" />
+                            </div>
+                        </div>
 
+                        <div class="col-md-4">
+                            <div class="form-group ">
+                                <label>PAN</label>
+                                @Html.TextBoxFor(m => m.PAN, new { @class = "form-control", @placeholder = "PAN" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group ">
+                                <label>PAN Image</label>
+                                <input type="file" name="Files" class="bg-default form-control" id="PANImage" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group ">
+                                <label>Aadhar Card No</label>
+                                @Html.TextBoxFor(m => m.AddharNo, new { @class = "form-control", @placeholder = "Aadhar Card No" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group ">
+                                <label>Aadhar Card Image</label>
+                                <input type="file" name="Files" class="bg-default form-control" id="AadharImage" />
+                            </div>
+                        </div>
+                        <div class="form-group col-md-12">
+                           
+                            @if (Model.Pk_AdminId == null)
+                            {
+                                <input type="submit" class="btn btn-success" value="Register" name="saveUser" onclick="return validateForm();" />
+                            }
+                            else
+                            {
+                                <input type="submit" class="btn btn-success" value="Update" name="updateUser" onclick="return validateupdateForm();" />
+                            }
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-
+    
 }
 
 

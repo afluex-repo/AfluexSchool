@@ -7,74 +7,64 @@
 
 @using (Html.BeginForm("SMSTemplateList", "SMS", FormMethod.Post, new { @id = "SMSTemplateListid" }))
 {
-    <div>
-        <div class="card border-0 shadow-sm mb-4">
-            <div class="card-header border-0 bg-none">
-                <div class="row">
-                    <div class="col-12 col-md">
-                        <p class="fs15">SMS Template List</p>
-                    </div>
-                    <p style="color:red">
-                        @TempData["SMSTemplateList"]
-                    </p>
+    <div class="container-fluid">
+        <div class="row page-titles mx-0">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h3><b>SMS Template List</b></h3>
                 </div>
             </div>
-            <div class="card-body ">
-                <div class="row">
-
-                   
-                    <div class="col-md-6">
-                        <a href="/Export/ExportToExcel?id=pdf&&PageName=SMSTemplate"><img src="../../AdminPanelcss/assets/img/pdf.png" style="width:40px;height:40px" title="Export To PDF" /></a>
-                        <a href="/Export/ExportToExcel?id=excel&&PageName=SMSTemplate"><img src="../../AdminPanelcss/assets/img/excel.jpg" style="width:40px;height:40px" title="Export To Excel" /></a>
-                        <a href="/Export/ExportToExcel?id=word&&PageName=SMSTemplate"><img src="../../AdminPanelcss/assets/img/Word.png" style="width:40px;height:40px" title="Export To Word" /></a>
-                        <a href="#" onclick="return printData();"><img src="../../AdminPanelcss/assets/img/print.jpg" style="width:40px;height:40px" title="Print" /></a>
-                    </div>
-                </div>
-                <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-                    <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
-                        <div class="col-sm-12">
-                            <table class="table table-bordered w-100 mb-0" id="example24">
-                                <thead>
-                                    <tr>
-                                        <th>Sr.No.</th>
-                                        <th>Template Name</th>
-                                        <th>Message</th>
-                                        <th class="station-12">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @if (Model != null)
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">SMS</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">SMS Template List</a></li>
+                </ol>
+            </div>
+        </div>
+        <div class="card shadow">
+            <div class="card-body">
+                <p style="color:red">
+                    @TempData["SMSTemplateList"]
+                </p>
+                <div class="table-responsive mt-3">
+                    <table id="example5" class="display table" style="min-width:845px">
+                        <thead>
+                            <tr>
+                                <th>Sr.No.</th>
+                                <th>Template Name</th>
+                                <th>Message</th>
+                                <th class="station-12">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                if (Model.TemplateList != null)
+                                {
+                                    var i = 1;
+                                    foreach (var item in Model.TemplateList)
                                     {
-                                        if (Model.TemplateList != null)
-                                        {
-                                            var i = 1;
-                                            foreach (var item in Model.TemplateList)
-                                            {
-                                                <tr>
-                                                    <td>@i</td>
-                                                    <td>@item.TemplateName</td>
-                                                    <td>@item.Msg</td>
-                                                    <td class="station-12">
-                                                        <a href="/SMS/SMSTemplate?PK_TemplateId=@item.PK_TemplateId" class="btn btn-success btn-sm">Edit</a>
+                                        <tr>
+                                            <td>@i</td>
+                                            <td>@item.TemplateName</td>
+                                            <td>@item.Msg</td>
+                                            <td class="station-12">
+                                                <a href="/SMS/SMSTemplate?PK_TemplateId=@item.PK_TemplateId" class="btn btn-success btn-sm">Edit</a>
 
-                                                        <a href="/SMS/DeleteSMSTemplate?PK_TemplateId=@item.PK_TemplateId" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete?')">Delete</a>
-                                                    </td>
-                                                </tr>
-                                                i++;
-                                            }
-                                        }
+                                                <a href="/SMS/DeleteSMSTemplate?PK_TemplateId=@item.PK_TemplateId" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete?')">Delete</a>
+                                            </td>
+                                        </tr>
+                                        i++;
                                     }
-                                </tbody>
-
-                            </table>
-                        </div>
-                    </div>
-
+                                }
+                            }
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-
     </div>
+
 }
 <script src="../../scripts/jquery-1.10.2.min.js"></script>
 <script>

@@ -7,8 +7,8 @@
 
 @using (Html.BeginForm("EditProfile", "TeacherLogin", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
-    <div>
-          <div class="login-row">
+    <div class="container-fluid">
+        <div class="row">
             <div class="col-12 col-md-12 col-lg-12 col-xl-12 mx-auto align-self-center">
                 <div class="card border-0 shadow-sm mb-4">
                     <div class="card-header">
@@ -222,9 +222,8 @@
         changeYear: true,
         yearRange: "-59:-18",
         currentyear: false,
-
-
     });
+
 
     $('#DOJ').datepicker({
         dateFormat: 'dd/mm/yy',

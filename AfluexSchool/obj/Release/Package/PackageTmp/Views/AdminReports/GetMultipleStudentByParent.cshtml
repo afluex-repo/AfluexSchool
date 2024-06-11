@@ -9,82 +9,78 @@
 
 @using (Html.BeginForm("GetMultipleStudentByParent", "AdminReports", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
-    <div>
-        <div class="card border-0 shadow-sm mb-4">
-            <div class="card-header border-0 bg-none">
-                <div class="row">
-                    <div class="col-12 col-md">
-                        <p class="fs15"> Students</p>
-                    </div>
+    <div class="container-fluid">
+        <div class="row page-titles mx-0">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h3><b>Students</b></h3>
                 </div>
             </div>
-            <div class="card-body ">
-                <div class="col-md-6">
-                    <br />
-                   <a class="btn btn-primary" href="/AdminReports/MultipleStudentReport">Back</a> 
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Reports</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Multiple Student For Parents</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Students</a></li>
+                </ol>
+            </div>
+        </div>
+        <div class="card shadow">
+            <div class="card-body">
+                @*<p style="color:red">
+                    @TempData["LeaveList"]
+                </p>*@
+                <div class="col-md-12 mb-3">
+                    <a class="btn btn-primary" href="/AdminReports/MultipleStudentReport">Back</a>
                 </div>
-                <br />
-                <div class="row">
-                    <div class="table-responsive">
-                        <table class="table table-bordered w-100 mb-0" id="example24">
-                            <thead>
-                                <tr>
-                                    <th>S.no</th>
-                                    <th>Login ID</th>
-                                    <th>Name</th>
-                                    <th>Class</th>
-                                    <th>Section</th>
-                                    <th>Registration No.</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @if (Model != null)
+                <div class="table-responsive mt-3">
+                    <table id="example5" class="display table" style="min-width:845px">
+                        <thead>
+                            <tr>
+                                <th>S.no</th>
+                                <th>Login ID</th>
+                                <th>Name</th>
+                                <th>Class</th>
+                                <th>Section</th>
+                                <th>Registration No.</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                if (Model.lstfeedata != null)
                                 {
-                                    if (Model.lstfeedata != null)
+                                    int i = 1;
+                                    foreach (var item in Model.lstfeedata)
                                     {
-                                        int i = 1;
-                                        foreach (var item in Model.lstfeedata)
-                                        {
-
-                                            <tr>
-                                                <td>
-                                                    @i
-                                                </td>
-                                                <td>
-                                                    @item.LoginId
-                                                </td>
-                                                <td>
-                                                    @item.StudentName
-                                                </td>
-                                                <td>
-                                                    @item.ClassName
-                                                </td>
-                                                <td>
-                                                    @item.SectionName
-                                                </td>
-                                                <td>
-                                                    @item.RegistrationAmt
-                                                </td>
-                                            </tr>
-                                            i++;
-                                        }
+                                        <tr>
+                                            <td>
+                                                @i
+                                            </td>
+                                            <td>
+                                                @item.LoginId
+                                            </td>
+                                            <td>
+                                                @item.StudentName
+                                            </td>
+                                            <td>
+                                                @item.ClassName
+                                            </td>
+                                            <td>
+                                                @item.SectionName
+                                            </td>
+                                            <td>
+                                                @item.RegistrationAmt
+                                            </td>
+                                        </tr>
+                                        i++;
                                     }
                                 }
-                            </tbody>
-                        </table>
-
-
-                        <div class="j-response"></div>
-
-                    </div>
-
+                            }
+                        </tbody>
+                    </table>
                 </div>
-
             </div>
         </div>
     </div>
-
-
-
 
 }

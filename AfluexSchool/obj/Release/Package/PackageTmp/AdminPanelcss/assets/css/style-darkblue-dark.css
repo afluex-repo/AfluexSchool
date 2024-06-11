@@ -10484,8 +10484,8 @@ body.modern-touch .sidebar .nav .nav-item .nav-link {
         .sidebar .logo > .logo-icon {
             display: inline-block;
             vertical-align: middle;
-            width: auto;
-            margin-right: 10px;
+            /*width: auto;*/
+            margin-right: 5px;
         }
 
         .sidebar .logo .logo-text {
