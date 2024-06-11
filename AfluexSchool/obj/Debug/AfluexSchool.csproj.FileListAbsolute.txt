@@ -372,3 +372,4 @@ F:\Ashwani Afluex\repository\AfluexSchool\AfluexSchool\bin\System.Web.Http.xml
 F:\Ashwani Afluex\repository\AfluexSchool\AfluexSchool\bin\System.Web.Http.WebHost.xml
 F:\Ashwani Afluex\repository\AfluexSchool\AfluexSchool\obj\Debug\APSSchool.dll
 F:\Ashwani Afluex\repository\AfluexSchool\AfluexSchool\obj\Debug\APSSchool.pdb
+F:\Ashwani Afluex\repository\AfluexSchool\AfluexSchool\obj\Debug\AfluexSchool.csprojResolveAssemblyReference.cache
