@@ -9,105 +9,154 @@
     <div class="row">
         <div class="col-xl-12 col-xxl-12 col-sm-12">
             <div class="row">
-                <div class="col-xl-3 col-xxl-3 col-sm-3">
-                    <div class="widget-stat card shadow">
+                <div class="col-xl-3 col-xxl-3 col-sm-6">
+                    <div class="widget-stat card" style="background:#2d1238;!important">
                         <div class="card-body">
-                            <h4 class="card-title">Total Parent</h4>
-                            <h3>@ViewBag.TotalParent</h3>
-                            <div class="progress mb-2">
-                                <div class="progress-bar progress-animated bg-primary" style="width: 50%">
+                            <div class="media">
+                                <div class="media-body text-white">
+                                    <p class="mb-1">Total Parent</p>
+                                    <h3 class="text-white">@ViewBag.TotalParent</h3>
+                                    <div class="progress mb-2 bg-secondary">
+                                        <div class="progress-bar progress-animated bg-light" style="width: 50%"></div>
+                                    </div>
+                                    <small><a href="/Parent/ParentList" class="text-white">View Details</a></small>
                                 </div>
+                                <span class="ml-3 p-2 overflow-hidden">
+                                   <img class="w-100" src="https://cdn-icons-gif.flaticon.com/9874/9874023.gif" />
+                                </span>
                             </div>
-                            <small><a href="/Parent/ParentList">View Details</a></small>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-xxl-3 col-sm-3">
-                    <div class="widget-stat card shadow">
+                <div class="col-xl-3 col-xxl-3 col-sm-6">
+                    <div class="widget-stat card" style="background:#7e3600;!important">
                         <div class="card-body">
-                            <h4 class="card-title">Total Student</h4>
-                            <h3>@ViewBag.TotalStudent</h3>
-                            <div class="progress mb-2">
-                                <div class="progress-bar progress-animated bg-primary" style="width: 50%">
+                            <div class="media">
+                                <div class="media-body text-white">
+                                    <p class="mb-1">Total Student</p>
+                                    <h3 class="text-white">@ViewBag.TotalStudent</h3>
+                                    <div class="progress mb-2 bg-primary">
+                                        <div class="progress-bar progress-animated bg-light" style="width: 50%"></div>
+                                    </div>
+                                    <small><a class="text-white" href="/Student/StudentRegistrationList">View Details</a></small>
                                 </div>
+                                <span class="ml-3 p-2 overflow-hidden">
+                                    <img class="w-100" src="https://cdn-icons-gif.flaticon.com/12317/12317779.gif" />
+                                </span>
                             </div>
-                            <small><a href="/Student/StudentRegistrationList">View Details</a></small>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-xxl-3 col-sm-3">
-                    <div class="widget-stat card shadow">
+                <div class="col-xl-3 col-xxl-3 col-sm-6">
+                    <div class="widget-stat card bg-secondary">
                         <div class="card-body">
-                            <h4 class="card-title">Total Employee</h4>
-                            <h3>@ViewBag.TotalStaff</h3>
-                            <div class="progress mb-2">
-                                <div class="progress-bar progress-animated bg-red" style="width: 10%">
+                            <div class="media">
+                                <div class="media-body text-white">
+                                    <p class="mb-1">Total Employee</p>
+                                    <h3 class="text-white">@ViewBag.TotalStaff</h3>
+                                    <div class="progress mb-2 bg-primary">
+                                        <div class="progress-bar progress-animated bg-light" style="width: 10%"></div>
+                                    </div>
+                                    <small><a class="text-white" href="/Permission/UserList">View Details</a></small>
                                 </div>
+                                <span class="ml-3 p-1 overflow-hidden">
+                                    <img class="w-100" src="https://cdn-icons-gif.flaticon.com/12340/12340711.gif" />
+                                </span>
                             </div>
-                            <small><a href="/Permission/UserList">View Details</a></small>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-xxl-3 col-sm-3">
-                    <div class="widget-stat card shadow">
+                <div class="col-xl-3 col-xxl-3 col-sm-6">
+                    <div class="widget-stat card" style="background:#642b1e;!important">
                         <div class="card-body">
-                            <h4 class="card-title">Total Teacher</h4>
-                            <h3>@ViewBag.TotalTeacher</h3>
-                            <div class="progress mb-2">
-                                <div class="progress-bar progress-animated bg-info" style="width: 20%">
+                            <div class="media">
+                                <div class="media-body text-white">
+                                    <p class="mb-1">Total Teacher</p>
+                                    <h3 class="text-white">@ViewBag.TotalTeacher</h3>
+                                    <div class="progress mb-2 bg-secondary">
+                                        <div class="progress-bar progress-animated bg-light" style="width: 20%"></div>
+                                    </div>
+                                    <small><a class="text-white" href="/Teacher/TeacherList">View Details</a></small>
                                 </div>
+                                <span class="ml-3 p-1 overflow-hidden">
+                                    <img class="w-100" src="https://cdn-icons-gif.flaticon.com/11545/11545402.gif" />
+                                </span>
                             </div>
-                            <small><a href="/Teacher/TeacherList">View Details</a></small>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-xxl-3 col-sm-3">
-                    <div class="widget-stat card shadow">
+                <div class="col-xl-3 col-xxl-3 col-sm-6">
+                    <div class="widget-stat card bg-primary">
                         <div class="card-body">
-                            <h4 class="card-title">Total SMS</h4>
-                            <h3>@ViewBag.TotalSMS</h3>
-                            <div class="progress mb-2">
-                                <div class="progress-bar progress-animated bg-primary" style="width: 70%">
+                            <div class="media">
+                                <div class="media-body text-white">
+                                    <p class="mb-1">Total SMS</p>
+                                    <h3 class="text-white">@ViewBag.TotalSMS</h3>
+                                    <div class="progress mb-2 bg-secondary">
+                                        <div class="progress-bar progress-animated bg-light" style="width: 70%"></div>
+                                    </div>
+                                    @*<small>30% Increase in 30 Days</small>*@
                                 </div>
+                                <span class="ml-3 p-2 overflow-hidden">
+                                    <img class="w-100" src="https://cdn-icons-gif.flaticon.com/8717/8717912.gif" />
+                                </span>
                             </div>
-                            @*<small><a href="javascript:void(0)">View Details</a></small>*@
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-xxl-3 col-sm-3">
-                    <div class="widget-stat card shadow">
+                <div class="col-xl-3 col-xxl-3 col-sm-6">
+                    <div class="widget-stat card" style="background:#1e3945;!important">
                         <div class="card-body">
-                            <h4 class="card-title">Send SMS</h4>
-                            <h3>@ViewBag.TotalSendSMS</h3>
-                            <div class="progress mb-2">
-                                <div class="progress-bar progress-animated bg-success" style="width: 50%">
+                            <div class="media">
+                                <div class="media-body text-white">
+                                    <p class="mb-1">Send SMS</p>
+                                    <h3 class="text-white">@ViewBag.TotalSendSMS</h3>
+                                    <div class="progress mb-2 bg-secondary">
+                                        <div class="progress-bar progress-animated bg-light" style="width: 50%"></div>
+                                    </div>
+                                    <small><a class="text-white" href="/AdminReports/UsedSMS?Status=Send">View Details</a></small>
                                 </div>
+                                <span class="ml-3 p-2 overflow-hidden">
+                                    <img class="w-100" src="https://cdn-icons-gif.flaticon.com/6416/6416396.gif" />
+                                </span>
                             </div>
-                            <small><a href="/AdminReports/UsedSMS?Status=Send">View Details</a></small>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-xxl-3 col-sm-3">
-                    <div class="widget-stat card shadow">
+                <div class="col-xl-3 col-xxl-3 col-sm-6">
+                    <div class="widget-stat card" style="background:#2a5787;!important">
                         <div class="card-body">
-                            <h4 class="card-title">Failed SMS</h4>
-                            <h3>@ViewBag.TotalUnSendSMS</h3>
-                            <div class="progress mb-2">
-                                <div class="progress-bar progress-animated bg-red" style="width: 30%">
+                            <div class="media">
+                                <div class="media-body text-white">
+                                    <p class="mb-1">Failed SMS</p>
+                                    <h3 class="text-white">@ViewBag.TotalUnSendSMS</h3>
+                                    <div class="progress mb-2 bg-secondary">
+                                        <div class="progress-bar progress-animated bg-light" style="width: 30%"></div>
+                                    </div>
+                                    <small><a class="text-white" href="/AdminReports/UsedSMS?Status=Failed">View Details</a></small>
                                 </div>
+                                <span class="ml-3 p-2 overflow-hidden">
+                                    <img class="w-100" src="https://cdn-icons-gif.flaticon.com/8717/8717931.gif" />
+                                </span>
                             </div>
-                            <small><a href="/AdminReports/UsedSMS?Status=Failed">View Details</a></small>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-xxl-3 col-sm-3">
-                    <div class="widget-stat card shadow">
+                <div class="col-xl-3 col-xxl-3 col-sm-6">
+                    <div class="widget-stat card" style="background:#162432;!important">
                         <div class="card-body">
-                            <h4 class="card-title">Balance</h4>
-                            <h3>@ViewBag.Balance</h3>
-                            <div class="progress mb-2">
-                                <div class="progress-bar progress-animated bg-success" style="width: 70%">
+                            <div class="media">
+                                <div class="media-body text-white">
+                                    <p class="mb-1">Balance</p>
+                                    <h3 class="text-white">@ViewBag.Balance</h3>
+                                    <div class="progress mb-2 bg-secondary">
+                                        <div class="progress-bar progress-animated bg-light" style="width: 70%"></div>
+                                    </div>
+                                    <small>30% Increase in 30 Days</small>
                                 </div>
+                                <span class="ml-3 p-2 overflow-hidden">
+                                    <img class="w-100" src="https://cdn-icons-gif.flaticon.com/11259/11259489.gif" />
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -119,7 +168,7 @@
                 <div class="col-xl-4 col-xxl-4 col-sm-12">
                     <div class="card shadow">
                         <div class="card-header">
-                            <h4 class="card-title">SMS Summary</h4>
+                            <h4 class="card-title"><b>SMS Summary</b></h4>
                         </div>
                         <div class="card-body">
                             <canvas id="pie_chart"></canvas>
@@ -129,7 +178,7 @@
                 <div class="col-xl-4 col-xxl-4 col-sm-12">
                     <div class="card shadow">
                         <div class="card-header">
-                            <h4 class="card-title">Staff/Teacher</h4>
+                            <h4 class="card-title"><b>Staff/Teacher</b></h4>
                         </div>
                         <div class="card-body">
                             <canvas id="pie_chartstaff"></canvas>
@@ -139,7 +188,7 @@
                 <div class="col-xl-4 col-xxl-4 col-sm-12">
                     <div class="card shadow">
                         <div class="card-header">
-                            <h4 class="card-title">Student/Parent</h4>
+                            <h4 class="card-title"><b>Student/Parent</b></h4>
                         </div>
                         <div class="card-body">
                             <canvas id="pie_chartstudent"></canvas>
@@ -150,7 +199,7 @@
         </div>
         <div class="col-xl-12 col-xxl-12 col-sm-12 card">
             <div class="card-header">
-                <h4 class="card-title">Top 10 Teacher</h4>
+                <h4 class="card-title"><b>Top 10 Teacher</b></h4>
             </div>
             <div class="row card-body">
                 @if (Model != null)

@@ -1753,7 +1753,7 @@ namespace AfluexSchool.Controllers
             Student model = new Student();
             model.HomeWorkID = HomeWorkID;
             model.HomeworkFile = StudentPhoto;
-            DataSet ds = model.HomeworkList();
+            DataSet ds = model.HomeworkListforImage();
             if (ds != null && ds.Tables.Count > 0)
             {
                 if (ds.Tables[0].Rows.Count > 0)

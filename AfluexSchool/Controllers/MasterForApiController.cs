@@ -2685,7 +2685,7 @@ namespace APSSchool.Controllers
                         HomeworkListAPI obj = new HomeworkListAPI();
                         obj.HomeWorkID = r["Pk_HomeworkID"].ToString();
                         obj.HomeWorkHTML = r["HomeworkText"].ToString();
-                        obj.StudentPhoto = r["HomeworkFile"].ToString();
+                        obj.HomeworkFile = r["HomeworkFile"].ToString();
                         obj.HomeworkDate = r["HomeworkDate"].ToString();
                         obj.ClassName = r["ClassName"].ToString();
                         obj.Fk_ClassID = r["Pk_ClassID"].ToString();
@@ -3542,8 +3542,7 @@ namespace APSSchool.Controllers
         #endregion
 
         #region SaveAttendance
-
-        [HttpPost]
+        
         public ActionResult SaveAttendance(SaveEmployeeAttendanceRequest Request, HttpPostedFileBase TeacherPhoto)
         {
             SaveEmployeeAttendanceResponse Response = new SaveEmployeeAttendanceResponse();
@@ -3561,7 +3560,7 @@ namespace APSSchool.Controllers
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
                         Response.status = "0";
-                        Response.Message = "   Punching Successfully !";
+                        Response.Message = "Punching Successfully !";
                         Response.PunchInDate = ds.Tables[0].Rows[0]["PunchInDate"].ToString();
                         Response.PunchInTime = ds.Tables[0].Rows[0]["PunchInTime"].ToString();
                     }
@@ -3905,7 +3904,7 @@ namespace APSSchool.Controllers
         }
 
         #endregion
-        ////////////////////////////////////////////////////////////////////////////////////////
+        
         #region GetAttenndaceList
 
         public ActionResult GetAttenndaceList(GetAttenndaceListReqst model)
@@ -4009,7 +4008,7 @@ namespace APSSchool.Controllers
         }
 
         #endregion
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        
         #region EditNoticeMaster
 
         [HttpPost]

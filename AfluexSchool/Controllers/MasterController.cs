@@ -4211,9 +4211,7 @@ namespace AfluexSchool.Controllers
             return RedirectToAction("HolidayList");
         }
         #endregion
-
-
-
+        
         #region Complains
         public ActionResult GetAllMessages()
         {
@@ -4281,12 +4279,7 @@ namespace AfluexSchool.Controllers
 
 
         #endregion
-
-
-
-
-
-
+        
     }
 }
 

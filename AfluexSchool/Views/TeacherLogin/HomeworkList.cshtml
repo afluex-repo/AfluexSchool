@@ -61,15 +61,15 @@
                             <table id="example5" class="display">
                                 <thead>
                                     <tr>
-                                        <th>S.no</th>
-                                        <th>Homework Date    </th>
-                                        <th>Class   </th>
+                                        <th>S.No</th>
+                                        <th>Homework Date</th>
+                                        <th>Class</th>
                                         <th>Section</th>
-                                        <th>Subject          </th>
+                                        <th>Subject</th>
                                         <th>Homework By</th>
-                                        <th>Text          </th>
-                                        <th>Photo   </th>
-                                        <th>Action      </th>
+                                        <th>Text</th>
+                                        <th>Photo</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -100,9 +100,8 @@
                                                     </td>
                                                     <td>@(new HtmlString(item.HomeWorkHTML))</td>
                                                     <td>
-                                                        <input type="button" value="View" class="btn btn-info   " onclick="savemessage('@item.StudentPhoto','@item.HomeWorkID');" />
+                                                        <input type="button" value="View" class="btn btn-info" onclick="savemessage('@item.StudentPhoto','@item.HomeWorkID');" />
                                                     <td>
-
                                                         <a href="/TeacherLogin/DeleteHomework?HomeWorkID=@item.HomeWorkID" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete?')">Delete</a>
                                                         @*  <a href="/Parent/PrintReceipt?Pk_ParentID=@item.Pk_ParentID" class="btn btn-primary btn-sm" target="_blank"> Receipt</a>*@
                                                     </td>

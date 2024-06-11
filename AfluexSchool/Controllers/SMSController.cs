@@ -236,12 +236,9 @@ namespace AfluexSchool.Controllers
                     dtSMS.Rows.Add(name, mobile, Status);
                     string message = obj.SMS + ' ' + Common.SoftwareDetails.CompanyName;
                     BLSMS.SendSMS2(Common.SMSCredential.UserName, Common.SMSCredential.Password, Common.SMSCredential.SenderId, mobile, message);
-
-
-
+                    
                 }
-
-
+                
             }
             
             obj.dtSMS = dtSMS;
@@ -289,12 +286,9 @@ namespace AfluexSchool.Controllers
                     dtSMS.Rows.Add(name, mobile, Status);
                     string message = obj.SMS + ' ' + Common.SoftwareDetails.CompanyName;
                     BLSMS.SendSMS2(Common.SMSCredential.UserName, Common.SMSCredential.Password, Common.SMSCredential.SenderId, mobile, message);
-
-
-
+                    
                 }
-
-
+                
             }
 
             obj.dtSMS = dtSMS;
