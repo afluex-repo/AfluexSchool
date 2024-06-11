@@ -15,8 +15,7 @@ namespace APSSchool.Controllers
     public class MasterForApiController : Controller
     {
         // GET: MasterForApi
-
-
+        
         public ActionResult Index()
         {
             return View();
