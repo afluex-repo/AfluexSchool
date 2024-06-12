@@ -15,8 +15,7 @@ namespace APSSchool.Controllers
     public class MasterForApiController : Controller
     {
         // GET: MasterForApi
-
-
+        
         public ActionResult Index()
         {
             return View();
@@ -3904,7 +3903,7 @@ namespace APSSchool.Controllers
         }
 
         #endregion
-        ////////////////////////////////////////////////////////////////////////////////////////
+        
         #region GetAttenndaceList
 
         public ActionResult GetAttenndaceList(GetAttenndaceListReqst model)
@@ -4008,7 +4007,7 @@ namespace APSSchool.Controllers
         }
 
         #endregion
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        
         #region EditNoticeMaster
 
         [HttpPost]

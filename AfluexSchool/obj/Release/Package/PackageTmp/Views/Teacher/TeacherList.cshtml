@@ -8,123 +8,106 @@
 
 @using (Html.BeginForm("TeacherList", "Teacher", FormMethod.Post, new { @id = "form3", enctype = "multipart/form-data" }))
 {
-
-    <div>
-        <div class="card border-0 shadow-sm mb-4">
-            <div class="card-header border-0 bg-none">
-                <div class="row">
-                    <div class="col-12 col-md">
-                        <p class="fs15">Teacher List</p>
-                    </div>
-                    <p style="color:red">
-                        @TempData["TeacherList"]
-                    </p>
+    <div class="container-fluid">
+        <div class="row page-titles mx-0">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h3><b>Teacher List</b></h3>
                 </div>
             </div>
-            <div class="card-body ">
-
-
-                <div class="row">
-                    <div class="col-md-3">
-                        Login ID
-                        @Html.TextBoxFor(m => m.LoginID, new { @class = "form-control", placeholder = "Login ID" })
-                    </div>
-                    <div class="col-md-3">
-                        Teacher Name
-                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Teacher Name" })
-                    </div>
-                    <div class="col-md-3">
-                        Date Of Joining
-                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", placeholder = "From Date", @ReadOnly = "ReadOnly" })
-                    </div>
-                    <div class="col-md-3">
-                        Date Of Joining
-                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", placeholder = "To Date", @ReadOnly = "ReadOnly" })
-                    </div>
-
-                </div>
-                <br />
-                <div class="row">
-                   
-                    <div class="col-md-6">
-                        <input type="submit" value="Search" name="Search" id="Search" class="btn btn-primary" />
-                        <a href="/Export/ExportToExcel?id=pdf&&PageName=TeacherList"><img src="../../AdminPanelcss/assets/img/pdf.png" style="width:40px;height:40px" title="Export To PDF" /></a>
-                        <a href="/Export/ExportToExcel?id=excel&&PageName=TeacherList"><img src="../../AdminPanelcss/assets/img/excel.jpg" style="width:40px;height:40px" title="Export To Excel" /></a>
-                        <a href="/Export/ExportToExcel?id=word&&PageName=TeacherList"><img src="../../AdminPanelcss/assets/img/Word.png" style="width:40px;height:40px" title="Export To Word" /></a>
-                        <a href="#" onclick="return printData();"><img src="../../AdminPanelcss/assets/img/print.jpg" style="width:40px;height:40px" title="Print" /></a>
-
-                    </div>
-                </div>
-                <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-                    <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
-                        <div class="col-sm-12">
-                            <table class="table table-bordered w-100 mb-0" id="example24">
-                                <thead>
-                                    <tr>
-
-                                        <th>Sr No.</th>
-                                        <th>LoginID</th>
-                                        <th>Teacher Name</th>
-                                        <th>Password</th>
-                                        <th>Date Of Birth</th>
-                                        <th>Gender</th>
-                                        <th>Category</th>
-                                        <th>Address</th>
-                                        <th>Date Of Joining</th>
-                                        <th>MobileNo</th>
-                                        <th class="station-12" style="display:@ViewBag.IsEdit;">Edit</th>
-                                        <th class="station-12" style="display:@ViewBag.IsDelete;">Delete</th>
-
-                                    </tr>
-
-                                </thead>
-                                <tbody>
-                                    @if (Model != null)
-                                    {
-                                        if (Model.lstTeacherList != null)
-                                        {
-                                            int i = 1;
-                                            foreach (var Item in Model.lstTeacherList)
-                                            {
-                                                <tr class="text-left">
-
-                                                    <td>
-                                                        @i
-                                                        @Html.HiddenFor(m => m.PK_TeacherID)
-                                                    </td>
-                                                    <td>@Item.LoginID</td>
-                                                    <td>@Item.Name</td>
-                                                    <td>@Item.Password</td>
-                                                    <td>@Item.DOB</td>
-                                                    <td>@Item.Gender</td>
-                                                    <td>@Item.Category</td>
-                                                    <td>@Item.Address</td>
-                                                    <td>@Item.DOJ</td>
-                                                    <td>@Item.MobileNo</td>
-                                                    <td class="station-12" style="display:@ViewBag.IsEdit;">
-                                                        <a href="/Teacher/Teacher?PK_TeacherID=@Item.PK_TeacherID&actionview=edit" class="btn btn-sm btn-success">Edit</a>
-                                                        
-                                                    </td>
-                                                    <td class="station-12" style="display:@ViewBag.IsDelete;"><a href="/Teacher/DeleteTeacherList?PK_TeacherID=@Item.PK_TeacherID" class="btn btn-sm btn-danger" onclick="return confirm('Are you want to delete?;')">Delete</a></td>
-                                                </tr>
-                                                i++;
-                                            }
-
-                                        }
-                                    }
-                                </tbody>
-                            </table>
-                            <div class="j-response"></div>
-                        </div>
-
-                    </div>
-                </div>
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Teacher</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Teacher List</a></li>
+                </ol>
             </div>
-
         </div>
+        <div class="card shadow">
+            <div class="card-body">
+                <p style="color:red">
+                    @TempData["TeacherList"]
+                </p>
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label>Login ID</label>
+                            @Html.TextBoxFor(m => m.LoginID, new { @class = "form-control", placeholder = "Login ID" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Teacher Name</label>
+                            @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Teacher Name" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>From Date</label>
+                            @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", placeholder = "From Date", @ReadOnly = "ReadOnly" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>To Date</label>
+                            @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", placeholder = "To Date", @ReadOnly = "ReadOnly" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <input type="submit" value="Search" name="Search" id="Search" class="btn btn-primary" />
+                        </div>
+                       
+                    </div>
+                </form>
 
+                <div class="table-responsive mt-3">
+                    <table id="example5" class="display table" style="min-width:845px">
+                        <thead>
+                            <tr>
+                                <th>Sr No.</th>
+                                <th>LoginID</th>
+                                <th>Teacher Name</th>
+                                <th>Password</th>
+                                <th>Date Of Birth</th>
+                                <th>Gender</th>
+                                <th>Category</th>
+                                <th>Address</th>
+                                <th>Date Of Joining</th>
+                                <th>MobileNo</th>
+                                <th class="station-12" style="display:@ViewBag.IsEdit;">Edit</th>
+                                <th class="station-12" style="display:@ViewBag.IsDelete;">Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                if (Model.lstTeacherList != null)
+                                {
+                                    int i = 1;
+                                    foreach (var Item in Model.lstTeacherList)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @i
+                                                @Html.HiddenFor(m => m.PK_TeacherID)
+                                            </td>
+                                            <td>@Item.LoginID</td>
+                                            <td>@Item.Name</td>
+                                            <td>@Item.Password</td>
+                                            <td>@Item.DOB</td>
+                                            <td>@Item.Gender</td>
+                                            <td>@Item.Category</td>
+                                            <td>@Item.Address</td>
+                                            <td>@Item.DOJ</td>
+                                            <td>@Item.MobileNo</td>
+                                            <td class="station-12" style="display:@ViewBag.IsEdit;">
+                                                <a href="/Teacher/Teacher?PK_TeacherID=@Item.PK_TeacherID&actionview=edit" class="btn btn-sm btn-success">Edit</a>
+
+                                            </td>
+                                            <td class="station-12" style="display:@ViewBag.IsDelete;"><a href="/Teacher/DeleteTeacherList?PK_TeacherID=@Item.PK_TeacherID" class="btn btn-sm btn-danger" onclick="return confirm('Are you want to delete?;')">Delete</a></td>
+                                        </tr>
+                                        i++;
+                                    }
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
-
 
 }
 

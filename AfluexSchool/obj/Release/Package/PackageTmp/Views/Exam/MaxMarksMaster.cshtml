@@ -5,82 +5,71 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<style>
+    .errortext{
+        border:1px solid red!important;
+        background-color:#fab8b8!important;
+    }
+</style>
+
 @using (Html.BeginForm("MaxMarksMaster", "Exam", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
-
-    <div>
-          <div class="login-row">
-            <div class="col-12 col-md-12 col-lg-12 col-xl-12 mx-auto align-self-center">
-                <div class="card border-0 shadow-sm mb-4">
-                    <div class="card-header">
-                        <div class="row ">
-
-                            <div class="col-auto">
-                                <h4 class="mt-0 mb-1">Max/Passing Marks </h4>
-
-                            </div>
-                            <p style="color:red">
-                                @TempData["MaxMarksMaster"]
-                            </p>
-                        </div>
-                    </div>
-                    <div class="card-body">
-
-                        <div class="row justify-content-center">
-                            <div class="col-md-12 mx-auto">
-                                <div class="row ">
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="form-group ">
-                                            <label> Class <span style="color:red">*</span></label>
-                                            @Html.DropDownListFor(m => m.ClassName, new SelectList(ViewBag.ddlClass, "Value", "Text"), new { @class = "form-control" })
-                                            @Html.HiddenFor(m => m.Pk_MaxMarksId)
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="form-group ">
-                                            <label> Exam Type <span style="color:red">*</span></label>
-                                            @Html.DropDownListFor(m => m.ExamTypeName, new SelectList(ViewBag.ddlExamType, "Value", "Text"), new { @class = "form-control" })
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row ">
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="form-group ">
-                                            <label> Max   Marks <span style="color:red">*</span></label>
-                                            @Html.TextBoxFor(m => m.MaxMarksExam, new { @class = "form-control", @placeholder = "Enter Marks in Exam", @onkeypress = "return isNumberKey(event)", @maxlength = "4", })
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="form-group ">
-                                            <label> Passing Marks <span style="color:red">*</span></label>
-                                            @Html.TextBoxFor(m => m.MinMarks, new { @class = "form-control", @placeholder = "Passing Marks ", @onkeypress = "return isNumberKey(event)", @maxlength = "4" })
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer text-left">
-                        @if (Model == null)
-                        {
-                            <input type="submit" id="btnSave" class="btn btn-success" onclick="return validateform();" name="btnSave" value="Save" />
-                        }
-                        else
-                        {
-                            <input type="submit" id="btnUpdate" class="btn btn-success" onclick="return validateformUpdate();" name="btnUpdate" value="Update" />
-                        }
-                    </div>
+    <div class="container-fluid">
+        <div class="row page-titles mx-0">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h3><b>Max/Passing Marks</b></h3>
                 </div>
+            </div>
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Exam</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Maximum Marks</a></li>
+                </ol>
+            </div>
+        </div>
+        <div class="card shadow">
+            <div class="card-body">
+                <p style="color:red">
+                    @TempData["MaxMarksMaster"]
+                </p>
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label>Class<span style="color:red">*</span></label>
+                            @Html.DropDownListFor(m => m.ClassName, new SelectList(ViewBag.ddlClass, "Value", "Text"), new { @class = "form-control" })
+                            @Html.HiddenFor(m => m.Pk_MaxMarksId)
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Exam Type<span style="color:red">*</span></label>
+                            @Html.DropDownListFor(m => m.ExamTypeName, new SelectList(ViewBag.ddlExamType, "Value", "Text"), new { @class = "form-control" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Max Marks<span style="color:red">*</span></label>
+                            @Html.TextBoxFor(m => m.MaxMarksExam, new { @class = "form-control", @placeholder = "Enter Marks in Exam", @onkeypress = "return isNumberKey(event)", @maxlength = "4", })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Passing Marks<span style="color:red">*</span></label>
+                            @Html.TextBoxFor(m => m.MinMarks, new { @class = "form-control", @placeholder = "Passing Marks ", @onkeypress = "return isNumberKey(event)", @maxlength = "4" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            @if (Model == null)
+                            {
+                                <input type="submit" id="btnSave" class="btn btn-success" onclick="return validateform();" name="btnSave" value="Save" />
+                            }
+                            else
+                            {
+                                <input type="submit" id="btnUpdate" class="btn btn-success" onclick="return validateformUpdate();" name="btnUpdate" value="Update" />
+                            }
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 
 }
 
-<script src="../../scripts/jquery-1.10.2.min.js"></script>
 <script>
 
     $(document).ready(function () {

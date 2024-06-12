@@ -7,105 +7,87 @@
 
 @using (Html.BeginForm("TransactionLog", "AdminReports", FormMethod.Post, new { @id = " " }))
 {
-    <div class="container main-container" id="main-container">
-        <div class="login-row">
-            <div class="col-12 col-md-12 col-lg-12 col-xl-12 mx-auto align-self-center">
-                <div class="card border-0 shadow-sm mb-4">
-                    <div class="card-header">
-                        <div class="row ">
-                            <div class="col-auto">
-                                <h4 class="mt-0 mb-1">Transaction Log</h4>
-                            </div>
+    <div class="container-fluid">
+        <div class="row page-titles mx-0">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h3><b>Transaction Log</b></h3>
+                </div>
+            </div>
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Reports</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Transaction Log</a></li>
+                </ol>
+            </div>
+        </div>
+        <div class="card shadow">
+            <div class="card-body">
+                @*<p style="color:red">
+                    @TempData["LeaveList"]
+                </p>*@
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label>Search by Action Name</label>
+                            @Html.DropDownListFor(m => m.ActionName, new SelectList(ViewBag.ddlAction, "Value", "Text"), new { @class = "form-control" })
                         </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="row justify-content-center">
-                            <div class="col-md-12 mx-auto">
-                                <div class="row ">
-                                    <div class="col-lg-3 col-md-3">
-                                        <div class="form-group ">
-                                            <label> Search by Action Name</label>
-                                            @Html.DropDownListFor(m => m.ActionName, new SelectList(ViewBag.ddlAction, "Value", "Text"), new { @class = "form-control" })
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label>  From Date</label>
-                                        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @readonly = "read" })
-                                    </div>
-
-                                    <div class="col-md-3">
-                                        <label>  To Date</label>
-                                        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @readonly = "read" })
-                                    </div>
-                                    <div class="col-md-3">
-                                        <br />
-                                        <input type="submit" class="btn btn-primary" value="GetDetails" name="GetDetails" />
-                                    </div>
-                                </div>
-                                <br />
-                                <div class="row ">
-                                    <div class="col-md-3">
-                                        <a href="/Export/ExportToExcel?id=pdf&&PageName=TransactionLog"><img src="../../AdminPanelcss/assets/img/pdf.png" style="width:40px;height:40px" title="Export To PDF" /></a>
-                                        <a href="/Export/ExportToExcel?id=excel&&PageName=TransactionLog"><img src="../../AdminPanelcss/assets/img/excel.jpg" style="width:40px;height:40px" title="Export To Excel" /></a>
-                                        <a href="/Export/ExportToExcel?id=word&&PageName=TransactionLog"><img src="../../AdminPanelcss/assets/img/Word.png" style="width:40px;height:40px" title="Export To Word" /></a>
-                                        <a href="#" onclick="return printData();"><img src="../../AdminPanelcss/assets/img/print.jpg" style="width:40px;height:40px" title="Print" /></a>
-
-                                    </div>
-                                </div>
-
-                            </div>
+                        <div class="form-group  col-md-3">
+                            <label>From Date</label>
+                            @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @readonly = "read" })
                         </div>
+                        <div class="form-group col-md-3">
+                            <label>To Date</label>
+                            @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @readonly = "read" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label class="d-block">&nbsp;</label>
+                            <input type="submit" class="btn btn-primary" value="GetDetails" name="GetDetails" />
+                        </div>
+                        
                     </div>
+                </form>
 
-                    <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-                        <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
-                            <div class="col-sm-12">
-                                <table class="table table-bordered w-100 mb-0" id="example24">
-                                    <thead>
+                <div class="table-responsive mt-3">
+                    <table id="example5" class="display table" style="min-width:845px">
+                        <thead>
+                            <tr>
+                                <th>S.no</th>
+                                <th>ActionName</th>
+                                <th>Remark</th>
+                                <th>TransactionDate</th>
+                                <th>TransactionBy</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                if (Model.lstfeedata != null)
+                                {
+                                    int i = 1;
+                                    foreach (var item in Model.lstfeedata)
+                                    {
                                         <tr>
-
-                                            <th>S.no</th>
-                                            <th>ActionName       </th>
-                                            <th>Remark           </th>
-                                            <th>TransactionDate    </th>
-                                            <th>TransactionBy    </th>
-
+                                            <td>
+                                                @i
+                                            </td>
+                                            <td>@item.ActionName</td>
+                                            <td>@item.Remark</td>
+                                            <td>@item.TransactionDate</td>
+                                            <td>@item.TransactionBy</td>
                                         </tr>
-
-                                    </thead>
-                                    <tbody>
-                                        @if (Model != null)
-                                        {
-                                            if (Model.lstfeedata != null)
-                                            {
-                                                int i = 1;
-                                                foreach (var item in Model.lstfeedata)
-                                                {
-
-                                                    <tr>
-                                                        <td>
-                                                            @i
-                                                        </td>
-                                                        <td>@item.ActionName      </td>
-                                                        <td>@item.Remark          </td>
-                                                        <td>@item.TransactionDate </td>
-                                                        <td>@item.TransactionBy   </td>
-                                                    </tr>
-                                                    i++;
-                                                }
-                                            }
-                                        }
-                                    </tbody>
-                                </table>
-                                <div class="j-response"></div>
-                            </div>
-
-                        </div>
-                    </div>
+                                        i++;
+                                    }
+                                }
+                            }
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
+
+    
 }
 
 <script src="../../scripts/jquery-1.10.2.min.js"></script>

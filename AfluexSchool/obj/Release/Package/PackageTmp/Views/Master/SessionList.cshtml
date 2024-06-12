@@ -7,97 +7,79 @@
 
 @using (Html.BeginForm("SessionList", "Master", FormMethod.Post, new { @id = "SessionList" }))
 {
-    <div>
-        <div class="card border-0 shadow-sm mb-4">
-            <div class="card-header border-0 bg-none">
-                <div class="row">
-                    <div class="col-12 col-md">
-                        <p class="fs15">Session List</p>
-                        <p style="color:red">
-                            @TempData["SessionList"]
-                        </p>
-                    </div>
-                    
+    <div class="container-fluid">
+        <div class="row page-titles mx-0">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h3><b>Session List</b></h3>
                 </div>
             </div>
-            <div class="card-body ">
-                <div class="row">
-
-                    <div class="col-md-6">
-                       
-                        <a href="/Export/ExportToExcel?id=pdf&&PageName=SessionList"><img src="../../AdminPanelcss/assets/img/pdf.png" style="width:40px;height:40px" title="Export To PDF" /></a>
-                        <a href="/Export/ExportToExcel?id=excel&&PageName=SessionList"><img src="../../AdminPanelcss/assets/img/excel.jpg" style="width:40px;height:40px" title="Export To Excel" /></a>
-                        <a href="/Export/ExportToExcel?id=word&&PageName=SessionList"><img src="../../AdminPanelcss/assets/img/Word.png" style="width:40px;height:40px" title="Export To Word" /></a>
-                        <a href="#" onclick="return printData();"><img src="../../AdminPanelcss/assets/img/print.jpg" style="width:40px;height:40px" title="Print" /></a>
-
-
-                    </div>
-
-                </div>
-
-                <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-                    <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
-                        <div class="col-sm-12">
-                            <table class="table table-bordered w-100 mb-0" id="example24">
-                                <thead>
-                                    <tr>
-                                        <th>Sr.No.</th>
-                                        <th>Session Name</th>
-                                        <th>Status</th>
-                                        <th style="display:@ViewBag.IsDelete" class="station-12">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @if (Model != null)
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Masters</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Session List</a></li>
+                </ol>
+            </div>
+        </div>
+        <div class="card shadow">
+            <div class="card-body">
+                <p style="color:red">
+                    @TempData["SessionList"]
+                </p>
+                <div class="table-responsive">
+                    <table id="example5" class="display table" style="min-width:845px">
+                        <thead>
+                            <tr>
+                                <th>Sr.No.</th>
+                                <th>Session Name</th>
+                                <th>Status</th>
+                                <th style="display:@ViewBag.IsDelete" class="station-12">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                if (Model.sessionLst != null)
+                                {
+                                    var i = 1;
+                                    foreach (var item in Model.sessionLst)
                                     {
-                                        if (Model.sessionLst != null)
-                                        {
-                                            var i = 1;
-                                            foreach (var item in Model.sessionLst)
-                                            {
-                                                <tr role="row">
-                                                    <td>@i</td>
-                                                    <td>@item.SessionName</td>
-                                                    <td>
-                                                        @if (item.isDeleted == "False")
-                                                        {
-                                                            <div class="btn-danger btn btn-sm">In-Active</div>
+                                        <tr role="row">
+                                            <td>@i</td>
+                                            <td>@item.SessionName</td>
+                                            <td>
+                                                @if (item.isDeleted == "False")
+                                                {
+                                                    <div class="btn-danger btn btn-sm">In-Active</div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="btn-success btn btn-sm">Active</div>
+                                                }
+                                            </td>
+                                            <td class="station-12">
+                                                @if (item.isDeleted == "False")
+                                                {
+                                                    <a style="display:@ViewBag.IsDelete" href="/Master/DeletingSession?Pk_SessionId=@item.Pk_SessionId" class="btn btn-success btn-sm" onclick="return confirm('Are you sure want to Activate?')">Activate</a>
+                                                }
+                                                else
+                                                {
 
-                                                        }
-                                                        else
-                                                        {
-                                                            <div class="btn-success btn btn-sm">Active</div>
-                                                        }
-                                                    </td>
-                                                    <td class="station-12">
-                                                        @if (item.isDeleted == "False")
-                                                        {
-                                                            <a style="display:@ViewBag.IsDelete" href="/Master/DeletingSession?Pk_SessionId=@item.Pk_SessionId" class="btn btn-success btn-sm" onclick="return confirm('Are you sure want to Activate?')">Activate</a>
-                                                        }
-                                                        else
-                                                        {
+                                                }
 
-
-                                                        }
-
-                                                    </td>
-
-                                                </tr>
-                                                i++;
-                                            }
-                                        }
+                                            </td>
+                                        </tr>
+                                        i++;
                                     }
-                                </tbody>
-                            </table>
-
-                        </div>
-                    </div>
-
+                                }
+                            }
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-
     </div>
+    
 }
 <script src="../../scripts/jquery-1.10.2.min.js"></script>
 <script>

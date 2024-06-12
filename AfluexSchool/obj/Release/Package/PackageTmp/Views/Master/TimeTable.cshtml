@@ -8,48 +8,49 @@
  
 @using (Html.BeginForm("TimeTable", "Master", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
-    <div>
-        <div class="card border-0 shadow-sm mb-4">
-            <div class="card-header border-0 bg-none">
-                <div class="row">
-                    <div class="col-12 col-md">
-                        <p class="fs15">TimeTable</p>
-                    </div>
-                    <p style="color:red">
-                        @TempData["TimeTable"]
-                    </p>
+    <div class="container-fluid">
+        <div class="row page-titles mx-0">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h3><b>TimeTable</b></h3>
                 </div>
             </div>
-            <div class="card-body ">
-                <div class="row">
-                    <div class="col-md-4">
-                        <label>Class <span style="color: red">*</span></label>
-                        @Html.DropDownListFor(m => m.Fk_ClassID, new SelectList(ViewBag.ddlclass, "Value", "Text"), new { @class = "form-control", @onchange = "return OnchangeSection();" })
-
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Masters</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">TimeTable</a></li>
+                </ol>
+            </div>
+        </div>
+        <div class="card shadow">
+            <div class="card-body">
+                <p style="color:red">
+                    @TempData["TimeTable"]
+                </p>
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label>Class<span style="color: red">*</span></label>
+                            @Html.DropDownListFor(m => m.Fk_ClassID, new SelectList(ViewBag.ddlclass, "Value", "Text"), new { @class = "form-control", @onchange = "return OnchangeSection();" })
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Section<span style="color: red">*</span></label>
+                            @Html.DropDownListFor(m => m.Fk_SectionID, new SelectList(ViewBag.ddlsection, "Value", "Text"), new { @class = "form-control", @onchange = "return onDDLchange()" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Upload TimeTable <span style="color: red">*</span></label>
+                            <input type="file" name="TimeTable" class="bg-default form-control" id="TimeTable" />
+                        </div>
+                        <div class="form-group col-md-4">
+                            <input class="btn btn-primary" type="submit" name="btnSave" onclick="return validateform()" value="Save" id="btndetail" />
+                        </div>
                     </div>
-                    <div class="col-md-4">
-                        <label>Section <span style="color: red">*</span></label>
-                        @Html.DropDownListFor(m => m.Fk_SectionID, new SelectList(ViewBag.ddlsection, "Value", "Text"), new { @class = "form-control", @onchange = "return onDDLchange()" })
-
-                    </div>
-                    <div class="col-md-4">
-                        <label>Upload TimeTable <span style="color: red">*</span></label>
-                        <input type="file" name="TimeTable" class="bg-default form-control" id="TimeTable" />
-                    </div>
-                </div>
-                <div class="card-footer text-left">
-                    <div class="col-md-2">
-                        <input class="btn btn-primary btn-sm" type="submit" name="btnSave" onclick="return validateform()" value="Save" id="btndetail" />
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
-
+    
 }
-<script src="../../scripts/jquery-1.10.2.min.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
 
 <script>
         $(document).ready(function () {

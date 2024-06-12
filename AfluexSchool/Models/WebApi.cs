@@ -2003,8 +2003,8 @@ namespace APSSchool.Models
         public DataSet SaveEmployeeAttendance()
         {
             SqlParameter[] para ={
-                                       //new SqlParameter ("@Intime",InTime),
-                                       //new SqlParameter ("@OutTime",OutTime),
+                                       new SqlParameter ("@Intime",InTime),
+                                       new SqlParameter ("@OutTime",OutTime),
                                        //new SqlParameter ("@AttendanceDate",AttendanceDate),
                                        new SqlParameter ("@FK_EmpID",EmployeeID),
                                        new SqlParameter ("@AddedBy",AddedBy),

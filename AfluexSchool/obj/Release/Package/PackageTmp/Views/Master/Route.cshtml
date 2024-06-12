@@ -5,158 +5,127 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<style>
+    .errortext{
+        border:1px solid red!important;
+        background-color:#fbcdcd!important;
+    }
+</style>
 
 @using (Html.BeginForm("Route", "Master", FormMethod.Post, new { @id = "Route" }))
 {
-
-    <div>
-        <div class="login-row">
-            <div class="col-12 col-md-12 col-lg-12 col-xl-12 mx-auto align-self-center">
-                <div class="card border-0 shadow-sm mb-3">
-                    <div class="card-header">
-                        <div class="row ">
-                            <div class="col-auto">
-                                <h4 class="mt-0 mb-1">Route</h4>
-                            </div>
-                            <p style="color:red">
-                                @TempData["Route"]
-                            </p>
+    <div class="container-fluid">
+        <div class="row page-titles mx-0">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h3><b>Route</b></h3>
+                </div>
+            </div>
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Vehicle</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Route</a></li>
+                </ol>
+            </div>
+        </div>
+        <div class="card shadow">
+            <div class="card-body">
+                <p style="color:red">
+                    @TempData["Route"]
+                </p>
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label>Route No.<span style="color: red">*</span></label>
+                            @Html.TextBoxFor(m => m.RouteNo, new { @class = "form-control", @placeholder = "Route No.", @onchange = "return validNumber(event)" })
+                            @Html.HiddenFor(m => m.PK_RouteId, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label class="d-block">&nbsp;</label>
+                            <input type="submit" value="Search" name="btnSearch" id="btnSearch" class="btn btn-primary" />
                         </div>
                     </div>
-                    <div class="card-body">
-                        <div class="row justify-content-center">
-                            <div class="col-md-12 mx-auto">
-                                <div class="row ">
-                                    <div class="col-lg-3 col-md-3">
-                                        <div class="form-group ">
-                                            <label> Route No.<span style="color: red">*</span></label>
-                                            @Html.TextBoxFor(m => m.RouteNo, new { @class = "form-control", @placeholder = "Route No.", @onchange = "return validNumber(event)" })
-                                            @Html.HiddenFor(m => m.PK_RouteId, new { @class = "form-control" })
+                </form>
 
-
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="card-body ">
-                        <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-                            <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
-                                <div class="col-sm-12">
-                                    <table id="tblData" class="table datatable display responsive w-100 dataTable no-footer dtr-inline" style="width: 1002px;">
-                                        <thead>
-                                            <tr>
-                                                <th>S No.</th>
-                                                <th id="areanm">Area Name</th>
-                                                <th id="PikTime">Pickup Time</th>
-                                                <th id="DrpTime">Drop Time</th>
-                                                <th>  Select All&nbsp;&nbsp; <input type="checkbox" name="checkedAll" id="checkedAll" style="margin-top:3px;" /></th>
-                                            </tr>
-
-                                        </thead>
-                                        <tbody>
-                                            @if (Model != null)
-                                            {
-                                                if (Model.Arealist != null)
-                                                {
-                                                    int i = 1;
-                                                    foreach (var item in Model.Arealist)
-                                                    {
-
-                                                        <tr>
-                                                            <td>
-                                                                @i
-
-                                                            </td>
-
-                                                            <td>
-                                                                @item.AreaName
-                                                            </td>
-                                                            <td>
-                                                                <input type="time" name="PickupTime_ @i" id="PickupTime_ @i" />
-                                                            </td>
-                                                            <td>
-                                                                <input type="time" name="DropTime_ @i" id="DropTime_ @i" />
-                                                            </td>
-                                                            <td>
-
-                                                                <input name="chkSelect_ @i" id="chkSelect_ @i" type="checkbox" @item.SelectedValue class="chkclass" />
-
-                                                                <input type="hidden" name="PK_AreaMasterID_ @i" id="PK_AreaMasterID_ @i" value="@item.PK_AreaMasterID" />
-                                                            </td>
-                                                        </tr>
-                                                        i++;
-                                                    }
-                                                    <input type="hidden" id="hdRows" name="hdRows" value="@i" />
-                                                }
-                                            }
-                                        </tbody>
-
-                                    </table>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="card-body">
-                        <div class="row justify-content-center">
-                            <div class="col-md-12 mx-auto">
-
-                                <div class="row ">
-                                    <div class="col-lg-3 col-md-3">
-                                        <div class="form-group " id="PK_VehicleType">
-                                            <label> Vehicle Type <span style="color: red">*</span></label>
-                                            @Html.DropDownListFor(m => m.PK_VehicleTypeID, new SelectList(ViewBag.ddlVehicleType, "Value", "Text"), new { @class = "form-control", @onchange = "return GetVehicle()" })
-
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-3 col-md-3">
-                                        <div class="form-group " id="PK_VehicleMaster">
-                                            <label>Vehicle No  <span style="color: red">*</span></label>
-                                            @Html.DropDownListFor(m => m.PK_VehicleMasterID, new SelectList(ViewBag.ddlVehicleNo, "Value", "Text"), new { @class = "form-control" })
-
-                                        </div>
-
-                                    </div>
-
-
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="card-footer text-left" id="Saves">
-                            @*@if (Model.Pk_AlotVehicleID == null)
-                                {*@
-                            <input type="submit" class="btn btn-success" value="Save" name="SaveRoute" onclick="return validate();" />
-                            @*}
-                                else
+                <div class="table-responsive mt-3">
+                    <table id="example5" class="display table" style="min-width:845px">
+                        <thead>
+                            <tr>
+                                <th>S No.</th>
+                                <th id="areanm">Area Name</th>
+                                <th id="PikTime">Pickup Time</th>
+                                <th id="DrpTime">Drop Time</th>
+                                <th><input type="checkbox" name="checkedAll" id="checkedAll" style="margin-top:3px;" />&nbsp;&nbsp;Select All</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                if (Model.Arealist != null)
                                 {
-                                    <input type="submit" class="btn btn-success" value="Update" name="UpdateVehicle" onclick="return validate();" />
-                                }*@
+                                    int i = 1;
+                                    foreach (var item in Model.Arealist)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @i
+                                            </td>
+                                            <td>
+                                                @item.AreaName
+                                            </td>
+                                            <td>
+                                                <input type="time" name="PickupTime_ @i" id="PickupTime_ @i" />
+                                            </td>
+                                            <td>
+                                                <input type="time" name="DropTime_ @i" id="DropTime_ @i" />
+                                            </td>
+                                            <td>
+                                                <input name="chkSelect_ @i" id="chkSelect_ @i" type="checkbox" @item.SelectedValue class="chkclass" />
+
+                                                <input type="hidden" name="PK_AreaMasterID_ @i" id="PK_AreaMasterID_ @i" value="@item.PK_AreaMasterID" />
+                                            </td>
+                                        </tr>
+                                        i++;
+                                    }
+                                    <input type="hidden" id="hdRows" name="hdRows" value="@i" />
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="form-row mt-3">
+                    <div class="col-md-3">
+                        <div class="form-group" id="PK_VehicleType">
+                            <label>Vehicle Type<span style="color: red">*</span></label>
+                            @Html.DropDownListFor(m => m.PK_VehicleTypeID, new SelectList(ViewBag.ddlVehicleType, "Value", "Text"), new { @class = "form-control", @onchange = "return GetVehicle()" })
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group" id="PK_VehicleMaster">
+                            <label>Vehicle No<span style="color: red">*</span></label>
+                            @Html.DropDownListFor(m => m.PK_VehicleMasterID, new SelectList(ViewBag.ddlVehicleNo, "Value", "Text"), new { @class = "form-control" })
                         </div>
                     </div>
                 </div>
-
+                <div class="col-md-12" id="Saves">
+                    @*@if (Model.Pk_AlotVehicleID == null)
+                        {*@
+                                <input type="submit" class="btn btn-success" value="Save" name="SaveRoute" onclick="return validate();" />
+                                @*}
+                        else
+                        {
+                            <input type="submit" class="btn btn-success" value="Update" name="UpdateVehicle" onclick="return validate();" />
+                        }*@
+                </div>
             </div>
-
-
         </div>
-
     </div>
+
 }
 
 <script src="../../AdminPanelcss/assets/js/jquery-3.3.1.min.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
 
 <script>
     $('#checkedAll').click(function () {
