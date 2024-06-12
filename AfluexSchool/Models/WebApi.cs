@@ -2036,7 +2036,7 @@ namespace APSSchool.Models
         public DataSet SaveEmployeePunchoutAttendance()
         {
             SqlParameter[] para ={
-                                       new SqlParameter ("@OutTime",OutTime),
+                                       //new SqlParameter ("@OutTime",OutTime),
                                        //new SqlParameter ("@AttendanceDate",AttendanceDate),
                                        new SqlParameter ("@FK_EmpID",EmployeeID),
                                        new SqlParameter ("@OutLongitude",OutLongitude),
